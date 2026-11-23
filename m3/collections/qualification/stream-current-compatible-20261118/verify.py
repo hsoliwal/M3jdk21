@@ -11,14 +11,16 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-# Groovy collate successor: retain the six prior receipts and bind both new owners.
+# Stream convergence successor: retain six prior seals and bind two qualified owners.
+# Recipe: com.synexia.m3.StreamReceivingGuard20261122.
+# The exact prior guard and seals remain in its canonical recipe beforeimage.
 FILES = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java":
-        "45eea74cd492eb97341a1c9e94d860506a7af88cb39889b36247cf2e778428db",
+        "1e635db39f8b2a1b30f54d7f7ee4a9c48589034b1cf693b3dd4b191e2e5b99d8",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamAdvancedKernels.java":
-        "29810419f0125147d7bdbc0d33794b113dcd07e85f0ba9937e5aabd806e6103d",
+        "fc9a3d1a0c0ab7114b6f2765f0214915115272a2dc02d6e85168b600e0ad31d3",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLoopKernels.java":
-        "b7f5f9ba4f9a82b6a14a349a27ab10b43cc9b2f93ce224a3916c8a30989f1813",
+        "02b56913bb682f90a3f7d2d04689c259a6e8c6ee68748ad920cfd1082937c024",
     "test/jdk/jdk/m3/collections/ObjectStreamAdvancedContractTest.java":
         "da888b9b9ff96dc106bdad4d21e5de47f181f889477846367d537047263f53eb",
     "test/jdk/jdk/m3/collections/ObjectStreamLoopContractTest.java":
@@ -26,7 +28,7 @@ FILES = {
     "test/jdk/jdk/m3/collections/ObjectStreamCompatibilityGateTest.java":
         "56b64efee5f246baea4a0c274f8ef684286bbbf9d7de79be725ff5a8cd764a90",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java":
-        "d3167b2189bf303cabfc557ce8474b1df75af0d586e0c8adbe4377b6de569609",
+        "c74cc7b797660e2a57548ca8a64931077e544ddf042c90ea015ceab4a5994e14",
     "test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java":
         "8cfb6c344d69dab1957e499fdfb0cc5b8b33fa61708e1c5595a5c7dc47c08f2f",
 }
@@ -35,7 +37,7 @@ MUST_RETAIN = (
     "arrayWindow(", "mapAdjacent(", "distinctAdjacent(", "foldByKey(",
     "pairwise(", "mapIndexed(", "mapIndexedOrdinalFirst(", "mapWhile(",
     "mapWhileNullable(", "zipLongest(", "topKBy(", "groupMapReduce(",
-    "mergeSorted(", "partitionMap(", "collate(",
+    "mergeSorted(", "partitionMap(", "collate(", "countByMany(",
 )
 UNIQUE = (
     "public interface IndexedMapper<",
@@ -44,14 +46,14 @@ UNIQUE = (
     "public <R> ObjectStream<R> mapIndexedOrdinalFirst(",
     "public <R> ObjectStream<R> mapWhile(",
     "public <R> ObjectStream<R> mapWhileNullable(",
+    "public <K> Map<K, Long> countByMany(",
     "public ObjectStream<List<T>> collate(int width)",
     "public ObjectStream<List<T>> collate(int width, int step)",
     "public ObjectStream<List<T>> collate(int width, int step, TailPolicy tailPolicy)",
 )
 INTEGRATION = (
-    "import java.util.stream.Streams;",
-    "Streams.pairwise(input, mapper)",
-    "Streams.mapWhile(input, mapper)",
+    "delegateStream(input -> ObjectStreamLanguageKernels.pairwise(input, mapper))",
+    "delegateStream(input -> ObjectStreamLoopKernels.mapWhileOptional(",
     "ObjectStreamLanguageKernels.collate(stream(), width, step, tailPolicy)",
 )
 

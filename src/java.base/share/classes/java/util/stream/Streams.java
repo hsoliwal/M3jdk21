@@ -31,15 +31,27 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+import java.util.OptionalLong;
+import java.util.PrimitiveIterator;
 import java.util.Set;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
+import java.util.function.DoubleFunction;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
+import java.util.function.IntFunction;
+import java.util.function.LongBinaryOperator;
 import java.util.function.LongConsumer;
+import java.util.function.LongFunction;
+import java.util.function.ext.DoubleLongToDoubleFunction;
+import java.util.function.ext.IntLongToIntFunction;
 import java.util.function.ext.ObjLongFunction;
 import jdk.internal.vm.annotation.IntrinsicCandidate;
 
@@ -442,6 +454,1153 @@ public final class Streams {
         Spliterator<T> merged = new SortedMergeSpliterator<>(
                 first.sequential().spliterator(), second.sequential().spliterator(), comparator);
         return StreamSupport.stream(merged, false).onClose(composedClose(first, second));
+    }
+
+
+    /**
+     * Maps each int value with its zero-based primitive {@code long} encounter
+     * index at this pipeline stage. The value is the first callback argument.
+     * For unordered input, indices follow this traversal's received order.
+     * Index {@link Long#MAX_VALUE} is valid; demanding a further element throws
+     * {@code ArithmeticException} before its mapper is invoked. An existence
+     * check may prefetch that additional element.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param mapper the function receiving the primitive value and long index
+     * @return the indexed primitive mapping
+     * @throws NullPointerException if an argument is null
+     * @throws ArithmeticException if traversal demands an index beyond Long.MAX_VALUE
+     * @since 21
+     */
+    public static IntStream mapIndexedInt(IntStream source, IntLongToIntFunction mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator.OfInt input = source.sequential().spliterator();
+        return StreamSupport.intStream(new IndexedIntSpliterator(input, mapper), false)
+                .onClose(source::close);
+    }
+
+    /**
+     * Maps each long value with its zero-based primitive {@code long} encounter
+     * index at this pipeline stage. The value is the first callback argument.
+     * For unordered input, indices follow this traversal's received order.
+     * Index {@link Long#MAX_VALUE} is valid; demanding a further element throws
+     * {@code ArithmeticException} before its mapper is invoked. An existence
+     * check may prefetch that additional element.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param mapper the function receiving the primitive value and long index
+     * @return the indexed primitive mapping
+     * @throws NullPointerException if an argument is null
+     * @throws ArithmeticException if traversal demands an index beyond Long.MAX_VALUE
+     * @since 21
+     */
+    public static LongStream mapIndexedLong(LongStream source, LongBinaryOperator mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator.OfLong input = source.sequential().spliterator();
+        return StreamSupport.longStream(new IndexedLongSpliterator(input, mapper), false)
+                .onClose(source::close);
+    }
+
+    /**
+     * Maps each double value with its zero-based primitive {@code long} encounter
+     * index at this pipeline stage. The value is the first callback argument.
+     * For unordered input, indices follow this traversal's received order.
+     * Index {@link Long#MAX_VALUE} is valid; demanding a further element throws
+     * {@code ArithmeticException} before its mapper is invoked. An existence
+     * check may prefetch that additional element.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param mapper the function receiving the primitive value and long index
+     * @return the indexed primitive mapping
+     * @throws NullPointerException if an argument is null
+     * @throws ArithmeticException if traversal demands an index beyond Long.MAX_VALUE
+     * @since 21
+     */
+    public static DoubleStream mapIndexedDouble(DoubleStream source, DoubleLongToDoubleFunction mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator.OfDouble input = source.sequential().spliterator();
+        return StreamSupport.doubleStream(new IndexedDoubleSpliterator(input, mapper), false)
+                .onClose(source::close);
+    }
+
+    /**
+     * Maps overlapping adjacent int values, passing the earlier value first.
+     * Empty and singleton inputs produce no result; no pair containers are used.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param mapper the adjacent-value mapping function
+     * @return the primitive adjacent-pair mapping
+     * @throws NullPointerException if an argument is null
+     * @since 21
+     */
+    public static IntStream pairwiseInt(IntStream source, IntBinaryOperator mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator.OfInt input = source.sequential().spliterator();
+        return StreamSupport.intStream(new PairwiseIntSpliterator(input, mapper), false)
+                .onClose(source::close);
+    }
+
+    /**
+     * Maps overlapping adjacent long values, passing the earlier value first.
+     * Empty and singleton inputs produce no result; no pair containers are used.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param mapper the adjacent-value mapping function
+     * @return the primitive adjacent-pair mapping
+     * @throws NullPointerException if an argument is null
+     * @since 21
+     */
+    public static LongStream pairwiseLong(LongStream source, LongBinaryOperator mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator.OfLong input = source.sequential().spliterator();
+        return StreamSupport.longStream(new PairwiseLongSpliterator(input, mapper), false)
+                .onClose(source::close);
+    }
+
+    /**
+     * Maps overlapping adjacent double values, passing the earlier value first.
+     * Empty and singleton inputs produce no result; no pair containers are used.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param mapper the adjacent-value mapping function
+     * @return the primitive adjacent-pair mapping
+     * @throws NullPointerException if an argument is null
+     * @since 21
+     */
+    public static DoubleStream pairwiseDouble(DoubleStream source, DoubleBinaryOperator mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator.OfDouble input = source.sequential().spliterator();
+        return StreamSupport.doubleStream(new PairwiseDoubleSpliterator(input, mapper), false)
+                .onClose(source::close);
+    }
+
+    /**
+     * Combines corresponding int values until either input is exhausted.
+     * Testing for a pair may consume one unpaired value from the longer input.
+     * Encounter order is reported only when both input streams are ordered.
+
+     * <p>Both inputs are switched to sequential mode and their spliterators are
+     * acquired without requesting elements or invoking callbacks. The result is
+     * initially sequential, its primitive source cannot split even after
+     * {@code parallel()}, and it does not advertise an exact size. Traversal
+     * retains constant state and does not box primitive values.
+     *
+     * <p>The inputs must be distinct, open and unused, and must not be used
+     * separately afterward. Closing the result closes the first input and then
+     * the second, even if the first close fails; a second failure is suppressed
+     * on the first. Exhaustion alone does not close either input. If construction
+     * fails, close responsibility remains with the caller. Callback and
+     * traversal failures propagate unchanged.
+     * @param first the first input stream
+     * @param second the second input stream
+     * @param zipper the primitive pair-combining function
+     * @return the primitive paired results
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if both input references are identical
+     * @since 21
+     */
+    public static IntStream zipInt(IntStream first, IntStream second,
+            IntBinaryOperator zipper) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        Objects.requireNonNull(zipper, "zipper");
+        if (first == second) throw new IllegalArgumentException("distinct streams required");
+        Spliterator.OfInt paired = new ZipIntSpliterator(
+                first.sequential().spliterator(), second.sequential().spliterator(), zipper);
+        return StreamSupport.intStream(paired, false).onClose(composedClose(first, second));
+    }
+
+    /**
+     * Combines corresponding long values until either input is exhausted.
+     * Testing for a pair may consume one unpaired value from the longer input.
+     * Encounter order is reported only when both input streams are ordered.
+
+     * <p>Both inputs are switched to sequential mode and their spliterators are
+     * acquired without requesting elements or invoking callbacks. The result is
+     * initially sequential, its primitive source cannot split even after
+     * {@code parallel()}, and it does not advertise an exact size. Traversal
+     * retains constant state and does not box primitive values.
+     *
+     * <p>The inputs must be distinct, open and unused, and must not be used
+     * separately afterward. Closing the result closes the first input and then
+     * the second, even if the first close fails; a second failure is suppressed
+     * on the first. Exhaustion alone does not close either input. If construction
+     * fails, close responsibility remains with the caller. Callback and
+     * traversal failures propagate unchanged.
+     * @param first the first input stream
+     * @param second the second input stream
+     * @param zipper the primitive pair-combining function
+     * @return the primitive paired results
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if both input references are identical
+     * @since 21
+     */
+    public static LongStream zipLong(LongStream first, LongStream second,
+            LongBinaryOperator zipper) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        Objects.requireNonNull(zipper, "zipper");
+        if (first == second) throw new IllegalArgumentException("distinct streams required");
+        Spliterator.OfLong paired = new ZipLongSpliterator(
+                first.sequential().spliterator(), second.sequential().spliterator(), zipper);
+        return StreamSupport.longStream(paired, false).onClose(composedClose(first, second));
+    }
+
+    /**
+     * Combines corresponding double values until either input is exhausted.
+     * Testing for a pair may consume one unpaired value from the longer input.
+     * Encounter order is reported only when both input streams are ordered.
+
+     * <p>Both inputs are switched to sequential mode and their spliterators are
+     * acquired without requesting elements or invoking callbacks. The result is
+     * initially sequential, its primitive source cannot split even after
+     * {@code parallel()}, and it does not advertise an exact size. Traversal
+     * retains constant state and does not box primitive values.
+     *
+     * <p>The inputs must be distinct, open and unused, and must not be used
+     * separately afterward. Closing the result closes the first input and then
+     * the second, even if the first close fails; a second failure is suppressed
+     * on the first. Exhaustion alone does not close either input. If construction
+     * fails, close responsibility remains with the caller. Callback and
+     * traversal failures propagate unchanged.
+     * @param first the first input stream
+     * @param second the second input stream
+     * @param zipper the primitive pair-combining function
+     * @return the primitive paired results
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if both input references are identical
+     * @since 21
+     */
+    public static DoubleStream zipDouble(DoubleStream first, DoubleStream second,
+            DoubleBinaryOperator zipper) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        Objects.requireNonNull(zipper, "zipper");
+        if (first == second) throw new IllegalArgumentException("distinct streams required");
+        Spliterator.OfDouble paired = new ZipDoubleSpliterator(
+                first.sequential().spliterator(), second.sequential().spliterator(), zipper);
+        return StreamSupport.doubleStream(paired, false).onClose(composedClose(first, second));
+    }
+
+    /**
+     * Inserts a primitive separator strictly between consecutive int values.
+     * Empty and singleton inputs are unchanged. Emitting a separator may read
+     * and retain one following value so that no trailing separator is emitted.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param separator the value inserted between input values
+     * @return the interspersed primitive stream
+     * @throws NullPointerException if source is null
+     * @since 21
+     */
+    public static IntStream intersperseInt(IntStream source, int separator) {
+        Objects.requireNonNull(source, "source");
+        Spliterator.OfInt input = source.sequential().spliterator();
+        return StreamSupport.intStream(
+                new InterspersedIntSpliterator(input, separator), false).onClose(source::close);
+    }
+
+    /**
+     * Inserts a primitive separator strictly between consecutive long values.
+     * Empty and singleton inputs are unchanged. Emitting a separator may read
+     * and retain one following value so that no trailing separator is emitted.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param separator the value inserted between input values
+     * @return the interspersed primitive stream
+     * @throws NullPointerException if source is null
+     * @since 21
+     */
+    public static LongStream intersperseLong(LongStream source, long separator) {
+        Objects.requireNonNull(source, "source");
+        Spliterator.OfLong input = source.sequential().spliterator();
+        return StreamSupport.longStream(
+                new InterspersedLongSpliterator(input, separator), false).onClose(source::close);
+    }
+
+    /**
+     * Inserts a primitive separator strictly between consecutive double values.
+     * Empty and singleton inputs are unchanged. Emitting a separator may read
+     * and retain one following value so that no trailing separator is emitted.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param separator the value inserted between input values
+     * @return the interspersed primitive stream
+     * @throws NullPointerException if source is null
+     * @since 21
+     */
+    public static DoubleStream intersperseDouble(DoubleStream source, double separator) {
+        Objects.requireNonNull(source, "source");
+        Spliterator.OfDouble input = source.sequential().spliterator();
+        return StreamSupport.doubleStream(
+                new InterspersedDoubleSpliterator(input, separator), false).onClose(source::close);
+    }
+
+    /**
+     * Maps int values until the first empty primitive optional. The rejecting
+     * input value is consumed, but no later value or mapper call is requested,
+     * including after repeated exhaustion checks. A null optional is rejected.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param mapper the primitive-input mapping and termination function
+     * @return the present optional values preceding the first empty optional
+     * @throws NullPointerException if an argument or mapped optional is null
+     * @since 21
+     */
+    public static IntStream mapWhileInt(IntStream source,
+            IntFunction<OptionalInt> mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator.OfInt input = source.sequential().spliterator();
+        return StreamSupport.intStream(
+                new MappingWhileIntSpliterator(input, mapper), false).onClose(source::close);
+    }
+
+    /**
+     * Maps long values until the first empty primitive optional. The rejecting
+     * input value is consumed, but no later value or mapper call is requested,
+     * including after repeated exhaustion checks. A null optional is rejected.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param mapper the primitive-input mapping and termination function
+     * @return the present optional values preceding the first empty optional
+     * @throws NullPointerException if an argument or mapped optional is null
+     * @since 21
+     */
+    public static LongStream mapWhileLong(LongStream source,
+            LongFunction<OptionalLong> mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator.OfLong input = source.sequential().spliterator();
+        return StreamSupport.longStream(
+                new MappingWhileLongSpliterator(input, mapper), false).onClose(source::close);
+    }
+
+    /**
+     * Maps double values until the first empty primitive optional. The rejecting
+     * input value is consumed, but no later value or mapper call is requested,
+     * including after repeated exhaustion checks. A null optional is rejected.
+
+     * <p>Construction switches the source to sequential mode and acquires its
+     * spliterator without requesting elements or invoking callbacks. The result
+     * is initially sequential and its primitive source cannot split, even after
+     * {@code parallel()}. It preserves encounter order when present, retains
+     * constant state, and does not advertise an exact size. Primitive values are
+     * traversed without boxing. Closing the result closes the input; exhaustion
+     * alone does not. The input must not be used separately afterward.
+     * Callback and traversal failures propagate unchanged.
+     * @param source the input stream
+     * @param mapper the primitive-input mapping and termination function
+     * @return the present optional values preceding the first empty optional
+     * @throws NullPointerException if an argument or mapped optional is null
+     * @since 21
+     */
+    public static DoubleStream mapWhileDouble(DoubleStream source,
+            DoubleFunction<OptionalDouble> mapper) {
+        Objects.requireNonNull(source, "source");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator.OfDouble input = source.sequential().spliterator();
+        return StreamSupport.doubleStream(
+                new MappingWhileDoubleSpliterator(input, mapper), false).onClose(source::close);
+    }
+
+    /**
+     * Lazily merges two int streams already sorted in natural ascending order.
+     * Duplicates are retained; equal values from the first input precede those
+     * from the second, preserving order within each input. Sortedness is a
+     * caller precondition and is not checked. The spliterator reports ORDERED
+     * and SORTED, with a null comparator for natural ordering.
+
+
+     * <p>Both inputs are switched to sequential mode and their spliterators are
+     * acquired without requesting elements or invoking callbacks. The result is
+     * initially sequential, its primitive source cannot split even after
+     * {@code parallel()}, and it does not advertise an exact size. Traversal
+     * retains constant state and does not box primitive values.
+     *
+     * <p>The inputs must be distinct, open and unused, and must not be used
+     * separately afterward. Closing the result closes the first input and then
+     * the second, even if the first close fails; a second failure is suppressed
+     * on the first. Exhaustion alone does not close either input. If construction
+     * fails, close responsibility remains with the caller. Callback and
+     * traversal failures propagate unchanged.
+     * @param first the first naturally sorted input
+     * @param second the second naturally sorted input
+     * @return the stable primitive merge
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if both input references are identical
+     * @since 21
+     */
+    public static IntStream mergeSortedInt(IntStream first, IntStream second) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        if (first == second) throw new IllegalArgumentException("distinct streams required");
+        Spliterator.OfInt merged = new SortedMergeIntSpliterator(
+                first.sequential().spliterator(), second.sequential().spliterator());
+        return StreamSupport.intStream(merged, false).onClose(composedClose(first, second));
+    }
+
+    /**
+     * Lazily merges two long streams already sorted in natural ascending order.
+     * Duplicates are retained; equal values from the first input precede those
+     * from the second, preserving order within each input. Sortedness is a
+     * caller precondition and is not checked. The spliterator reports ORDERED
+     * and SORTED, with a null comparator for natural ordering.
+
+
+     * <p>Both inputs are switched to sequential mode and their spliterators are
+     * acquired without requesting elements or invoking callbacks. The result is
+     * initially sequential, its primitive source cannot split even after
+     * {@code parallel()}, and it does not advertise an exact size. Traversal
+     * retains constant state and does not box primitive values.
+     *
+     * <p>The inputs must be distinct, open and unused, and must not be used
+     * separately afterward. Closing the result closes the first input and then
+     * the second, even if the first close fails; a second failure is suppressed
+     * on the first. Exhaustion alone does not close either input. If construction
+     * fails, close responsibility remains with the caller. Callback and
+     * traversal failures propagate unchanged.
+     * @param first the first naturally sorted input
+     * @param second the second naturally sorted input
+     * @return the stable primitive merge
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if both input references are identical
+     * @since 21
+     */
+    public static LongStream mergeSortedLong(LongStream first, LongStream second) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        if (first == second) throw new IllegalArgumentException("distinct streams required");
+        Spliterator.OfLong merged = new SortedMergeLongSpliterator(
+                first.sequential().spliterator(), second.sequential().spliterator());
+        return StreamSupport.longStream(merged, false).onClose(composedClose(first, second));
+    }
+
+    /**
+     * Lazily merges two double streams already sorted in natural ascending order.
+     * Duplicates are retained; equal values from the first input precede those
+     * from the second, preserving order within each input. Sortedness is a
+     * caller precondition and is not checked. The spliterator reports ORDERED
+     * and SORTED, with a null comparator for natural ordering.
+     * Natural double order is defined by {@link Double#compare(double, double)},
+     * including negative zero before positive zero and NaNs after numbers.
+
+     * <p>Both inputs are switched to sequential mode and their spliterators are
+     * acquired without requesting elements or invoking callbacks. The result is
+     * initially sequential, its primitive source cannot split even after
+     * {@code parallel()}, and it does not advertise an exact size. Traversal
+     * retains constant state and does not box primitive values.
+     *
+     * <p>The inputs must be distinct, open and unused, and must not be used
+     * separately afterward. Closing the result closes the first input and then
+     * the second, even if the first close fails; a second failure is suppressed
+     * on the first. Exhaustion alone does not close either input. If construction
+     * fails, close responsibility remains with the caller. Callback and
+     * traversal failures propagate unchanged.
+     * @param first the first naturally sorted input
+     * @param second the second naturally sorted input
+     * @return the stable primitive merge
+     * @throws NullPointerException if an argument is null
+     * @throws IllegalArgumentException if both input references are identical
+     * @since 21
+     */
+    public static DoubleStream mergeSortedDouble(DoubleStream first, DoubleStream second) {
+        Objects.requireNonNull(first, "first");
+        Objects.requireNonNull(second, "second");
+        if (first == second) throw new IllegalArgumentException("distinct streams required");
+        Spliterator.OfDouble merged = new SortedMergeDoubleSpliterator(
+                first.sequential().spliterator(), second.sequential().spliterator());
+        return StreamSupport.doubleStream(merged, false).onClose(composedClose(first, second));
+    }
+
+    /** Shared conservative metadata; each typed subclass keeps primitive traversal. */
+    private abstract static class PrimitiveCombinatorSpliterator {
+        private final int characteristics;
+        boolean finished;
+
+        PrimitiveCombinatorSpliterator(int characteristics) {
+            this.characteristics = characteristics | Spliterator.NONNULL;
+        }
+
+        public final long estimateSize() { return finished ? 0 : Long.MAX_VALUE; }
+
+        public final int characteristics() { return characteristics; }
+    }
+
+    private abstract static class IntCombinatorSpliterator
+            extends PrimitiveCombinatorSpliterator implements Spliterator.OfInt {
+        IntCombinatorSpliterator(int characteristics) { super(characteristics); }
+
+        @Override
+        public final Spliterator.OfInt trySplit() { return null; }
+    }
+
+    private abstract static class LongCombinatorSpliterator
+            extends PrimitiveCombinatorSpliterator implements Spliterator.OfLong {
+        LongCombinatorSpliterator(int characteristics) { super(characteristics); }
+
+        @Override
+        public final Spliterator.OfLong trySplit() { return null; }
+    }
+
+    private abstract static class DoubleCombinatorSpliterator
+            extends PrimitiveCombinatorSpliterator implements Spliterator.OfDouble {
+        DoubleCombinatorSpliterator(int characteristics) { super(characteristics); }
+
+        @Override
+        public final Spliterator.OfDouble trySplit() { return null; }
+    }
+
+    private static final class IndexedIntSpliterator extends IntCombinatorSpliterator {
+        private final PrimitiveIterator.OfInt input;
+        private final IntLongToIntFunction mapper;
+        private long index;
+        private boolean overflow;
+
+        IndexedIntSpliterator(Spliterator.OfInt input, IntLongToIntFunction mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!input.hasNext()) { finished = true; return false; }
+            if (overflow) throw new ArithmeticException("stream index overflow");
+            int value = input.nextInt();
+            long current = index;
+            if (index == Long.MAX_VALUE) overflow = true;
+            else index++;
+            action.accept(mapper.applyAsInt(value, current));
+            return true;
+        }
+    }
+
+    private static final class IndexedLongSpliterator extends LongCombinatorSpliterator {
+        private final PrimitiveIterator.OfLong input;
+        private final LongBinaryOperator mapper;
+        private long index;
+        private boolean overflow;
+
+        IndexedLongSpliterator(Spliterator.OfLong input, LongBinaryOperator mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(LongConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!input.hasNext()) { finished = true; return false; }
+            if (overflow) throw new ArithmeticException("stream index overflow");
+            long value = input.nextLong();
+            long current = index;
+            if (index == Long.MAX_VALUE) overflow = true;
+            else index++;
+            action.accept(mapper.applyAsLong(value, current));
+            return true;
+        }
+    }
+
+    private static final class IndexedDoubleSpliterator extends DoubleCombinatorSpliterator {
+        private final PrimitiveIterator.OfDouble input;
+        private final DoubleLongToDoubleFunction mapper;
+        private long index;
+        private boolean overflow;
+
+        IndexedDoubleSpliterator(Spliterator.OfDouble input, DoubleLongToDoubleFunction mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(DoubleConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!input.hasNext()) { finished = true; return false; }
+            if (overflow) throw new ArithmeticException("stream index overflow");
+            double value = input.nextDouble();
+            long current = index;
+            if (index == Long.MAX_VALUE) overflow = true;
+            else index++;
+            action.accept(mapper.applyAsDouble(value, current));
+            return true;
+        }
+    }
+
+    private static final class PairwiseIntSpliterator extends IntCombinatorSpliterator {
+        private final PrimitiveIterator.OfInt input;
+        private final IntBinaryOperator mapper;
+        private boolean hasPrevious;
+        private int previous;
+
+        PairwiseIntSpliterator(Spliterator.OfInt input, IntBinaryOperator mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!hasPrevious) {
+                if (!input.hasNext()) { finished = true; return false; }
+                previous = input.nextInt();
+                hasPrevious = true;
+            }
+            if (!input.hasNext()) { finished = true; return false; }
+            int first = previous;
+            int second = input.nextInt();
+            previous = second;
+            action.accept(mapper.applyAsInt(first, second));
+            return true;
+        }
+    }
+
+    private static final class PairwiseLongSpliterator extends LongCombinatorSpliterator {
+        private final PrimitiveIterator.OfLong input;
+        private final LongBinaryOperator mapper;
+        private boolean hasPrevious;
+        private long previous;
+
+        PairwiseLongSpliterator(Spliterator.OfLong input, LongBinaryOperator mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(LongConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!hasPrevious) {
+                if (!input.hasNext()) { finished = true; return false; }
+                previous = input.nextLong();
+                hasPrevious = true;
+            }
+            if (!input.hasNext()) { finished = true; return false; }
+            long first = previous;
+            long second = input.nextLong();
+            previous = second;
+            action.accept(mapper.applyAsLong(first, second));
+            return true;
+        }
+    }
+
+    private static final class PairwiseDoubleSpliterator extends DoubleCombinatorSpliterator {
+        private final PrimitiveIterator.OfDouble input;
+        private final DoubleBinaryOperator mapper;
+        private boolean hasPrevious;
+        private double previous;
+
+        PairwiseDoubleSpliterator(Spliterator.OfDouble input, DoubleBinaryOperator mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(DoubleConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!hasPrevious) {
+                if (!input.hasNext()) { finished = true; return false; }
+                previous = input.nextDouble();
+                hasPrevious = true;
+            }
+            if (!input.hasNext()) { finished = true; return false; }
+            double first = previous;
+            double second = input.nextDouble();
+            previous = second;
+            action.accept(mapper.applyAsDouble(first, second));
+            return true;
+        }
+    }
+
+    private static final class ZipIntSpliterator extends IntCombinatorSpliterator {
+        private final PrimitiveIterator.OfInt first;
+        private final PrimitiveIterator.OfInt second;
+        private final IntBinaryOperator zipper;
+
+        ZipIntSpliterator(Spliterator.OfInt first, Spliterator.OfInt second,
+                IntBinaryOperator zipper) {
+            super(first.characteristics() & second.characteristics() & Spliterator.ORDERED);
+            this.first = Spliterators.iterator(first);
+            this.second = Spliterators.iterator(second);
+            this.zipper = zipper;
+        }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!first.hasNext() || !second.hasNext()) { finished = true; return false; }
+            int left = first.nextInt();
+            int right = second.nextInt();
+            action.accept(zipper.applyAsInt(left, right));
+            return true;
+        }
+    }
+
+    private static final class ZipLongSpliterator extends LongCombinatorSpliterator {
+        private final PrimitiveIterator.OfLong first;
+        private final PrimitiveIterator.OfLong second;
+        private final LongBinaryOperator zipper;
+
+        ZipLongSpliterator(Spliterator.OfLong first, Spliterator.OfLong second,
+                LongBinaryOperator zipper) {
+            super(first.characteristics() & second.characteristics() & Spliterator.ORDERED);
+            this.first = Spliterators.iterator(first);
+            this.second = Spliterators.iterator(second);
+            this.zipper = zipper;
+        }
+
+        @Override
+        public boolean tryAdvance(LongConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!first.hasNext() || !second.hasNext()) { finished = true; return false; }
+            long left = first.nextLong();
+            long right = second.nextLong();
+            action.accept(zipper.applyAsLong(left, right));
+            return true;
+        }
+    }
+
+    private static final class ZipDoubleSpliterator extends DoubleCombinatorSpliterator {
+        private final PrimitiveIterator.OfDouble first;
+        private final PrimitiveIterator.OfDouble second;
+        private final DoubleBinaryOperator zipper;
+
+        ZipDoubleSpliterator(Spliterator.OfDouble first, Spliterator.OfDouble second,
+                DoubleBinaryOperator zipper) {
+            super(first.characteristics() & second.characteristics() & Spliterator.ORDERED);
+            this.first = Spliterators.iterator(first);
+            this.second = Spliterators.iterator(second);
+            this.zipper = zipper;
+        }
+
+        @Override
+        public boolean tryAdvance(DoubleConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!first.hasNext() || !second.hasNext()) { finished = true; return false; }
+            double left = first.nextDouble();
+            double right = second.nextDouble();
+            action.accept(zipper.applyAsDouble(left, right));
+            return true;
+        }
+    }
+
+    private static final class InterspersedIntSpliterator extends IntCombinatorSpliterator {
+        private final PrimitiveIterator.OfInt input;
+        private final int separator;
+        private boolean first = true;
+        private boolean hasPending;
+        private int pending;
+
+        InterspersedIntSpliterator(Spliterator.OfInt input, int separator) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.separator = separator;
+        }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (hasPending) {
+                hasPending = false;
+                action.accept(pending);
+                return true;
+            }
+            if (!input.hasNext()) { finished = true; return false; }
+            int value = input.nextInt();
+            if (first) {
+                first = false;
+                action.accept(value);
+            } else {
+                pending = value;
+                hasPending = true;
+                action.accept(separator);
+            }
+            return true;
+        }
+    }
+
+    private static final class InterspersedLongSpliterator extends LongCombinatorSpliterator {
+        private final PrimitiveIterator.OfLong input;
+        private final long separator;
+        private boolean first = true;
+        private boolean hasPending;
+        private long pending;
+
+        InterspersedLongSpliterator(Spliterator.OfLong input, long separator) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.separator = separator;
+        }
+
+        @Override
+        public boolean tryAdvance(LongConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (hasPending) {
+                hasPending = false;
+                action.accept(pending);
+                return true;
+            }
+            if (!input.hasNext()) { finished = true; return false; }
+            long value = input.nextLong();
+            if (first) {
+                first = false;
+                action.accept(value);
+            } else {
+                pending = value;
+                hasPending = true;
+                action.accept(separator);
+            }
+            return true;
+        }
+    }
+
+    private static final class InterspersedDoubleSpliterator extends DoubleCombinatorSpliterator {
+        private final PrimitiveIterator.OfDouble input;
+        private final double separator;
+        private boolean first = true;
+        private boolean hasPending;
+        private double pending;
+
+        InterspersedDoubleSpliterator(Spliterator.OfDouble input, double separator) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.separator = separator;
+        }
+
+        @Override
+        public boolean tryAdvance(DoubleConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (hasPending) {
+                hasPending = false;
+                action.accept(pending);
+                return true;
+            }
+            if (!input.hasNext()) { finished = true; return false; }
+            double value = input.nextDouble();
+            if (first) {
+                first = false;
+                action.accept(value);
+            } else {
+                pending = value;
+                hasPending = true;
+                action.accept(separator);
+            }
+            return true;
+        }
+    }
+
+    private static final class MappingWhileIntSpliterator extends IntCombinatorSpliterator {
+        private final PrimitiveIterator.OfInt input;
+        private final IntFunction<OptionalInt> mapper;
+
+        MappingWhileIntSpliterator(Spliterator.OfInt input, IntFunction<OptionalInt> mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!input.hasNext()) { finished = true; return false; }
+            OptionalInt result = Objects.requireNonNull(
+                    mapper.apply(input.nextInt()), "mapped optional");
+            if (result.isEmpty()) { finished = true; return false; }
+            action.accept(result.getAsInt());
+            return true;
+        }
+    }
+
+    private static final class MappingWhileLongSpliterator extends LongCombinatorSpliterator {
+        private final PrimitiveIterator.OfLong input;
+        private final LongFunction<OptionalLong> mapper;
+
+        MappingWhileLongSpliterator(Spliterator.OfLong input, LongFunction<OptionalLong> mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(LongConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!input.hasNext()) { finished = true; return false; }
+            OptionalLong result = Objects.requireNonNull(
+                    mapper.apply(input.nextLong()), "mapped optional");
+            if (result.isEmpty()) { finished = true; return false; }
+            action.accept(result.getAsLong());
+            return true;
+        }
+    }
+
+    private static final class MappingWhileDoubleSpliterator extends DoubleCombinatorSpliterator {
+        private final PrimitiveIterator.OfDouble input;
+        private final DoubleFunction<OptionalDouble> mapper;
+
+        MappingWhileDoubleSpliterator(Spliterator.OfDouble input, DoubleFunction<OptionalDouble> mapper) {
+            super(input.characteristics() & Spliterator.ORDERED);
+            this.input = Spliterators.iterator(input);
+            this.mapper = mapper;
+        }
+
+        @Override
+        public boolean tryAdvance(DoubleConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!input.hasNext()) { finished = true; return false; }
+            OptionalDouble result = Objects.requireNonNull(
+                    mapper.apply(input.nextDouble()), "mapped optional");
+            if (result.isEmpty()) { finished = true; return false; }
+            action.accept(result.getAsDouble());
+            return true;
+        }
+    }
+
+    private static final class SortedMergeIntSpliterator extends IntCombinatorSpliterator {
+        private final PrimitiveIterator.OfInt first;
+        private final PrimitiveIterator.OfInt second;
+        private boolean firstDone;
+        private boolean secondDone;
+        private boolean hasFirst;
+        private boolean hasSecond;
+        private int firstValue;
+        private int secondValue;
+
+        SortedMergeIntSpliterator(Spliterator.OfInt first, Spliterator.OfInt second) {
+            super(Spliterator.ORDERED | Spliterator.SORTED);
+            this.first = Spliterators.iterator(first);
+            this.second = Spliterators.iterator(second);
+        }
+
+        @Override
+        public Comparator<? super Integer> getComparator() { return null; }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!hasFirst && !firstDone) {
+                if (first.hasNext()) { firstValue = first.nextInt(); hasFirst = true; }
+                else firstDone = true;
+            }
+            if (!hasSecond && !secondDone) {
+                if (second.hasNext()) { secondValue = second.nextInt(); hasSecond = true; }
+                else secondDone = true;
+            }
+            if (!hasFirst && !hasSecond) { finished = true; return false; }
+            int value;
+            if (!hasSecond || (hasFirst && Integer.compare(firstValue, secondValue) <= 0)) {
+                value = firstValue;
+                hasFirst = false;
+            } else {
+                value = secondValue;
+                hasSecond = false;
+            }
+            action.accept(value);
+            return true;
+        }
+    }
+
+    private static final class SortedMergeLongSpliterator extends LongCombinatorSpliterator {
+        private final PrimitiveIterator.OfLong first;
+        private final PrimitiveIterator.OfLong second;
+        private boolean firstDone;
+        private boolean secondDone;
+        private boolean hasFirst;
+        private boolean hasSecond;
+        private long firstValue;
+        private long secondValue;
+
+        SortedMergeLongSpliterator(Spliterator.OfLong first, Spliterator.OfLong second) {
+            super(Spliterator.ORDERED | Spliterator.SORTED);
+            this.first = Spliterators.iterator(first);
+            this.second = Spliterators.iterator(second);
+        }
+
+        @Override
+        public Comparator<? super Long> getComparator() { return null; }
+
+        @Override
+        public boolean tryAdvance(LongConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!hasFirst && !firstDone) {
+                if (first.hasNext()) { firstValue = first.nextLong(); hasFirst = true; }
+                else firstDone = true;
+            }
+            if (!hasSecond && !secondDone) {
+                if (second.hasNext()) { secondValue = second.nextLong(); hasSecond = true; }
+                else secondDone = true;
+            }
+            if (!hasFirst && !hasSecond) { finished = true; return false; }
+            long value;
+            if (!hasSecond || (hasFirst && Long.compare(firstValue, secondValue) <= 0)) {
+                value = firstValue;
+                hasFirst = false;
+            } else {
+                value = secondValue;
+                hasSecond = false;
+            }
+            action.accept(value);
+            return true;
+        }
+    }
+
+    private static final class SortedMergeDoubleSpliterator extends DoubleCombinatorSpliterator {
+        private final PrimitiveIterator.OfDouble first;
+        private final PrimitiveIterator.OfDouble second;
+        private boolean firstDone;
+        private boolean secondDone;
+        private boolean hasFirst;
+        private boolean hasSecond;
+        private double firstValue;
+        private double secondValue;
+
+        SortedMergeDoubleSpliterator(Spliterator.OfDouble first, Spliterator.OfDouble second) {
+            super(Spliterator.ORDERED | Spliterator.SORTED);
+            this.first = Spliterators.iterator(first);
+            this.second = Spliterators.iterator(second);
+        }
+
+        @Override
+        public Comparator<? super Double> getComparator() { return null; }
+
+        @Override
+        public boolean tryAdvance(DoubleConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (finished) return false;
+            if (!hasFirst && !firstDone) {
+                if (first.hasNext()) { firstValue = first.nextDouble(); hasFirst = true; }
+                else firstDone = true;
+            }
+            if (!hasSecond && !secondDone) {
+                if (second.hasNext()) { secondValue = second.nextDouble(); hasSecond = true; }
+                else secondDone = true;
+            }
+            if (!hasFirst && !hasSecond) { finished = true; return false; }
+            double value;
+            if (!hasSecond || (hasFirst && Double.compare(firstValue, secondValue) <= 0)) {
+                value = firstValue;
+                hasFirst = false;
+            } else {
+                value = secondValue;
+                hasSecond = false;
+            }
+            action.accept(value);
+            return true;
+        }
     }
 
     private static <T> Stream<T> combinatorStream(BaseStream<?, ?> source,

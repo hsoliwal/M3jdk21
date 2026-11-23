@@ -55,8 +55,7 @@ public final class Flat3MapContract {
         check(map.isEmpty() == (expectedSize == 0), "empty");
         check(capacity(map, "keyLane") == capacity(map, "valueLane"), "lane alignment");
         int cap = capacity(map, "keyLane");
-        int words = capacity(map, "stateMaskWords");
-        check(words == (cap <= 3 ? 0 : (cap + 31) >>> 5), "packed two-bit state capacity");
+        inspectStates(map);
         check(map.size() <= cap, "live capacity");
     }
 
@@ -178,54 +177,56 @@ public final class Flat3MapContract {
                     "packed boundary insertion");
             if (i % 17 == 0 || i == keys.length - 1) {
                 compare(actual, model, keys);
-                inspectPacking(actual);
+                inspectStates(actual);
             }
         }
         for (int i = 0; i < keys.length; i += 3) {
             check(Objects.equals(actual.remove(keys[i]), model.remove(keys[i])),
                     "packed boundary removal");
-            if (i % 23 == 0) inspectPacking(actual);
+            if (i % 23 == 0) inspectStates(actual);
         }
-        inspectPacking(actual);
+        inspectStates(actual);
         compare(actual, model, keys);
         for (int i = 0; i < keys.length; i += 3) {
             check(Objects.equals(actual.put(keys[i], -i), model.put(keys[i], -i)),
                     "packed boundary reinsert");
         }
-        inspectPacking(actual);
+        inspectStates(actual);
         compare(actual, model, keys);
     }
 
-    private static void inspectPacking(Flat3Map<Key, Integer> map) {
+    /** Physical key-lane state must agree with reachability and payload clearing. */
+    private static void inspectStates(Flat3Map<Key, Integer> map) {
         try {
             Field kField = map.getClass().getDeclaredField("keyLane");
             Field vField = map.getClass().getDeclaredField("valueLane");
-            Field sField = map.getClass().getDeclaredField("stateMaskWords");
-            kField.setAccessible(true);
-            vField.setAccessible(true);
-            sField.setAccessible(true);
+            Field emptyField = map.getClass().getDeclaredField("EMPTY");
+            Field removedField = map.getClass().getDeclaredField("REMOVED");
+            Field occupiedField = map.getClass().getDeclaredField("occupied");
+            for (Field field : new Field[]{kField, vField, emptyField, removedField, occupiedField}) {
+                field.setAccessible(true);
+            }
             Object[] keys = (Object[]) kField.get(map);
             Object[] values = (Object[]) vField.get(map);
-            long[] words = (long[]) sField.get(map);
-            check(keys.length == values.length, "packed key/value alignment");
-            if (keys.length <= 3) {
-                check(words.length == 0, "no state allocation for inline entries");
-                return;
-            }
-            check(words.length == ((keys.length + 31) >>> 5), "packed word count");
-            int live = 0;
+            Object empty = emptyField.get(null), removed = removedField.get(null);
+            check(empty != null && removed != null && empty != removed, "distinct private sentinels");
+            check(keys.length == values.length, "key/value alignment");
+            boolean inline = keys.length <= 3;
+            int live = 0, tombstones = 0;
             for (int slot = 0; slot < keys.length; slot++) {
-                long state = (words[slot >>> 5] >>> ((slot & 31) << 1)) & 3L;
-                check(state <= 2, "two-bit state encoding");
-                if (state == 1) {
+                boolean used = inline ? slot < map.size() : keys[slot] != empty && keys[slot] != removed;
+                if (used) {
                     live++;
+                    check(keys[slot] != empty && keys[slot] != removed, "sentinels cannot be live keys");
                     check(map.containsKey(keys[slot]), "every physical live key reachable");
                 } else {
-                    check(keys[slot] == null, "no dangling key in empty/deleted slot");
+                    if (inline) check(keys[slot] == null, "cleared inline key");
+                    else if (keys[slot] == removed) tombstones++;
                     check(values[slot] == null, "no dangling value in empty/deleted slot");
                 }
             }
-            check(live == map.size(), "packed live count equals logical size");
+            check(live == map.size(), "physical live count equals logical size");
+            if (!inline) check(occupiedField.getInt(map) == live + tombstones, "occupied includes tombstones");
         } catch (ReflectiveOperationException failure) {
             throw new AssertionError(failure);
         }

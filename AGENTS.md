@@ -1,6 +1,8 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-## Priority 0 — MOP SDK core source invariant (2026-11-18)
+## Priority 0 — MOP SDK canonical source and product-receiver rule (2026-11-21)
+
+Follow exactly one canonical Synexia MOP SDK rule: [SYNEXIA-MOP-SDK-CORE-INVARIANTS-1](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-CORE-INVARIANTS-1.md), beneath the locked M3Scale v3.3 system authority. Its [source and 13-to-25 axiom crosswalk](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-AUTHORITY-20261121.md) retains lattice, unknown-pattern, semantic-algebra and dependency-closure supplements; the product-native documents `doc/mop-sdk-core-invariants.md`, `doc/m3sdk-mop-core-invariants.md` and `AGENT.md` remain compatible guidance, not alternative recipe or promotion owners. All later MOP paragraphs in this file remain mandatory details of this same Priority-0 contract despite having non-priority headings; existing clean-product, JDK API/ABI, rights, history and target-native proof constraints retain full force. A Git merge or source hash does not certify unexecuted behavior or full product readiness.
 
 Before generating or changing code, follow [MOP SDK core invariants](doc/mop-sdk-core-invariants.md): top-down repository -> project -> module -> package -> file -> declarations/atoms inventory and contract freeze; bottom-up atom -> file -> package/interface -> module -> project -> system patternization with dependency-closed, proof-gated promotion. Model each file as documented meaningful private/static/instance atoms composed by higher methods where semantically safe; explicitly record NO_SAFE_EXTRACTION when necessary. Independent sealed files may be prepared concurrently, but each file has one writer and serial verified refinement. Preserve JDK/HotSpot/JNI public interfaces, effects, behavior, native lifecycle, existing owners, original rights and qualified additive history. The M3JDK21 product receives only source-sealed, executed Synexia recipe postimages and target-native tests; no recipe or memory store is copied here. No source, API, optimality or runtime claim may be promoted from documentation or unrun tests alone.
 
@@ -39,7 +41,7 @@ receipts or qualification evidence in this repository.
 
 
 
-## Priority 0 — MOP SDK documented-atom and pattern invariant (2026-11-18)
+## MOP SDK compatible atom/pattern details (included in the same Priority-0 rule; 2026-11-18)
 
 For every source-changing JDK/SDK coding task, follow the [canonical Synexia MOP SDK invariant](https://github.com/hsoliwal/com.synexia/blob/develop/docs/M3-SCALE/invariants/SYNEXIA-MOP-SDK-CORE-INVARIANTS-1.md), together with the existing file-atom, recipe-first and M3Scale locked rules. MOP means **contract-sealed top-down inventory and atomization** (repository -> project -> module -> package/interface -> file -> fields/methods/native symbols -> behavioral atoms), followed by **bottom-up multipass patternization** (verified atoms -> file -> package/interface and callers -> module -> project -> repository/installed SDK). Every newly affected dependency requires a fresh downward discovery pass before upward promotion.
 
@@ -47,7 +49,7 @@ Independent files may have bounded parallel **candidate preparation** only when 
 
 ### Machine-tagged semantic-pattern residue
 
-Every source owner must attempt exact, versioned lookup of **known algorithms and patterns** before any transformation. Classify recognized candidates as `KNOWN_ALGORITHM` or `KNOWN_PATTERN` only when the canonical Synexia catalogue supplies stable identity, typed roles, applicability/contract/effect constraints and relevant proof. Otherwise record `UNKNOWN_ALGORITHM`, `UNKNOWN_PATTERN` or `UNPROVEN_MATCH` in the **private Synexia semantic inventory** with exact revision, symbol/atom, dependencies, effects, provenance, refusal reason and review state; link those facts from valid Javadoc/docstrings or an already supported annotation where safe. Never invent a Java annotation, alter JDK source just to mark an unknown, or treat a hash/LLM label as correctness. Unresolved novelty remains candidate-only until a versioned recognizer, validator, template, independent tests and owner approval establish admissibility. Keep M3JDK21's clean-output rule intact; this AGENTS policy change supplies no runtime implementation or proof. See [canonical pending MOP-13](https://github.com/hsoliwal/com.synexia/pull/18784).
+Every source owner must attempt exact, versioned lookup of **known algorithms and patterns** before any transformation. Classify recognized candidates as `KNOWN_ALGORITHM` or `KNOWN_PATTERN` only when the canonical Synexia catalogue supplies stable identity, typed roles, applicability/contract/effect constraints and relevant proof. Otherwise record `UNKNOWN_ALGORITHM`, `UNKNOWN_PATTERN` or `UNPROVEN_MATCH` in the **private Synexia semantic inventory** with exact revision, symbol/atom, dependencies, effects, provenance, refusal reason and review state; link those facts from valid Javadoc/docstrings or an already supported annotation where safe. Never invent a Java annotation, alter JDK source just to mark an unknown, or treat a hash/LLM label as correctness. Unresolved novelty remains candidate-only until a versioned recognizer, validator, template, independent tests and owner approval establish admissibility. Keep M3JDK21's clean-output rule intact; this AGENTS policy change supplies no runtime implementation or proof. See [merged MOP lattice and preflight PR #18784](https://github.com/hsoliwal/com.synexia/pull/18784).
 
 ## Priority 0 — additive best-of-best API superset, full-history merge custody (2026-11-18)
 
@@ -164,7 +166,7 @@ native/process-memory evidence. Do not equate a finite donor pass or merge ances
 target delivery; retain pending gates and partial coverage explicitly.
 
 
-## Priority 0 — MOP SDK documented atoms and verified pattern composition
+## MOP SDK additional composition and proof detail (included in the same Priority-0 rule)
 
 MOP requires top-down `repository -> project -> module -> package
 -> file -> interface/type -> fields/methods -> semantic atom` and
