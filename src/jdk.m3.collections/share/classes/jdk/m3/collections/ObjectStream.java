@@ -278,9 +278,8 @@ public final class ObjectStream<T> {
             Function<? super T, ? extends K> keyExtractor, int maxRunLength) {
         Objects.requireNonNull(keyExtractor, "keyExtractor");
         requireWidth(maxRunLength);
-        return new ObjectStream<>(
-                () -> ObjectStreamLanguageKernels.chunkBy(stream(), keyExtractor, maxRunLength),
-                replayable);
+        return delegateStream(input ->
+                Streams.groupAdjacent(input, keyExtractor, maxRunLength));
     }
 
     /** Suppress only adjacent duplicate keys using constant additional state. */
@@ -316,6 +315,54 @@ public final class ObjectStream<T> {
                 if (second != null) {
                     try { second.close(); }
                     catch (RuntimeException | Error closing) { failure.addSuppressed(closing); }
+                }
+                throw failure;
+            }
+        }, replayable && other.replayable());
+    }
+
+    /**
+     * Python-style strict zip over two replay-aware plans. A complete terminal
+     * traversal refuses unequal source lengths rather than truncating silently.
+     * A short-circuiting terminal may stop before the first mismatch.
+     *
+     * <p>Streams are opened per evaluation, preserving both plans' snapshot,
+     * live and one-shot semantics. The result is replayable only if both
+     * inputs are replayable. The java.base Streams owner performs strict
+     * length checking; this facade creates no second zip engine.
+     *
+     * <p>Opening the second input or constructing the paired traversal can
+     * fail. Such failures close any inputs already opened here, suppressing
+     * close failures on the original exception. On successful construction,
+     * terminal completion closes both through the original java.base owner.
+     *
+     * @param other the right input plan
+     * @param mapper the ordered pair mapping function
+     * @param <U> right input type
+     * @param <R> result type
+     * @return strict lazy pairing plan
+     * @throws NullPointerException if an argument is null
+     */
+    public <U, R> ObjectStream<R> zipStrict(ObjectStream<? extends U> other,
+            BiFunction<? super T, ? super U, ? extends R> mapper) {
+        Objects.requireNonNull(other, "other");
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(() -> {
+            Stream<T> first = stream();
+            Stream<? extends U> second = null;
+            try {
+                second = other.stream();
+                return Streams.zipStrict(first, second, mapper);
+            } catch (RuntimeException | Error failure) {
+                try { first.close(); }
+                catch (RuntimeException | Error closing) {
+                    if (failure != closing) failure.addSuppressed(closing);
+                }
+                if (second != null) {
+                    try { second.close(); }
+                    catch (RuntimeException | Error closing) {
+                        if (failure != closing) failure.addSuppressed(closing);
+                    }
                 }
                 throw failure;
             }
