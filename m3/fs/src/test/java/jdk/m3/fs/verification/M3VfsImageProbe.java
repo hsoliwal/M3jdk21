@@ -9,6 +9,7 @@ import jdk.m3.fs.M3FsProgress;
 import jdk.m3.fs.M3ObjectKind;
 import jdk.m3.fs.M3ObjectRef;
 import jdk.m3.fs.MFile;
+import jdk.m3.fs.M3File;
 import jdk.m3.fs.MFileCapture;
 import jdk.m3.fs.MFileChangeSource;
 import jdk.m3.fs.MFileContent;
@@ -211,17 +212,29 @@ public final class M3VfsImageProbe {
     public static void main(String[] args) throws Exception {
         require(args.length == 1, "fixture directory required");
         Path fixtures = Path.of(args[0]);
-        for (Class<?> type : new Class<?>[] {M3FS.class, MFiles.class, MFile.class, M3VFS.class,
+        for (Class<?> type : new Class<?>[] {M3FS.class, MFiles.class, MFile.class, M3File.class, M3VFS.class,
                 MFileContent.class, MFileStreams.class, MFileObservation.class, MFileDelta.class,
                 MFileChangeSource.class, MFileCapture.class, MFileShadow.class, DatabaseFileProvider.class}) {
             require("jdk.m3fs".equals(type.getModule().getName()), "module identity: " + type);
         }
-        for (String module : Set.of("commons.logging", "org.apache.commons.lang3", "org.apache.commons.io",
+        for (String module : Set.of("org.m3jdk.file", "jdk.m3.collections", "jdk.m3.arrays",
+                                     "org.apache.commons.lang3", "org.apache.commons.io",
                                      "org.apache.commons.compress", "org.apache.commons.codec")) {
             require(ModuleLayer.boot().findModule(module).isPresent(), "dependency missing: " + module);
         }
         require("jdk.m3fs".equals(M3VFS.class.getModule().getName()), "VFS escaped the M3FS module");
         require(new TarArchiveEntry("payload.txt").getName().equals("payload.txt"), "transitive Compress API");
+        require("jdk.m3fs".equals(LogFactory.class.getModule().getName()), "inlined Logging owner");
+        for (String scheme : Set.of("zip", "jar", "tar", "tgz", "tbz2", "gz", "bz2")) {
+            String name = scheme.equals("gz") || scheme.equals("bz2")
+                    ? "payload.txt." + scheme : "payload." + scheme;
+            String address = scheme + ":" + fixtures.resolve(name).toUri() + "!/";
+            try (var entries = M3File.stream(address, M3File::isFile, entry -> entry)) {
+                M3File entry = entries.findFirst().orElseThrow();
+                require(Arrays.equals(PAYLOAD, entry.readAllBytes(4096)), "M3File archive content " + scheme);
+                require(entry instanceof MFile, "M3File must retain the existing entry implementation");
+            }
+        }
         FileSystemManager manager = M3VFS.getManager();
         try {
             ((StandardFileSystemManager) manager).setLogger(LogFactory.getLog(M3VfsImageProbe.class));
@@ -268,6 +281,7 @@ public final class M3VfsImageProbe {
         }
         System.out.println("M3FS_VFS_IMAGE_PROBE=PASS");
         System.out.println("MODULE=jdk.m3fs");
+        System.out.println("M3FILE_ARCHIVE_API=PASS");
         System.out.println("CONSUMER_MODULE=" + M3VfsImageProbe.class.getModule().getName());
         System.out.println("GENERIC_URL_NAMES=PASS");
         System.out.println("MONITORED_CONTENT=PASS");

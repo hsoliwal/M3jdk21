@@ -92,6 +92,23 @@
     </resources>
     <plugins>
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <id>m3file-entry-source</id><phase>generate-sources</phase>
+            <goals><goal>add-source</goal></goals>
+            <configuration><sources><source>${project.basedir}/../../src/jdk.m3fs/share/classes</source></sources></configuration>
+          </execution>
+          <execution>
+            <id>m3file-entry-tests</id><phase>generate-test-sources</phase>
+            <goals><goal>add-test-source</goal></goals>
+            <configuration><sources><source>${project.basedir}/../../test/jdk/jdk/m3/fs</source></sources></configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>

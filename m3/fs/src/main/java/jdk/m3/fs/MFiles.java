@@ -47,10 +47,10 @@ import jdk.m3.fs.vfs.provider.zip.ZipFileSystem;
  * Hierarchical metadata streams backed by the M3FS VFS providers.
  *
  * <pre>{@code
- * try (Stream<MFile> entries = MFiles.from(root)
+ * try (Stream<M3File> entries = M3File.stream(MFiles.from(root)
  *         .filter(file -> file.isFile() && file.name().endsWith(".txt"))
  *         .descendInto(folder -> !folder.name().equals(".git"))
- *         .stream()) {
+ *         )) {
  *     entries.forEach(file -> System.out.println(file.relativeName()));
  * }
  * }</pre>
@@ -67,7 +67,7 @@ import jdk.m3.fs.vfs.provider.zip.ZipFileSystem;
  * and provider metadata methods can perform I/O according to their own contracts.
  * Non-default NIO paths retain their caller-owned filesystem, which is never
  * closed or remounted by this facade. Their native URI is available from
- * {@link MFile#uri()}; their {@code m3nio:} source address identifies that exact
+ * {@link M3File#uri()}; their {@code m3nio:} source address identifies that exact
  * live filesystem instance and resolves only while its binding remains open in
  * this JVM. The internal scheme is reserved and registration collisions fail.
  * No filesystem snapshot, archive-record identity, or repeatable content is

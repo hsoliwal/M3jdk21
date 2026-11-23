@@ -21,6 +21,9 @@ OMITTED_PROVIDERS = frozenset({"ftp", "ftps", "http", "https", "http4", "http4s"
 OMITTED_FILES = frozenset({"cache/LRUFilesCache.java", "provider/URLFileName.java",
                           "provider/URLFileNameParser.java"})
 VFS_PREFIX = "src/main/java/jdk/m3/fs/vfs/"
+# Exact first-party helper co-located with the imported provider implementation.
+# It remains source-locked and compiled, but is not one of the 311 Apache donors.
+OWNED_VFS_SOURCES = frozenset({VFS_PREFIX + "util/M3UriMask.java"})
 VFS_LEGAL_SHA256 = {
     "LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "NOTICE.txt": "c3b9e52e1b1a64d99b76e0f529d38d70c7ed01b97d01fd68e4c2fe4b6bf7bbbb",
@@ -100,7 +103,8 @@ def verify_source_lock(module_root, lock_path):
         source = input_file(root / name)
         if not source.is_relative_to(root) or digest(source) != expected:
             raise ValueError("source SHA-256 drift: " + name)
-    donor_sources = [name for name in locked if name.startswith(VFS_PREFIX) and name.endswith(".java")]
+    donor_sources = [name for name in locked if name.startswith(VFS_PREFIX)
+                     and name.endswith(".java") and name not in OWNED_VFS_SOURCES]
     if len(donor_sources) != 311:
         raise ValueError("expected all 311 relocated Apache Commons VFS Java sources in custody")
     compiled = [name for name in donor_sources if selected_vfs_source(name)]
@@ -112,7 +116,9 @@ def verify_source_lock(module_root, lock_path):
             raise ValueError("exact Apache Commons VFS legal text drift: " + name)
     return {"source_lock": str(input_file(lock_path)), "source_lock_sha256": digest(lock_path),
             "input_files": len(locked), "donor_java_custody": len(donor_sources),
-            "donor_java_compiled": len(compiled), "receiver_base": RECEIVER_BASE,
+            "donor_java_compiled": len(compiled),
+            "owned_vfs_java": sorted(OWNED_VFS_SOURCES.intersection(locked)),
+            "receiver_base": RECEIVER_BASE,
             "vfs_upstream_commit": UPSTREAM_COMMIT}
 
 
