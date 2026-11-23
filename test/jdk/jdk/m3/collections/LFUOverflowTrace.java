@@ -34,11 +34,12 @@ public final class LFUOverflowTrace {
                 Object[] k=(Object[])field(c,"keys"),v=(Object[])field(c,"values");
                 int[] freq=(int[])field(c,"frequencies");
                 long[] stamp=(long[])field(c,"accessStamps");
-                byte[] state=(byte[])field(c,"states");
+                Object empty=field(c,"EMPTY");
                 for(int j=0;j<capacity;j++){
+                    byte state=(byte)(k[j]==empty?0:1);
                     int id=-1;
-                    if(state[j]!=0){for(int p=0;p<keys.length;p++)if(k[j]==keys[p]){id=p;break;}}
-                    row.append('|').append(state[j]).append(',').append(id).append(',')
+                    if(state!=0){for(int p=0;p<keys.length;p++)if(k[j]==keys[p]){id=p;break;}}
+                    row.append('|').append(state).append(',').append(id).append(',')
                        .append(v[j]).append(',').append(freq[j]).append(',').append(stamp[j]);
                 }
                 digest.update(row.toString().getBytes(StandardCharsets.UTF_8));

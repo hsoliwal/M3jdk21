@@ -90,6 +90,83 @@ class M3ViewportSchedulerTest {
     }
 
     @Test
+    void checkedCpuExecutorRejectsUiCallerRunsFallback() {
+        Thread uiThread = Thread.currentThread();
+        Executor callerRuns = Runnable::run;
+        Executor guarded = M3ViewportScheduler.requireBackgroundExecutor(uiThread, callerRuns);
+        AtomicReference<String> computed = new AtomicReference<>();
+        assertThrows(IllegalStateException.class, () -> guarded.execute(() -> computed.set("unsafe")));
+        assertNull(computed.get(), "GUI thread must never perform CPU viewport computation");
+        assertThrows(NullPointerException.class, () ->
+                M3ViewportScheduler.requireBackgroundExecutor(null, callerRuns));
+        assertThrows(NullPointerException.class, () ->
+                M3ViewportScheduler.requireBackgroundExecutor(uiThread, null));
+    }
+
+    @Test
+    void checkedUiExecutorRefusesOffThreadPresentation() throws InterruptedException {
+        Thread uiThread = Thread.currentThread();
+        M3ViewportScheduler.UiExecutor direct = Runnable::run;
+        M3ViewportScheduler.UiExecutor guarded = M3ViewportScheduler.requireUiExecutor(uiThread, direct);
+        AtomicReference<Thread> consumer = new AtomicReference<>();
+        AtomicReference<Throwable> failure = new AtomicReference<>();
+        Thread wrong = new Thread(() -> {
+            try {
+                guarded.execute(() -> consumer.set(Thread.currentThread()));
+            } catch (Throwable thrown) {
+                failure.set(thrown);
+            }
+        }, "wrong-viewport-publication");
+        wrong.start();
+        wrong.join(3000);
+        assertFalse(wrong.isAlive(), "wrong-thread dispatch must finish or fail");
+        assertInstanceOf(IllegalStateException.class, failure.get());
+        assertNull(consumer.get(), "never invoke GUI callbacks from a CPU worker");
+        guarded.execute(() -> consumer.set(Thread.currentThread()));
+        assertSame(uiThread, consumer.get());
+        assertThrows(NullPointerException.class, () ->
+                M3ViewportScheduler.requireUiExecutor(null, direct));
+        assertThrows(NullPointerException.class, () ->
+                M3ViewportScheduler.requireUiExecutor(uiThread, null));
+    }
+
+    @Test
+    void checkedCpuAndUiExecutorsPreserveLatestGeneration() throws InterruptedException {
+        Thread uiThread = Thread.currentThread();
+        ManualExecutor cpu = new ManualExecutor(), ui = new ManualExecutor();
+        AtomicReference<String> presented = new AtomicReference<>();
+        AtomicReference<Throwable> failure = new AtomicReference<>();
+        var scheduler = new M3ViewportScheduler<Integer, String>(
+                M3ViewportScheduler.requireBackgroundExecutor(uiThread, cpu),
+                M3ViewportScheduler.requireUiExecutor(uiThread, ui),
+                (request, token) -> {
+                    assertNotSame(uiThread, Thread.currentThread());
+                    return "cpu:" + request;
+                },
+                (generation, snapshot) -> {
+                    assertSame(uiThread, Thread.currentThread());
+                    presented.set(generation + ":" + snapshot);
+                });
+        scheduler.request(1);
+        scheduler.request(2);
+        Thread worker = new Thread(() -> {
+            try {
+                cpu.finish();
+            } catch (Throwable thrown) {
+                failure.set(thrown);
+            }
+        }, "cpu-viewport-worker");
+        worker.start();
+        worker.join(3000);
+        assertFalse(worker.isAlive(), "worker must complete");
+        assertNull(failure.get(), "guarded worker failed");
+        assertNull(presented.get(), "CPU worker cannot present");
+        assertEquals(1, ui.tasks.size());
+        ui.finish();
+        assertEquals("2:cpu:2", presented.get());
+    }
+
+    @Test
     void computesFailureOnWorkerButDeliversOnUi() {
         ManualExecutor worker = new ManualExecutor(), ui = new ManualExecutor();
         List<String> seen = new ArrayList<>();

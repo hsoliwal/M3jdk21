@@ -25,6 +25,7 @@
 
 package java.util;
 
+import java.util.concurrent.ProgressMonitor;
 import java.util.stream.Stream;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
@@ -902,6 +903,28 @@ public abstract class AbstractMap<K,V> implements Map<K,V> {
     /* non-public */ abstract static class ViewCollection<E> implements Collection<E> {
         UnsupportedOperationException uoe() { return new UnsupportedOperationException(); }
         abstract Collection<E> view();
+
+        // Monitored operations belong to the current backing view. Only the ordinary
+        // add and addAll operations below are always rejected by this wrapper.
+        @Override
+        public void forEachMonitored(Consumer<? super E> action, ProgressMonitor monitor) {
+            view().forEachMonitored(action, monitor);
+        }
+
+        @Override
+        public boolean containsAllMonitored(Collection<?> elements, ProgressMonitor monitor) {
+            return view().containsAllMonitored(elements, monitor);
+        }
+
+        @Override
+        public boolean removeIfMonitored(Predicate<? super E> predicate, ProgressMonitor monitor) {
+            return view().removeIfMonitored(predicate, monitor);
+        }
+
+        @Override
+        public boolean addAllMonitored(Collection<? extends E> elements, ProgressMonitor monitor) {
+            return view().addAllMonitored(elements, monitor);
+        }
 
         public boolean add(E t) { throw uoe(); }
         public boolean addAll(Collection<? extends E> c) { throw uoe(); }

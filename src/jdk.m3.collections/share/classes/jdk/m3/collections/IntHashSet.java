@@ -15,7 +15,9 @@ import java.util.NoSuchElementException;
  * key lane uses zero as the empty marker and tracks a present zero key separately, so every
  * {@code int} is a legal member and no occupancy lane is needed. Removal back-shifts the probe
  * run instead of leaving tombstones. JDK-shaped set semantics with fail-fast primitive iteration;
- * iteration order is zero first (if present), then slot order. This is an M3 proving-ground
+ * iteration order is zero first (if present), then slot order. Capacity is
+ * staged before a new nonzero insertion: failed allocation must not publish
+ * the new key or a partially migrated probe directory. This is an M3 proving-ground
  * backend, not a public {@code HashSet} replacement.</p>
  */
 public final class IntHashSet implements IntCollection {
@@ -62,13 +64,22 @@ public final class IntHashSet implements IntCollection {
             }
             pos = (pos + 1) & mask;
         }
+        // The key is new (duplicates returned above). Admit capacity before
+        // committing membership, so a failed growth does not insert a key and
+        // then throw from add(). Zero remains outside the primitive lane.
+        if (size - (hasZero ? 1 : 0) >= threshold) {
+            if (keys.length >= (1 << 30)) {
+                throw new IllegalStateException("maximum hash-table capacity reached");
+            }
+            rehash(keys.length << 1);
+            pos = mix(key) & mask;
+            while (keys[pos] != 0) {
+                pos = (pos + 1) & mask;
+            }
+        }
         keys[pos] = key;
         size++;
         modCount++;
-        // Count only keys actually retained in the primitive probe lane.
-        if (size - (hasZero ? 1 : 0) > threshold) {
-            rehash(keys.length << 1);
-        }
         return true;
     }
 
@@ -205,23 +216,28 @@ public final class IntHashSet implements IntCollection {
         }
     }
 
+    /** Stage the entire new primitive table before publishing its directory. */
     private void rehash(int newCapacity) {
         if (keys.length >= (1 << 30)) {
             throw new IllegalStateException("maximum hash-table capacity reached");
         }
-        int[] old = keys;
-        keys = new int[newCapacity];
-        mask = newCapacity - 1;
-        threshold = thresholdFor(newCapacity);
-        for (int key : old) {
+        // Do not replace keys/mask/threshold until reallocation and migration
+        // both succeed. Existing iterators still see the original owner on OOME.
+        int[] replacement = new int[newCapacity];
+        int newMask = newCapacity - 1;
+        int newThreshold = thresholdFor(newCapacity);
+        for (int key : keys) {
             if (key != 0) {
-                int pos = mix(key) & mask;
-                while (keys[pos] != 0) {
-                    pos = (pos + 1) & mask;
+                int pos = mix(key) & newMask;
+                while (replacement[pos] != 0) {
+                    pos = (pos + 1) & newMask;
                 }
-                keys[pos] = key;
+                replacement[pos] = key;
             }
         }
+        keys = replacement;
+        mask = newMask;
+        threshold = newThreshold;
     }
 
     private static int capacityFor(int expectedSize) {

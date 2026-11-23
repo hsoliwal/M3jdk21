@@ -1,0 +1,6 @@
+# Public GDK extension classes only; no source is copied or executed.
+org.codehaus.groovy.runtime.ArrayGroovyMethods
+org.codehaus.groovy.runtime.DefaultGroovyMethods
+org.codehaus.groovy.runtime.IOGroovyMethods
+org.codehaus.groovy.runtime.ResourceGroovyMethods
+org.codehaus.groovy.runtime.StringGroovyMethods

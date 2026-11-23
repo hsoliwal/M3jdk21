@@ -96,11 +96,11 @@ final class ConcurrentMultisetContractTest {
         assertLanes(multiset, model);
     }
 
-    /** Physical proof: per stripe region, the state words, the element lane, the count lane and the tallies agree. */
+    /** Physical proof: per stripe region, key sentinels, the element lane, the count lane and the tallies agree. */
     private static void assertLanes(ConcurrentMultiset<Object> multiset, Map<Object, Integer> model) throws Exception {
         Object[] elements = (Object[]) lane(multiset, "elementLane");
         int[] counts = (int[]) lane(multiset, "countLane");
-        long[] states = (long[]) lane(multiset, "stateMaskWords");
+        Object removed = lane(multiset, "REMOVED");
         int[] index = (int[]) lane(multiset, "hashIndexLane");
         int region = (int) lane(multiset, "region");
         int[] used = (int[]) lane(multiset, "used");
@@ -114,14 +114,13 @@ final class ConcurrentMultisetContractTest {
             long totalHere = 0;
             for (int slot = stripe * region; slot < (stripe + 1) * region; slot++) {
                 boolean handedOut = slot - stripe * region < used[stripe << 4];
-                if (states[slot] == ConcurrentMultiset.STATE_OCCUPIED) {
+                if (elements[slot] != null && elements[slot] != removed) {
                     assertTrue(handedOut && counts[slot] > 0, "an occupied slot was handed out and counts something");
                     assertEquals(model.get(elements[slot]).intValue(), counts[slot], "the count lane holds the count");
                     liveHere++;
                     totalHere += counts[slot];
                 } else {
-                    assertEquals(handedOut ? ConcurrentMultiset.STATE_DELETED : 0L, states[slot], "deleted or never used");
-                    assertNull(elements[slot], "a slot that is not occupied holds no element");
+                    assertSame(handedOut ? removed : null, elements[slot], "deleted sentinel or never used");
                     assertEquals(0, counts[slot]);
                 }
             }

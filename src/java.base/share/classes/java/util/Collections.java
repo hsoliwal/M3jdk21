@@ -30,6 +30,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.util.concurrent.ProgressMonitor;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -1410,6 +1411,24 @@ public class Collections {
         }
 
         // Override default methods in Collection
+        // Keep guarded iterator entries, mutation refusal and monitor validation order.
+        @Override
+        public void forEachMonitored(Consumer<? super E> action, ProgressMonitor monitor) {
+            Collection.super.forEachMonitored(action, monitor);
+        }
+        @Override
+        public boolean containsAllMonitored(Collection<?> elements, ProgressMonitor monitor) {
+            return Collection.super.containsAllMonitored(elements, monitor);
+        }
+        @Override
+        public boolean removeIfMonitored(Predicate<? super E> predicate, ProgressMonitor monitor) {
+            return Collection.super.removeIfMonitored(predicate, monitor);
+        }
+        @Override
+        public boolean addAllMonitored(Collection<? extends E> elements, ProgressMonitor monitor) {
+            return Collection.super.addAllMonitored(elements, monitor);
+        }
+
         @Override
         public void forEach(Consumer<? super E> action) {
             c.forEach(action);
@@ -2645,6 +2664,32 @@ public class Collections {
             synchronized (mutex) {return c.toString();}
         }
         // Override default methods in Collection
+        // Serialize the whole operation on the owner mutex, including monitor callbacks.
+        @Override
+        public void forEachMonitored(Consumer<? super E> action, ProgressMonitor monitor) {
+            synchronized (mutex) {
+                Collection.super.forEachMonitored(action, monitor);
+            }
+        }
+        @Override
+        public boolean containsAllMonitored(Collection<?> elements, ProgressMonitor monitor) {
+            synchronized (mutex) {
+                return Collection.super.containsAllMonitored(elements, monitor);
+            }
+        }
+        @Override
+        public boolean removeIfMonitored(Predicate<? super E> predicate, ProgressMonitor monitor) {
+            synchronized (mutex) {
+                return Collection.super.removeIfMonitored(predicate, monitor);
+            }
+        }
+        @Override
+        public boolean addAllMonitored(Collection<? extends E> elements, ProgressMonitor monitor) {
+            synchronized (mutex) {
+                return Collection.super.addAllMonitored(elements, monitor);
+            }
+        }
+
         @Override
         public void forEach(Consumer<? super E> consumer) {
             synchronized (mutex) {c.forEach(consumer);}
@@ -3741,6 +3786,24 @@ public class Collections {
         }
 
         // Override default methods in Collection
+        // Keep per-element type checks and the successful prefix of a monitored add.
+        @Override
+        public void forEachMonitored(Consumer<? super E> action, ProgressMonitor monitor) {
+            Collection.super.forEachMonitored(action, monitor);
+        }
+        @Override
+        public boolean containsAllMonitored(Collection<?> elements, ProgressMonitor monitor) {
+            return Collection.super.containsAllMonitored(elements, monitor);
+        }
+        @Override
+        public boolean removeIfMonitored(Predicate<? super E> predicate, ProgressMonitor monitor) {
+            return Collection.super.removeIfMonitored(predicate, monitor);
+        }
+        @Override
+        public boolean addAllMonitored(Collection<? extends E> elements, ProgressMonitor monitor) {
+            return Collection.super.addAllMonitored(elements, monitor);
+        }
+
         @Override
         public void forEach(Consumer<? super E> action) {c.forEach(action);}
         @Override
@@ -6411,6 +6474,24 @@ public class Collections {
         // We use inherited addAll; forwarding addAll would be wrong
 
         // Override default methods in Collection
+        // Use this queue as the receiver: a monitored add must insert at the front.
+        @Override
+        public void forEachMonitored(Consumer<? super E> action, ProgressMonitor monitor) {
+            super.forEachMonitored(action, monitor);
+        }
+        @Override
+        public boolean containsAllMonitored(Collection<?> elements, ProgressMonitor monitor) {
+            return super.containsAllMonitored(elements, monitor);
+        }
+        @Override
+        public boolean removeIfMonitored(Predicate<? super E> predicate, ProgressMonitor monitor) {
+            return super.removeIfMonitored(predicate, monitor);
+        }
+        @Override
+        public boolean addAllMonitored(Collection<? extends E> elements, ProgressMonitor monitor) {
+            return super.addAllMonitored(elements, monitor);
+        }
+
         @Override
         public void forEach(Consumer<? super E> action) {q.forEach(action);}
         @Override

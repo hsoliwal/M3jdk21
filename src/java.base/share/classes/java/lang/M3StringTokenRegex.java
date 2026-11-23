@@ -71,8 +71,10 @@ final class M3StringTokenRegex {
         TokenSequence tokens = TokenSequence.capture(Objects.requireNonNull(source, "source"));
         if (!nativeUnavailable && tokens.size >= NATIVE_MIN_TOKENS) {
             try {
-                int candidate =
-                        matches0(tokens.fingerprints, fingerprints, kinds, quantifiers);
+                // The native selector consumes the entire supplied array; capacity is not input.
+                long[] input = tokens.size == tokens.fingerprints.length
+                        ? tokens.fingerprints : Arrays.copyOf(tokens.fingerprints, tokens.size);
+                int candidate = matches0(input, fingerprints, kinds, quantifiers);
                 if (candidate == 0) return false;
                 if (candidate != 1) throw new InternalError("invalid M3 token regex native result");
             } catch (UnsatisfiedLinkError unavailable) {

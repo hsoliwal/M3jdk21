@@ -52,6 +52,38 @@ public final class M3ViewportScheduler<R, S> implements AutoCloseable {
         void execute(Runnable command);
     }
 
+    /**
+     * Rejects a CPU executor that runs viewport computations on the owning GUI thread.
+     * This detects direct executors and caller-runs fallbacks without creating a thread.
+     * Use when binding an M3 viewport to SWT Display, Swing EDT or another UI owner.
+     */
+    public static Executor requireBackgroundExecutor(Thread uiThread, Executor executor) {
+        Objects.requireNonNull(uiThread, "uiThread");
+        Objects.requireNonNull(executor, "executor");
+        return command -> executor.execute(() -> {
+            if (Thread.currentThread() == uiThread) {
+                throw new IllegalStateException("viewport CPU work executed on GUI thread");
+            }
+            command.run();
+        });
+    }
+
+    /**
+     * Rejects GUI publication on a thread other than the owning GUI thread.
+     * The delegate must schedule to that thread; the guard runs at delivery,
+     * not just when the worker submits the runnable.
+     */
+    public static UiExecutor requireUiExecutor(Thread uiThread, UiExecutor executor) {
+        Objects.requireNonNull(uiThread, "uiThread");
+        Objects.requireNonNull(executor, "executor");
+        return command -> executor.execute(() -> {
+            if (Thread.currentThread() != uiThread) {
+                throw new IllegalStateException("viewport GUI publication executed off UI thread");
+            }
+            command.run();
+        });
+    }
+
     /** Both callbacks run on the UI thread, never on a worker. */
     public interface Receiver<S> {
         void present(long generation, S snapshot);
