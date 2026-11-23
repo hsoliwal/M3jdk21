@@ -208,18 +208,25 @@ jobs:
           # Compile the real M3 java.base dependencies; this bounded patch is not a full JDK build.
           cp src/java.base/share/classes/java/util/stream/Streams.java "$proof/patch-source/java/util/stream/"
           cp src/java.base/share/classes/java/util/function/ext/ObjLongFunction.java "$proof/patch-source/java/util/function/ext/"
+          # Streams.java has also imported these two java.util.function.ext interfaces since #3390.
+          cp src/java.base/share/classes/java/util/function/ext/DoubleLongToDoubleFunction.java "$proof/patch-source/java/util/function/ext/"
+          cp src/java.base/share/classes/java/util/function/ext/IntLongToIntFunction.java "$proof/patch-source/java/util/function/ext/"
           javac --patch-module java.base="$proof/patch-source" -d "$proof/patch" \
-            "$proof/patch-source/java/util/stream/Streams.java" "$proof/patch-source/java/util/function/ext/ObjLongFunction.java" > "$proof/base-compile.log" 2>&1
+            "$proof/patch-source/java/util/stream/Streams.java" "$proof/patch-source/java/util/function/ext/ObjLongFunction.java" \
+            "$proof/patch-source/java/util/function/ext/DoubleLongToDoubleFunction.java" \
+            "$proof/patch-source/java/util/function/ext/IntLongToIntFunction.java" > "$proof/base-compile.log" 2>&1
           find src/jdk.m3.collections/share/classes src/jdk.m3.collections/providers/classes -name '*.java' ! -name module-info.java | sort > "$proof/sources.txt"
           while IFS= read -r source; do sha256sum "$source"; done < "$proof/sources.txt" > "$proof/sources.sha256"
           javac -J-Xmx1200m --patch-module java.base="$proof/patch" --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
             -proc:none -d "$proof/classes" @"$proof/sources.txt" > "$proof/collection-compile.log" 2>&1
           javac -Xlint:all -Werror -proc:none -cp "$proof/classes" -d "$proof/classes" \
             src/jdk.m3.collections/providers/classes/jdk/m3/collections/vavr/collection/BitSet.java > "$proof/bitset-compile.log" 2>&1
+          # The oracle helpers moved byte for byte under providers/ (#3402, first landed by #3404); the prefix test did not.
+          providerroot=test/jdk/jdk/m3/collections/providers/vavr/collection
           testroot=test/jdk/jdk/m3/collections/vavr/collection
           javac -Xlint:all -Werror -proc:none -cp "$proof/classes:$RUNNER_TEMP/bitset-junit.jar" -d "$proof/tests" \
-            "$testroot/BitSetOracleKit.java" "$testroot/BitSetOracleOps.java" "$testroot/RefBitSetModule.java" \
-            "$testroot/BitSetWordOpsOracleTest.java" "$testroot/BitSetPrefixAllocationTest.java" > "$proof/test-compile.log" 2>&1
+            "$providerroot/BitSetOracleKit.java" "$providerroot/BitSetOracleOps.java" "$providerroot/RefBitSetModule.java" \
+            "$providerroot/BitSetWordOpsOracleTest.java" "$testroot/BitSetPrefixAllocationTest.java" > "$proof/test-compile.log" 2>&1
           # Preserve the original oracle's exception-message checks across JIT warmup.
           java -Xmx768m -XX:-OmitStackTraceInFastThrow --patch-module java.base="$proof/patch" \
             --add-exports java.base/java.util.function.ext=ALL-UNNAMED -jar "$RUNNER_TEMP/bitset-junit.jar" execute \
