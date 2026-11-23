@@ -105,11 +105,22 @@ def main(argv=None):
     parser.add_argument("--dependency-lock", type=Path)
     parser.add_argument("--source-lock", type=Path, required=True,
                         help="Reviewed canonical-materialization TSV inventory; path and sha256 columns")
+    parser.add_argument("--entry-api-sha256",
+                        help="Reviewed SHA-256 of the exact root-owned M3File.java input")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
     module = args.module_root.resolve(strict=True)
     repository = args.repository_root.resolve(strict=True)
     source_proof = verify_source_lock(module, args.source_lock)
+    entry_api = repository / "src/jdk.m3fs/share/classes/jdk/m3/fs/M3File.java"
+    entry_proof = None
+    if entry_api.exists() or args.entry_api_sha256 is not None:
+        input_file(entry_api)
+        if (args.entry_api_sha256 is None
+                or re.fullmatch(r"[0-9a-f]{64}", args.entry_api_sha256) is None
+                or digest(entry_api) != args.entry_api_sha256):
+            raise ValueError("root-owned M3File.java requires its reviewed SHA-256")
+        entry_proof = {"path": str(entry_api), "sha256": args.entry_api_sha256}
     lock = args.dependency_lock or module / "tools/vfs-dependencies.lock.json"
     dependencies = load_dependencies(lock, args.dependency_cache, module)
     jdk = args.jdk_home.resolve(strict=True)
@@ -130,7 +141,7 @@ def main(argv=None):
     out.mkdir(parents=True)
     environment, removed = clean_environment(jdk)
     receipts = {
-        "scope": SCOPE, "source": source_proof, "jdk_home": str(jdk), "jdk_release": release,
+        "scope": SCOPE, "source": source_proof, "entry_api": entry_proof, "jdk_home": str(jdk), "jdk_release": release,
         "dependency_lock": {"path": str(input_file(lock)), "sha256": digest(lock)},
         "dependencies": [{"module": row["module"], "jar": str(row["jar"]),
                            "sha256": row["sha256"], "descriptor_kind": row["descriptor_kind"]}
@@ -146,6 +157,8 @@ def main(argv=None):
     source_paths = sorted((module / "src/main/java").rglob("*.java"))
     vfs = [path for path in source_paths if selected_vfs_source(path.relative_to(module).as_posix())]
     owned = [path for path in source_paths if not path.relative_to(module).as_posix().startswith(VFS_PREFIX)]
+    if entry_proof is not None:
+        owned.append(entry_api)
     if not owned or not any(path.name == "M3FS.java" for path in owned):
         raise ValueError("complete existing M3FS product sources required")
     checked([jdk / "bin/javac", "--release", "21", "-Xlint:all", "-implicit:none",
@@ -201,6 +214,8 @@ def main(argv=None):
     if "M3FS_VFS_IMAGE_PROBE=PASS" not in result.splitlines():
         raise RuntimeError("linked-image consumer did not emit its success marker")
     # Replay immutable-input admission after use; drift cannot become a PASS receipt.
+    if entry_proof is not None and digest(input_file(entry_api)) != entry_proof["sha256"]:
+        raise ValueError("root-owned M3File.java changed during qualification")
     verify_source_lock(module, args.source_lock)
     load_dependencies(lock, args.dependency_cache, module)
     report = {

@@ -10,6 +10,9 @@ import java.util.OptionalLong;
 import jdk.m3.fs.vfs.FileObject;
 
 /**
+ * Compatibility implementation of {@link M3File}. New callers should use the
+ * {@code M3File} entry type and its stream factories.
+ *
  * An immutable metadata projection of one entry encountered by an {@link MFiles}
  * traversal. Every encountered entry has a distinct object; this is not a mutable
  * iterator cursor. Metadata remains available after the owning stream closes.
@@ -18,7 +21,7 @@ import jdk.m3.fs.vfs.FileObject;
  * Metadata is captured when an entry is encountered. It is not a filesystem or
  * content snapshot, and an external change can affect a later content read.</p>
  */
-public final class MFile implements MFileContent {
+public final class MFile implements MFileContent, M3File {
     private final String name;
     private final String relativeName;
     private final URI uri;
