@@ -127,7 +127,7 @@ jobs:
           done
           {
             echo '### Source-built M3LEX mapped-reader results'
-            echo 'Git revision: `'${{ github.sha }}'`'
+            echo "Git revision: $(git rev-parse HEAD)"
             echo 'Actual M3JDK21 JDK home: `' "$jdk" '`'
             for mode in normal interpreted checked-jni; do
               grep '^M3LEX_V2_REAL_VM_MAPPED_READER_PASS' "$RUNNER_TEMP/m3lex-vm-$mode.log"
