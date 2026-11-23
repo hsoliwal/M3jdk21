@@ -229,6 +229,29 @@ jobs:
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Build original M3 arrays JNI and test its C11 owner
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$M3_JAVA_HOME"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          native_build="$RUNNER_TEMP/m3-ginq-arrays-native"
+          cmake -S make/m3/arrays -B "$native_build" \
+            -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON \
+            | tee "$RUNNER_TEMP/m3-ginq-native-configure.log"
+          cmake --build "$native_build" --parallel 2 \
+            | tee "$RUNNER_TEMP/m3-ginq-native-build.log"
+          ctest --test-dir "$native_build" --output-on-failure \
+            | tee "$RUNNER_TEMP/m3-ginq-native-ctest.log"
+          native_lib="$native_build/libm3_arrays.so"
+          test -s "$native_lib"
+          nm -D "$native_lib" > "$RUNNER_TEMP/m3-ginq-native-symbols.txt"
+          for symbol in nativeAllocateObjects nativeAllocateInts; do
+            grep -F "Java_jdk_m3_arrays_ArrayNative_$symbol" \
+              "$RUNNER_TEMP/m3-ginq-native-symbols.txt"
+          done
+          sha256sum "$native_lib" \
+            | tee "$RUNNER_TEMP/m3-ginq-native-sha256.txt"
+          printf 'M3_ARRAYS_NATIVE_PATH=%s\n' "$native_lib" >> "$GITHUB_ENV"
       - name: Build original M3 arrays JNI and exercise C11 allocation tests
         run: |
           set -euo pipefail
@@ -265,10 +288,10 @@ jobs:
           set -euo pipefail
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
-          java --list-modules | grep '^jdk.m3.collections@'
+          java --list-modules | grep -E '^jdk[.]m3[.]collections(@|$)'
           "$M3_JAVA_HOME/bin/jlink" --module-path "$M3_JAVA_HOME/jmods" \
             --add-modules jdk.m3.collections --output "$RUNNER_TEMP/m3-object-stream-jlink"
-          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" --list-modules | grep '^jdk.m3.collections@'
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" --list-modules | grep -E '^jdk[.]m3[.]collections(@|$)'
       - name: Compile and run collate on built and linked M3 images
         run: |
           set -euo pipefail
@@ -411,6 +434,11 @@ jobs:
             ${{ runner.temp }}/m3-groovy-count-native-symbols.txt
             ${{ runner.temp }}/m3-groovy-count-native-sha256.txt
             ${{ runner.temp }}/m3-collate-jlink-image.log
+            ${{ runner.temp }}/m3-ginq-native-configure.log
+            ${{ runner.temp }}/m3-ginq-native-build.log
+            ${{ runner.temp }}/m3-ginq-native-ctest.log
+            ${{ runner.temp }}/m3-ginq-native-symbols.txt
+            ${{ runner.temp }}/m3-ginq-native-sha256.txt
             ${{ runner.temp }}/m3-gn-version.log
             ${{ runner.temp }}/m3-ninja-version.log
             ${{ runner.temp }}/m3-jtreg-version.log
