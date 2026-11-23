@@ -3,7 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 : "${M3JDK:?Set M3JDK to an isolated JDK 21 directory}"
 mkdir -p build/classes build/tests build/logs
-mapfile -t sources < <(find core/src -name '*.java' | sort)
+mapfile -t sources < <(find ../src/java.base/share/classes/jdk/m3/text -name '*.java' | sort)
 "$M3JDK/bin/javac" --release 21 -Xlint:all,-module -d build/classes "${sources[@]}" > build/logs/compile.log 2>&1
 "$M3JDK/bin/jar" --create --file build/jdk.m3.text.jar -C build/classes .
 "$M3JDK/bin/javac" --release 21 --module-path build/jdk.m3.text.jar --add-modules jdk.m3.text -d build/tests \
