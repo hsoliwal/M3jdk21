@@ -145,12 +145,20 @@ public final class M3Lex001Image {
         int directory = version == 1 ? 8 : 12;
         int previousOffset = 0;
         int previousLength = -1;
+        int consumedUnits = 0;
         for (int row = 0; row < count; row++) {
             int entry = HEADER + row * directory;
             int offset = map.getInt(entry);
             int length = map.getInt(entry + 4);
             M3LexiconFormatException.require(offset >= 0 && length >= 0 && (long) offset + length <= units,
                     "invalid record");
+            // A checksum also covers otherwise unused payload bytes. Version 2
+            // admits only exact, gap-free UTF-16 rows; preserve legacy v1.
+            if (version == 2) {
+                M3LexiconFormatException.require(offset == consumedUnits,
+                        "noncontiguous UTF-16 record offsets");
+            }
+            consumedUnits = offset + length;
             int hash = javaHash(map, payload, offset, length);
             M3LexiconFormatException.require(version == 1 || map.getInt(entry + 8) == hash, "Java hash mismatch");
             M3LexiconFormatException.require(previousLength < 0
@@ -158,6 +166,10 @@ public final class M3Lex001Image {
                     "records must be UTF-16 sorted");
             previousOffset = offset;
             previousLength = length;
+        }
+        if (version == 2) {
+            M3LexiconFormatException.require(consumedUnits == units,
+                    "unreferenced trailing UTF-16 payload");
         }
     }
 
