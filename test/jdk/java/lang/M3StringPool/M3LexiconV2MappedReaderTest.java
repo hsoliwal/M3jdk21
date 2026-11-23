@@ -233,15 +233,15 @@ public final class M3LexiconV2MappedReaderTest {
             for (Path path : paths) {
                 try {
                     Files.deleteIfExists(path);
-                } catch (java.nio.file.AccessDeniedException mappingStillAlive) {
-                    // The VM owns the mapping for its lifetime. The already
-                    // registered delete-on-exit handler runs after this test.
+                } catch (IOException mappingStillAlive) {
+                    // A mapped file may stay locked on Windows (AccessDenied or
+                    // FileSystemException). It is registered for delete-on-exit.
                 }
             }
             try {
                 Files.deleteIfExists(directory);
-            } catch (java.nio.file.DirectoryNotEmptyException mappingStillAlive) {
-                // Deferred mapped-file cleanup on Windows, not a test failure.
+            } catch (IOException mappingStillAlive) {
+                // Deferred mapped-file cleanup, not a parser test failure.
             }
         }
     }
