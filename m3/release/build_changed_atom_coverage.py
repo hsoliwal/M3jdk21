@@ -133,13 +133,15 @@ def build(root: Path, report: Path, inventory: Path, report_artifact: str,
         raise ValueError("empty coverage inventory")
     atoms = []
     seen = set()
+    seen_methods = set()
     source_digests = {}  # reuse SHA-256 for atoms sharing one source file
     for row in rows:
         ident = row["id"]
         key = (row["class"], row["method"], row["descriptor"])
-        if not ident or ident in seen or not all(key):
+        if not ident or ident in seen or not all(key) or key in seen_methods:
             raise ValueError("missing/duplicate coverage atom or method key")
         seen.add(ident)
+        seen_methods.add(key)
         if key not in methods:
             raise ValueError("missing instrumented method: " + repr(key))
         counts = methods[key]
