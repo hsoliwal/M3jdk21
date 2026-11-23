@@ -1,0 +1,136 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3LEX001 v2 source-built java.base mapped-reader acceptance
+
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/lang/M3StringPool.java'
+      - 'm3/lexicon/receiver/**'
+      - 'test/jdk/java/lang/M3StringPool/M3LexiconV2MappedReaderTest.java'
+      - '.github/workflows/m3lex-v2-source-built-vm.yml'
+  push:
+    branches:
+      - m3lex-v2-contiguous-geometry-20261123
+    paths:
+      - 'src/java.base/share/classes/java/lang/M3StringPool.java'
+      - 'm3/lexicon/receiver/**'
+      - 'test/jdk/java/lang/M3StringPool/M3LexiconV2MappedReaderTest.java'
+      - '.github/workflows/m3lex-v2-source-built-vm.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m3lex-v2-source-build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-run-actual-vm:
+    name: Source-built M3JDK21 -> java.base -> mapped reader normal/Xint/JNI
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - name: Checkout exactly the candidate source being tested
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # pinned v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify review-sealed VM, reader and jtreg sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          check_blob() {
+            local file="$1" expected="$2"
+            test -f "$file"
+            test "$(git hash-object "$file")" = "$expected" || {
+              echo "::error::Unreviewed source changed: $file"; exit 1;
+            }
+          }
+          check_blob src/java.base/share/classes/java/lang/M3StringPool.java 90a48a800518a048531b303da466936e339c5834
+          check_blob m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3Lex001Image.java 91a8fc3d2e20ff6b917868f672434f113aa625a9
+          check_blob m3/lexicon/receiver/src/test/java/M3Lex001ContiguousV2Test.java 9dad19a602832803790fdf75a9e84cb6ba132a20
+          check_blob test/jdk/java/lang/M3StringPool/M3LexiconV2MappedReaderTest.java 6cf795cb22b1a948a0bcc6f847725e64a0533c6a
+          grep -qx 'DEFAULT_VERSION_FEATURE=21' make/conf/version-numbers.conf
+          grep -qx 'DEFAULT_ACCEPTABLE_BOOT_VERSIONS="20 21"' make/conf/version-numbers.conf
+          grep -qx 'requiredVersion=8.2.1+1' test/jdk/TEST.ROOT
+          echo "M3LEX_V2_REVIEWED_SOURCE_BLOBS_PASS commit=$(git rev-parse HEAD)"
+      - name: Install stock Java21 as the BOOT JDK only
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # pinned v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install official Ubuntu JDK compilation dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            build-essential autoconf zip unzip file \
+            libasound2-dev libcups2-dev libfreetype-dev \
+            libx11-dev libxext-dev libxrender-dev libxtst-dev libxrandr-dev \
+            libfontconfig1-dev libffi-dev
+      - name: Configure unmodified OpenJDK build machinery for this fork
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -x "$JAVA_HOME/bin/java"
+          "$JAVA_HOME/bin/java" -version
+          bash configure --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=release --with-jvm-variants=server
+      - name: Build real fork JDK images (no stock-JDK substitution)
+        shell: bash
+        run: |
+          set -euo pipefail
+          make images JOBS=2
+          mapfile -t built < <(find build -type f -path '*/images/jdk/bin/java' -print)
+          test "${#built[@]}" -eq 1 || {
+            echo "::error::Expected exactly one source-built JDK image"; exit 1;
+          }
+          jdk_home="$(cd "$(dirname "${built[0]}")/.." && pwd -P)"
+          test "$jdk_home" != "$JAVA_HOME"
+          test -f "$jdk_home/jmods/java.base.jmod"
+          test -x "$jdk_home/bin/java" && test -x "$jdk_home/bin/javac"
+          "$jdk_home/bin/java" -version
+          echo "M3_SOURCE_BUILT_JDK_HOME=$jdk_home" >> "$GITHUB_ENV"
+          echo "M3LEX_SOURCE_BUILT_IMAGE_PASS home=$jdk_home"
+      - name: Strict-compile original jtreg source using built M3JDK21
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${M3_SOURCE_BUILT_JDK_HOME:-}"
+          mkdir -p "$RUNNER_TEMP/m3lex-vm-test"
+          "$M3_SOURCE_BUILT_JDK_HOME/bin/javac" --release 21 \
+            -encoding UTF-8 -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3lex-vm-test" \
+            test/jdk/java/lang/M3StringPool/M3LexiconV2MappedReaderTest.java
+      - name: Execute ACTUAL java.lang.M3StringPool mmap reader in three VM modes
+        shell: bash
+        run: |
+          set -euo pipefail
+          jdk="$M3_SOURCE_BUILT_JDK_HOME"
+          classpath="$RUNNER_TEMP/m3lex-vm-test"
+          for mode in normal interpreted checked-jni; do
+            args=()
+            case "$mode" in
+              normal) ;;
+              interpreted) args+=(-Xint) ;;
+              checked-jni) args+=(-Xcheck:jni) ;;
+            esac
+            "$jdk/bin/java" "${args[@]}" \
+              --add-opens=java.base/java.lang=ALL-UNNAMED \
+              -cp "$classpath" M3LexiconV2MappedReaderTest \
+              | tee "$RUNNER_TEMP/m3lex-vm-$mode.log"
+            grep -q '^M3LEX_V2_REAL_VM_MAPPED_READER_PASS assertions=' \
+              "$RUNNER_TEMP/m3lex-vm-$mode.log"
+            echo "M3LEX_REAL_MAPPED_VM_PASS mode=$mode"
+          done
+          {
+            echo '### Source-built M3LEX mapped-reader results'
+            echo 'Git revision: `'${{ github.sha }}'`'
+            echo 'Actual M3JDK21 JDK home: `' "$jdk" '`'
+            for mode in normal interpreted checked-jni; do
+              grep '^M3LEX_V2_REAL_VM_MAPPED_READER_PASS' "$RUNNER_TEMP/m3lex-vm-$mode.log"
+            done
+            echo 'Formal jtreg harness, GC, Windows and production corpus admission remain separate.'
+          } >> "$GITHUB_STEP_SUMMARY"
