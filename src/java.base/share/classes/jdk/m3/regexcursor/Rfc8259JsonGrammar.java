@@ -141,6 +141,156 @@ public final class Rfc8259JsonGrammar {
         }
     }
 
+    /**
+     * Recognize RFC 8259 JSON from a borrowed UTF-8 byte view without
+     * materializing a UTF-16 String or a token array. Only the input's remaining
+     * region is consumed logically; its position, limit and mark are untouched.
+     * The caller must keep mapped/borrowed bytes stable for the duration of the call.
+     * Invalid, overlong, surrogate-encoded or truncated UTF-8 is refused.
+     *
+     * <p>The byte scanner supplies exact JSON token kinds to the existing,
+     * build-prepared LL(1) syntax table. Its spelling decisions are compared
+     * against the authoritative UTF-16 lexer by the differential product test.</p>
+     */
+    public static boolean acceptsUtf8(java.nio.ByteBuffer source) {
+        Objects.requireNonNull(source, "source");
+        try {
+            return prepared().accepts(new Utf8Tokens(source.asReadOnlyBuffer()));
+        } catch (IllegalArgumentException invalidInput) {
+            return false;
+        }
+    }
+
+    private static final class Utf8Tokens implements IntSupplier {
+        private final java.nio.ByteBuffer bytes;
+        private final int limit;
+        private int position;
+
+        Utf8Tokens(java.nio.ByteBuffer bytes) {
+            this.bytes = bytes;
+            this.position = bytes.position();
+            this.limit = bytes.limit();
+        }
+
+        private int unit(int index) {
+            return bytes.get(index) & 0xff;
+        }
+
+        private IllegalArgumentException invalid() {
+            return new IllegalArgumentException("invalid UTF-8 JSON at byte " + position);
+        }
+
+        @Override
+        public int getAsInt() {
+            while (position < limit) {
+                int c = unit(position);
+                if (c == ' ' || c == '\t' || c == '\n' || c == '\r') position++;
+                else break;
+            }
+            if (position == limit) return 0;
+            int c = unit(position);
+            switch (c) {
+                case '{' -> { position++; return OBJECT_OPEN; }
+                case '}' -> { position++; return OBJECT_CLOSE; }
+                case '[' -> { position++; return ARRAY_OPEN; }
+                case ']' -> { position++; return ARRAY_CLOSE; }
+                case ',' -> { position++; return COMMA; }
+                case ':' -> { position++; return COLON; }
+                case '"' -> { position = string(position + 1); return STRING; }
+                case 't' -> { word("true"); return TRUE; }
+                case 'f' -> { word("false"); return FALSE; }
+                case 'n' -> { word("null"); return NULL; }
+                default -> {
+                    if (c == '-' || c >= '0' && c <= '9') {
+                        position = number(position);
+                        return NUMBER;
+                    }
+                    throw invalid();
+                }
+            }
+        }
+
+        private void word(String keyword) {
+            if (limit - position < keyword.length()) throw invalid();
+            for (int j = 0; j < keyword.length(); j++) {
+                if (unit(position + j) != keyword.charAt(j)) throw invalid();
+            }
+            position += keyword.length();
+        }
+
+        private int number(int at) {
+            if (unit(at) == '-') {
+                if (++at == limit) throw invalid();
+            }
+            int first = unit(at++);
+            if (first != '0') {
+                if (first < '1' || first > '9') throw invalid();
+                while (at < limit && digit(unit(at))) at++;
+            }
+            if (at < limit && unit(at) == '.') {
+                if (++at == limit || !digit(unit(at))) throw invalid();
+                do { at++; } while (at < limit && digit(unit(at)));
+            }
+            if (at < limit && (unit(at) == 'e' || unit(at) == 'E')) {
+                if (++at == limit) throw invalid();
+                if (unit(at) == '+' || unit(at) == '-') {
+                    if (++at == limit) throw invalid();
+                }
+                if (!digit(unit(at))) throw invalid();
+                do { at++; } while (at < limit && digit(unit(at)));
+            }
+            // A bare leading zero or an unfinished adjacent token is rejected
+            // by the unchanged grammar, which always requires complete input.
+            return at;
+        }
+
+        private static boolean digit(int c) { return c >= '0' && c <= '9'; }
+        private static boolean hex(int c) {
+            return digit(c) || c >= 'a' && c <= 'f' || c >= 'A' && c <= 'F';
+        }
+        private static boolean continuation(int c) { return c >= 0x80 && c <= 0xbf; }
+
+        private int string(int at) {
+            while (at < limit) {
+                int c = unit(at++);
+                if (c == '"') return at;
+                if (c == '\\') {
+                    if (at == limit) throw invalid();
+                    int escaped = unit(at++);
+                    if (escaped == 'u') {
+                        if (limit - at < 4) throw invalid();
+                        for (int n = 0; n < 4; n++) {
+                            if (!hex(unit(at++))) throw invalid();
+                        }
+                    } else if (escaped != '"' && escaped != '\\' && escaped != '/'
+                            && escaped != 'b' && escaped != 'f' && escaped != 'n'
+                            && escaped != 'r' && escaped != 't') {
+                        throw invalid();
+                    }
+                    continue;
+                }
+                if (c < 0x20) throw invalid();
+                if (c < 0x80) continue;
+                int following;
+                if (c >= 0xc2 && c <= 0xdf) following = 1;
+                else if (c >= 0xe0 && c <= 0xef) following = 2;
+                else if (c >= 0xf0 && c <= 0xf4) following = 3;
+                else throw invalid();
+                if (limit - at < following) throw invalid();
+                int second = unit(at++);
+                if (!continuation(second)
+                        || c == 0xe0 && second < 0xa0
+                        || c == 0xed && second >= 0xa0
+                        || c == 0xf0 && second < 0x90
+                        || c == 0xf4 && second >= 0x90) throw invalid();
+                for (int i = 1; i < following; i++) {
+                    if (!continuation(unit(at++))) throw invalid();
+                }
+            }
+            throw invalid();
+        }
+    }
+
     private static final class CursorTokens implements IntSupplier {
         private final CharSequence source;
         private final GrammarSpecification.Session session;
