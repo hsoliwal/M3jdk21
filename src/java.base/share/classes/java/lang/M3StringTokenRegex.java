@@ -32,7 +32,10 @@ final class M3StringTokenRegex {
         ONE,
         ZERO_OR_MORE,
         ONE_OR_MORE,
-        OPTIONAL
+        OPTIONAL;
+
+        // Enum.values() returns a fresh array. Keep one private ordinal table for NFA dispatch.
+        private static final Quantifier[] BY_ORDINAL = values();
     }
 
     private final byte[] kinds;
@@ -136,7 +139,7 @@ final class M3StringTokenRegex {
             int atom = Long.numberOfTrailingZeros(remaining);
             remaining &= remaining - 1L;
             if (!accepts(atom, source, sourceToken)) continue;
-            switch (Quantifier.values()[quantifiers[atom]]) {
+            switch (Quantifier.BY_ORDINAL[quantifiers[atom]]) {
                 case ONE, OPTIONAL -> next |= 1L << (atom + 1);
                 case ZERO_OR_MORE -> next |= 1L << atom;
                 case ONE_OR_MORE -> next |= (1L << atom) | (1L << (atom + 1));
@@ -163,7 +166,7 @@ final class M3StringTokenRegex {
             while (active != 0L) {
                 int atom = Long.numberOfTrailingZeros(active);
                 active &= active - 1L;
-                Quantifier quantifier = Quantifier.values()[quantifiers[atom]];
+                Quantifier quantifier = Quantifier.BY_ORDINAL[quantifiers[atom]];
                 if (quantifier == Quantifier.ZERO_OR_MORE || quantifier == Quantifier.OPTIONAL) {
                     bits |= 1L << (atom + 1);
                 }
