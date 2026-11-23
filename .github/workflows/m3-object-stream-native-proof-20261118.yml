@@ -11,6 +11,18 @@ on:
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
+      - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
+      - 'make/m3/collections/test-provider-junit.sh'
+      - 'm3/collections/qualification/provider-tests-20261123.*'
+      - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/apache/**'
+      - 'test/jdk/jdk/m3/collections/eclipse/**'
+      - 'test/jdk/jdk/m3/collections/guava/**'
+      - 'test/jdk/jdk/m3/collections/vavr/**'
       - 'src/java.base/share/classes/java/lang/String.java'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'test/jdk/java/lang/String/StringCaseFamily*.java'
@@ -28,6 +40,18 @@ on:
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
+      - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
+      - 'make/m3/collections/test-provider-junit.sh'
+      - 'm3/collections/qualification/provider-tests-20261123.*'
+      - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/apache/**'
+      - 'test/jdk/jdk/m3/collections/eclipse/**'
+      - 'test/jdk/jdk/m3/collections/guava/**'
+      - 'test/jdk/jdk/m3/collections/vavr/**'
       - 'src/java.base/share/classes/java/lang/String.java'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'test/jdk/java/lang/String/StringCaseFamily*.java'
@@ -61,6 +85,33 @@ jobs:
           git diff --check
           python3 -m unittest -v m3/collections/test_verify_stream_current.py
           python3 m3/collections/qualification/stream-current-compatible-20261118/verify.py
+          printf '%s  %s\n' \
+            '4b95a5e0746e3e4163174e52794796f142e5a36d4dc122c2a55f9aad236da430' 'm3/compatibility/groovy/tests/M3GroovyCountByManyTest.java' \
+            '2009c9fd180c441317051a9164a6c010f924fb4278207e37b9b089068a4e20c8' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java' \
+            '5af43c760da207b7fb173bb48773ce0f1fd903c6e283f4c0868a72f48d3faabd' 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java' \
+            | sha256sum --check -
+          bash -n m3/compatibility/groovy/run-ginq-join-installed.sh
+          bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
+          bash m3/compatibility/groovy/test-ginq-runner-negative.sh
+          bash -n make/m3/collections/test-provider-junit.sh
+          python3 - <<'PY'
+          import pathlib, subprocess
+          root = pathlib.Path.cwd()
+          manifest = root / 'm3/collections/qualification/provider-tests-20261123.tsv'
+          rows = [r.split('\t') for r in manifest.read_text(encoding='utf-8').splitlines()
+                  if r and not r.startswith('#')]
+          assert len(rows) == 54 and all(len(r) == 3 for r in rows), '54 exact move rows required'
+          assert len({r[0] for r in rows}) == len({r[1] for r in rows}) == 54
+          assert sum(r[1].endswith('Test.java') for r in rows) == 14
+          for old, new, digest in rows:
+              assert old.startswith('test/jdk/jdk/m3/collections/')
+              assert new == old.replace('/collections/', '/collections/providers/', 1)
+              assert not (root / old).exists() and not (root / old).is_symlink(), old
+              assert (root / new).is_file() and not (root / new).is_symlink(), new
+              actual = subprocess.check_output(['git', 'hash-object', new], text=True).strip()
+              assert actual == digest, new
+          print('M3_PROVIDER_SOURCE_RELOCATION_PASS files=54 junitClasses=14')
+          PY
 
   actual-m3jdk:
     name: Build modified M3JDK21 image and execute stream JUnit
@@ -274,13 +325,63 @@ jobs:
             | tee "$RUNNER_TEMP/m3-groovy-count-jlink-image.log"
           grep -Fx 'M3_GROOVY_COUNT_BY_MANY_PASS checks=5020 randomizedTrials=2500 seed=0x636f756e7442794d' \
             "$RUNNER_TEMP/m3-groovy-count-jlink-image.log"
+      - name: Compile and run GINQ join on full and linked M3 images
+        run: |
+          set -euo pipefail
+          join_classes="$RUNNER_TEMP/m3-ginq-contract-classes"
+          empty_sourcepath="$RUNNER_TEMP/m3-ginq-empty-sourcepath"
+          mkdir -p "$join_classes" "$empty_sourcepath"
+          "$M3_JAVA_HOME/bin/javap" --module jdk.m3.collections \
+            jdk.m3.collections.GinqHashJoin \
+            | grep -F 'public final class jdk.m3.collections.GinqHashJoin'
+          "$M3_JAVA_HOME/bin/javac" \
+            -source 21 -target 21 -proc:none -implicit:none -Xlint:all -Werror \
+            --add-modules jdk.m3.collections \
+            -sourcepath "$empty_sourcepath" -classpath "$join_classes" \
+            -d "$join_classes" \
+            test/jdk/jdk/m3/collections/GinqHashJoinTest.java
+          "$M3_JAVA_HOME/bin/java" -Xmx64m -ea -Xcheck:jni \
+            "-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
+            --add-modules jdk.m3.collections \
+            -cp "$join_classes" GinqHashJoinTest \
+            | tee "$RUNNER_TEMP/m3-ginq-full-image.log"
+          grep -Fx 'M3_GROOVY_GINQ_JOIN_PASS checks=8041 seededTrials=2000 joinModes=4' \
+            "$RUNNER_TEMP/m3-ginq-full-image.log"
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" -Xint -Xmx64m -ea -Xcheck:jni \
+            "-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
+            --add-modules jdk.m3.collections \
+            -cp "$join_classes" GinqHashJoinTest \
+            | tee "$RUNNER_TEMP/m3-ginq-jlink-image.log"
+          grep -Fx 'M3_GROOVY_GINQ_JOIN_PASS checks=8041 seededTrials=2000 joinModes=4' \
+            "$RUNNER_TEMP/m3-ginq-jlink-image.log"
+          bash m3/compatibility/groovy/run-ginq-join-installed.sh \
+            "$M3_JAVA_HOME" "$RUNNER_TEMP/m3-ginq-installed-receipt"
+          grep -Fx 'M3_GINQ_INSTALLED_SOURCE_BOUND_TESTS_PASS' \
+            "$RUNNER_TEMP/m3-ginq-installed-receipt/status.txt"
       - name: Run real jtreg contracts on the built M3 image
         run: |
           set -euo pipefail
           make CONF=m3-groovy-native-proof JOBS=2 test \
             JTREG="JAVA_OPTIONS=-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
-            TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
+            TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/jdk/m3/collections/GinqHashJoinTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
             | tee "$RUNNER_TEMP/m3-groovy-jtreg.log"
+      - name: Compile original provider JUnit tests against the complete installed module
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$M3_JAVA_HOME"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          test -s "$M3_ARRAYS_NATIVE_PATH"
+          curl --fail --location --retry 3 \
+            'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' \
+            -o "$RUNNER_TEMP/m3-provider-console.jar"
+          printf '%s  %s\n' \
+            '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' \
+            "$RUNNER_TEMP/m3-provider-console.jar" | sha256sum --check -
+          bash make/m3/collections/test-provider-junit.sh \
+            "$M3_JAVA_HOME" "$RUNNER_TEMP/m3-provider-console.jar" \
+            "$RUNNER_TEMP/m3-provider-junit"
+          grep -Fx 'M3_PROVIDER_JUNIT_PASS classes=14 sourceFiles=54' \
+            "$RUNNER_TEMP/m3-provider-junit/status.txt"
       - name: Compile current M3 collections and execute real JUnit
         run: |
           set -euo pipefail
@@ -300,6 +401,10 @@ jobs:
             ${{ runner.temp }}/m3-collate-full-image.log
             ${{ runner.temp }}/m3-groovy-count-full-image.log
             ${{ runner.temp }}/m3-groovy-count-jlink-image.log
+            ${{ runner.temp }}/m3-ginq-full-image.log
+            ${{ runner.temp }}/m3-ginq-jlink-image.log
+            ${{ runner.temp }}/m3-ginq-installed-receipt/
+            ${{ runner.temp }}/m3-provider-junit/
             ${{ runner.temp }}/m3-groovy-count-native-configure.log
             ${{ runner.temp }}/m3-groovy-count-native-build.log
             ${{ runner.temp }}/m3-groovy-count-native-ctest.log
