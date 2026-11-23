@@ -138,6 +138,50 @@ class PackagingAdmissionTest(unittest.TestCase):
                 writer.writerow((relative, digest(self.module / relative)))
         return source, lock
 
+    def reviewed_module_fixture(self):
+        # A verification fixture only: copy the exact finite source-lock inputs.
+        for relative in source_inventory(MODULE):
+            destination = self.module / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(MODULE / relative, destination)
+        return self.seal_module_fixture()
+
+    def seal_module_fixture(self):
+        lock = self.root / "reviewed-source.tsv"
+        lock.write_text("path\tsha256\n" + "".join(
+            relative + "\t" + digest(self.module / relative) + "\n"
+            for relative in source_inventory(self.module)), encoding="utf-8")
+        return lock
+
+    def test_first_party_helper_is_preserved_without_changing_apache_counts(self):
+        lock = self.reviewed_module_fixture()
+        proof = verify_source_lock(self.module, lock)
+        self.assertEqual(311, proof["donor_java_custody"])
+        self.assertEqual(237, proof["donor_java_compiled"])
+        self.assertEqual(["src/main/java/jdk/m3/fs/vfs/util/M3UriMask.java"],
+                         proof["owned_vfs_java"])
+        self.assertTrue(selected_vfs_source(proof["owned_vfs_java"][0]))
+
+    def test_unknown_provider_source_is_refused_even_when_resealed(self):
+        self.reviewed_module_fixture()
+        (self.module / "src/main/java/jdk/m3/fs/vfs/util/M3Unexpected.java").write_text(
+            "package jdk.m3.fs.vfs.util; final class M3Unexpected {}\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "311 relocated Apache"):
+            verify_source_lock(self.module, self.seal_module_fixture())
+
+    def test_missing_donor_is_refused_even_when_resealed(self):
+        self.reviewed_module_fixture()
+        (self.module / "src/main/java/jdk/m3/fs/vfs/FileContentInfoFactory.java").unlink()
+        with self.assertRaisesRegex(ValueError, "311 relocated Apache"):
+            verify_source_lock(self.module, self.seal_module_fixture())
+
+    def test_owned_helper_byte_drift_is_still_refused(self):
+        lock = self.reviewed_module_fixture()
+        helper = self.module / "src/main/java/jdk/m3/fs/vfs/util/M3UriMask.java"
+        helper.write_text(helper.read_text(encoding="utf-8") + "// drift\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "source SHA-256 drift"):
+            verify_source_lock(self.module, lock)
+
     def test_source_byte_drift_refused_before_compilation(self):
         source, lock = self.source_fixture()
         source.write_text("changed source\n", encoding="utf-8")
