@@ -1213,6 +1213,7 @@ final class M3StringPool {
             int[] javaHashes = new int[count];
             M3StringAtom[] atoms = new M3StringAtom[count];
             byte[] coders = allocateCoders(count);
+            int consumedUnits = 0;
             for (int row = 0; row < count; row++) {
                 int entry = LEXICON_HEADER + row * directoryBytes;
                 int offset = mapped.getInt(entry);
@@ -1220,6 +1221,12 @@ final class M3StringPool {
                 if (offset < 0 || length < 0 || (long) offset + length > units) {
                     throw new IOException("invalid MIndex lexicon record");
                 }
+                // All v2 UTF-16 payload units must belong to exactly one word.
+                // Retain the original v1 record semantics for compatibility.
+                if (version == 2 && offset != consumedUnits) {
+                    throw new IOException("noncontiguous MIndex lexicon UTF-16 records");
+                }
+                consumedUnits = offset + length;
                 offsets[row] = offset;
                 lengths[row] = length;
                 long geometry = scanMappedGeometry(
@@ -1241,6 +1248,9 @@ final class M3StringPool {
                                 >= 0) {
                     throw new IOException("MIndex lexicon must be UTF-16 sorted");
                 }
+            }
+            if (version == 2 && consumedUnits != units) {
+                throw new IOException("unreferenced MIndex lexicon UTF-16 payload");
             }
             long generation64 = ByteBuffer.wrap(actual).getLong();
             return new Lexicon(
