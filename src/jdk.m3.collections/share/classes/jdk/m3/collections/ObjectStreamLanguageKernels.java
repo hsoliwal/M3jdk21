@@ -46,6 +46,57 @@ final class ObjectStreamLanguageKernels {
         return wrap(input, output);
     }
 
+    /**
+     * Pairwise receiver for the M3 ObjectStream facade on a stock Java 21 host.
+     *
+     * <p>Reuse this existing language-kernel owner instead of referring to
+     * java.util.stream.Streams, which is package-private on stock OpenJDK.
+     * Unlike the historical zipWithNext combinator, the java.base Streams
+     * pairwise contract has no splits and preserves ORDERED only when the
+     * original spliterator advertises it.
+     */
+    static <T, R> Stream<R> pairwise(Stream<T> input,
+            BiFunction<? super T, ? super T, ? extends R> mapper) {
+        Objects.requireNonNull(input, "input");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator<T> upstream = input.sequential().spliterator();
+        Iterator<T> source = Spliterators.iterator(upstream);
+        Spliterator<R> result = new Spliterators.AbstractSpliterator<>(
+                Long.MAX_VALUE, upstream.characteristics() & Spliterator.ORDERED) {
+            private boolean initialized;
+            private boolean finished;
+            private T previous;
+
+            @Override public Spliterator<R> trySplit() {
+                return null; // Original java.base Streams.pairwise is unsplittable.
+            }
+
+            @Override public boolean tryAdvance(Consumer<? super R> action) {
+                Objects.requireNonNull(action, "action");
+                if (finished) return false;
+                if (!initialized) {
+                    if (!source.hasNext()) {
+                        finished = true;
+                        return false;
+                    }
+                    previous = source.next();
+                    initialized = true;
+                }
+                if (!source.hasNext()) {
+                    previous = null;
+                    finished = true;
+                    return false;
+                }
+                T first = previous;
+                T second = source.next();
+                previous = second;
+                action.accept(mapper.apply(first, second));
+                return true;
+            }
+        };
+        return wrap(input, result);
+    }
+
     static <T, R> Stream<R> zipWithNext(Stream<T> input,
             BiFunction<? super T, ? super T, ? extends R> mapper) {
         Iterator<T> source = input.iterator();

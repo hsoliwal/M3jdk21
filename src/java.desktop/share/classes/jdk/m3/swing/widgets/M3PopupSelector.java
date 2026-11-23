@@ -4,6 +4,8 @@ package jdk.m3.swing.widgets;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.IllegalComponentStateException;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -111,9 +113,22 @@ public abstract class M3PopupSelector<V extends JComponent> extends JPanel {
             popup.setLayout(new BorderLayout());
             popup.add(new JScrollPane(view), BorderLayout.CENTER);
         }
-        int h = Math.max(1, Math.min(visibleRowCount, Math.max(1, rowCount()))) * Math.max(16, rowHeight());
+        int visibleRows = Math.max(1, Math.min(visibleRowCount, Math.max(1, rowCount())));
+        long pixelHeight = (long) visibleRows * Math.max(16, rowHeight());
+        if (view instanceof javax.swing.JTree tree) {
+            Rectangle last = tree.getRowBounds(visibleRows - 1);
+            if (last != null) pixelHeight = Math.max(pixelHeight, (long) last.y + last.height);
+        } else if (view instanceof javax.swing.JTable table) {
+            Rectangle last = table.getCellRect(visibleRows - 1, 0, true);
+            if (last != null) pixelHeight = Math.max(pixelHeight, (long) last.y + last.height);
+        }
         int header = view instanceof javax.swing.JTable ? 28 : 0;
-        popup.getComponent(0).setPreferredSize(new Dimension(Math.max(getWidth(), 240), h + header));
+        JScrollPane scroll = (JScrollPane) popup.getComponent(0);
+        Insets chrome = scroll.getInsets();
+        long preferredHeight = pixelHeight + header + Math.max(0, chrome.top)
+                + Math.max(0, chrome.bottom);
+        int height = (int) Math.min(Integer.MAX_VALUE, preferredHeight);
+        scroll.setPreferredSize(new Dimension(Math.max(getWidth(), 240), height));
         popup.show(this, 0, getHeight());
         view.requestFocusInWindow();
     }

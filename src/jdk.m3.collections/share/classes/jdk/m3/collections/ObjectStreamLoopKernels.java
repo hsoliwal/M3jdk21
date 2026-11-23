@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.BiPredicate;
@@ -28,6 +29,51 @@ final class ObjectStreamLoopKernels {
 
     private static <R> Stream<R> wrap(Stream<?> input, Spliterator<R> output) {
         return StreamSupport.stream(output, false).onClose(input::close);
+    }
+
+    /**
+     * Optional-terminated mapping with the original java.base Streams.mapWhile
+     * semantics, in the existing M3 loop-kernel owner.
+     *
+     * <p>The Optional is the stop signal; null Optional is a mapper error,
+     * never a valid output. The one-pass spliterator is unsplittable even when
+     * the original source supports splitting, and preserves ORDERED only when
+     * the source does. No indexed entry or per-element mapper wrapper is kept.
+     */
+    static <T, R> Stream<R> mapWhileOptional(Stream<T> input,
+            Function<? super T, ? extends Optional<? extends R>> mapper) {
+        Objects.requireNonNull(input, "input");
+        Objects.requireNonNull(mapper, "mapper");
+        Spliterator<T> upstream = input.sequential().spliterator();
+        Iterator<T> source = Spliterators.iterator(upstream);
+        int flags = (upstream.characteristics() & Spliterator.ORDERED)
+                | Spliterator.NONNULL;
+        Spliterator<R> result = new Spliterators.AbstractSpliterator<>(
+                Long.MAX_VALUE, flags) {
+            private boolean stopped;
+
+            @Override public Spliterator<R> trySplit() {
+                return null; // Original java.base Streams.mapWhile is unsplittable.
+            }
+
+            @Override public boolean tryAdvance(Consumer<? super R> action) {
+                Objects.requireNonNull(action, "action");
+                if (stopped) return false;
+                if (!source.hasNext()) {
+                    stopped = true;
+                    return false;
+                }
+                Optional<? extends R> mapped = Objects.requireNonNull(
+                        mapper.apply(source.next()), "mapped optional");
+                if (mapped.isEmpty()) {
+                    stopped = true;
+                    return false;
+                }
+                action.accept(mapped.get());
+                return true;
+            }
+        };
+        return wrap(input, result);
     }
 
     /** Rust Iterator::map_while shape, using null as stop, not an output value. */

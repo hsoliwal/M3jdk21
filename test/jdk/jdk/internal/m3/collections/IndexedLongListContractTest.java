@@ -108,7 +108,8 @@ final class IndexedLongListContractTest {
         assertTrue(Math.abs(lh - rh) <= 1, "AVL height imbalance");
         assertEquals(1 + Math.max(lh, rh), height[slot] & 255);
         assertEquals(IndexedLongList.STATE_OCCUPIED
-                | (lh == rh ? 0 : IndexedLongList.STATE_BALANCE), states[slot]);
+                | (lh == rh ? 0 : IndexedLongList.STATE_BALANCE),
+                (states[slot / 16] >>> (4 * (slot % 16))) & 0xFL);
         return lc + rc + 1;
     }
 

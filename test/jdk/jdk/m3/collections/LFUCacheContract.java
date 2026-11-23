@@ -71,10 +71,10 @@ public final class LFUCacheContract {
             Object[] gotValues=(Object[])field(cache,"values");
             int[] gotFreq=(int[])field(cache,"frequencies");
             long[] gotStamp=(long[])field(cache,"accessStamps");
-            byte[] gotState=(byte[])field(cache,"states");
+            Object empty=field(cache,"EMPTY");
             for(int i=0;i<keys.length;i++) {
-                check((gotState[i]!=0)==used[i],"state "+i);
-                check(gotKeys[i]==keys[i],"identity "+i);
+                check((gotKeys[i]!=empty)==used[i],"state "+i);
+                check(gotKeys[i]==(used[i]?keys[i]:empty),"identity "+i);
                 check(gotValues[i]==values[i],"value "+i);
                 check(gotFreq[i]==freq[i],"frequency "+i);
                 check(gotStamp[i]==stamp[i],"recency "+i);
