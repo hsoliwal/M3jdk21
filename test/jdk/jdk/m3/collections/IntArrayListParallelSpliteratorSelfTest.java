@@ -133,7 +133,11 @@ public final class IntArrayListParallelSpliteratorSelfTest {
         expect(ConcurrentModificationException.class,
                 () -> callback.tryAdvance((int v) -> callbackOwner.add(4)));
         expect(NullPointerException.class, () ->
-                IntArrayList.copyOf(new int[] {1}).intSpliterator().tryAdvance(null));
+                IntArrayList.copyOf(new int[] {1}).intSpliterator()
+                        .tryAdvance((java.util.function.IntConsumer) null));
+        expect(NullPointerException.class, () ->
+                IntArrayList.copyOf(new int[] {1}).intSpliterator()
+                        .tryAdvance((java.util.function.Consumer<Integer>) null));
     }
 
     private static void nonstructuralReplacement() {
