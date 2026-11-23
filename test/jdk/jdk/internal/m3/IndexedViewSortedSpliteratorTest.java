@@ -2,7 +2,8 @@
  * @test
  * @summary Indexed array sorted views retain original comparator through splits and ranges
  * @modules java.base/jdk.internal.m3
- * @run main/othervm jdk.internal.m3.IndexedViewSortedSpliteratorTest
+ * @compile --patch-module java.base=${test.src} IndexedViewSortedSpliteratorTest.java
+ * @run main/othervm --patch-module java.base=${test.classes} jdk.internal.m3.IndexedViewSortedSpliteratorTest
  * Copyright (c) 2026 Hitesh Soliwal and contributors.
  * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
  */
