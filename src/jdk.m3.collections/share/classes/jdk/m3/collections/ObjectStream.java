@@ -1348,6 +1348,341 @@ public final class ObjectStream<T> {
         return merger.apply(left, right);
     }
 
+    /**
+     * A replayable source that opens a fresh, independent stream for each
+     * traversal. Construction validates the factory without invoking it. Each
+     * {@link #stream()} call invokes it exactly once, rejects a null result and
+     * exposes a sequential traversal. Terminal operations retain their ordinary
+     * source-closing behavior; callers of {@code stream()} own its closure.
+     *
+     * <p>The caller promises that every successful factory invocation returns a
+     * fresh stream. This factory does not cache elements or restore a consumed
+     * stream. Supplier failures propagate unchanged and do not consume a future
+     * invocation.</p>
+     *
+     * @param <E> element type
+     * @param factory factory of fresh streams, including nullable elements
+     * @return a replayable source plan
+     * @throws NullPointerException if the factory is null
+     */
+    public static <E> ObjectStream<E> fromStreamSupplier(
+            Supplier<? extends Stream<? extends E>> factory) {
+        Objects.requireNonNull(factory, "factory");
+        return new ObjectStream<>(() -> {
+            @SuppressWarnings("unchecked") Stream<E> opened = (Stream<E>) factory.get();
+            return opened;
+        }, true);
+    }
+
+    /**
+     * A left-join projection with an explicit match bit. A matched right value
+     * may itself be null; an unmatched row has {@code hasRight == false} and a
+     * null right argument.
+     *
+     * @param <L> left value type
+     * @param <R> right value type
+     * @param <O> result type
+     */
+    @FunctionalInterface
+    public interface LeftJoinMapper<L, R, O> {
+        /**
+         * Project one output row.
+         * @param left left value
+         * @param hasRight whether a matching right occurrence exists
+         * @param right matching right value, or null for an unmatched row
+         * @return the projected value, which may be null
+         */
+        O apply(L left, boolean hasRight, R right);
+    }
+
+    /**
+     * Bounded equality-key inner join in left encounter order, then right
+     * encounter order for each left occurrence. Null keys match null keys;
+     * duplicate occurrences form the ordinary Cartesian product for that key.
+     *
+     * <p>Plan construction and opening do not traverse either input. On first
+     * demand the left input, then the right input, are captured in bounded
+     * array/index lanes. Each admitted value's key is extracted once. Distinct
+     * key and source bounds, then the complete result cardinality, are checked
+     * before any joiner call. Both inputs are closed before results are
+     * projected lazily. Closing before first demand closes both unconsumed
+     * traversals. A failed second open closes the first. The same plan object
+     * cannot be supplied as both inputs; distinct plans may share data.</p>
+     *
+     * <p>The result is replayable exactly when both inputs are replayable.
+     * Traversal is sequential and unsplittable. Keys must obey stable Java
+     * equality and hash contracts. Retained preparation storage is linear in
+     * the bounded input sizes and distinct keys, with no per-row entry nodes.</p>
+     *
+     * @param right right input plan
+     * @param leftKey left key extractor
+     * @param rightKey right key extractor
+     * @param joiner projection for a matching pair
+     * @param maxLeftElements left input bound
+     * @param maxRightElements right input bound
+     * @param maxLeftKeys left distinct-key bound
+     * @param maxRightKeys right distinct-key bound
+     * @param maxResults result cardinality bound
+     * @param <U> right value type
+     * @param <K> equality-key type
+     * @param <R> result type
+     * @return the bounded join plan
+     * @throws IllegalArgumentException if a bound is negative or right is this plan
+     * @throws NullPointerException if a plan or callback is null
+     */
+    public <U, K, R> ObjectStream<R> innerJoinByKey(
+            ObjectStream<? extends U> right,
+            Function<? super T, ? extends K> leftKey,
+            Function<? super U, ? extends K> rightKey,
+            BiFunction<? super T, ? super U, ? extends R> joiner,
+            int maxLeftElements, int maxRightElements,
+            int maxLeftKeys, int maxRightKeys, int maxResults) {
+        Objects.requireNonNull(joiner, "joiner");
+        return keyedJoin(right, leftKey, rightKey,
+                (left, hasRight, value) -> joiner.apply(left, value),
+                ObjectStreamAdvancedKernels.INNER_JOIN, maxLeftElements,
+                maxRightElements, maxLeftKeys, maxRightKeys, maxResults);
+    }
+
+    /**
+     * Bounded left outer join with the preparation, equality, ordering and
+     * ownership rules of {@link #innerJoinByKey}. Each unmatched left occurrence
+     * produces one projection with {@code hasRight == false}; a matching null
+     * right payload still has {@code hasRight == true}. Result cardinality is
+     * preflighted before any projection, including unmatched projections.
+     *
+     * @param right right input plan
+     * @param leftKey left key extractor
+     * @param rightKey right key extractor
+     * @param joiner match-aware projection
+     * @param maxLeftElements left input bound
+     * @param maxRightElements right input bound
+     * @param maxLeftKeys left distinct-key bound
+     * @param maxRightKeys right distinct-key bound
+     * @param maxResults result cardinality bound
+     * @param <U> right value type
+     * @param <K> equality-key type
+     * @param <R> result type
+     * @return the bounded left join plan
+     */
+    public <U, K, R> ObjectStream<R> leftJoinByKey(
+            ObjectStream<? extends U> right,
+            Function<? super T, ? extends K> leftKey,
+            Function<? super U, ? extends K> rightKey,
+            LeftJoinMapper<? super T, ? super U, ? extends R> joiner,
+            int maxLeftElements, int maxRightElements,
+            int maxLeftKeys, int maxRightKeys, int maxResults) {
+        return keyedJoin(right, leftKey, rightKey, joiner,
+                ObjectStreamAdvancedKernels.LEFT_JOIN, maxLeftElements,
+                maxRightElements, maxLeftKeys, maxRightKeys, maxResults);
+    }
+
+    /**
+     * Retain each left occurrence exactly once if its key occurs on the right.
+     * Uses the bounded lazy preparation and ownership rules of
+     * {@link #innerJoinByKey}; right multiplicity does not duplicate left output.
+     *
+     * @param right right input plan
+     * @param leftKey left key extractor
+     * @param rightKey right key extractor
+     * @param maxLeftElements left input bound
+     * @param maxRightElements right input bound
+     * @param maxLeftKeys left distinct-key bound
+     * @param maxRightKeys right distinct-key bound
+     * @param maxResults result cardinality bound
+     * @param <U> right value type
+     * @param <K> equality-key type
+     * @return the bounded semi-join plan
+     */
+    public <U, K> ObjectStream<T> semiJoinByKey(
+            ObjectStream<? extends U> right,
+            Function<? super T, ? extends K> leftKey,
+            Function<? super U, ? extends K> rightKey,
+            int maxLeftElements, int maxRightElements,
+            int maxLeftKeys, int maxRightKeys, int maxResults) {
+        return keyedJoin(right, leftKey, rightKey, (left, hasRight, value) -> left,
+                ObjectStreamAdvancedKernels.SEMI_JOIN, maxLeftElements,
+                maxRightElements, maxLeftKeys, maxRightKeys, maxResults);
+    }
+
+    /**
+     * Retain each left occurrence whose key is absent from the right. Uses the
+     * bounded lazy preparation and ownership rules of {@link #innerJoinByKey}.
+     *
+     * @param right right input plan
+     * @param leftKey left key extractor
+     * @param rightKey right key extractor
+     * @param maxLeftElements left input bound
+     * @param maxRightElements right input bound
+     * @param maxLeftKeys left distinct-key bound
+     * @param maxRightKeys right distinct-key bound
+     * @param maxResults result cardinality bound
+     * @param <U> right value type
+     * @param <K> equality-key type
+     * @return the bounded anti-join plan
+     */
+    public <U, K> ObjectStream<T> antiJoinByKey(
+            ObjectStream<? extends U> right,
+            Function<? super T, ? extends K> leftKey,
+            Function<? super U, ? extends K> rightKey,
+            int maxLeftElements, int maxRightElements,
+            int maxLeftKeys, int maxRightKeys, int maxResults) {
+        return keyedJoin(right, leftKey, rightKey, (left, hasRight, value) -> left,
+                ObjectStreamAdvancedKernels.ANTI_JOIN, maxLeftElements,
+                maxRightElements, maxLeftKeys, maxRightKeys, maxResults);
+    }
+
+    private <U, K, R> ObjectStream<R> keyedJoin(
+            ObjectStream<? extends U> right,
+            Function<? super T, ? extends K> leftKey,
+            Function<? super U, ? extends K> rightKey,
+            LeftJoinMapper<? super T, ? super U, ? extends R> joiner, int kind,
+            int maxLeftElements, int maxRightElements,
+            int maxLeftKeys, int maxRightKeys, int maxResults) {
+        Objects.requireNonNull(right, "right");
+        Objects.requireNonNull(leftKey, "leftKey");
+        Objects.requireNonNull(rightKey, "rightKey");
+        Objects.requireNonNull(joiner, "joiner");
+        if (right == this) throw new IllegalArgumentException("join inputs must be distinct plans");
+        requireNonNegative(maxLeftElements, "maxLeftElements");
+        requireNonNegative(maxRightElements, "maxRightElements");
+        requireNonNegative(maxLeftKeys, "maxLeftKeys");
+        requireNonNegative(maxRightKeys, "maxRightKeys");
+        requireNonNegative(maxResults, "maxResults");
+        return new ObjectStream<>(() -> {
+            Stream<T> first = stream();
+            Stream<? extends U> second = null;
+            try {
+                second = right.stream();
+                return ObjectStreamAdvancedKernels.joinByKey(first, second,
+                        leftKey, rightKey, joiner, kind, maxLeftElements,
+                        maxRightElements, maxLeftKeys, maxRightKeys, maxResults);
+            } catch (RuntimeException | Error failure) {
+                if (second != null) {
+                    try { second.close(); }
+                    catch (RuntimeException | Error closing) {
+                        if (closing != failure) failure.addSuppressed(closing);
+                    }
+                }
+                try { first.close(); }
+                catch (RuntimeException | Error closing) {
+                    if (closing != failure) failure.addSuppressed(closing);
+                }
+                throw failure;
+            }
+        }, replayable && right.replayable);
+    }
+
+    /**
+     * Partition each key's occurrences into consecutive count-based chunks.
+     * Keys and chunks retain first-key and per-key encounter order. INCLUDE
+     * retains the final short chunk; DROP retains the key with an empty chunk
+     * list when no full chunk exists. The map, group lists and chunks are
+     * immutable snapshots, with null keys and values preserved.
+     *
+     * <p>This sequential terminal captures at most maxElements values and
+     * maxKeys distinct keys in array/index lanes, extracts one key per admitted
+     * value, and closes the source before constructing results. Exceeding an
+     * input or key bound throws IllegalStateException. Width is in [1, 65536].</p>
+     *
+     * @param keyExtractor key extractor
+     * @param width chunk width
+     * @param tailPolicy final short-chunk policy
+     * @param maxElements input bound
+     * @param maxKeys distinct-key bound
+     * @param <K> key type
+     * @return immutable chunks in an encounter-ordered immutable map
+     */
+    public <K> Map<K, List<List<T>>> countWindowsByKey(
+            Function<? super T, ? extends K> keyExtractor, int width,
+            TailPolicy tailPolicy, int maxElements, int maxKeys) {
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        Objects.requireNonNull(tailPolicy, "tailPolicy");
+        requireWidth(width);
+        requireNonNegative(maxElements, "maxElements");
+        requireNonNegative(maxKeys, "maxKeys");
+        return ObjectStreamAdvancedKernels.countWindowsByKey(
+                stream(), keyExtractor, width, tailPolicy, maxElements, maxKeys);
+    }
+
+    /**
+     * Map a centered, per-key neighborhood for every source occurrence. The
+     * immutable window contains up to before preceding same-key occurrences,
+     * the center, and up to after following same-key occurrences; edges are
+     * truncated. Null values and keys are retained. Results are aligned to the
+     * original source order, even when keys are interleaved.
+     *
+     * <p>Opening is lazy. First demand captures the bounded source and extracts
+     * keys once; input closure succeeds before any mapper call. The mapper is
+     * then called once for each requested output occurrence with its center
+     * and a detached window. Traversal is unsplittable. Preparation uses
+     * O(maxElements + maxKeys) bounded lanes; each requested window adds at most
+     * before + after + 1 references. A mapper may retain its window. Both radii
+     * are nonnegative and the complete width must be at most 65536.</p>
+     *
+     * @param keyExtractor key extractor
+     * @param before number of preceding same-key neighbors
+     * @param after number of following same-key neighbors
+     * @param mapper center/window projection
+     * @param maxElements input bound
+     * @param maxKeys distinct-key bound
+     * @param <K> key type
+     * @param <R> result type
+     * @return the source-aligned window mapping plan
+     */
+    public <K, R> ObjectStream<R> mapWindowsByKey(
+            Function<? super T, ? extends K> keyExtractor, int before, int after,
+            BiFunction<? super T, ? super List<T>, ? extends R> mapper,
+            int maxElements, int maxKeys) {
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        Objects.requireNonNull(mapper, "mapper");
+        requireNonNegative(before, "before");
+        requireNonNegative(after, "after");
+        if ((long) before + after + 1 > MAX_STATEFUL_WIDTH) {
+            throw new IllegalArgumentException(
+                    "complete window width exceeds " + MAX_STATEFUL_WIDTH);
+        }
+        requireNonNegative(maxElements, "maxElements");
+        requireNonNegative(maxKeys, "maxKeys");
+        return delegateStream(input -> ObjectStreamAdvancedKernels.mapWindowsByKey(
+                input, keyExtractor, before, after, mapper, maxElements, maxKeys));
+    }
+
+    /**
+     * Select each key's greatest k occurrences, descending by comparator, with
+     * stable source order for ties. The map uses first-key encounter order and
+     * the map and result lists are immutable. Null keys and values are allowed
+     * when the comparator handles the values. For k == 0, observed keys map
+     * to empty lists and the comparator is never called.
+     *
+     * <p>This sequential terminal first captures and closes the bounded input,
+     * then reuses the existing stable heap kernel for each key's occurrence
+     * projection. Storage is O(input + keys + selected output), plus one heap
+     * of at most k entries, not O(k) for the whole operation. Each source key
+     * is extracted once. Bounds are nonnegative and k is at most 65536.</p>
+     *
+     * @param keyExtractor key extractor
+     * @param k per-key result limit
+     * @param comparator ordering in which greater values are preferred
+     * @param maxElements input bound
+     * @param maxKeys distinct-key bound
+     * @param <K> key type
+     * @return an encounter-ordered immutable map of stable greatest-first lists
+     */
+    public <K> Map<K, List<T>> topKByKey(
+            Function<? super T, ? extends K> keyExtractor, int k,
+            Comparator<? super T> comparator, int maxElements, int maxKeys) {
+        Objects.requireNonNull(keyExtractor, "keyExtractor");
+        Objects.requireNonNull(comparator, "comparator");
+        requireNonNegative(k, "k");
+        if (k > MAX_STATEFUL_WIDTH)
+            throw new IllegalArgumentException("k exceeds " + MAX_STATEFUL_WIDTH);
+        requireNonNegative(maxElements, "maxElements");
+        requireNonNegative(maxKeys, "maxKeys");
+        return ObjectStreamAdvancedKernels.topKByKey(
+                stream(), keyExtractor, k, comparator, maxElements, maxKeys);
+    }
+
     public enum TailPolicy { INCLUDE, DROP }
 
     private static void requireWidth(int width) {

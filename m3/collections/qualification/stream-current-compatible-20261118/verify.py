@@ -11,12 +11,14 @@ import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-# Groovy collate successor: retain the six prior receipts and bind both new owners.
+# Stream convergence successor: retain six prior seals and bind two qualified owners.
+# Recipe: com.synexia.m3.StreamReceivingGuard20261122.
+# The exact prior guard and seals remain in its canonical recipe beforeimage.
 FILES = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java":
-        "40497e161e2e8d8c9ec7a6524b63d68bf4e2b775845b9f58bf193d1068d041d2",
+        "1e635db39f8b2a1b30f54d7f7ee4a9c48589034b1cf693b3dd4b191e2e5b99d8",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamAdvancedKernels.java":
-        "29810419f0125147d7bdbc0d33794b113dcd07e85f0ba9937e5aabd806e6103d",
+        "fc9a3d1a0c0ab7114b6f2765f0214915115272a2dc02d6e85168b600e0ad31d3",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLoopKernels.java":
         "02b56913bb682f90a3f7d2d04689c259a6e8c6ee68748ad920cfd1082937c024",
     "test/jdk/jdk/m3/collections/ObjectStreamAdvancedContractTest.java":
