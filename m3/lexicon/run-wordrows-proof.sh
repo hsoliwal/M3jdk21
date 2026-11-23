@@ -7,8 +7,8 @@ cc=${CC:-cc}
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 "$M3JDK/bin/javac" --release 21 -Xlint:all -Werror -h "$work" \
-    -d "$work" core/src/jdk/m3/text/M3WordRows.java \
-    core/src/jdk/m3/text/M3WordRowsNative.java \
+    -d "$work" ../src/java.base/share/classes/jdk/m3/text/M3WordRows.java \
+    ../src/java.base/share/classes/jdk/m3/text/M3WordRowsNative.java \
     core/test/M3WordRowsContractTest.java
 "$cc" -std=c11 -Wall -Wextra -Werror -fPIC -shared \
     -I"$M3JDK/include" -I"$M3JDK/include/linux" \
