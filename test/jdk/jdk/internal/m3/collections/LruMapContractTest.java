@@ -78,6 +78,11 @@ final class LruMapContractTest {
         return field.get(map);
     }
 
+    /** Decode the current two-bit physical-slot contract independently of the owner. */
+    private static long state(long[] words, int slot) {
+        return (words[slot / 32] >>> (2 * (slot % 32))) & 3L;
+    }
+
     /** The links run from head to tail over occupied slots. Returns the number of linked slots. */
     private static int linked(LruMap<?, ?> map) throws Exception {
         int[] next = (int[]) field(map, "nextLane");
@@ -86,7 +91,7 @@ final class LruMapContractTest {
         int count = 0;
         int before = -1;
         for (int slot = (Integer) field(map, "head"); slot >= 0; before = slot, slot = next[slot], count++) {
-            assertEquals(LruMap.STATE_OCCUPIED, states[slot], "linked slot is occupied");
+            assertEquals(LruMap.STATE_OCCUPIED, state(states, slot), "linked slot is occupied");
             assertEquals(before, previous[slot], "back link");
         }
         assertEquals(before, (Integer) field(map, "tail"), "tail is the last linked slot");
@@ -99,7 +104,7 @@ final class LruMapContractTest {
         long[] states = (long[]) field(map, "stateMaskWords");
         int count = 0;
         for (int slot = (Integer) field(map, "free"); slot >= 0; slot = next[slot], count++) {
-            assertEquals(LruMap.STATE_DELETED, states[slot], "free slot is deleted");
+            assertEquals(LruMap.STATE_DELETED, state(states, slot), "free slot is deleted");
         }
         return count;
     }
@@ -112,7 +117,7 @@ final class LruMapContractTest {
         for (int entry : index) {
             if (entry != 0) {
                 count++;
-                assertEquals(LruMap.STATE_OCCUPIED, states[entry - 1], "hash lane names a live slot");
+                assertEquals(LruMap.STATE_OCCUPIED, state(states, entry - 1), "hash lane names a live slot");
             }
         }
         assertTrue(index.length == 0 || 2 * map.size() <= index.length, "hash lane at most half full");

@@ -122,7 +122,8 @@ final class LongLazyPriorityFrontierTest {
     @Test
     void validationAndClearingLeaveQueueReusable() {
         var queue = new LongLazyPriorityFrontier(0, id -> id);
-        assertEquals(25L, queue.payloadBytes());
+        // One physical slot has three long lanes and one allocated bitmap word.
+        assertEquals(4L * Long.BYTES, queue.payloadBytes());
         assertThrows(IllegalArgumentException.class,
                 () -> queue.offerAll(new long[] {1}, new long[] {1, 2}));
         assertThrows(NoSuchElementException.class, queue::pollId);
