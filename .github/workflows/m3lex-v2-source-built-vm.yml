@@ -28,7 +28,7 @@ concurrency:
 jobs:
   build-and-run-actual-vm:
     name: Source-built M3JDK21 -> java.base -> mapped reader normal/Xint/JNI
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 180
     steps:
       - name: Checkout exactly the candidate source being tested
@@ -69,7 +69,24 @@ jobs:
             build-essential autoconf zip unzip file \
             libasound2-dev libcups2-dev libfreetype-dev \
             libx11-dev libxext-dev libxrender-dev libxtst-dev libxrandr-dev \
-            libfontconfig1-dev libffi-dev
+            libfontconfig1-dev libffi-dev jtreg8
+      - name: Verify distribution jtreg meets exact JDK source requirement
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(dpkg-query -W -f='${Version}' jtreg8)"
+          dpkg --compare-versions "$version" ge '8.2.1+1' || {
+            echo "::error::JDK source requires jtreg >= 8.2.1+1, found $version"
+            exit 1
+          }
+          jtreg_bin="$(command -v jtreg8 || true)"
+          test -n "$jtreg_bin" && test -x "$jtreg_bin" || {
+            echo "::error::No executable jtreg8 from reviewed Ubuntu 26.04 package"
+            exit 1
+          }
+          "$jtreg_bin" -version
+          echo "M3_JTREG_BIN=$jtreg_bin" >> "$GITHUB_ENV"
+          echo "M3LEX_JTREG_VERSION_ADMITTED $version"
       - name: Configure unmodified OpenJDK build machinery for this fork
         shell: bash
         run: |
@@ -134,3 +151,17 @@ jobs:
             done
             echo 'Formal jtreg harness, GC, Windows and production corpus admission remain separate.'
           } >> "$GITHUB_STEP_SUMMARY"
+      - name: Run formal JTReg harness against the exact SOURCE-BUILT JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          jdk="$M3_SOURCE_BUILT_JDK_HOME"
+          jtreg="$M3_JTREG_BIN"
+          test -x "$jdk/bin/java" && test -x "$jtreg"
+          mkdir -p "$RUNNER_TEMP/jtreg-work" "$RUNNER_TEMP/jtreg-report"
+          "$jtreg" -jdk:"$jdk" -w:"$RUNNER_TEMP/jtreg-work" \
+            -r:"$RUNNER_TEMP/jtreg-report" \
+            test/jdk/java/lang/M3StringPool/M3LexiconV2MappedReaderTest.java \
+            | tee "$RUNNER_TEMP/m3lex-real-jtreg.log"
+          echo "M3LEX_V2_SOURCE_BUILT_JTREG_PASS jdk=$jdk"
+          echo "Formal Jtreg: M3LEX_V2_SOURCE_BUILT_JTREG_PASS" >> "$GITHUB_STEP_SUMMARY"
