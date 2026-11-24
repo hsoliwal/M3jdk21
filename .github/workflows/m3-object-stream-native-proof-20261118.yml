@@ -117,6 +117,9 @@ jobs:
             'b84917c20e2674404cf39d3b69f1753ef155aa754371f5ed0dbab6152d71b8b3' 'test/jdk/jdk/m3/collections/providers/vavr/collection/BitSetWordOpsOracleTest.java' \
             '3f4222fd0100ebe5415daf46928217e62d99d494dfb24d24bf4a2deb434377ab' 'test/jdk/jdk/m3/collections/providers/vavr/collection/RefBitSetModule.java' \
             'e65574e20d9b6c0f596a06529ad02acaa5ddebdf06af0a2abb2fe30ce21ddd5b' 'test/jdk/jdk/m3/collections/vavr/collection/BitSetPrefixAllocationTest.java' \
+            'da888b9b9ff96dc106bdad4d21e5de47f181f889477846367d537047263f53eb' 'test/jdk/jdk/m3/collections/ObjectStreamAdvancedContractTest.java' \
+            '8c910a3d4fe8a10d8315686eeb21131051f067dd0f1bd8c7a0134c8430e19d7e' 'test/jdk/jdk/m3/collections/ObjectStreamLoopContractTest.java' \
+            '56b64efee5f246baea4a0c274f8ef684286bbbf9d7de79be725ff5a8cd764a90' 'test/jdk/jdk/m3/collections/ObjectStreamCompatibilityGateTest.java' \
             | sha256sum --check -
           bash -n m3/compatibility/groovy/run-ginq-join-installed.sh
           bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
