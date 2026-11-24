@@ -575,17 +575,21 @@ final class M3CollectionViews {
         Objects.requireNonNull(source, "source");
         Object[] values = source.toArray();
         if (filter != null) {
-            long[] mask = new long[(int) (((long) values.length + 63) >>> 6)];
             int accepted = 0;
-            for (int i = 0; i < values.length; i++) {
-                if (filter.test((E) values[i])) {
-                    mask[i >>> 6] |= 1L << (i & 63);
-                    accepted++;
+            while (accepted < values.length && filter.test((E) values[accepted])) accepted++;
+            if (accepted < values.length) {
+                // The first rejected physical slot ends an all-selected prefix.
+                // Seed its bits once; all-pass snapshots never need selection words.
+                long[] mask = new long[(int) (((long) values.length + 63) >>> 6)];
+                int prefixWord = accepted >>> 6;
+                Arrays.fill(mask, 0, prefixWord, -1L);
+                mask[prefixWord] = (1L << (accepted & 63)) - 1L;
+                for (int i = accepted + 1; i < values.length; i++) {
+                    if (filter.test((E) values[i])) {
+                        mask[i >>> 6] |= 1L << (i & 63);
+                        accepted++;
+                    }
                 }
-            }
-            // Every value already belongs to this detached capture. If all pass,
-            // retain it instead of materializing an identity index and a second copy.
-            if (accepted != values.length) {
                 values = M3CollectionMasks.selectedValues(mask, values, accepted);
             }
         }

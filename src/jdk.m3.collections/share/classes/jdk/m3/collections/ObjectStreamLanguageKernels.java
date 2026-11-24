@@ -255,6 +255,54 @@ final class ObjectStreamLanguageKernels {
                 .onClose(left::close).onClose(right::close);
     }
 
+    /**
+     * Strict variant of the truncating {@code zip} above: pair in encounter
+     * order, but refuse unequal lengths instead of stopping at the shorter
+     * side. Each step tests both cursors before consuming either, so a
+     * complete traversal throws {@code IllegalArgumentException} where the
+     * first unmatched element is found, while a short-circuiting terminal
+     * checks only the prefix it demands and may stop before a mismatch.
+     *
+     * <p>Like {@code zip}, it buffers neither input, makes no tuples, rejects
+     * no null element or mapper result, and closes both inputs when the
+     * result is closed. It never claims SIZED (traversal is what validates the
+     * lengths), never splits, and stays exhausted after a refused mismatch.
+     * Being an M3 kernel, it is independent of java.util.stream.Streams,
+     * which is package-private on a stock Java 21 JDK.
+     */
+    static <L, R, O> Stream<O> zipStrict(Stream<? extends L> left, Stream<? extends R> right,
+            BiFunction<? super L, ? super R, ? extends O> mapper) {
+        Iterator<? extends L> a = left.iterator();
+        Iterator<? extends R> b = right.iterator();
+        Spliterator<O> output = new Spliterators.AbstractSpliterator<>(
+                Long.MAX_VALUE, Spliterator.ORDERED) {
+            private boolean finished;
+
+            @Override public boolean tryAdvance(Consumer<? super O> action) {
+                Objects.requireNonNull(action, "action");
+                if (finished) return false;
+                boolean hasLeft = a.hasNext();
+                boolean hasRight = b.hasNext();
+                if (hasLeft != hasRight) {
+                    finished = true;
+                    throw new IllegalArgumentException("zipStrict input lengths differ");
+                }
+                if (!hasLeft) {
+                    finished = true;
+                    return false;
+                }
+                action.accept(mapper.apply(a.next(), b.next()));
+                return true;
+            }
+
+            @Override public Spliterator<O> trySplit() {
+                return null; // Splitting would buffer pairs ahead of the length check.
+            }
+        };
+        return StreamSupport.stream(output, false)
+                .onClose(left::close).onClose(right::close);
+    }
+
     /** Stepped windows with bounded ring storage and demand-driven gap traversal. */
     static <T> Stream<List<T>> collate(Stream<T> input, int width, int step,
             ObjectStream.TailPolicy tailPolicy) {

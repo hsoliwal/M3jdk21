@@ -42,5 +42,5 @@ jobs:
       - name: Execute original owning M3 collections signal tests
         run: >
           mvn -B -ntp -f m3/collections/pom.xml
-          -Dtest=M3SignalColumnsTest,M3SignalDimensionsTest,M3SourceSignalImageTest,M3SignalTopKTest
+          -Dtest=SignalColumnsTest,SignalDimensionsTest,SourceSignalImageTest,SignalTopKTest
           test

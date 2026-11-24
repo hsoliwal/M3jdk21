@@ -54,8 +54,9 @@ jobs:
           check_blob test/jdk/java/lang/M3StringPool/M3LexiconV2MappedReaderTest.java 6cf795cb22b1a948a0bcc6f847725e64a0533c6a
           check_blob m3/lexicon/receiver/scripts/resolve-jtreg8.sh f7bbf01602a3f2794bdb5867b87dcb88c2dc863a
           check_blob m3/lexicon/receiver/scripts/test-resolve-jtreg8.sh 5f9f438d5018cae8514245f5cdc4923601cd4bde
-          # The fork's own configure explicitly supports a Java-only Skia
-          # lane; no unpinned GN executable may substitute for pinned GN 2175.
+          # Review-seal the fork's Skia configure logic: bundled Skia requires
+          # pinned GN 2175 (no unpinned GN may substitute) and a Java-only
+          # lane stays available.
           check_blob make/autoconf/lib-skia.m4 b6f9301a147cebc88c1b2bebf8c3904b4d2b7b09
           grep -Fq 'elif test "x$with_skia" != xnone' make/autoconf/lib-skia.m4
           grep -qx 'DEFAULT_VERSION_FEATURE=21' make/conf/version-numbers.conf
@@ -73,10 +74,10 @@ jobs:
           set -euo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
-            build-essential autoconf zip unzip file \
+            build-essential autoconf zip unzip file curl python3 \
             libasound2-dev libcups2-dev libfreetype-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxrandr-dev \
-            libxt-dev libfontconfig1-dev libffi-dev jtreg8
+            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libxrandr-dev \
+            libfontconfig1-dev libffi-dev jtreg8
       - name: Prove package-owned JTReg8 launcher discovery and refusals
         shell: bash
         run: |
@@ -86,27 +87,83 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # The Debian/Ubuntu package is named jtreg8; its executable may be
-          # named jtreg and installed under a version-specific bin directory.
-          # Resolve from exact jtreg8 package-owned files, never a jtreg7
-          # launcher inherited from PATH.
-          jtreg_bin="$(bash m3/lexicon/receiver/scripts/resolve-jtreg8.sh)"
-          test -n "$jtreg_bin" && test -x "$jtreg_bin"
+          version="$(dpkg-query -W -f='${Version}' jtreg8)"
+          dpkg --compare-versions "$version" ge '8.2.1+1' || {
+            echo "::error::JDK source requires jtreg >= 8.2.1+1, found $version"
+            exit 1
+          }
+          jtreg_files="$(dpkg-query -L jtreg8)"
+          jtreg_bin=
+          while IFS= read -r candidate; do
+            case "$candidate" in
+              /*/bin/jtreg)
+                if test -x "$candidate"; then
+                  resolved="$(readlink -f "$candidate")"
+                  printf '%s\n' "$jtreg_files" | grep -Fx -- "$resolved" > /dev/null || {
+                    echo "::error::jtreg launcher resolves outside the jtreg8 package: $candidate"
+                    exit 1
+                  }
+                  test -z "$jtreg_bin" || test "$jtreg_bin" = "$resolved" || {
+                    echo "::error::Ambiguous executable launchers in jtreg8 package"
+                    exit 1
+                  }
+                  jtreg_bin="$resolved"
+                fi
+                ;;
+            esac
+          done <<< "$jtreg_files"
+          test -n "$jtreg_bin" && test -x "$jtreg_bin" || {
+            echo "::error::No package-owned executable jtreg from reviewed Ubuntu 26.04 package"
+            exit 1
+          }
+          # Independent cross-check with the source-tested package resolver
+          # (proven by test-resolve-jtreg8.sh above). It re-checks the jtreg8
+          # version floor and requires a package-owned launcher that passes
+          # -version; it never falls back to a jtreg5/jtreg7 launcher on PATH.
+          script_bin="$(bash m3/lexicon/receiver/scripts/resolve-jtreg8.sh)"
+          test -n "$script_bin" && test -x "$script_bin"
+          if test "$(readlink -f "$script_bin")" != "$jtreg_bin"; then
+            echo "::warning::resolve-jtreg8.sh chose $script_bin; using the inline package-owned launcher $jtreg_bin"
+          fi
           "$jtreg_bin" -version
           echo "M3_JTREG_BIN=$jtreg_bin" >> "$GITHUB_ENV"
-          echo "M3LEX_JTREG_VERSION_ADMITTED $(dpkg-query -W -f='${Version}' jtreg8)"
+          echo "M3LEX_JTREG_VERSION_ADMITTED $version"
+      - name: Acquire hash-pinned bundled Skia build tools
+        run: |
+          set -euo pipefail
+          tools_dir="$RUNNER_TEMP/m3-native-build-tools"
+          mkdir -p "$tools_dir/gn" "$tools_dir/ninja"
+          curl --fail --location --retry 3 \
+            'https://chrome-infra-packages.appspot.com/dl/gn/gn/linux-amd64/+/git_revision:b2afae122eeb6ce09c52d63f67dc53fc517dbdc8' \
+            -o "$tools_dir/gn.zip"
+          printf '%s  %s\n' \
+            '6a3bfc53d825bccac5e5b4b7bdcc10ce9396a04a689ac684ec3308ca5c7f3d9c' \
+            "$tools_dir/gn.zip" | sha256sum --check -
+          unzip -q "$tools_dir/gn.zip" -d "$tools_dir/gn"
+          curl --fail --location --retry 3 \
+            'https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip' \
+            -o "$tools_dir/ninja.zip"
+          printf '%s  %s\n' \
+            '6f98805688d19672bd699fbbfa2c2cf0fc054ac3df1f0e6a47664d963d530255' \
+            "$tools_dir/ninja.zip" | sha256sum --check -
+          unzip -q "$tools_dir/ninja.zip" -d "$tools_dir/ninja"
+          "$tools_dir/gn/gn" --version | tee "$RUNNER_TEMP/m3-gn-version.log"
+          "$tools_dir/ninja/ninja" --version | tee "$RUNNER_TEMP/m3-ninja-version.log"
+          grep -Fx '2175 (b2afae122eeb)' "$RUNNER_TEMP/m3-gn-version.log"
+          grep -Fx '1.12.1' "$RUNNER_TEMP/m3-ninja-version.log"
+          printf 'M3_GN=%s\n' "$tools_dir/gn/gn" >> "$GITHUB_ENV"
+          printf 'M3_NINJA=%s\n' "$tools_dir/ninja/ninja" >> "$GITHUB_ENV"
       - name: Configure unmodified OpenJDK build machinery for this fork
         shell: bash
         run: |
           set -euo pipefail
           test -x "$JAVA_HOME/bin/java"
           "$JAVA_HOME/bin/java" -version
-          # This job qualifies java.base/M3LEX, not jdk.m3.graphics native Skia.
-          # 'auto' selects bundled Skia on Linux and demands pinned GN 2175.
+          # 'auto' selects bundled Skia on Linux and demands pinned GN 2175; the
+          # step above supplies hash-pinned GN 2175 and Ninja 1.12.1 for it.
           # Do not install a different distro GN or bypass the source-built JDK.
-          # Native Skia remains a SEPARATE required full-release qualification.
           bash configure --with-boot-jdk="$JAVA_HOME" \
-            --with-skia=none \
+            --with-gn="$M3_GN" --with-ninja="$M3_NINJA" \
             --with-debug-level=release --with-jvm-variants=server
       - name: Build real fork JDK images (no stock-JDK substitution)
         shell: bash
