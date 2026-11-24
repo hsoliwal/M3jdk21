@@ -12,16 +12,20 @@ on:
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'src/jdk.m3.collections/providers/classes/jdk/m3/collections/vavr/collection/BitSet.java'
       - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
       - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/M3ProviderJUnitDiscoveryProbe.java'
+      - 'make/m3/collections/test-provider-junit-loader.sh'
       - 'make/m3/collections/ProviderJUnitReportsCheck.java'
       - 'make/m3/collections/ProviderJUnitReportsCheckSelfTest.java'
       - 'make/m3/collections/test-provider-junit-loader-repro.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/vavr/collection/BitSetPrefixAllocationTest.java'
       - 'test/jdk/jdk/m3/collections/apache/**'
       - 'test/jdk/jdk/m3/collections/eclipse/**'
       - 'test/jdk/jdk/m3/collections/guava/**'
@@ -50,16 +54,20 @@ on:
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'src/jdk.m3.collections/providers/classes/jdk/m3/collections/vavr/collection/BitSet.java'
       - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
       - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/M3ProviderJUnitDiscoveryProbe.java'
+      - 'make/m3/collections/test-provider-junit-loader.sh'
       - 'make/m3/collections/ProviderJUnitReportsCheck.java'
       - 'make/m3/collections/ProviderJUnitReportsCheckSelfTest.java'
       - 'make/m3/collections/test-provider-junit-loader-repro.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/vavr/collection/BitSetPrefixAllocationTest.java'
       - 'test/jdk/jdk/m3/collections/apache/**'
       - 'test/jdk/jdk/m3/collections/eclipse/**'
       - 'test/jdk/jdk/m3/collections/guava/**'
@@ -111,11 +119,31 @@ jobs:
             '4b95a5e0746e3e4163174e52794796f142e5a36d4dc122c2a55f9aad236da430' 'm3/compatibility/groovy/tests/M3GroovyCountByManyTest.java' \
             '2009c9fd180c441317051a9164a6c010f924fb4278207e37b9b089068a4e20c8' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java' \
             '5af43c760da207b7fb173bb48773ce0f1fd903c6e283f4c0868a72f48d3faabd' 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java' \
+            '1e9fa447590f14a83592ee455f0198d155e00ad087370c9477738a688dfd5d27' 'src/jdk.m3.collections/providers/classes/jdk/m3/collections/vavr/collection/BitSet.java' \
+            'b84917c20e2674404cf39d3b69f1753ef155aa754371f5ed0dbab6152d71b8b3' 'test/jdk/jdk/m3/collections/providers/vavr/collection/BitSetWordOpsOracleTest.java' \
+            '3f4222fd0100ebe5415daf46928217e62d99d494dfb24d24bf4a2deb434377ab' 'test/jdk/jdk/m3/collections/providers/vavr/collection/RefBitSetModule.java' \
+            'e65574e20d9b6c0f596a06529ad02acaa5ddebdf06af0a2abb2fe30ce21ddd5b' 'test/jdk/jdk/m3/collections/vavr/collection/BitSetPrefixAllocationTest.java' \
+            'da888b9b9ff96dc106bdad4d21e5de47f181f889477846367d537047263f53eb' 'test/jdk/jdk/m3/collections/ObjectStreamAdvancedContractTest.java' \
+            '8c910a3d4fe8a10d8315686eeb21131051f067dd0f1bd8c7a0134c8430e19d7e' 'test/jdk/jdk/m3/collections/ObjectStreamLoopContractTest.java' \
+            '56b64efee5f246baea4a0c274f8ef684286bbbf9d7de79be725ff5a8cd764a90' 'test/jdk/jdk/m3/collections/ObjectStreamCompatibilityGateTest.java' \
             | sha256sum --check -
           bash -n m3/compatibility/groovy/run-ginq-join-installed.sh
           bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash -n make/m3/collections/test-provider-junit.sh
+          bash -n make/m3/collections/test-provider-junit-loader.sh
+          bash make/m3/collections/test-provider-junit-loader.sh "$JAVA_HOME"
+          curl --fail --location --retry 3 \
+            'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' \
+            -o "$RUNNER_TEMP/m3-provider-junit-console-1.12.2.jar"
+          printf '%s  %s\n' \
+            '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' \
+            "$RUNNER_TEMP/m3-provider-junit-console-1.12.2.jar" | sha256sum --check -
+          bash make/m3/collections/test-provider-junit-loader.sh \
+            "$JAVA_HOME" "$RUNNER_TEMP/m3-provider-junit-console-1.12.2.jar" \
+            | tee "$RUNNER_TEMP/m3-provider-real-junit-loader.log"
+          grep -Fx 'M3_PROVIDER_REAL_JUNIT_LOADER_SELFTEST_PASS tests=1 negative=refused' \
+            "$RUNNER_TEMP/m3-provider-real-junit-loader.log"
           provider_report_classes="$RUNNER_TEMP/m3-provider-junit-validator"
           mkdir -p "$provider_report_classes"
           javac --release 21 -Xlint:all -Werror \
@@ -126,10 +154,8 @@ jobs:
             | tee "$RUNNER_TEMP/m3-provider-junit-report-selftest.log"
           grep -Fx 'M3_PROVIDER_JUNIT_REPORT_SELFTEST_PASS negatives=12' \
             "$RUNNER_TEMP/m3-provider-junit-report-selftest.log"
-          junit_fixture_jar="$RUNNER_TEMP/m3-junit-console-1.12.2.jar"
-          curl --fail --location --retry 3 \
-            'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' \
-            -o "$junit_fixture_jar"
+          # Reuse the console JAR downloaded above; re-check the same SHA-256 pin here.
+          junit_fixture_jar="$RUNNER_TEMP/m3-provider-junit-console-1.12.2.jar"
           printf '%s  %s\n' \
             '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' \
             "$junit_fixture_jar" | sha256sum --check -
@@ -158,6 +184,14 @@ jobs:
               assert actual == digest, new
           print('M3_PROVIDER_SOURCE_RELOCATION_PASS files=54 junitClasses=14')
           PY
+
+      - name: Archive early JUnit platform-loader diagnostic
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-provider-loader-${{ github.run_id }}
+          path: ${{ runner.temp }}/m3-provider-real-junit-loader.log
+          if-no-files-found: warn
 
       - name: Retain source-only provider report validator evidence
         if: always()
@@ -475,9 +509,47 @@ jobs:
           set -euo pipefail
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
+          # Platform-owned tests need their POM's JUnit classes visible from the bootstrap loader.
+          junit_classpath="$RUNNER_TEMP/m3-stream-junit-classpath.txt"
+          mvn -B -ntp -f m3/collections/pom.xml \
+            org.apache.maven.plugins:maven-dependency-plugin:3.8.1:build-classpath \
+            -DincludeScope=test \
+            -DincludeGroupIds=org.junit.jupiter,org.junit.platform,org.opentest4j,org.apiguardian \
+            "-Dmdep.outputFile=$junit_classpath"
+          test -s "$junit_classpath"
+          # Patch only the original test output; implementations remain in the source-built module.
+          for suite in ObjectStreamAdvancedContractTest ObjectStreamLoopContractTest ObjectStreamCompatibilityGateTest; do
+            rm -f "m3/collections/target/surefire-reports/TEST-jdk.m3.collections.$suite.xml"
+          done
           mvn -B -ntp -f m3/collections/pom.xml \
             -Dtest=ObjectStreamAdvancedContractTest,ObjectStreamLoopContractTest,ObjectStreamCompatibilityGateTest \
+            -DfailIfNoTests=true \
+            "-DargLine=-Xbootclasspath/a:\"$(cat "$junit_classpath")\" --add-modules jdk.m3.collections --patch-module \"jdk.m3.collections=$GITHUB_WORKSPACE/m3/collections/target/test-classes\" --add-reads jdk.m3.collections=ALL-UNNAMED --add-opens jdk.m3.collections/jdk.m3.collections=ALL-UNNAMED" \
             test
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          expected = {
+              'jdk.m3.collections.ObjectStreamAdvancedContractTest': 8,
+              'jdk.m3.collections.ObjectStreamLoopContractTest': 9,
+              'jdk.m3.collections.ObjectStreamCompatibilityGateTest': 5,
+          }
+          reports = Path('m3/collections/target/surefire-reports')
+          total = 0
+          for name in sorted(expected):
+              suite = ET.parse(reports / ('TEST-' + name + '.xml')).getroot()
+              cases = suite.findall('testcase')
+              identities = [(case.get('classname'), case.get('name')) for case in cases]
+              if (suite.get('name') != name or len(cases) != expected[name]
+                      or int(suite.get('tests', '-1')) != len(cases)
+                      or len(set(identities)) != len(identities) or any(not item[1] for item in identities)
+                      or any(int(suite.get(key, '-1')) != 0 for key in ('failures', 'errors', 'skipped'))
+                      or any(case.get('classname') != name or case.find('failure') is not None
+                             or case.find('error') is not None or case.find('skipped') is not None for case in cases)):
+                  raise SystemExit('Incomplete original stream JUnit proof: ' + name)
+              total += len(cases)
+          print(f'M3_STREAM_JUNIT_PASS classes={len(expected)} tests={total}')
+          PY
       - name: Archive source-built M3 image with custody
         id: m3_image_custody
         if: ${{ always() && env.M3_JAVA_HOME != '' }}
@@ -581,6 +653,97 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           compression-level: 0
+      - name: Archive a bounded source-built M3 test runtime
+        id: m3_test_runtime_custody
+        if: ${{ always() && steps.m3_image_custody.outcome == 'success' }}
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          image="$GITHUB_WORKSPACE/build/m3-groovy-native-proof/images/jdk"
+          test "$M3_JAVA_HOME" = "$image"
+          test "$(realpath "$image")" = "$image"
+          full="$RUNNER_TEMP/m3-source-built-image"
+          destination="$RUNNER_TEMP/m3-source-built-test-runtime"
+          if [[ -e "$destination" || -L "$destination" ]]; then
+            echo "Test-runtime output already exists" >&2; exit 1
+          fi
+          (cd "$full"; sha256sum --strict --check SHA256SUMS)
+          (cd "$image"; sha256sum --strict --check "$full/image.sha256")
+          tar --compare --gzip --file "$full/jdk.tar.gz" -C "$(dirname "$image")"
+          temporary="$(mktemp -d "$RUNNER_TEMP/m3-test-runtime-XXXXXX")"
+          trap 'rm -rf -- "$temporary"' EXIT
+          package="$temporary/package"
+          mkdir "$package" "$package/original-custody" "$temporary/extracted"
+          cp "$full"/{custody.txt,source-inventory.git,source-files.sha256,image-modules.txt,image-module-description.txt,jmod-description.txt,image.sha256} "$package/original-custody/"
+          cp "$full/SHA256SUMS" "$package/original-custody/full-image-SHA256SUMS"
+          python3 - "$image" > "$package/omitted-image-paths.txt" <<'PY'
+          import pathlib, sys
+          image = pathlib.Path(sys.argv[1])
+          def excluded(name):
+              return (name == 'jmods' or name.startswith('jmods/') or name == 'lib/src.zip'
+                      or name.endswith(('.debuginfo', '.diz', '.pdb')))
+          for path in sorted(image.rglob('*')):
+              name = path.relative_to(image).as_posix()
+              if '\n' in name or '\r' in name or '\t' in name:
+                  raise SystemExit('Unsafe image path: ' + repr(name))
+              if path.is_dir() and not path.is_symlink() and name.endswith(('.debuginfo', '.diz', '.pdb')):
+                  raise SystemExit('Debug suffix is not a file: ' + name)
+              if excluded(name):
+                  print('jdk/' + name)
+              elif path.is_symlink():
+                  if path.readlink().is_absolute():
+                      raise SystemExit('Absolute retained image symlink: ' + name)
+                  target = path.resolve(strict=True)
+                  if image not in target.parents or excluded(target.relative_to(image).as_posix()):
+                      raise SystemExit('Retained symlink escapes image or targets omitted content: ' + name)
+          PY
+          (cd "$image"; sha256sum release lib/modules bin/java bin/javac bin/javap bin/jlink bin/jmod) > "$package/runtime.sha256"
+          tar --create --gzip --file "$package/test-runtime.tar.gz" -C "$(dirname "$image")" \
+            --anchored --exclude='jdk/jmods' --exclude='jdk/lib/src.zip' \
+            --exclude='*.debuginfo' --exclude='*.diz' --exclude='*.pdb' jdk
+          tar --compare --gzip --file "$package/test-runtime.tar.gz" -C "$(dirname "$image")"
+          archive_bytes="$(stat -c %s "$package/test-runtime.tar.gz")"
+          if (( archive_bytes > 524288000 )); then
+            echo "Test-runtime archive exceeds 524288000 bytes: $archive_bytes" >&2; exit 1
+          fi
+          tar --extract --gzip --file "$package/test-runtime.tar.gz" -C "$temporary/extracted" --no-same-owner
+          runtime="$temporary/extracted/jdk"
+          while IFS= read -r omitted; do
+            if [[ -e "$temporary/extracted/$omitted" || -L "$temporary/extracted/$omitted" ]]; then
+              echo "Omitted path remained in test runtime: $omitted" >&2; exit 1
+            fi
+          done < "$package/omitted-image-paths.txt"
+          (cd "$runtime"; sha256sum --strict --check "$package/runtime.sha256")
+          "$runtime/bin/java" --list-modules > "$package/runtime-modules.txt"
+          cmp "$full/image-modules.txt" "$package/runtime-modules.txt"
+          for tool in java javac javap; do
+            "$image/bin/$tool" -version > "$temporary/original-version.txt" 2>&1
+            "$runtime/bin/$tool" -version > "$package/$tool-version.txt" 2>&1
+            cmp "$temporary/original-version.txt" "$package/$tool-version.txt"
+          done
+          tar --compare --gzip --file "$package/test-runtime.tar.gz" -C "$temporary/extracted"
+          (cd "$image"; sha256sum --strict --check "$full/image.sha256" "$package/runtime.sha256")
+          tar --compare --gzip --file "$full/jdk.tar.gz" -C "$(dirname "$image")"
+          printf 'kind=source-built-test-runtime\nfull_jdk_or_jlink_distribution=false\narchive_bytes=%s\narchive_limit_bytes=524288000\nruntime_tests=NOT_RUN_BY_PACKAGING\nomissions=jmods-tree,lib-src.zip,debug-symbol-files\n' "$archive_bytes" > "$package/test-runtime.txt"
+          (cd "$package"; find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+          package_bytes="$(du -sb "$package" | cut -f1)"
+          if (( package_bytes > 524288000 )); then
+            echo "Test-runtime artifact payload exceeds 524288000 bytes: $package_bytes" >&2; exit 1
+          fi
+          if [[ -e "$destination" || -L "$destination" ]]; then
+            echo "Test-runtime output appeared during packaging" >&2; exit 1
+          fi
+          mv -T "$package" "$destination"
+          printf 'M3_TEST_RUNTIME_ARCHIVE_PASS archive_bytes=%s package_bytes=%s\n' "$archive_bytes" "$package_bytes"
+      - name: Retain source-built M3 test runtime separately
+        if: ${{ always() && steps.m3_test_runtime_custody.outcome == 'success' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-source-built-test-runtime-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-source-built-test-runtime/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
       - name: Retain Maven/JDK evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -596,6 +759,7 @@ jobs:
             ${{ runner.temp }}/m3-ginq-jlink-image.log
             ${{ runner.temp }}/m3-ginq-installed-receipt/
             ${{ runner.temp }}/m3-provider-junit/
+            ${{ runner.temp }}/m3-stream-junit-classpath.txt
             ${{ runner.temp }}/m3-groovy-count-native-configure.log
             ${{ runner.temp }}/m3-groovy-count-native-build.log
             ${{ runner.temp }}/m3-groovy-count-native-ctest.log

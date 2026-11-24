@@ -1269,11 +1269,11 @@ jobs:
           OUT="$RUNNER_TEMP/m3-residency-pressure"
           mkdir -p "$OUT"
           javac --release 21 -Xlint:all -Werror -d "$OUT" \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Address28.java \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLane28.java \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/Address28.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLane28.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/BitLane28.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/SlotAllocator28.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectResidency.java \
             m3/tooling/object-residency/M3ResidencyPressureProbe.java
       - name: Execute real small-Xmx LRU/recreation proof
         shell: bash

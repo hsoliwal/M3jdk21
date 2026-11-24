@@ -1,0 +1,48 @@
+{
+  "schema": "M3_SEMANTIC_CENSUS_V2_CARRY/1",
+  "carries": "m3/tooling/atom-census/contract/M3_SEMANTIC_CENSUS_V2_RECEIPT.json",
+  "rule": "Append-only. The V2 receipt keeps its preimages and postimages as written. Each chain starts at a V2 postimage and ends at the live file. A 'receipt' step is sealed by that receipt's target for the same path (pre -> post); a 'drop-product-prefix' step is a rename_types.py carry whose new bytes equal the previous bytes with the M3 prefix of the renamed types dropped (values also appended to m3/tooling/jdk-naming/RENAME_RESEAL.tsv). The semantic-census job checks every step and the live SHA-256.",
+  "source_change": [
+    {
+      "step": "v2-postimage",
+      "path": "m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3AtomCensus.java",
+      "blob": "c622479241ebb5566681aeb2971fb466ac0ba476",
+      "sha256": "1f1019d4ba95fe80b2533526eeb3d2f564ce475f20bf816274e85b44898a7baa",
+      "commit": "e7d27aa53a"
+    },
+    {
+      "step": "receipt",
+      "path": "m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/M3AtomCensus.java",
+      "blob": "2f6d529d0afd9294ea66df3ba6969fffeeb4c0e7",
+      "sha256": "9c9945fe350c5c256badf8c3d0e360ac55090dbda6052f89d2352947bf573260",
+      "commit": "e7800bbf06",
+      "receipt": "m3/tooling/atom-census/contract/M3_JNI_PROJECTION_RECEIPT.json",
+      "why": "JNI declaration projection: opt-in --jni mode; legacy and semantic census output unchanged (receipt invariants)"
+    },
+    {
+      "step": "drop-product-prefix",
+      "path": "m3/tooling/atom-census/src/main/java/jdk/m3/tooling/atoms/AtomCensus.java",
+      "blob": "643f40be083bcc5d771d75de573ffcfdc0899362",
+      "sha256": "f1859f5c93b24509db960dcb48e29a7001fdca802847db944ff16583c0de7848",
+      "commit": "d4cfdc29ec",
+      "why": "rename_types.py DROP_PRODUCT_PREFIX over jdk.m3.tooling.atoms (48 types); the bytes are the previous bytes with M3<Type> -> <Type> for those types, nothing else"
+    }
+  ],
+  "test_change": [
+    {
+      "step": "v2-postimage",
+      "path": "m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/M3AtomCensusSemanticSelfTest.java",
+      "blob": "65b6e32f6e45f9d95dced02f9513efbe4c76874f",
+      "sha256": "846cd879d3fa5a4644d3c6aa33c48f034d239166ad548a10f652396935a54c03",
+      "commit": "e7d27aa53a"
+    },
+    {
+      "step": "drop-product-prefix",
+      "path": "m3/tooling/atom-census/src/test/java/jdk/m3/tooling/atoms/AtomCensusSemanticSelfTest.java",
+      "blob": "e2f641f637d79ff9c0b3253593acf74055c5e398",
+      "sha256": "71675bc067e9993961e8e727dc170905e080efd4609965871a5eb7d6b4c347b3",
+      "commit": "d4cfdc29ec",
+      "why": "rename_types.py DROP_PRODUCT_PREFIX over jdk.m3.tooling.atoms (48 types); the bytes are the previous bytes with M3<Type> -> <Type> for those types, nothing else"
+    }
+  ]
+}

@@ -100,7 +100,7 @@ if [[ ${#cases[@]} -ne 15 ]]; then
   exit 73
 fi
 selects=()
-selected_classes=()
+case_names=()
 opens=()
 declare -A seen=()
 for source in "${cases[@]}"; do
@@ -111,15 +111,17 @@ for source in "${cases[@]}"; do
   }
   name="$(basename "$source" .java)"
   selects+=(--select-class "$pkg.$name")
-  selected_classes+=("$pkg.$name")
+  case_names+=("$pkg.$name")
   if [[ -z "${seen[$pkg]:-}" ]]; then
     opens+=("--add-opens=jdk.m3.collections/$pkg=ALL-UNNAMED")
     seen[$pkg]=1
   fi
 done
 printf '%s\n' "${cases[@]}" > "$out/test-classes.txt"
-printf '%s\n' "${selected_classes[@]}" > "$out/selected-classes.txt"
+printf '%s\n' "${case_names[@]}" > "$out/selected-classes.txt"
 runtime=(--add-modules jdk.m3.collections
+  -XX:-OmitStackTraceInFastThrow
+  "-Xbootclasspath/a:$junit"
   --patch-module "jdk.m3.collections=$out/classes"
   --add-reads jdk.m3.collections=ALL-UNNAMED
   "${opens[@]}")
@@ -128,18 +130,26 @@ if [[ -n "${M3_ARRAYS_NATIVE_PATH:-}" ]]; then
   runtime+=("-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH")
   sha256sum "$M3_ARRAYS_NATIVE_PATH" >> "$out/inputs-sha256.txt"
 fi
-# Test classes belong to a JDK module loaded by the platform class loader.
-# Merely adding a readability edge to ALL-UNNAMED does not let that loader
-# resolve JUnit annotations from the application class loader. Put the exact
-# SHA-256-pinned Console Standalone JAR on the bootstrap append search path.
-# This corrects the observed 0-tests-discovered failure without moving or
-# weakening the original module-patched JUnit tests.
+# JDK product modules use the platform class loader. An application-only
+# JUnit jar leaves runtime @Test annotations invisible (zero tests discovered).
+# Keep one pinned jar on the bootstrap append path for the test process only;
+# prove all 15 owning-module test classes have visible annotations first.
+mkdir -p "$out/harness"
+"$jdk/bin/javac" --release 21 -Xlint:all -Werror \
+  -d "$out/harness" "$repo/make/m3/collections/M3ProviderJUnitDiscoveryProbe.java"
+"$jdk/bin/java" -ea -Xmx2g -Xbootclasspath/a:"$junit" \
+  "${runtime[@]}" -cp "$out/harness:$junit" M3ProviderJUnitDiscoveryProbe \
+  "${case_names[@]}" | tee "$out/discovery.log"
+grep -E '^M3_PROVIDER_JUNIT_DISCOVERY_PASS classes=15 methods=[1-9][0-9]*$' \
+  "$out/discovery.log"
+# Compile the fail-closed validator for the actual JUnit Jupiter XML report
+# (all 15 selected provider classes executed, nothing failed or skipped).
 mkdir -p "$out/validator"
 sha256sum "$repo/make/m3/collections/ProviderJUnitReportsCheck.java" \
   >> "$out/inputs-sha256.txt"
 "$jdk/bin/javac" --release 21 -proc:none -Xlint:all -Werror \
   -d "$out/validator" "$repo/make/m3/collections/ProviderJUnitReportsCheck.java"
-"$jdk/bin/java" "-Xbootclasspath/a:$junit" -ea -Xmx2g "${runtime[@]}" -cp "$junit" \
+"$jdk/bin/java" -ea -Xmx2g -Xbootclasspath/a:"$junit" "${runtime[@]}" -cp "$junit" \
   org.junit.platform.console.ConsoleLauncher execute \
   "${selects[@]}" --include-engine junit-jupiter \
   --disable-banner --details=summary --reports-dir "$out/junit-reports" \
