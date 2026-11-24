@@ -54,7 +54,7 @@ jobs:
           cmake -S make/m3/arrays -B m3/arrays/target/native \
             -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON "-DJAVA_HOME=$JAVA_HOME"
           cmake --build m3/arrays/target/native --config Release --parallel 2
-          ctest --test-dir m3/arrays/target/native --output-on-failure -C Release
+          ctest --test-dir m3/arrays/target/native --output-on-failure -C Release --no-tests=error
           test -s m3/arrays/target/native/libm3_arrays.so
           mvn -B -ntp -f m3/arrays/pom.xml -Dm3.arrays.native.required=true \
             "-DargLine=-Xcheck:jni -Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" install
