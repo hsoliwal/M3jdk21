@@ -147,10 +147,37 @@ public abstract class M3PopupSelector<V extends JComponent> extends JPanel {
         }
         JScrollPane scroll = (JScrollPane) popup.getComponent(0);
         Insets chrome = scroll.getInsets();
+        Insets viewportChrome = scroll.getViewportBorder() == null
+                ? new Insets(0, 0, 0, 0)
+                : scroll.getViewportBorder().getBorderInsets(scroll);
+        int width = Math.max(getWidth(), 240);
+        long availableWidth = (long) width - Math.max(0, chrome.left)
+                - Math.max(0, chrome.right) - Math.max(0, viewportChrome.left)
+                - Math.max(0, viewportChrome.right);
+        boolean vertical = scroll.getVerticalScrollBarPolicy()
+                == JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+                || scroll.getVerticalScrollBarPolicy() != JScrollPane.VERTICAL_SCROLLBAR_NEVER
+                && rowCount() > visibleRows;
+        if (vertical) {
+            availableWidth -= Math.max(0,
+                    scroll.getVerticalScrollBar().getPreferredSize().width);
+        }
+        boolean tracksWidth = view instanceof javax.swing.Scrollable scrollable
+                && scrollable.getScrollableTracksViewportWidth();
+        int horizontalPolicy = scroll.getHorizontalScrollBarPolicy();
+        boolean horizontal = horizontalPolicy == JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS;
+        if (!horizontal && horizontalPolicy != JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+                && !tracksWidth) {
+            int viewWidth = view.getPreferredSize().width;
+            horizontal = viewWidth > Math.max(0L, availableWidth);
+        }
+        int horizontalHeight = horizontal ? Math.max(0,
+                scroll.getHorizontalScrollBar().getPreferredSize().height) : 0;
         long preferredHeight = pixelHeight + header + Math.max(0, chrome.top)
-                + Math.max(0, chrome.bottom);
+                + Math.max(0, chrome.bottom) + Math.max(0, viewportChrome.top)
+                + Math.max(0, viewportChrome.bottom) + horizontalHeight;
         int height = (int) Math.min(Integer.MAX_VALUE, preferredHeight);
-        scroll.setPreferredSize(new Dimension(Math.max(getWidth(), 240), height));
+        scroll.setPreferredSize(new Dimension(width, height));
     }
 
     @Override public void setEnabled(boolean enabled) {
