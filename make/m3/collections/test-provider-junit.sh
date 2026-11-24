@@ -100,6 +100,7 @@ if [[ ${#cases[@]} -ne 15 ]]; then
   exit 73
 fi
 selects=()
+test_names=()
 opens=()
 declare -A seen=()
 for source in "${cases[@]}"; do
@@ -110,6 +111,7 @@ for source in "${cases[@]}"; do
   }
   name="$(basename "$source" .java)"
   selects+=(--select-class "$pkg.$name")
+  test_names+=("$pkg.$name")
   if [[ -z "${seen[$pkg]:-}" ]]; then
     opens+=("--add-opens=jdk.m3.collections/$pkg=ALL-UNNAMED")
     seen[$pkg]=1
@@ -125,7 +127,25 @@ if [[ -n "${M3_ARRAYS_NATIVE_PATH:-}" ]]; then
   runtime+=("-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH")
   sha256sum "$M3_ARRAYS_NATIVE_PATH" >> "$out/inputs-sha256.txt"
 fi
-"$jdk/bin/java" -ea -Xmx2g "${runtime[@]}" -cp "$junit" \
+# Named JDK module classes may be bootstrap/platform-loaded; their annotations are
+# invisible if Jupiter is only on the child application class loader. The exact
+# SHA-256-verified standalone JUnit jar is appended to the bootstrap lookup for
+# these test subprocesses only. Preserve original JPMS module ownership.
+mkdir -p "$out/discovery-probe"
+"$jdk/bin/javac" --release 21 -proc:none -Xlint:all -Werror \
+  -d "$out/discovery-probe" \
+  "$repo/make/m3/collections/ProviderJUnitDiscoveryProbe.java" \
+  2>&1 | tee "$out/discovery-compile.log"
+"$jdk/bin/java" "-Xbootclasspath/a:$junit" -ea -Xmx2g "${runtime[@]}" \
+  -cp "$out/discovery-probe:$junit" ProviderJUnitDiscoveryProbe \
+  jdk.m3.collections 15 "${test_names[@]}" \
+  2>&1 | tee "$out/discovery-annotations.log"
+grep -E '^M3_PROVIDER_JUNIT_ANNOTATIONS_VISIBLE module=jdk[.]m3[.]collections classes=15 methods=[1-9][0-9]*
+printf 'M3_PROVIDER_JUNIT_PASS classes=15 sourceFiles=57\n' \
+  | tee "$out/status.txt"
+ \
+  "$out/discovery-annotations.log"
+"$jdk/bin/java" "-Xbootclasspath/a:$junit" -ea -Xmx2g "${runtime[@]}" -cp "$junit" \
   org.junit.platform.console.ConsoleLauncher execute \
   "${selects[@]}" --disable-banner --details=summary \
   --fail-if-no-tests 2>&1 | tee "$out/provider-junit.log"
