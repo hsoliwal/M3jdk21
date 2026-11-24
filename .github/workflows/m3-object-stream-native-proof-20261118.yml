@@ -17,6 +17,8 @@ on:
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/M3ProviderJUnitDiscoveryProbe.java'
+      - 'make/m3/collections/test-provider-junit-loader.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -52,6 +54,8 @@ on:
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/M3ProviderJUnitDiscoveryProbe.java'
+      - 'make/m3/collections/test-provider-junit-loader.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -91,6 +95,10 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
       - name: Verify clean diff and source receipts
         run: |
           set -euo pipefail
@@ -106,6 +114,19 @@ jobs:
           bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash -n make/m3/collections/test-provider-junit.sh
+          bash -n make/m3/collections/test-provider-junit-loader.sh
+          bash make/m3/collections/test-provider-junit-loader.sh "$JAVA_HOME"
+          curl --fail --location --retry 3 \
+            'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' \
+            -o "$RUNNER_TEMP/m3-provider-junit-console-1.12.2.jar"
+          printf '%s  %s\n' \
+            '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' \
+            "$RUNNER_TEMP/m3-provider-junit-console-1.12.2.jar" | sha256sum --check -
+          bash make/m3/collections/test-provider-junit-loader.sh \
+            "$JAVA_HOME" "$RUNNER_TEMP/m3-provider-junit-console-1.12.2.jar" \
+            | tee "$RUNNER_TEMP/m3-provider-real-junit-loader.log"
+          grep -Fx 'M3_PROVIDER_REAL_JUNIT_LOADER_SELFTEST_PASS tests=1 negative=refused' \
+            "$RUNNER_TEMP/m3-provider-real-junit-loader.log"
           python3 - <<'PY'
           import pathlib, subprocess
           root = pathlib.Path.cwd()
@@ -124,6 +145,14 @@ jobs:
               assert actual == digest, new
           print('M3_PROVIDER_SOURCE_RELOCATION_PASS files=54 junitClasses=14')
           PY
+
+      - name: Archive early JUnit platform-loader diagnostic
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-provider-loader-${{ github.run_id }}
+          path: ${{ runner.temp }}/m3-provider-real-junit-loader.log
+          if-no-files-found: warn
 
   actual-m3jdk:
     name: Build modified M3JDK21 image and execute stream JUnit
