@@ -17,6 +17,8 @@ on:
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/M3ProviderJUnitDiscoveryProbe.java'
+      - 'make/m3/collections/test-provider-junit-loader.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -52,6 +54,8 @@ on:
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/M3ProviderJUnitDiscoveryProbe.java'
+      - 'make/m3/collections/test-provider-junit-loader.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -91,6 +95,10 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
       - name: Verify clean diff and source receipts
         run: |
           set -euo pipefail
@@ -106,6 +114,8 @@ jobs:
           bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash -n make/m3/collections/test-provider-junit.sh
+          bash -n make/m3/collections/test-provider-junit-loader.sh
+          bash make/m3/collections/test-provider-junit-loader.sh "$JAVA_HOME"
           python3 - <<'PY'
           import pathlib, subprocess
           root = pathlib.Path.cwd()
