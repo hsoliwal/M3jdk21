@@ -117,6 +117,7 @@ for source in "${cases[@]}"; do
 done
 printf '%s\n' "${cases[@]}" > "$out/test-classes.txt"
 runtime=(--add-modules jdk.m3.collections
+  "-Xbootclasspath/a:$junit"
   --patch-module "jdk.m3.collections=$out/classes"
   --add-reads jdk.m3.collections=ALL-UNNAMED
   "${opens[@]}")
