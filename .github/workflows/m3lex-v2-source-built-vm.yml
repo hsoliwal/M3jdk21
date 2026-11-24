@@ -53,6 +53,10 @@ jobs:
           check_blob test/jdk/java/lang/M3StringPool/M3LexiconV2MappedReaderTest.java 6cf795cb22b1a948a0bcc6f847725e64a0533c6a
           check_blob m3/lexicon/receiver/scripts/resolve-jtreg8.sh f7bbf01602a3f2794bdb5867b87dcb88c2dc863a
           check_blob m3/lexicon/receiver/scripts/test-resolve-jtreg8.sh 5f9f438d5018cae8514245f5cdc4923601cd4bde
+          # The fork's own configure explicitly supports a Java-only Skia
+          # lane; no unpinned GN executable may substitute for pinned GN 2175.
+          check_blob make/autoconf/lib-skia.m4 b6f9301a147cebc88c1b2bebf8c3904b4d2b7b09
+          grep -Fq 'elif test "x$with_skia" != xnone' make/autoconf/lib-skia.m4
           grep -qx 'DEFAULT_VERSION_FEATURE=21' make/conf/version-numbers.conf
           grep -qx 'DEFAULT_ACCEPTABLE_BOOT_VERSIONS="20 21"' make/conf/version-numbers.conf
           grep -qx 'requiredVersion=8.2.1+1' test/jdk/TEST.ROOT
@@ -96,7 +100,12 @@ jobs:
           set -euo pipefail
           test -x "$JAVA_HOME/bin/java"
           "$JAVA_HOME/bin/java" -version
+          # This job qualifies java.base/M3LEX, not jdk.m3.graphics native Skia.
+          # 'auto' selects bundled Skia on Linux and demands pinned GN 2175.
+          # Do not install a different distro GN or bypass the source-built JDK.
+          # Native Skia remains a SEPARATE required full-release qualification.
           bash configure --with-boot-jdk="$JAVA_HOME" \
+            --with-skia=none \
             --with-debug-level=release --with-jvm-variants=server
       - name: Build real fork JDK images (no stock-JDK substitution)
         shell: bash
