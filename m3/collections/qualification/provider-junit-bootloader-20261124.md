@@ -70,3 +70,25 @@ source-built `jdk.m3.collections` provider suite, original Maven
 bridge and full-platform runtime have **not yet produced a passing
 post-correction hosted receipt**. Never label this a full native
 integration success until that exact CI run completes.
+
+## Exact pinned-JUnit 1.12.2 preflight
+
+The companion `make/m3/collections/test-provider-junit-loader-repro.sh` is an
+executable, self-contained 15-class source reproduction. It compiles
+package-private Jupiter tests into an existing standard JDK21 module
+(`java.xml`, package `javax.xml.parsers`) with original `--patch-module`
+compilation. In the same run it demands the original classpath-only launcher
+report **0 tests found / exit 2**, then demands the bootstrap-visible
+launcher report **15 successful tests / exit 0**, and checks the generated
+Jupiter XML for all 15 exact classnames. A positive receipt cannot come
+from the original empty discovery state or a partial selection.
+
+This script executed successfully against the locally retained 1.14.2
+JUnit Console Standalone JAR. The existing source-identity workflow now
+downloads the **actual production 1.12.2** Console Standalone JAR with
+its reviewed SHA-256
+`329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a`,
+runs the same differential on Java21 **before any full JDK compilation**,
+and retains its original/candidate transcripts and report. Exact 1.12.2
+execution remains pending until that hosted job reports a result; no
+cross-version compatibility is inferred from the 1.14.2 local proof.

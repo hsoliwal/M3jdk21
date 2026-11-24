@@ -19,6 +19,7 @@ on:
       - 'make/m3/collections/test-provider-junit.sh'
       - 'make/m3/collections/ProviderJUnitReportsCheck.java'
       - 'make/m3/collections/ProviderJUnitReportsCheckSelfTest.java'
+      - 'make/m3/collections/test-provider-junit-loader-repro.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -56,6 +57,7 @@ on:
       - 'make/m3/collections/test-provider-junit.sh'
       - 'make/m3/collections/ProviderJUnitReportsCheck.java'
       - 'make/m3/collections/ProviderJUnitReportsCheckSelfTest.java'
+      - 'make/m3/collections/test-provider-junit-loader-repro.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -124,6 +126,20 @@ jobs:
             | tee "$RUNNER_TEMP/m3-provider-junit-report-selftest.log"
           grep -Fx 'M3_PROVIDER_JUNIT_REPORT_SELFTEST_PASS negatives=12' \
             "$RUNNER_TEMP/m3-provider-junit-report-selftest.log"
+          junit_fixture_jar="$RUNNER_TEMP/m3-junit-console-1.12.2.jar"
+          curl --fail --location --retry 3 \
+            'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' \
+            -o "$junit_fixture_jar"
+          printf '%s  %s\n' \
+            '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' \
+            "$junit_fixture_jar" | sha256sum --check -
+          bash -n make/m3/collections/test-provider-junit-loader-repro.sh
+          bash make/m3/collections/test-provider-junit-loader-repro.sh \
+            "$JAVA_HOME" "$junit_fixture_jar" \
+            "$RUNNER_TEMP/m3-provider-junit-loader-repro" \
+            | tee "$RUNNER_TEMP/m3-provider-junit-loader-repro.log"
+          grep -Fx 'M3_PROVIDER_JUNIT_LOADER_REPRO_PASS originalTests=0 candidateTests=15' \
+            "$RUNNER_TEMP/m3-provider-junit-loader-repro/status.txt"
           python3 - <<'PY'
           import pathlib, subprocess
           root = pathlib.Path.cwd()
@@ -148,7 +164,10 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: m3-provider-report-selftest-${{ github.run_id }}
-          path: ${{ runner.temp }}/m3-provider-junit-report-selftest.log
+          path: |
+            ${{ runner.temp }}/m3-provider-junit-report-selftest.log
+            ${{ runner.temp }}/m3-provider-junit-loader-repro.log
+            ${{ runner.temp }}/m3-provider-junit-loader-repro/
           if-no-files-found: warn
 
   actual-m3jdk:
