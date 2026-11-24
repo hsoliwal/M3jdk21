@@ -327,20 +327,52 @@ public final class M3ArrayDeque<E> extends AbstractCollection<E>
             }
         }
         if (removed == null) return false;
-        int write = firstRemoved;
-        for (int read = firstRemoved + 1; read < oldSize; read++) {
+        int write = firstRemoved, read = firstRemoved + 1;
+        // Each bitmap word describes one bounded segment of source occurrences.
+        // Copy entire surviving runs, keeping the Object[] and state byte lanes
+        // aligned even when either logical window crosses the physical ring end.
+        while (read < oldSize) {
             int bit = read - firstRemoved;
-            if ((removed[bit >>> 6] & (1L << (bit & (Long.SIZE - 1)))) == 0L) {
-                int src = position(read), dst = position(write++);
-                values[dst] = values[src]; states[dst] = states[src];
+            int available = Math.min(oldSize - read, Long.SIZE - (bit & 63));
+            long flags = removed[bit >>> 6] >>> (bit & 63);
+            if ((flags & 1L) != 0L) {
+                read += Math.min(available, Long.numberOfTrailingZeros(~flags));
+            } else {
+                int length = Math.min(available, Long.numberOfTrailingZeros(flags));
+                copySurvivorRun(read, write, length);
+                read += length;
+                write += length;
             }
         }
-        for (int i = write; i < oldSize; i++) {
-            int slot = position(i); values[slot] = null; states[slot] = 0;
+        // Clear the vacated logical tail in at most two physical spans.
+        int cleared = oldSize - write;
+        if (cleared != 0) {
+            int start = position(write);
+            int first = Math.min(cleared, values.length - start);
+            Arrays.fill(values, start, start + first, null);
+            Arrays.fill(states, start, start + first, (byte) 0);
+            if (first != cleared) {
+                Arrays.fill(values, 0, cleared - first, null);
+                Arrays.fill(states, 0, cleared - first, (byte) 0);
+            }
         }
         size = write; if (size == 0) head = 0;
         revision++;
         return true;
+    }
+
+    /** Private aligned ring-run copy, forward-only after the first rejection. */
+    private void copySurvivorRun(int read, int write, int count) {
+        final int capacity = values.length;
+        while (count != 0) {
+            int src = position(read), dst = position(write);
+            int span = Math.min(count, Math.min(capacity - src, capacity - dst));
+            System.arraycopy(values, src, values, dst, span);
+            System.arraycopy(states, src, states, dst, span);
+            read += span;
+            write += span;
+            count -= span;
+        }
     }
 
     private final class Cursor implements Iterator<E> {
