@@ -17,6 +17,8 @@ on:
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/ProviderJUnitDiscoveryProbe.java'
+      - 'make/m3/collections/test-provider-junit-discovery-bootstrap.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -52,6 +54,8 @@ on:
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/ProviderJUnitDiscoveryProbe.java'
+      - 'make/m3/collections/test-provider-junit-discovery-bootstrap.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -106,6 +110,7 @@ jobs:
           bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash -n make/m3/collections/test-provider-junit.sh
+          bash -n make/m3/collections/test-provider-junit-discovery-bootstrap.sh
           python3 - <<'PY'
           import pathlib, subprocess
           root = pathlib.Path.cwd()
@@ -154,6 +159,13 @@ jobs:
             "$RUNNER_TEMP/m3jdk21.tar.gz" | sha256sum --check -
           tar -xzf "$RUNNER_TEMP/m3jdk21.tar.gz" -C "$RUNNER_TEMP"
           printf 'BOOT_JDK=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
+      - name: Verify Java21 bootstrap Jupiter annotation refusal and recovery
+        run: |
+          set -euo pipefail
+          bash make/m3/collections/test-provider-junit-discovery-bootstrap.sh \
+            "$BOOT_JDK" "$RUNNER_TEMP/m3-provider-bootstrap-discovery"
+          grep -Fx 'M3_PROVIDER_JUNIT_BOOTSTRAP_DISCOVERY_PASS negative=1 positive=1' \
+            "$RUNNER_TEMP/m3-provider-bootstrap-discovery/status.txt"
       - name: Acquire hash-pinned bundled Skia build tools
         run: |
           set -euo pipefail
@@ -549,6 +561,7 @@ jobs:
             ${{ runner.temp }}/m3-ginq-jlink-image.log
             ${{ runner.temp }}/m3-ginq-installed-receipt/
             ${{ runner.temp }}/m3-provider-junit/
+            ${{ runner.temp }}/m3-provider-bootstrap-discovery/
             ${{ runner.temp }}/m3-groovy-count-native-configure.log
             ${{ runner.temp }}/m3-groovy-count-native-build.log
             ${{ runner.temp }}/m3-groovy-count-native-ctest.log
