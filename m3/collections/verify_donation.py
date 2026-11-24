@@ -5,6 +5,7 @@
 # Modified 2026 by Hitesh Soliwal and contributors: restore exact collection receiving provenance and verification while retaining current owners and String phase authority.
 # Modified 2026 by Hitesh Soliwal and contributors: restore the Tools4j predecessor selector and seal the superset source set as an exact additive successor after the Tools4j refinement; historical receipts stay unchanged.
 # Modified 2026 by Hitesh Soliwal and contributors: seal the master source set (2026-10-31) as a transition-receipt successor after the superset seal, through one shared transition atom.
+# Modified 2026 by Hitesh Soliwal and contributors: advance only the exact CountTotalsTest source guard without adding product evidence files.
 """Verify the installed M3 collection donation with target-native Java/JNI checks.
 
 This host verifies product source. The canonical transformation and SDK replay remain
@@ -440,6 +441,55 @@ def include_longlane_required_native_source_successor(previous_rows, receipt=_LO
                                     _LONG_NATIVE_RESULT_JAVA)
 
 
+# Generated source guard for the existing CountTotalsTest owner. Canonical recipe
+# execution and target runtime acceptance remain separate from this build check.
+_COUNT_TOTALS_GUARD_KEY = 'count_totals_test_source_guard_20261124'
+_COUNT_TOTALS_GUARD_CONFIG = {
+    'schema': 'M3_COLLECTION_SOURCE_GUARD_V1',
+    'guard': 'count-totals-test-source-20261124',
+    'predecessor_successor': 'longlane_required_native_source_successor_20261113',
+}
+_COUNT_TOTALS_TEST_PATH = 'm3/collections/src/test/java/jdk/m3/collections/CountTotalsTest.java'
+_COUNT_TOTALS_TEST_BEFORE_SHA256 = '660534fa205ff0fccca987107773637b4c3b625895f452439e904ca6f180cd55'
+_COUNT_TOTALS_TEST_AFTER_SHA256 = 'e092c7160e4b8f6791c26e95f018c5ee23099a1db181b088073d7b9bdb477cf6'
+_COUNT_TOTALS_PREDECESSOR_SHA256 = '10a8b59ab6bf9d48365e89f38c03c244b301ad5e9488d0a8864442b3a2697425'
+_COUNT_TOTALS_RESULT_SHA256 = 'cba9276750d4c18c19224fdcb0850b15ea36674832770a50cf7d32ec58ee92ca'
+_COUNT_TOTALS_RESULT_ROWS = 1957
+_COUNT_TOTALS_RESULT_JAVA = 1951
+
+
+def include_count_totals_test_source_guard(previous_rows, packet):
+    """Advance only the selected test row over the exact preserved source chain.
+
+    These generated checks neither modify source files nor certify Java/JNI
+    execution. All historical file-backed successors and later runtime gates
+    retain their original owners. No new qualification file is read or written.
+    """
+    if (not isinstance(packet, dict)
+            or packet.get('source_set_successor_current') != _COUNT_TOTALS_GUARD_KEY
+            or packet.get(_COUNT_TOTALS_GUARD_KEY) != _COUNT_TOTALS_GUARD_CONFIG):
+        raise SystemExit('CountTotals test source guard configuration drift')
+    prior = list(previous_rows)
+    if (len(prior) != _COUNT_TOTALS_RESULT_ROWS
+            or any(not isinstance(row, (tuple, list)) or len(row) != 2
+                   or any(not isinstance(cell, str) for cell in row) for row in prior)):
+        raise SystemExit('CountTotals test source guard malformed predecessor rows')
+    predecessor = ''.join(path + '\t' + expected + '\n' for path, expected in prior)
+    if hashlib.sha256(predecessor.encode('utf-8')).hexdigest() != _COUNT_TOTALS_PREDECESSOR_SHA256:
+        raise SystemExit('CountTotals test source guard predecessor chain drift')
+    positions = [index for index, (path, _) in enumerate(prior) if path == _COUNT_TOTALS_TEST_PATH]
+    if len(positions) != 1 or prior[positions[0]][1] != _COUNT_TOTALS_TEST_BEFORE_SHA256:
+        raise SystemExit('CountTotals test source guard inherited test drift')
+    result = list(prior)
+    result[positions[0]] = (_COUNT_TOTALS_TEST_PATH, _COUNT_TOTALS_TEST_AFTER_SHA256)
+    resulting = ''.join(path + '\t' + expected + '\n' for path, expected in result)
+    java_paths = {path for path, _ in result if path.endswith('.java') and '/src/' in path}
+    if (hashlib.sha256(resulting.encode('utf-8')).hexdigest() != _COUNT_TOTALS_RESULT_SHA256
+            or len(result) != _COUNT_TOTALS_RESULT_ROWS or len(java_paths) != _COUNT_TOTALS_RESULT_JAVA):
+        raise SystemExit('CountTotals test source guard result drift')
+    return result
+
+
 # The transition-receipt successors by their m3-donation.json record: (receipt, receipt SHA-256,
 # predecessor SHA-256, transitions, resulting rows, exact Java source membership).
 SOURCE_TRANSITION_SEALS = {
@@ -674,6 +724,7 @@ def main():
     rows = include_current_receiver_source_successor(rows)
     rows = include_current_probe_source_successor(rows)
     rows = include_longlane_required_native_source_successor(rows)
+    rows = include_count_totals_test_source_guard(rows, packet)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:

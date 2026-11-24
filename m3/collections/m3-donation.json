@@ -1128,7 +1128,7 @@
     "linux_acceptance": "PENDING_LINUX",
     "phase_advance": false
   },
-  "source_set_successor_current": "longlane_required_native_source_successor_20261113",
+  "source_set_successor_current": "count_totals_test_source_guard_20261124",
   "tools4j_unix_refinement_20261019": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
@@ -1335,5 +1335,10 @@
     "historical_baseline_commit": "5e8a20b93790238c158bdc2d162cf8814e87448d",
     "current_source_commit": "2e25b01eefbe3c2e72650813f461ce35fa9f29a4",
     "origin": "Required supplied JNI long-page allocation, typed-directory/lifetime/public API retained; real Windows component proof separate from installed Linux acceptance"
+  },
+  "count_totals_test_source_guard_20261124": {
+    "schema": "M3_COLLECTION_SOURCE_GUARD_V1",
+    "guard": "count-totals-test-source-20261124",
+    "predecessor_successor": "longlane_required_native_source_successor_20261113"
   }
 }
