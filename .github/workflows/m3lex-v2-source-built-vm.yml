@@ -51,6 +51,8 @@ jobs:
           check_blob m3/lexicon/receiver/src/main/java/jdk/m3/lexicon/M3Lex001Image.java 91a8fc3d2e20ff6b917868f672434f113aa625a9
           check_blob m3/lexicon/receiver/src/test/java/M3Lex001ContiguousV2Test.java 9dad19a602832803790fdf75a9e84cb6ba132a20
           check_blob test/jdk/java/lang/M3StringPool/M3LexiconV2MappedReaderTest.java 6cf795cb22b1a948a0bcc6f847725e64a0533c6a
+          check_blob m3/lexicon/receiver/scripts/resolve-jtreg8.sh f7bbf01602a3f2794bdb5867b87dcb88c2dc863a
+          check_blob m3/lexicon/receiver/scripts/test-resolve-jtreg8.sh 5f9f438d5018cae8514245f5cdc4923601cd4bde
           grep -qx 'DEFAULT_VERSION_FEATURE=21' make/conf/version-numbers.conf
           grep -qx 'DEFAULT_ACCEPTABLE_BOOT_VERSIONS="20 21"' make/conf/version-numbers.conf
           grep -qx 'requiredVersion=8.2.1+1' test/jdk/TEST.ROOT
@@ -70,23 +72,24 @@ jobs:
             libasound2-dev libcups2-dev libfreetype-dev \
             libx11-dev libxext-dev libxrender-dev libxtst-dev libxrandr-dev \
             libfontconfig1-dev libffi-dev jtreg8
+      - name: Prove package-owned JTReg8 launcher discovery and refusals
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/lexicon/receiver/scripts/test-resolve-jtreg8.sh
       - name: Verify distribution jtreg meets exact JDK source requirement
         shell: bash
         run: |
           set -euo pipefail
-          version="$(dpkg-query -W -f='${Version}' jtreg8)"
-          dpkg --compare-versions "$version" ge '8.2.1+1' || {
-            echo "::error::JDK source requires jtreg >= 8.2.1+1, found $version"
-            exit 1
-          }
-          jtreg_bin="$(command -v jtreg8 || true)"
-          test -n "$jtreg_bin" && test -x "$jtreg_bin" || {
-            echo "::error::No executable jtreg8 from reviewed Ubuntu 26.04 package"
-            exit 1
-          }
+          # The Debian/Ubuntu package is named jtreg8; its executable may be
+          # named jtreg and installed under a version-specific bin directory.
+          # Resolve from exact jtreg8 package-owned files, never a jtreg7
+          # launcher inherited from PATH.
+          jtreg_bin="$(bash m3/lexicon/receiver/scripts/resolve-jtreg8.sh)"
+          test -n "$jtreg_bin" && test -x "$jtreg_bin"
           "$jtreg_bin" -version
           echo "M3_JTREG_BIN=$jtreg_bin" >> "$GITHUB_ENV"
-          echo "M3LEX_JTREG_VERSION_ADMITTED $version"
+          echo "M3LEX_JTREG_VERSION_ADMITTED $(dpkg-query -W -f='${Version}' jtreg8)"
       - name: Configure unmodified OpenJDK build machinery for this fork
         shell: bash
         run: |
