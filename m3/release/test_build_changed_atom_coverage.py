@@ -3,10 +3,12 @@
 """JaCoCo coverage importer tests using synthetic XML; not product coverage proof."""
 from __future__ import annotations
 
+import csv
 import importlib.util
 import tempfile
 import unittest
 from pathlib import Path
+import xml.etree.ElementTree as ET
 
 MODULE = Path(__file__).with_name("build_changed_atom_coverage.py")
 spec = importlib.util.spec_from_file_location("m3_coverage_import", MODULE)
@@ -272,6 +274,87 @@ class ImporterTest(unittest.TestCase):
         self.assertEqual((10, 10), (atom["line_covered"], atom["line_missed"]))
         self.assertTrue(importer.atom_passes(atom))
         self.assertEqual(0, self.require_pass())
+
+
+class UniqueCoverageMethodTest(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        source = self.root / "m3/Example.java"
+        source.parent.mkdir()
+        source.write_text("class Example { int value() { return 1; } }\n", encoding="utf-8")
+        self.report = self.root / "jacoco.xml"
+        self.inventory = self.root / "atoms.tsv"
+
+    def write(self, atoms):
+        report = ET.Element("report")
+        package = ET.SubElement(report, "package", {"name": "example"})
+        classes = {}
+        emitted = set()
+        for ident, owner, method, descriptor, source in atoms:
+            klass = classes.get(owner)
+            if klass is None:
+                klass = ET.SubElement(package, "class", {"name": owner})
+                classes[owner] = klass
+            key = (owner, method, descriptor)
+            if key not in emitted:
+                code = ET.SubElement(klass, "method", {"name": method, "desc": descriptor})
+                ET.SubElement(code, "counter", {"type": "LINE", "covered": "10", "missed": "0"})
+                ET.SubElement(code, "counter", {"type": "BRANCH", "covered": "2", "missed": "0"})
+                emitted.add(key)
+        ET.ElementTree(report).write(self.report, encoding="utf-8")
+        with self.inventory.open("w", encoding="utf-8", newline="") as output:
+            writer = csv.writer(output, delimiter="\t")
+            writer.writerow(importer.FIELDS)
+            writer.writerows(atoms)
+
+    def build(self):
+        return importer.build(self.root, self.report, self.inventory,
+                              "jacoco.xml", "atoms.tsv", "synthetic fixture", False)
+
+    def atom(self, ident="first", owner="example/Example", method="value", desc="()I"):
+        return (ident, owner, method, desc, "m3/Example.java")
+
+    def test_same_method_under_distinct_atom_ids_is_refused(self):
+        self.write([self.atom(), self.atom("second")])
+        with self.assertRaisesRegex(ValueError, "duplicate.*method key"):
+            self.build()
+
+    def test_changing_source_path_does_not_make_same_method_distinct(self):
+        (self.root / "m3/Other.java").write_text("class Other {}\n")
+        self.write([self.atom(), (*self.atom("other")[:-1], "m3/Other.java")])
+        with self.assertRaisesRegex(ValueError, "duplicate.*method key"):
+            self.build()
+
+    def test_method_descriptor_distinguishes_real_overloads(self):
+        self.write([self.atom(), self.atom("overloaded", desc="(I)I")])
+        result = self.build()
+        self.assertEqual(2, result["measured_count"])
+        self.assertFalse(result["inventory_complete"])
+        self.assertEqual({"()I", "(I)I"}, {x["jacoco_descriptor"] for x in result["atoms"]})
+
+    def test_class_owner_distinguishes_same_method_spelling(self):
+        self.write([self.atom(), self.atom("other", owner="example/Other")])
+        self.assertEqual(2, self.build()["measured_count"])
+
+    def test_multiple_distinct_methods_can_share_one_source(self):
+        self.write([self.atom(), self.atom("second", method="second")])
+        result = self.build()
+        self.assertEqual(2, result["measured_count"])
+        self.assertEqual(result["atoms"][0]["source_sha256"], result["atoms"][1]["source_sha256"])
+
+    def test_duplicate_atom_id_still_refuses_distinct_methods(self):
+        self.write([self.atom(), self.atom(method="second")])
+        with self.assertRaisesRegex(ValueError, "duplicate"):
+            self.build()
+
+    def test_sorted_unique_receipt_schema_stays_unchanged(self):
+        self.write([self.atom("z"), self.atom("a", method="other")])
+        result = self.build()
+        self.assertEqual("M3_CHANGED_ATOM_COVERAGE_V1", result["schema"])
+        self.assertEqual(["a", "z"], [a["id"] for a in result["atoms"]])
+        self.assertEqual(0, result["unmeasured_count"])
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@
  *  \______/___/\___\______/___/_____/___/\___\______/___/\___\
  *
  * Copyright 2014-2026 Vavr, https://vavr.io
+ * Modified 2026 by Hitesh Soliwal and contributors: bound prefix selection allocation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1328,16 +1329,19 @@ interface BitSetModule {
         //FLLDCIM: HPCPOP - OFFSET_ARRAY prefix popcount + MASK: keep the lowest k set bits
         // (0 < k < length())
         private BitSet<T> lowest(int k) {
-            final long[] words = copyExpand(getWordsNum());
             int i = 0;
             int left = k;
-            for (int count = Long.bitCount(words[0]); left > count;
-                    count = Long.bitCount(words[++i])) {
+            for (int count = Long.bitCount(getWord(0)); left > count;
+                    count = Long.bitCount(getWord(++i))) {
                 left -= count;
             }
-            words[i] = keepLow(words[i], left);
-            return fromBitMaskNoCopy(
-                    i + 1 == words.length ? words : java.util.Arrays.copyOf(words, i + 1));
+            // Allocate only the retained prefix, even when a sparse suffix is very large.
+            final long[] words = new long[i + 1];
+            for (int word = 0; word < i; word++) {
+                words[word] = getWord(word);
+            }
+            words[i] = keepLow(getWord(i), left);
+            return fromBitMaskNoCopy(words);
         }
 
         //FLLDCIM: HPCPOP - suffix popcount + MASK: keep the highest k set bits (0 < k < length())

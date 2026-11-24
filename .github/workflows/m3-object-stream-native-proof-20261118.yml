@@ -11,7 +11,25 @@ on:
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
+      - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
+      - 'make/m3/collections/test-provider-junit.sh'
+      - 'm3/collections/qualification/provider-tests-20261123.*'
+      - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/apache/**'
+      - 'test/jdk/jdk/m3/collections/eclipse/**'
+      - 'test/jdk/jdk/m3/collections/guava/**'
+      - 'test/jdk/jdk/m3/collections/vavr/**'
       - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/StringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/StringBuffer.java'
+      - 'src/java.base/share/classes/java/lang/M3String*.java'
+      - 'test/jdk/java/lang/StringBuilder/M3CompositeBuilderSearchReverseTest.java'
+      - 'test/jdk/java/lang/StringBuilder/M3CompositeBuilderMiddleEditTest.java'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'test/jdk/java/lang/String/StringCaseFamily*.java'
       - 'test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java'
@@ -28,7 +46,25 @@ on:
       - 'm3/collections/qualification/stream-current-compatible-20261118/**'
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
+      - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
+      - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
+      - 'make/m3/collections/test-provider-junit.sh'
+      - 'm3/collections/qualification/provider-tests-20261123.*'
+      - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/apache/**'
+      - 'test/jdk/jdk/m3/collections/eclipse/**'
+      - 'test/jdk/jdk/m3/collections/guava/**'
+      - 'test/jdk/jdk/m3/collections/vavr/**'
       - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/StringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/StringBuffer.java'
+      - 'src/java.base/share/classes/java/lang/M3String*.java'
+      - 'test/jdk/java/lang/StringBuilder/M3CompositeBuilderSearchReverseTest.java'
+      - 'test/jdk/java/lang/StringBuilder/M3CompositeBuilderMiddleEditTest.java'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'test/jdk/java/lang/String/StringCaseFamily*.java'
       - 'test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java'
@@ -61,6 +97,33 @@ jobs:
           git diff --check
           python3 -m unittest -v m3/collections/test_verify_stream_current.py
           python3 m3/collections/qualification/stream-current-compatible-20261118/verify.py
+          printf '%s  %s\n' \
+            '4b95a5e0746e3e4163174e52794796f142e5a36d4dc122c2a55f9aad236da430' 'm3/compatibility/groovy/tests/M3GroovyCountByManyTest.java' \
+            '2009c9fd180c441317051a9164a6c010f924fb4278207e37b9b089068a4e20c8' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java' \
+            '5af43c760da207b7fb173bb48773ce0f1fd903c6e283f4c0868a72f48d3faabd' 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java' \
+            | sha256sum --check -
+          bash -n m3/compatibility/groovy/run-ginq-join-installed.sh
+          bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
+          bash m3/compatibility/groovy/test-ginq-runner-negative.sh
+          bash -n make/m3/collections/test-provider-junit.sh
+          python3 - <<'PY'
+          import pathlib, subprocess
+          root = pathlib.Path.cwd()
+          manifest = root / 'm3/collections/qualification/provider-tests-20261123.tsv'
+          rows = [r.split('\t') for r in manifest.read_text(encoding='utf-8').splitlines()
+                  if r and not r.startswith('#')]
+          assert len(rows) == 54 and all(len(r) == 3 for r in rows), '54 exact move rows required'
+          assert len({r[0] for r in rows}) == len({r[1] for r in rows}) == 54
+          assert sum(r[1].endswith('Test.java') for r in rows) == 14
+          for old, new, digest in rows:
+              assert old.startswith('test/jdk/jdk/m3/collections/')
+              assert new == old.replace('/collections/', '/collections/providers/', 1)
+              assert not (root / old).exists() and not (root / old).is_symlink(), old
+              assert (root / new).is_file() and not (root / new).is_symlink(), new
+              actual = subprocess.check_output(['git', 'hash-object', new], text=True).strip()
+              assert actual == digest, new
+          print('M3_PROVIDER_SOURCE_RELOCATION_PASS files=54 junitClasses=14')
+          PY
 
   actual-m3jdk:
     name: Build modified M3JDK21 image and execute stream JUnit
@@ -172,29 +235,81 @@ jobs:
           grep -F 'public final class java.util.stream.Streams' "$RUNNER_TEMP/m3-streams-api.txt"
           grep -F 'mapWhile(' "$RUNNER_TEMP/m3-streams-api.txt"
           grep -F 'pairwise(' "$RUNNER_TEMP/m3-streams-api.txt"
+      - name: Run composite builder jtreg modes on the built M3 image
+        run: |
+          set -euo pipefail
+          make CONF=m3-groovy-native-proof JOBS=2 test \
+            TEST="jtreg:test/jdk/java/lang/StringBuilder/M3CompositeBuilderSearchReverseTest.java jtreg:test/jdk/java/lang/StringBuilder/M3CompositeBuilderMiddleEditTest.java" \
+            | tee "$RUNNER_TEMP/m3-composite-builder-jtreg.log"
       - name: Compile actual M3 arrays dependency
         run: |
           set -euo pipefail
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
           mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
-      - name: Compile current M3 collections and execute real JUnit
+      - name: Build original M3 arrays JNI and test its C11 owner
         run: |
           set -euo pipefail
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
-          mvn -B -ntp -f m3/collections/pom.xml \
-            -Dtest=ObjectStreamAdvancedContractTest,ObjectStreamLoopContractTest,ObjectStreamCompatibilityGateTest \
-            test
+          native_build="$RUNNER_TEMP/m3-ginq-arrays-native"
+          cmake -S make/m3/arrays -B "$native_build" \
+            -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON \
+            | tee "$RUNNER_TEMP/m3-ginq-native-configure.log"
+          cmake --build "$native_build" --parallel 2 \
+            | tee "$RUNNER_TEMP/m3-ginq-native-build.log"
+          ctest --test-dir "$native_build" --output-on-failure \
+            | tee "$RUNNER_TEMP/m3-ginq-native-ctest.log"
+          native_lib="$native_build/libm3_arrays.so"
+          test -s "$native_lib"
+          nm -D "$native_lib" > "$RUNNER_TEMP/m3-ginq-native-symbols.txt"
+          for symbol in nativeAllocateObjects nativeAllocateInts; do
+            grep -F "Java_jdk_m3_arrays_ArrayNative_$symbol" \
+              "$RUNNER_TEMP/m3-ginq-native-symbols.txt"
+          done
+          sha256sum "$native_lib" \
+            | tee "$RUNNER_TEMP/m3-ginq-native-sha256.txt"
+          printf 'M3_ARRAYS_NATIVE_PATH=%s\n' "$native_lib" >> "$GITHUB_ENV"
+      - name: Build original M3 arrays JNI and exercise C11 allocation tests
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$M3_JAVA_HOME"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          native_dir="src/jdk.m3.collections/share/native/libm3arrays"
+          printf '%s  %s\n' \
+            '0c7be7f8176ca235c40d88aad2cefab15e7ce7363d7fc648bafba4fdb535695d' "$native_dir/m3_arrays.c" \
+            'f1732d5333b4eba98d75557990a2fc2e88f3120d5d5a50343da6db91ef646862' "$native_dir/m3_arrays_jni.c" \
+            'f2eec872591c7af40c13af75012fb20efb8376cdb29209c9e8151fd9775d758d' "$native_dir/include/m3_arrays.h" \
+            'e479955a398c6e1db3b626ef87f5023fa490b4971bbcf8fee9b295c3dac06a34' "m3/native/include/m3_jni_core.h" \
+            | sha256sum --check -
+          native_build="$RUNNER_TEMP/m3-groovy-count-arrays-native"
+          cmake -S make/m3/arrays -B "$native_build" \
+            -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON \
+            | tee "$RUNNER_TEMP/m3-groovy-count-native-configure.log"
+          cmake --build "$native_build" --parallel 2 \
+            | tee "$RUNNER_TEMP/m3-groovy-count-native-build.log"
+          ctest --test-dir "$native_build" --output-on-failure \
+            | tee "$RUNNER_TEMP/m3-groovy-count-native-ctest.log"
+          native_lib="$native_build/libm3_arrays.so"
+          test -s "$native_lib"
+          nm -D "$native_lib" > "$RUNNER_TEMP/m3-groovy-count-native-symbols.txt"
+          for symbol in nativeAllocateObjects nativeAllocateBytes \
+                        nativeAllocateInts nativeAllocateLongs; do
+            grep -F "Java_jdk_m3_arrays_ArrayNative_$symbol" \
+              "$RUNNER_TEMP/m3-groovy-count-native-symbols.txt"
+          done
+          sha256sum "$native_lib" \
+            | tee "$RUNNER_TEMP/m3-groovy-count-native-sha256.txt"
+          printf 'M3_ARRAYS_NATIVE_PATH=%s\n' "$native_lib" >> "$GITHUB_ENV"
       - name: Verify installed collection module image
         run: |
           set -euo pipefail
           export JAVA_HOME="$M3_JAVA_HOME"
           export PATH="$JAVA_HOME/bin:$PATH"
-          java --list-modules | grep '^jdk.m3.collections@'
+          java --list-modules | grep -E '^jdk[.]m3[.]collections(@|$)'
           "$M3_JAVA_HOME/bin/jlink" --module-path "$M3_JAVA_HOME/jmods" \
             --add-modules jdk.m3.collections --output "$RUNNER_TEMP/m3-object-stream-jlink"
-          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" --list-modules | grep '^jdk.m3.collections@'
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" --list-modules | grep -E '^jdk[.]m3[.]collections(@|$)'
       - name: Compile and run collate on built and linked M3 images
         run: |
           set -euo pipefail
@@ -222,12 +337,203 @@ jobs:
             | tee "$RUNNER_TEMP/m3-collate-jlink-image.log"
           grep -Fx 'OBJECT_STREAM_COLLATE_PASS checks=29894' \
             "$RUNNER_TEMP/m3-collate-jlink-image.log"
+      - name: Compile and run countByMany on full and linked M3 images
+        run: |
+          set -euo pipefail
+          count_classes="$RUNNER_TEMP/m3-groovy-count-classes"
+          empty_sourcepath="$RUNNER_TEMP/m3-groovy-count-empty-sourcepath"
+          mkdir -p "$count_classes" "$empty_sourcepath"
+          "$M3_JAVA_HOME/bin/javac" \
+            -source 21 -target 21 -proc:none -implicit:none -Xlint:all -Werror \
+            --add-modules jdk.m3.collections \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -sourcepath "$empty_sourcepath" -classpath "$count_classes" \
+            -d "$count_classes" \
+            m3/compatibility/groovy/tests/M3GroovyCountByManyTest.java
+          "$M3_JAVA_HOME/bin/java" -Xmx64m -ea -Xcheck:jni \
+            "-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
+            --add-modules jdk.m3.collections \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -cp "$count_classes" jdk.m3.collections.tests.M3GroovyCountByManyTest \
+            | tee "$RUNNER_TEMP/m3-groovy-count-full-image.log"
+          grep -Fx 'M3_GROOVY_COUNT_BY_MANY_PASS checks=5020 randomizedTrials=2500 seed=0x636f756e7442794d' \
+            "$RUNNER_TEMP/m3-groovy-count-full-image.log"
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" -Xint -Xmx64m -ea -Xcheck:jni \
+            "-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
+            --add-modules jdk.m3.collections \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -cp "$count_classes" jdk.m3.collections.tests.M3GroovyCountByManyTest \
+            | tee "$RUNNER_TEMP/m3-groovy-count-jlink-image.log"
+          grep -Fx 'M3_GROOVY_COUNT_BY_MANY_PASS checks=5020 randomizedTrials=2500 seed=0x636f756e7442794d' \
+            "$RUNNER_TEMP/m3-groovy-count-jlink-image.log"
+      - name: Compile and run GINQ join on full and linked M3 images
+        run: |
+          set -euo pipefail
+          join_classes="$RUNNER_TEMP/m3-ginq-contract-classes"
+          empty_sourcepath="$RUNNER_TEMP/m3-ginq-empty-sourcepath"
+          mkdir -p "$join_classes" "$empty_sourcepath"
+          "$M3_JAVA_HOME/bin/javap" --module jdk.m3.collections \
+            jdk.m3.collections.GinqHashJoin \
+            | grep -F 'public final class jdk.m3.collections.GinqHashJoin'
+          "$M3_JAVA_HOME/bin/javac" \
+            -source 21 -target 21 -proc:none -implicit:none -Xlint:all -Werror \
+            --add-modules jdk.m3.collections \
+            -sourcepath "$empty_sourcepath" -classpath "$join_classes" \
+            -d "$join_classes" \
+            test/jdk/jdk/m3/collections/GinqHashJoinTest.java
+          "$M3_JAVA_HOME/bin/java" -Xmx64m -ea -Xcheck:jni \
+            "-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
+            --add-modules jdk.m3.collections \
+            -cp "$join_classes" GinqHashJoinTest \
+            | tee "$RUNNER_TEMP/m3-ginq-full-image.log"
+          grep -Fx 'M3_GROOVY_GINQ_JOIN_PASS checks=8041 seededTrials=2000 joinModes=4' \
+            "$RUNNER_TEMP/m3-ginq-full-image.log"
+          "$RUNNER_TEMP/m3-object-stream-jlink/bin/java" -Xint -Xmx64m -ea -Xcheck:jni \
+            "-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
+            --add-modules jdk.m3.collections \
+            -cp "$join_classes" GinqHashJoinTest \
+            | tee "$RUNNER_TEMP/m3-ginq-jlink-image.log"
+          grep -Fx 'M3_GROOVY_GINQ_JOIN_PASS checks=8041 seededTrials=2000 joinModes=4' \
+            "$RUNNER_TEMP/m3-ginq-jlink-image.log"
+          bash m3/compatibility/groovy/run-ginq-join-installed.sh \
+            "$M3_JAVA_HOME" "$RUNNER_TEMP/m3-ginq-installed-receipt"
+          grep -Fx 'M3_GINQ_INSTALLED_SOURCE_BOUND_TESTS_PASS' \
+            "$RUNNER_TEMP/m3-ginq-installed-receipt/status.txt"
       - name: Run real jtreg contracts on the built M3 image
         run: |
           set -euo pipefail
           make CONF=m3-groovy-native-proof JOBS=2 test \
-            TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
+            JTREG="JAVA_OPTIONS=-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
+            TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/jdk/m3/collections/GinqHashJoinTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
             | tee "$RUNNER_TEMP/m3-groovy-jtreg.log"
+      - name: Compile original provider JUnit tests against the complete installed module
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$M3_JAVA_HOME"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          test -s "$M3_ARRAYS_NATIVE_PATH"
+          curl --fail --location --retry 3 \
+            'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' \
+            -o "$RUNNER_TEMP/m3-provider-console.jar"
+          printf '%s  %s\n' \
+            '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' \
+            "$RUNNER_TEMP/m3-provider-console.jar" | sha256sum --check -
+          bash make/m3/collections/test-provider-junit.sh \
+            "$M3_JAVA_HOME" "$RUNNER_TEMP/m3-provider-console.jar" \
+            "$RUNNER_TEMP/m3-provider-junit"
+          grep -Fx 'M3_PROVIDER_JUNIT_PASS classes=15 sourceFiles=57' \
+            "$RUNNER_TEMP/m3-provider-junit/status.txt"
+      - name: Compile current M3 collections and execute real JUnit
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$M3_JAVA_HOME"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=ObjectStreamAdvancedContractTest,ObjectStreamLoopContractTest,ObjectStreamCompatibilityGateTest \
+            test
+      - name: Archive source-built M3 image with custody
+        id: m3_image_custody
+        if: ${{ always() && env.M3_JAVA_HOME != '' }}
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          image="$GITHUB_WORKSPACE/build/m3-groovy-native-proof/images/jdk"
+          test "$M3_JAVA_HOME" = "$image"
+          test "$(realpath "$image")" = "$image"
+          find "$image" -type l -print0 | while IFS= read -r -d '' link; do
+            case "$(readlink "$link")" in
+              /*) echo "Absolute image symlink is not portable: $link" >&2; exit 1 ;;
+            esac
+            case "$(realpath -e "$link")" in
+              "$image"/*) ;;
+              *) echo "Image symlink escapes image or is dangling: $link" >&2; exit 1 ;;
+            esac
+          done
+          for tool in java javac jlink jmod; do
+            test -x "$image/bin/$tool"
+            case "$(realpath "$image/bin/$tool")" in
+              "$image"/*) ;;
+              *) echo "M3 image tool escapes image: $tool" >&2; exit 1 ;;
+            esac
+          done
+          for required in release lib/modules jmods/java.base.jmod jmods/jdk.m3.collections.jmod; do
+            if [[ ! -s "$image/$required" ]]; then
+              echo "Required M3 image file absent: $required" >&2
+              exit 1
+            fi
+            case "$(realpath "$image/$required")" in
+              "$image"/*) ;;
+              *) echo "M3 image file escapes image: $required" >&2; exit 1 ;;
+            esac
+          done
+          cd "$GITHUB_WORKSPACE"
+          source_head="$(git rev-parse HEAD)"
+          test "$source_head" = "$GITHUB_SHA"
+          git ls-files -v -z -- | python3 -c '
+          import sys
+          entries = sys.stdin.buffer.read().split(b"\0")
+          if any(entry[:1] == b"S" or entry[:1].islower() for entry in entries if entry):
+              raise SystemExit("Hidden Git index flags prevent complete source custody")
+          '
+          git diff --exit-code HEAD --
+          source_roots=(src/jdk.m3.collections/share/classes src/jdk.m3.collections/providers/classes)
+          test -z "$(git ls-files --others -- "${source_roots[@]}")"
+          git ls-files --error-unmatch \
+            "${source_roots[0]}/module-info.java" \
+            "${source_roots[1]}/module-info.java.extra" \
+            make/conf/module-loader-map.conf \
+            make/jdk/src/classes/build/tools/module/GenModuleInfoSource.java > /dev/null
+          custody="$RUNNER_TEMP/m3-source-built-image"
+          mkdir "$custody"
+          git ls-files --stage -- "${source_roots[@]}" \
+            make/conf/module-loader-map.conf \
+            make/jdk/src/classes/build/tools/module/GenModuleInfoSource.java > "$custody/source-inventory.git"
+          git ls-files -z -- "${source_roots[@]}" \
+            make/conf/module-loader-map.conf \
+            make/jdk/src/classes/build/tools/module/GenModuleInfoSource.java \
+            | xargs -0 -r sha256sum > "$custody/source-files.sha256"
+          test -s "$custody/source-files.sha256"
+          "$image/bin/java" --list-modules > "$custody/image-modules.txt"
+          grep -E '^jdk[.]m3[.]collections(@[^[:space:]]+)?$' "$custody/image-modules.txt"
+          "$image/bin/java" --describe-module jdk.m3.collections > "$custody/image-module-description.txt"
+          "$image/bin/jmod" describe "$image/jmods/jdk.m3.collections.jmod" > "$custody/jmod-description.txt"
+          printf 'repository=%s\nsource_head=%s\nsource_tree=%s\nworkflow_blob=%s\nrun_id=%s\nrun_attempt=%s\nprovider_junit=NOT_RUN_BY_THIS_STEP\n' \
+            "$GITHUB_REPOSITORY" "$source_head" "$(git rev-parse 'HEAD^{tree}')" \
+            "$(git rev-parse HEAD:.github/workflows/m3-object-stream-native-proof-20261118.yml)" \
+            "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > "$custody/custody.txt"
+          (cd "$image"; sha256sum release lib/modules jmods/java.base.jmod \
+            jmods/jdk.m3.collections.jmod bin/java bin/javac bin/jlink bin/jmod) > "$custody/image.sha256"
+          # Tar preserves the image's executable modes and symlinks inside the artifact ZIP.
+          tar --create --gzip --file "$custody/jdk.tar.gz" -C "$(dirname "$image")" jdk
+          tar --compare --gzip --file "$custody/jdk.tar.gz" -C "$(dirname "$image")"
+          (cd "$image"; sha256sum --check "$custody/image.sha256")
+          archive_bytes="$(stat -c %s "$custody/jdk.tar.gz")"
+          if (( archive_bytes > 2147483648 )); then
+            echo "M3 image archive exceeds 2147483648 bytes: $archive_bytes" >&2
+            exit 1
+          fi
+          printf 'archive_bytes=%s\narchive_limit_bytes=2147483648\n' "$archive_bytes" >> "$custody/custody.txt"
+          (cd "$custody"; sha256sum custody.txt source-inventory.git source-files.sha256 \
+            image-modules.txt image-module-description.txt jmod-description.txt image.sha256 jdk.tar.gz \
+            > SHA256SUMS)
+      - name: Retain source-built M3 image separately
+        if: ${{ always() && steps.m3_image_custody.outcome == 'success' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-source-built-jdk-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/m3-source-built-image/jdk.tar.gz
+            ${{ runner.temp }}/m3-source-built-image/custody.txt
+            ${{ runner.temp }}/m3-source-built-image/source-inventory.git
+            ${{ runner.temp }}/m3-source-built-image/source-files.sha256
+            ${{ runner.temp }}/m3-source-built-image/image-modules.txt
+            ${{ runner.temp }}/m3-source-built-image/image-module-description.txt
+            ${{ runner.temp }}/m3-source-built-image/jmod-description.txt
+            ${{ runner.temp }}/m3-source-built-image/image.sha256
+            ${{ runner.temp }}/m3-source-built-image/SHA256SUMS
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
       - name: Retain Maven/JDK evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -237,11 +543,28 @@ jobs:
             m3/collections/target/surefire-reports/
             m3/arrays/target/surefire-reports/
             ${{ runner.temp }}/m3-collate-full-image.log
+            ${{ runner.temp }}/m3-groovy-count-full-image.log
+            ${{ runner.temp }}/m3-groovy-count-jlink-image.log
+            ${{ runner.temp }}/m3-ginq-full-image.log
+            ${{ runner.temp }}/m3-ginq-jlink-image.log
+            ${{ runner.temp }}/m3-ginq-installed-receipt/
+            ${{ runner.temp }}/m3-provider-junit/
+            ${{ runner.temp }}/m3-groovy-count-native-configure.log
+            ${{ runner.temp }}/m3-groovy-count-native-build.log
+            ${{ runner.temp }}/m3-groovy-count-native-ctest.log
+            ${{ runner.temp }}/m3-groovy-count-native-symbols.txt
+            ${{ runner.temp }}/m3-groovy-count-native-sha256.txt
             ${{ runner.temp }}/m3-collate-jlink-image.log
+            ${{ runner.temp }}/m3-ginq-native-configure.log
+            ${{ runner.temp }}/m3-ginq-native-build.log
+            ${{ runner.temp }}/m3-ginq-native-ctest.log
+            ${{ runner.temp }}/m3-ginq-native-symbols.txt
+            ${{ runner.temp }}/m3-ginq-native-sha256.txt
             ${{ runner.temp }}/m3-gn-version.log
             ${{ runner.temp }}/m3-ninja-version.log
             ${{ runner.temp }}/m3-jtreg-version.log
             ${{ runner.temp }}/m3-groovy-jtreg.log
+            ${{ runner.temp }}/m3-composite-builder-jtreg.log
             ${{ runner.temp }}/m3-packaged-image-identity.log
             build/*/configure.log
             build/*/spec.gmk

@@ -2,7 +2,7 @@
 # File observation, completed capture, and delta evidence
 
 `MFileObservation`, `MFileCapture`, `MFileDelta`, and the optional
-`MFileChangeSource` provider contract are part of `com.m3.fs` in the existing
+`MFileChangeSource` provider contract are part of `jdk.m3.fs` in the existing
 `jdk.m3fs` module. They use the existing `M3ContentId`, `M3ObjectRef`,
 `M3FileManifest`, and `M3PrecomputeKey` representation. They do not introduce a
 payload store, parser, or retained history map. These files are after templates
@@ -10,7 +10,7 @@ for the canonical source recipes.
 
 ## Observation contract
 
-`MFile.observation()` is an explicit fresh provider operation implemented by the
+`M3File.observation()` is an explicit fresh provider operation implemented by the
 facade. It returns a stable immutable value; provider refresh or later stream
 closure does not mutate that value. The original traversal entry metadata remains
 unchanged. Provider failures propagate and do not become absent observations.
@@ -19,7 +19,7 @@ checked `IOException`; a content implementation must supply its observation
 contract before it can use metadata capture. Progress and shadow defaults do not
 require metadata support.
 
-The source key is the exact fully resolvable `MFile.sourceAddress()`. Two different
+The source key is the exact fully resolvable `M3File.sourceAddress()`. Two different
 source strings cannot be compared, even if a caller believes they are aliases.
 The implementation retains the supplied string; it does not globally intern file
 identities. Source keys may contain credentials and should not be logged.
@@ -72,7 +72,7 @@ Here `progress`, `observer`, and `destination` are caller-owned, and
 `acceptCapture` is the caller's completion consumer. The view borrows progress and
 shadows; closing the input does not close those observers or mark a child progress
 monitor done. Source content must begin at offset zero of the selected file layer.
-The `MFile` adapter opens that provider entry's input. An arbitrary implementation
+The `M3File` adapter opens that provider entry's input. An arbitrary implementation
 which returns an already-positioned stream must not attest whole-file coverage.
 
 `MFileShadow.onBytes(bytes, offset, length)` observes synchronous consumed bytes.
@@ -238,7 +238,7 @@ mkdir -p "$facts_output"
   src/main/java/com/m3/fs/MFileChangeSource.java \
   src/test/java/com/m3/fs/MFileObservationSelfTest.java
 "$facts_jdk/bin/java" -ea -cp "$facts_output:$facts_runtime" \
-  com.m3.fs.MFileObservationSelfTest
+  jdk.m3.fs.MFileObservationSelfTest
 ```
 
 This consumer is Java-only. It is not evidence of the full Maven/native gate,

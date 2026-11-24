@@ -121,10 +121,12 @@ public final class M3StringRegexPreparedUtf16Test {
         // A fragment-only result would match: applying its power must reject this length.
         strict(nativeText, "a*...", false);
         strict(repeated("\uD800", 8), "a*.", false);
-        check(direct(nativeText, ".*".repeat(64)) == -1, "64-atom prepared bound retains fallback");
+        check(direct(nativeText, ".*".repeat(64)) == 1,
+                "bounded code-point DP admits 64-atom pattern");
         parity(nativeText, ".*".repeat(64));
         String smaller = repeated("a\uD83D\uDE00b", 7);
-        check(direct(smaller, ".*".repeat(16)) == -1, "128-copy cohort retains fallback");
+        check(direct(smaller, ".*".repeat(16)) == 1,
+                "bounded code-point DP admits below repeated-fragment cohort");
         parity(smaller, ".*".repeat(16));
         String[] units = {"\uD800", "\uDC00", "\uD800\uDC00", "\uDC00\uD800",
                 "a\uD800\uDC00b", "\uDC00\n\uD800", "\uD800a\uDC00", "\u0000\uD800"};

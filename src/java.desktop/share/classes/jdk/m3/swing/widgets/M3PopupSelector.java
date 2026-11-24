@@ -4,6 +4,8 @@ package jdk.m3.swing.widgets;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.IllegalComponentStateException;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -90,7 +92,12 @@ public abstract class M3PopupSelector<V extends JComponent> extends JPanel {
     public final void setVisibleRowCount(int count) {
         if (count <= 0) throw new IllegalArgumentException("visibleRowCount must be positive");
         visibleRowCount = count;
-        if (popup != null) popup.pack();
+        if (popup != null) {
+            if (popup.isVisible()) {
+                updatePopupPreferredSize();
+            }
+            popup.pack();
+        }
     }
     public final boolean isCloseOnSelection() { return closeOnSelection; }
     public final void setCloseOnSelection(boolean close) { closeOnSelection = close; }
@@ -111,11 +118,39 @@ public abstract class M3PopupSelector<V extends JComponent> extends JPanel {
             popup.setLayout(new BorderLayout());
             popup.add(new JScrollPane(view), BorderLayout.CENTER);
         }
-        int h = Math.max(1, Math.min(visibleRowCount, Math.max(1, rowCount()))) * Math.max(16, rowHeight());
-        int header = view instanceof javax.swing.JTable ? 28 : 0;
-        popup.getComponent(0).setPreferredSize(new Dimension(Math.max(getWidth(), 240), h + header));
+        updatePopupPreferredSize();
         popup.show(this, 0, getHeight());
         view.requestFocusInWindow();
+    }
+
+    /**
+     * Size the original Swing viewport from its last visible native row and
+     * actual table-header preferred height. Never materialize backing rows.
+     * The same calculation is used when a visible selector changes its limit.
+     */
+    private void updatePopupPreferredSize() {
+        int visibleRows = Math.max(1, Math.min(visibleRowCount, Math.max(1, rowCount())));
+        long pixelHeight = (long) visibleRows * Math.max(16, rowHeight());
+        if (view instanceof javax.swing.JTree tree) {
+            Rectangle last = tree.getRowBounds(visibleRows - 1);
+            if (last != null) pixelHeight = Math.max(pixelHeight, (long) last.y + last.height);
+        } else if (view instanceof javax.swing.JTable table) {
+            Rectangle last = table.getCellRect(visibleRows - 1, 0, true);
+            if (last != null) pixelHeight = Math.max(pixelHeight, (long) last.y + last.height);
+        }
+        int header = view instanceof javax.swing.JTable ? 28 : 0;
+        if (view instanceof javax.swing.JTable table && table.getTableHeader() != null) {
+            Dimension size = table.getTableHeader().getPreferredSize();
+            if (size != null) {
+                header = Math.max(header, Math.max(0, size.height));
+            }
+        }
+        JScrollPane scroll = (JScrollPane) popup.getComponent(0);
+        Insets chrome = scroll.getInsets();
+        long preferredHeight = pixelHeight + header + Math.max(0, chrome.top)
+                + Math.max(0, chrome.bottom);
+        int height = (int) Math.min(Integer.MAX_VALUE, preferredHeight);
+        scroll.setPreferredSize(new Dimension(Math.max(getWidth(), 240), height));
     }
 
     @Override public void setEnabled(boolean enabled) {

@@ -64,15 +64,25 @@ public final class PrimitiveHashSet {
     public boolean addBits(long keyBits) {
         if (isZeroKey(keyBits)) {
             if (hasZeroKey) return false;
+            // Zero is tracked in the owner, not in the primitive key lane.
+            // Never resize the table solely to publish that independent flag.
             hasZeroKey = true;
-            if (++size > threshold) rehash(capacity() << 1);
+            size++;
             return true;
         }
         int position = insertionPositionNonZero(keyBits);
         if (position < 0) return false;
-        if (size + 1 > threshold) {
-            rehash(capacity() << 1);
+        // Only nonzero members occupy probe slots. Perform all fallible growth
+        // before publishing the new key or updating the logical size.
+        int probeKeys = size - (hasZeroKey ? 1 : 0);
+        if (probeKeys >= threshold) {
+            int oldCapacity = capacity();
+            if (oldCapacity >= (1 << 30)) {
+                throw new IllegalStateException("maximum hash-table capacity reached");
+            }
+            rehash(oldCapacity << 1);
             position = insertionPositionNonZero(keyBits);
+            if (position < 0) throw new IllegalStateException("rehash duplicate drift");
         }
         kind.writeBits(keys, position, keyBits);
         size++;
@@ -287,18 +297,27 @@ public final class PrimitiveHashSet {
     private void rehash(int newCapacity) {
         Object oldKeys = keys;
         int oldCapacity = capacity();
-        keys = kind.newArray(newCapacity);
-        mask = newCapacity - 1;
-        threshold = DenseHash.threshold(newCapacity, loadFactor);
+        // Stage the complete replacement before updating any owner field.
+        // The old table remains intact if allocation or migration throws.
+        Object replacement = kind.newArray(newCapacity);
+        int replacementMask = newCapacity - 1;
+        int rebuilt = 0;
         for (int i = 0; i < oldCapacity; i++) {
             long key = kind.readBits(oldKeys, i);
             if (isZeroStored(key)) continue;
-            int position = kind.hashBits(key) & mask;
-            while (!isZeroStored(kind.readBits(keys, position))) {
-                position = (position + 1) & mask;
+            int position = kind.hashBits(key) & replacementMask;
+            while (!isZeroStored(kind.readBits(replacement, position))) {
+                position = (position + 1) & replacementMask;
             }
-            kind.writeBits(keys, position, key);
+            kind.writeBits(replacement, position, key);
+            rebuilt++;
         }
+        if (rebuilt != size - (hasZeroKey ? 1 : 0)) {
+            throw new IllegalStateException("rehash lost primitive keys");
+        }
+        keys = replacement;
+        mask = replacementMask;
+        threshold = DenseHash.threshold(newCapacity, loadFactor);
     }
 
     private boolean isZeroKey(long bits) {

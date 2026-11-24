@@ -32,7 +32,10 @@ final class M3StringTokenRegex {
         ONE,
         ZERO_OR_MORE,
         ONE_OR_MORE,
-        OPTIONAL
+        OPTIONAL;
+
+        // Enum.values() returns a fresh array. Keep one private ordinal table for NFA dispatch.
+        private static final Quantifier[] BY_ORDINAL = values();
     }
 
     private final byte[] kinds;
@@ -71,8 +74,10 @@ final class M3StringTokenRegex {
         TokenSequence tokens = TokenSequence.capture(Objects.requireNonNull(source, "source"));
         if (!nativeUnavailable && tokens.size >= NATIVE_MIN_TOKENS) {
             try {
-                int candidate =
-                        matches0(tokens.fingerprints, fingerprints, kinds, quantifiers);
+                // The native selector consumes the entire supplied array; capacity is not input.
+                long[] input = tokens.size == tokens.fingerprints.length
+                        ? tokens.fingerprints : Arrays.copyOf(tokens.fingerprints, tokens.size);
+                int candidate = matches0(input, fingerprints, kinds, quantifiers);
                 if (candidate == 0) return false;
                 if (candidate != 1) throw new InternalError("invalid M3 token regex native result");
             } catch (UnsatisfiedLinkError unavailable) {
@@ -134,7 +139,7 @@ final class M3StringTokenRegex {
             int atom = Long.numberOfTrailingZeros(remaining);
             remaining &= remaining - 1L;
             if (!accepts(atom, source, sourceToken)) continue;
-            switch (Quantifier.values()[quantifiers[atom]]) {
+            switch (Quantifier.BY_ORDINAL[quantifiers[atom]]) {
                 case ONE, OPTIONAL -> next |= 1L << (atom + 1);
                 case ZERO_OR_MORE -> next |= 1L << atom;
                 case ONE_OR_MORE -> next |= (1L << atom) | (1L << (atom + 1));
@@ -161,7 +166,7 @@ final class M3StringTokenRegex {
             while (active != 0L) {
                 int atom = Long.numberOfTrailingZeros(active);
                 active &= active - 1L;
-                Quantifier quantifier = Quantifier.values()[quantifiers[atom]];
+                Quantifier quantifier = Quantifier.BY_ORDINAL[quantifiers[atom]];
                 if (quantifier == Quantifier.ZERO_OR_MORE || quantifier == Quantifier.OPTIONAL) {
                     bits |= 1L << (atom + 1);
                 }

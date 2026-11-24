@@ -25,7 +25,7 @@ runtime contract; a provider-wide capability list can be a superset.
 | Additional compatible VFS implementation | `Plan.withProvider(scheme, factory)` or `META-INF/m3fs-vfs-providers.xml` | Existing extension mechanisms; supply fresh provider instances and required dependencies |
 | FTP/FTPS, dedicated HTTP clients, SFTP and other excluded donor sources | Separate provider admission | Still outside the compiled core profile; remote credentials, dependencies and backend qualification are separate |
 
-The relocated VFS API lives in `com.m3.fs.vfs`. A plugin compiled against
+The relocated VFS API lives in `jdk.m3.fs.vfs`. A plugin compiled against
 `org.apache.commons.vfs2` needs an explicit adaptation; package similarity is not
 binary compatibility. Hadoop, object-store, repository and other database
 integrations can use the same hooks when supplied as compatible providers. This
@@ -73,10 +73,10 @@ semantics. Capture requires EOF and successful closure; overflow does not publis
 a complete capture.
 
 ```java
-try (var entries = MFiles.from(root).filter(MFile::isFile).stream()) {
+try (var entries = M3File.stream(MFiles.from(root).filter(M3File::isFile))) {
     var iterator = entries.iterator();
     while (iterator.hasNext()) {
-        MFile file = iterator.next();
+        M3File file = iterator.next();
         String text = file.readString(1_048_576, StandardCharsets.UTF_8);
         consume(file.relativeName(), text);
     }
@@ -136,7 +136,7 @@ template machinery. The adapter never creates, remounts or closes that caller's
 filesystem. Providers still need to implement the operations requested by the
 caller; unsupported operations fail explicitly.
 
-`MFile.uri()` is the native `Path.toUri()`. Its resolvable `sourceAddress()` uses
+`M3File.uri()` is the native `Path.toUri()`. Its resolvable `sourceAddress()` uses
 an internal `m3nio:` address containing a weak filesystem-instance token, native
 root and encoded path components. Two live filesystem instances with identical
 native URIs remain distinct. Reopening that address requires the same live, open
@@ -167,8 +167,8 @@ try (M3FS owner = M3FS.create(database)) {
 }
 
 String address = "m3db:" + database.toUri() + "!/documents/report.txt";
-try (var entries = MFiles.from(address).stream()) {
-    MFile file = entries.findFirst().orElseThrow();
+try (var entries = M3File.stream(address)) {
+    M3File file = entries.findFirst().orElseThrow();
     file.write("first\n".getBytes(StandardCharsets.UTF_8));
     file.append("second\n".getBytes(StandardCharsets.UTF_8));
     String text = file.readString(4096, StandardCharsets.UTF_8);
@@ -234,7 +234,7 @@ The authoritative naming admission is capability `m3.fs.provider-defaults` in
 `m3/docs/name-mapping.json` under `migration.records[]`. The companion
 `m3/docs/name-mapping.d/m3fs-provider-defaults-20261021.json` supplies provider
 details for that record. Public Java SE names and the existing module exports
-remain unchanged; database and NIO helpers stay internal to `com.m3.fs`.
+remain unchanged; database and NIO helpers stay internal to `jdk.m3.fs`.
 
 ### Provider references
 

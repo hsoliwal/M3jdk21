@@ -435,10 +435,15 @@ jobs:
       cancel-in-progress: true
     runs-on: ubuntu-22.04
     timeout-minutes: 30
+    env:
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
+      - name: Verify exact checked-out head
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
       - name: Prepare pinned Java 21 compiler
         shell: bash
         run: |
@@ -460,7 +465,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: m3-collections-historical-recipe-${{ github.sha }}
+          name: m3-collections-historical-recipe-${{ github.event.pull_request.head.sha || github.sha }}
           path: m3/collections/recipe/target/surefire-reports/
           if-no-files-found: warn
 
@@ -475,10 +480,15 @@ jobs:
       cancel-in-progress: true
     runs-on: ubuntu-22.04
     timeout-minutes: 20
+    env:
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
+      - name: Verify exact checked-out head
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
       - name: Verify unambiguous collection donation metadata
         run: python3 -m unittest discover -s m3/collections -p 'test_verify_*.py' -v
       - name: Prepare pinned Java 21 compiler and JUnit console
@@ -498,7 +508,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: m3-collections-installed-${{ github.sha }}
+          name: m3-collections-installed-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
             m3/collections/target/donation-verification/evidence/
             m3/collections/target/donation-verification/junit-reports/
@@ -546,6 +556,92 @@ jobs:
             m3/collections/target/full-java-jni/java-reports/
             m3/collections/target/full-java-jni/native-reports/
             m3/collections/target/surefire-reports/
+          if-no-files-found: warn
+
+  m3-collections__vavr-bitset-prefix:
+    name: "M3 collection contracts / BitSet prefix allocation and compatibility at exact head"
+    needs: ["gate"]
+    if: "${{ fromJSON(needs.gate.outputs.run || '{}')['m3-collections'] }}"
+    permissions:
+      contents: read
+    concurrency:
+      group: "M3 collection contracts-${{ github.ref }}-vavr-bitset-prefix"
+      cancel-in-progress: true
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Verify exact checked-out head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+      - name: Prepare pinned Java 21 and JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz' -o "$RUNNER_TEMP/bitset-jdk.tar.gz"
+          printf '%s  %s\n' 'ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94' "$RUNNER_TEMP/bitset-jdk.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/bitset-jdk.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"
+          curl --fail --location --retry 3 'https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.2/junit-platform-console-standalone-1.12.2.jar' -o "$RUNNER_TEMP/bitset-junit.jar"
+          printf '%s  %s\n' '329bd10288875a74d04c9ca6b7c9889c265ddf87b21a9ea42a7f7392f391472a' "$RUNNER_TEMP/bitset-junit.jar" | sha256sum --check -
+      - name: Compile actual collection sources and execute BitSet contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          proof="$RUNNER_TEMP/bitset-proof"
+          mkdir -p "$proof"/{patch-source/java/util/stream,patch-source/java/util/function/ext,patch,classes,tests}
+          git rev-parse HEAD > "$proof/head.txt"
+          java -version > "$proof/runtime.txt" 2>&1
+          # Compile the real M3 java.base dependencies; this bounded patch is not a full JDK build.
+          cp src/java.base/share/classes/java/util/stream/Streams.java "$proof/patch-source/java/util/stream/"
+          cp src/java.base/share/classes/java/util/function/ext/ObjLongFunction.java "$proof/patch-source/java/util/function/ext/"
+          # Streams.java has also imported these two java.util.function.ext interfaces since #3390.
+          cp src/java.base/share/classes/java/util/function/ext/DoubleLongToDoubleFunction.java "$proof/patch-source/java/util/function/ext/"
+          cp src/java.base/share/classes/java/util/function/ext/IntLongToIntFunction.java "$proof/patch-source/java/util/function/ext/"
+          javac --patch-module java.base="$proof/patch-source" -d "$proof/patch" \
+            "$proof/patch-source/java/util/stream/Streams.java" "$proof/patch-source/java/util/function/ext/ObjLongFunction.java" \
+            "$proof/patch-source/java/util/function/ext/DoubleLongToDoubleFunction.java" \
+            "$proof/patch-source/java/util/function/ext/IntLongToIntFunction.java" > "$proof/base-compile.log" 2>&1
+          find src/jdk.m3.collections/share/classes src/jdk.m3.collections/providers/classes -name '*.java' ! -name module-info.java | sort > "$proof/sources.txt"
+          while IFS= read -r source; do sha256sum "$source"; done < "$proof/sources.txt" > "$proof/sources.sha256"
+          javac -J-Xmx1200m --patch-module java.base="$proof/patch" --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
+            -proc:none -d "$proof/classes" @"$proof/sources.txt" > "$proof/collection-compile.log" 2>&1
+          javac -Xlint:all -Werror -proc:none -cp "$proof/classes" -d "$proof/classes" \
+            src/jdk.m3.collections/providers/classes/jdk/m3/collections/vavr/collection/BitSet.java > "$proof/bitset-compile.log" 2>&1
+          # The oracle helpers moved byte for byte under providers/ (#3402, first landed by #3404); the prefix test did not.
+          providerroot=test/jdk/jdk/m3/collections/providers/vavr/collection
+          testroot=test/jdk/jdk/m3/collections/vavr/collection
+          javac -Xlint:all -Werror -proc:none -cp "$proof/classes:$RUNNER_TEMP/bitset-junit.jar" -d "$proof/tests" \
+            "$providerroot/BitSetOracleKit.java" "$providerroot/BitSetOracleOps.java" "$providerroot/RefBitSetModule.java" \
+            "$providerroot/BitSetWordOpsOracleTest.java" "$testroot/BitSetPrefixAllocationTest.java" > "$proof/test-compile.log" 2>&1
+          # Preserve the original oracle's exception-message checks across JIT warmup.
+          java -Xmx768m -XX:-OmitStackTraceInFastThrow --patch-module java.base="$proof/patch" \
+            --add-exports java.base/java.util.function.ext=ALL-UNNAMED -jar "$RUNNER_TEMP/bitset-junit.jar" execute \
+            --class-path "$proof/tests:$proof/classes" --fail-if-no-tests \
+            --select-class jdk.m3.collections.vavr.collection.BitSetWordOpsOracleTest \
+            --select-class jdk.m3.collections.vavr.collection.BitSetPrefixAllocationTest \
+            --reports-dir "$proof/reports" --disable-banner --details=summary | tee "$proof/tests.log"
+          python3 - "$proof/reports" <<'PY'
+          import pathlib, sys, xml.etree.ElementTree as ET
+          reports = [ET.parse(p).getroot() for p in pathlib.Path(sys.argv[1]).glob('TEST-*.xml')]
+          assert reports and sum(int(r.attrib['tests']) for r in reports) > 0, 'no executed tests'
+          assert all(int(r.attrib.get(k, 0)) == 0 for r in reports for k in ('failures', 'errors', 'skipped')), 'incomplete BitSet proof'
+          PY
+      - name: Retain exact-head BitSet results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bitset-prefix-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            ${{ runner.temp }}/bitset-proof/*.txt
+            ${{ runner.temp }}/bitset-proof/*.log
+            ${{ runner.temp }}/bitset-proof/*.sha256
+            ${{ runner.temp }}/bitset-proof/reports/
           if-no-files-found: warn
 
   m3-java-base-internals__internals:
@@ -1173,11 +1269,11 @@ jobs:
           OUT="$RUNNER_TEMP/m3-residency-pressure"
           mkdir -p "$OUT"
           javac --release 21 -Xlint:all -Werror -d "$OUT" \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Address28.java \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLane28.java \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java \
-            src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/Address28.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLane28.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/BitLane28.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/SlotAllocator28.java \
+            src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectResidency.java \
             m3/tooling/object-residency/M3ResidencyPressureProbe.java
       - name: Execute real small-Xmx LRU/recreation proof
         shell: bash

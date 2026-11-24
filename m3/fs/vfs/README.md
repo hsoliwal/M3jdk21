@@ -3,20 +3,25 @@
 
 # M3FS hierarchical file and archive streams
 
-`com.m3.fs.MFiles` and `MFile` belong to the existing `jdk.m3fs` module. They expose
+`jdk.m3.fs.MFiles` and `M3File` belong to the existing `jdk.m3fs` module. They expose
 a bounded stream API over Apache Commons VFS 2.10.0, whose attributed provider API
-is relocated to `com.m3.fs.vfs` and whose `VFS` entry point is `M3VFS`.
+is relocated to `jdk.m3.fs.vfs` and whose `VFS` entry point is `M3VFS`.
 
 This guide describes the delivered source contract. Actual qualification results
 are recorded in [qualification.json](../verification/vfs-20261020/qualification.json)
 and [RESULTS.json](../verification/vfs-20261020/RESULTS.json). It does not assert a
 pass while those receipts are absent or a required gate is pending.
 
+The preferred entry name is `M3File`; the existing `MFile` concrete class and
+`MFiles` signatures remain available for source and binary compatibility. See
+[the current entry API guide](../../../doc/m3file-streams.md). Historical receipts
+retain the API names and source hashes they actually qualified.
+
 ## Directory selection and lambda projection
 
 ```java
-import com.m3.fs.MFile;
-import com.m3.fs.MFiles;
+import jdk.m3.fs.M3File;
+import jdk.m3.fs.MFiles;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
@@ -25,8 +30,8 @@ MFiles.Plan sources = MFiles.from(Path.of("checkout"))
         .maxDepth(8)
         .filter(entry -> entry.isFile() && entry.name().endsWith(".java"));
 
-try (Stream<MFile> entries = sources.stream()) {
-    entries.map(MFile::relativeName).forEach(System.out::println);
+try (Stream<M3File> entries = M3File.stream(sources)) {
+    entries.map(M3File::relativeName).forEach(System.out::println);
 }
 ```
 
@@ -67,7 +72,7 @@ classification, not a concurrent-filesystem snapshot or an OS no-follow guarante
 The convenience overload applies an output predicate and a result transformer:
 
 ```java
-try (Stream<String> names = MFiles.stream(Path.of("checkout"),
+try (Stream<String> names = M3File.stream(Path.of("checkout"),
         entry -> entry.isFile(),
         entry -> entry.relativeName())) {
     names.forEach(System.out::println);
@@ -85,10 +90,10 @@ import java.io.InputStream;
 
 Path archive = Path.of("bundle.zip").toAbsolutePath();
 String address = "zip:" + archive.toUri() + "!/";
-try (Stream<MFile> entries = MFiles.from(address)
-        .filter(MFile::isFile).stream()) {
+try (Stream<M3File> entries = M3File.stream(MFiles.from(address)
+        .filter(M3File::isFile))) {
     // Exhaustion keeps the owner open; retained entries can still be read here.
-    for (MFile entry : entries.toList()) {
+    for (M3File entry : entries.toList()) {
         try (InputStream content = entry.openInputStream()) {
             byte[] prefix = content.readNBytes(64);
             System.out.println(entry.relativeName() + ": " + prefix.length);
@@ -111,11 +116,11 @@ MFiles.Plan selected = MFiles.from(Path.of("inputs"))
         .enterArchives(entry -> entry.name().endsWith(".zip")
                 || entry.name().endsWith(".jar"), 2)
         .extensions("txt", "json", "bin")
-        .filter(MFile::isFile)
+        .filter(M3File::isFile)
         .maxDepth(12);
 
-try (Stream<MFile> entries = selected.stream()) {
-    entries.map(MFile::relativeName).forEach(System.out::println);
+try (Stream<M3File> entries = M3File.stream(selected)) {
+    entries.map(M3File::relativeName).forEach(System.out::println);
 }
 ```
 
@@ -207,7 +212,7 @@ no array-only, zero-copy, constant-memory, or measured memory-gain claim.
 
 ## Default I/O methods, progress and synchronous shadows
 
-`MFile` implements `MFileContent`. That interface centralizes monitored input,
+`M3File` extends `MFileContent`. That interface centralizes monitored input,
 monitored output and `transferTo` as default methods. A read-only implementation
 needs only `openInputStream()`; writable providers override the raw output method.
 Provider capability and consistency remain provider decisions.
@@ -274,20 +279,20 @@ evidence cannot silently establish unchanged content.
 
 The observations reuse compact M3FS identities and shared manifest/precompute
 owners. They do not introduce a global file registry or turn the separate
-`com.m3.file.M3File` Path wrapper into an interned identity service.
+`jdk.m3.file.M3File` Path wrapper into an interned identity service.
 See [the observation and delta contract](../verification/OBSERVATIONS.md).
 
 ## Register an application provider
 
 `Plan.withProvider` accepts a lower-case URI scheme and a supplier of the relocated
-`com.m3.fs.vfs.provider.FileProvider`. For example, inside application code with a
+`jdk.m3.fs.vfs.provider.FileProvider`. For example, inside application code with a
 `Supplier<? extends FileProvider> providerFactory`:
 
 ```java
 MFiles.Plan custom = MFiles.from("custom:/root")
         .withProvider("custom", providerFactory);
-try (Stream<MFile> entries = custom.stream()) {
-    entries.map(MFile::relativeName).forEach(System.out::println);
+try (Stream<M3File> entries = M3File.stream(custom)) {
+    entries.map(M3File::relativeName).forEach(System.out::println);
 }
 ```
 

@@ -12,7 +12,10 @@ final class M3ColdFileImage {
   static final long MAGIC = 0x534d46494c453031L;
   static final int FORMAT = 1;
   static final int HEADER_BYTES = 48;
+  // Preserve the original accepted domain; current M3FileImage uses the FNV-1a
+  // hash of UTF-8 "M3-MINDEX-FILE-IMAGE-1". Both describe the same sealed layout.
   private static final long DOMAIN = 0x561aef0143ec74dfL;
+  private static final long M3_DOMAIN = 0xdcd2c7dcfe77e7a4L;
   private M3ColdFileImage() {}
 
   /** Returns fingerprint, token count and unique count as primitive columns. */
@@ -29,7 +32,11 @@ final class M3ColdFileImage {
       validateLanguages(data, layout, languageCount, languages);
       validateStructure(data, layout, tokens, unique, width, lines, languageCount, flat, languages);
       long fingerprint = fingerprint(data, layout, tokens, unique, width, lines, languageCount, flat);
-      if (fingerprint != data.getLong(40)) throw new IOException("SMFILE01 fingerprint mismatch");
+      if (fingerprint != data.getLong(40)) {
+        fingerprint = fingerprint(data, layout, tokens, unique, width, lines,
+            languageCount, flat, M3_DOMAIN);
+        if (fingerprint != data.getLong(40)) throw new IOException("SMFILE01 fingerprint mismatch");
+      }
       return new long[] { fingerprint, tokens, unique };
     } catch (RuntimeException malformed) {
       throw new IOException("malformed SMFILE01 image", malformed);
@@ -133,8 +140,16 @@ final class M3ColdFileImage {
       int lineCount,
       int languageCount,
       int resolverTokenCount) {
+    return fingerprint(source, layout, tokenCount, uniqueCount, tokenWidth,
+        lineCount, languageCount, resolverTokenCount, DOMAIN);
+  }
+
+  private static long fingerprint(ByteBuffer source, int[] layout, int tokenCount,
+      int uniqueCount, int tokenWidth, int lineCount, int languageCount,
+      int resolverTokenCount, long domain) {
     ByteBuffer data = source.duplicate().order(ByteOrder.BIG_ENDIAN);
-    long hash = headerHash(tokenCount, uniqueCount, tokenWidth, lineCount, languageCount, resolverTokenCount);
+    long hash = headerHash(tokenCount, uniqueCount, tokenWidth, lineCount,
+        languageCount, resolverTokenCount, domain);
     for (int i = 0; i < languageCount; i++) {
       int at = layout[0] + i * (Integer.BYTES + Long.BYTES);
       hash = mix(hash, data.getInt(at));
@@ -192,8 +207,9 @@ final class M3ColdFileImage {
       int tokenWidth,
       int lineCount,
       int languageCount,
-      int resolverTokenCount) {
-    long hash = DOMAIN;
+      int resolverTokenCount,
+      long domain) {
+    long hash = domain;
     hash = mix(hash, FORMAT);
     hash = mix(hash, tokenCount);
     hash = mix(hash, uniqueCount);
