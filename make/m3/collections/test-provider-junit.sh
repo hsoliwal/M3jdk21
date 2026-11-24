@@ -118,6 +118,7 @@ for source in "${cases[@]}"; do
   fi
 done
 printf '%s\n' "${cases[@]}" > "$out/test-classes.txt"
+printf '%s\n' "${case_names[@]}" > "$out/selected-classes.txt"
 runtime=(--add-modules jdk.m3.collections
   -XX:-OmitStackTraceInFastThrow
   "-Xbootclasspath/a:$junit"
@@ -141,9 +142,20 @@ mkdir -p "$out/harness"
   "${case_names[@]}" | tee "$out/discovery.log"
 grep -E '^M3_PROVIDER_JUNIT_DISCOVERY_PASS classes=15 methods=[1-9][0-9]*$' \
   "$out/discovery.log"
+# Compile the fail-closed validator for the actual JUnit Jupiter XML report
+# (all 15 selected provider classes executed, nothing failed or skipped).
+mkdir -p "$out/validator"
+sha256sum "$repo/make/m3/collections/ProviderJUnitReportsCheck.java" \
+  >> "$out/inputs-sha256.txt"
+"$jdk/bin/javac" --release 21 -proc:none -Xlint:all -Werror \
+  -d "$out/validator" "$repo/make/m3/collections/ProviderJUnitReportsCheck.java"
 "$jdk/bin/java" -ea -Xmx2g -Xbootclasspath/a:"$junit" "${runtime[@]}" -cp "$junit" \
   org.junit.platform.console.ConsoleLauncher execute \
-  "${selects[@]}" --disable-banner --details=summary \
+  "${selects[@]}" --include-engine junit-jupiter \
+  --disable-banner --details=summary --reports-dir "$out/junit-reports" \
   --fail-if-no-tests 2>&1 | tee "$out/provider-junit.log"
+"$jdk/bin/java" -ea -cp "$out/validator" ProviderJUnitReportsCheck \
+  "$out/selected-classes.txt" "$out/junit-reports/TEST-junit-jupiter.xml" \
+  | tee "$out/report-verification.log"
 printf 'M3_PROVIDER_JUNIT_PASS classes=15 sourceFiles=57\n' \
   | tee "$out/status.txt"
