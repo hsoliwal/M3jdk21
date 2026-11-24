@@ -1219,12 +1219,6 @@ interface BitSetModule {
             int n = 1;
             while (it.hasNext()) {
                 final Integer v = toInt.apply(it.next());
-                // The pre-optimization stream comparator throws an NPE without an
-                // enhanced VM diagnostic if either mapped value is null. Keep that
-                // observable exception contract without touching callback order.
-                if (max == null || v == null) {
-                    throw new NullPointerException();
-                }
                 max = natural.compare(max, v) >= 0 ? max : v;
                 lane = n + 2 < lane.length ? lane : grow(lane);
                 lane[2 + n++] = v;
@@ -1241,12 +1235,7 @@ interface BitSetModule {
                 return this;
             }
             final int[] lane = laneOf(it);
-            // A single mapped null reaches getOrElse/unboxing in the original
-            // stream path. The lane's zero marker represents only that case.
-            if (lane[0] == 0) {
-                throw new NullPointerException();
-            }
-            final Integer max = lane[1];
+            final Integer max = lane[0] == 0 ? null : lane[1];
             final long[] copy =
                     copyExpand(1 + (Option.some(max).getOrElse(0) >> ADDRESS_BITS_PER_WORD));
             for (int i = 2; i < lane[0] + 2; i++) {
@@ -1436,12 +1425,6 @@ interface BitSetModule {
                 final int wordsNum = getWordsNum();
                 final long[] copy = copyExpand(wordsNum);
                 source.forEach(element -> {
-                    // The original reference raises an NPE with a null message
-                    // when a mapped value is null. An implicit Java 21 unbox
-                    // otherwise leaks a VM-specific helpful diagnostic.
-                    if (element == null) {
-                        throw new NullPointerException();
-                    }
                     // elements that cannot be present (negative or beyond the current words)
                     // are a no-op
                     if (element >= 0 && (element >> ADDRESS_BITS_PER_WORD) < wordsNum) {
