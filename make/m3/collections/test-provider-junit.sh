@@ -142,6 +142,20 @@ mkdir -p "$out/harness"
   "${case_names[@]}" | tee "$out/discovery.log"
 grep -E '^M3_PROVIDER_JUNIT_DISCOVERY_PASS classes=15 methods=[1-9][0-9]*$' \
   "$out/discovery.log"
+# Second, independent probe: exact owning module name and class count, no
+# duplicate selector, and every Jupiter method annotation kind (Test,
+# RepeatedTest, ParameterizedTest, TestFactory, TestTemplate).
+mkdir -p "$out/discovery-probe"
+"$jdk/bin/javac" --release 21 -proc:none -Xlint:all -Werror \
+  -d "$out/discovery-probe" \
+  "$repo/make/m3/collections/ProviderJUnitDiscoveryProbe.java" \
+  2>&1 | tee "$out/discovery-compile.log"
+"$jdk/bin/java" "-Xbootclasspath/a:$junit" -ea -Xmx2g "${runtime[@]}" \
+  -cp "$out/discovery-probe:$junit" ProviderJUnitDiscoveryProbe \
+  jdk.m3.collections 15 "${case_names[@]}" \
+  2>&1 | tee "$out/discovery-annotations.log"
+grep -E '^M3_PROVIDER_JUNIT_ANNOTATIONS_VISIBLE module=jdk[.]m3[.]collections classes=15 methods=[1-9][0-9]*$' \
+  "$out/discovery-annotations.log"
 # Compile the fail-closed validator for the actual JUnit Jupiter XML report
 # (all 15 selected provider classes executed, nothing failed or skipped).
 mkdir -p "$out/validator"
