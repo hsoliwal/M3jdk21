@@ -143,6 +143,9 @@
                    share/classes only. -->
               <testExcludes>
                 <testExclude>**/providers/**</testExclude>
+                <!-- BitSetPrefixAllocationTest (#3399/#3406) uses the vavr provider BitSet; the vavr-bitset-prefix job of
+                     .github/workflows/m3-collections.yml compiles and runs it against share/classes + providers/classes. -->
+                <testExclude>**/vavr/collection/BitSetPrefixAllocationTest.java</testExclude>
               </testExcludes>
             </configuration>
           </execution>
