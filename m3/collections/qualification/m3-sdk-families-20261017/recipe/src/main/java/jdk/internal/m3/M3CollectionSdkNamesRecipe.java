@@ -174,7 +174,7 @@ public final class M3CollectionSdkNamesRecipe {
             if ("PENDING".equals(cols[4]) && !"-".equals(cols[2])) {
                 throw new IOException("REFUSE_PRETEND_INSTALLED:" + i);
             }
-            if (!"-".equals(cols[2]) && !cols[2].startsWith("jdk.m3.collections.")) {
+            if (!"-".equals(cols[2]) && !cols[2].startsWith("com.m3.collections.")) {
                 throw new IOException("REFUSE_OTHER_OWNER:" + i);
             }
             rows.add(cols);

@@ -100,6 +100,7 @@ if [[ ${#cases[@]} -ne 15 ]]; then
   exit 73
 fi
 selects=()
+case_names=()
 opens=()
 declare -A seen=()
 for source in "${cases[@]}"; do
@@ -110,6 +111,7 @@ for source in "${cases[@]}"; do
   }
   name="$(basename "$source" .java)"
   selects+=(--select-class "$pkg.$name")
+  case_names+=("$pkg.$name")
   if [[ -z "${seen[$pkg]:-}" ]]; then
     opens+=("--add-opens=jdk.m3.collections/$pkg=ALL-UNNAMED")
     seen[$pkg]=1
@@ -127,7 +129,19 @@ if [[ -n "${M3_ARRAYS_NATIVE_PATH:-}" ]]; then
   runtime+=("-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH")
   sha256sum "$M3_ARRAYS_NATIVE_PATH" >> "$out/inputs-sha256.txt"
 fi
-"$jdk/bin/java" -ea -Xmx2g "${runtime[@]}" -cp "$junit" \
+# JDK product modules use the platform class loader. An application-only
+# JUnit jar leaves runtime @Test annotations invisible (zero tests discovered).
+# Keep one pinned jar on the bootstrap append path for the test process only;
+# prove all 15 owning-module test classes have visible annotations first.
+mkdir -p "$out/harness"
+"$jdk/bin/javac" --release 21 -Xlint:all -Werror \
+  -d "$out/harness" "$repo/make/m3/collections/M3ProviderJUnitDiscoveryProbe.java"
+"$jdk/bin/java" -ea -Xmx2g -Xbootclasspath/a:"$junit" \
+  "${runtime[@]}" -cp "$out/harness:$junit" M3ProviderJUnitDiscoveryProbe \
+  "${case_names[@]}" | tee "$out/discovery.log"
+grep -E '^M3_PROVIDER_JUNIT_DISCOVERY_PASS classes=15 methods=[1-9][0-9]*$' \
+  "$out/discovery.log"
+"$jdk/bin/java" -ea -Xmx2g -Xbootclasspath/a:"$junit" "${runtime[@]}" -cp "$junit" \
   org.junit.platform.console.ConsoleLauncher execute \
   "${selects[@]}" --disable-banner --details=summary \
   --fail-if-no-tests 2>&1 | tee "$out/provider-junit.log"

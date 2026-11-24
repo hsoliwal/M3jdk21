@@ -1,0 +1,219 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 strict streams full JDK image and JTReg qualification
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-strict-stream-native-proof.yml'
+      - 'src/java.base/share/classes/java/util/stream/Streams.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java'
+      - 'test/jdk/java/util/stream/Streams/StreamStrictAndAdjacentTest.java'
+      - 'test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m3-strict-native-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-identity:
+    name: Strict original-owner source hashes and zero-loss admission
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Bind both successor sources and tests without weakening 20261118 receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          printf '%s  %s\n' \
+            '4bffa37f859058a97117802adf2f6db60c55f57f847ee190e9b6c92e3acdf35f' 'src/java.base/share/classes/java/util/stream/Streams.java' \
+            'aeb6c3f614aa223cfe37cc5ddbc991f9dd4d9106b4f5940fd707ff57e106a465' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java' \
+            'fd565bea1630eddb3cadf5ce139e113bbf961602287922777b9c08865815fc23' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java' \
+            '12ddd2e21e43d3ee3bf41d08629978d5e1cca52f2a44ab64da306d3628fd7d17' 'test/jdk/java/util/stream/Streams/StreamStrictAndAdjacentTest.java' \
+            '171033c95034fd8ee331112edecf7ca1d11e0ab4fee24caffbf919bc1e569d5e' 'test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java' \
+            | sha256sum --check -
+          git diff --name-status HEAD^ HEAD || true
+
+  actual-m3jdk:
+    name: Build modified M3JDK21 image and execute stream JUnit
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    needs: source-identity
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install JDK image build prerequisites
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libegl-dev libgles-dev \
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+      - name: Acquire hash-pinned Java 21 boot JDK
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz' \
+            -o "$RUNNER_TEMP/m3jdk21.tar.gz"
+          printf '%s  %s\n' \
+            'ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94' \
+            "$RUNNER_TEMP/m3jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/m3jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'BOOT_JDK=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"
+      - name: Acquire hash-pinned bundled Skia build tools
+        run: |
+          set -euo pipefail
+          tools_dir="$RUNNER_TEMP/m3-native-build-tools"
+          mkdir -p "$tools_dir/gn" "$tools_dir/ninja"
+          curl --fail --location --retry 3 \
+            'https://chrome-infra-packages.appspot.com/dl/gn/gn/linux-amd64/+/git_revision:b2afae122eeb6ce09c52d63f67dc53fc517dbdc8' \
+            -o "$tools_dir/gn.zip"
+          printf '%s  %s\n' \
+            '6a3bfc53d825bccac5e5b4b7bdcc10ce9396a04a689ac684ec3308ca5c7f3d9c' \
+            "$tools_dir/gn.zip" | sha256sum --check -
+          unzip -q "$tools_dir/gn.zip" -d "$tools_dir/gn"
+          curl --fail --location --retry 3 \
+            'https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip' \
+            -o "$tools_dir/ninja.zip"
+          printf '%s  %s\n' \
+            '6f98805688d19672bd699fbbfa2c2cf0fc054ac3df1f0e6a47664d963d530255' \
+            "$tools_dir/ninja.zip" | sha256sum --check -
+          unzip -q "$tools_dir/ninja.zip" -d "$tools_dir/ninja"
+          "$tools_dir/gn/gn" --version | tee "$RUNNER_TEMP/m3-gn-version.log"
+          "$tools_dir/ninja/ninja" --version | tee "$RUNNER_TEMP/m3-ninja-version.log"
+          grep -Fx '2175 (b2afae122eeb)' "$RUNNER_TEMP/m3-gn-version.log"
+          grep -Fx '1.12.1' "$RUNNER_TEMP/m3-ninja-version.log"
+          printf 'M3_GN=%s\n' "$tools_dir/gn/gn" >> "$GITHUB_ENV"
+          printf 'M3_NINJA=%s\n' "$tools_dir/ninja/ninja" >> "$GITHUB_ENV"
+      - name: Verify repository jtreg source version
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' \
+            '0f5beeddee72c440d7e17b610abb6a68073ad30b6cce25a25b5269b189732b5c' \
+            '.github/actions/build-jtreg/action.yml' \
+            'b46d8aba28fdf12cf48eb65de762012c28642c23ba52b1d031b526ce77ba5cdb' \
+            '.github/actions/config/action.yml' | sha256sum --check -
+          grep -Fx 'JTREG_VERSION=8.2.1+1' make/conf/github-actions.conf
+      - name: Build repository-owned jtreg harness
+        uses: ./.github/actions/build-jtreg
+      - name: Verify installed repository jtreg harness
+        run: |
+          set -euo pipefail
+          "$BOOT_JDK/bin/java" -jar "$GITHUB_WORKSPACE/jtreg/installed/lib/jtreg.jar" -version \
+            | tee "$RUNNER_TEMP/m3-jtreg-version.log"
+          grep -E '^jtreg 8[.]2[.]1([+ -]|$)' "$RUNNER_TEMP/m3-jtreg-version.log"
+      - name: Configure and build modified M3JDK21 image
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-conf-name=m3-groovy-native-proof \
+            --with-boot-jdk="$BOOT_JDK" \
+            --with-gn="$M3_GN" \
+            --with-ninja="$M3_NINJA" \
+            --with-jtreg="$GITHUB_WORKSPACE/jtreg/installed" \
+            --with-debug-level=release \
+            --with-jvm-variants=server \
+            --disable-warnings-as-errors
+          make CONF=m3-groovy-native-proof JOBS=2 images
+      - name: Verify packaged M3 image identity
+        run: |
+          set -euo pipefail
+          m3_home="$GITHUB_WORKSPACE/build/m3-groovy-native-proof/images/jdk"
+          test -d "$m3_home"
+          test "$(realpath "$m3_home")" = "$m3_home"
+          for tool in java javac javap jlink; do
+            test -x "$m3_home/bin/$tool"
+            case "$(realpath "$m3_home/bin/$tool")" in
+              "$m3_home"/*) ;;
+              *) printf 'Image launcher escapes packaged JDK: %s\n' "$tool" >&2; exit 1 ;;
+            esac
+          done
+          for required in lib/modules release jmods/java.base.jmod jmods/jdk.m3.collections.jmod; do
+            test -s "$m3_home/$required"
+          done
+          "$m3_home/bin/java" -XshowSettings:properties -version \
+            2>&1 | tee "$RUNNER_TEMP/m3-packaged-image-identity.log"
+          runtime_home="$(sed -n 's/^ *java[.]home = //p' "$RUNNER_TEMP/m3-packaged-image-identity.log")"
+          test "$runtime_home" = "$m3_home"
+          printf 'M3_JAVA_HOME=%s\n' "$m3_home" >> "$GITHUB_ENV"
+          "$m3_home/bin/java" -version
+          "$m3_home/bin/javap" --module java.base java.util.stream.Streams > "$RUNNER_TEMP/m3-streams-api.txt"
+          grep -F 'public final class java.util.stream.Streams' "$RUNNER_TEMP/m3-streams-api.txt"
+          grep -F 'mapWhile(' "$RUNNER_TEMP/m3-streams-api.txt"
+          grep -F 'pairwise(' "$RUNNER_TEMP/m3-streams-api.txt"
+      - name: Verify both public signatures in the actual image modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$M3_JAVA_HOME/bin/javap" --module java.base java.util.stream.Streams \
+            | tee "$RUNNER_TEMP/m3-strict-stream-javap.txt"
+          grep -F 'zipStrict(' "$RUNNER_TEMP/m3-strict-stream-javap.txt"
+          grep -F 'groupAdjacent(' "$RUNNER_TEMP/m3-strict-stream-javap.txt"
+          "$M3_JAVA_HOME/bin/javap" --module jdk.m3.collections jdk.m3.collections.ObjectStream \
+            | tee "$RUNNER_TEMP/m3-strict-object-javap.txt"
+          grep -F 'zipStrict(' "$RUNNER_TEMP/m3-strict-object-javap.txt"
+          grep -F 'chunkBy(' "$RUNNER_TEMP/m3-strict-object-javap.txt"
+
+      - name: Execute the TWO successor tests through real JDK-image jtreg
+        shell: bash
+        run: |
+          set -euo pipefail
+          make CONF=m3-groovy-native-proof JOBS=2 test \
+            TEST="jtreg:test/jdk/java/util/stream/Streams/StreamStrictAndAdjacentTest.java jtreg:test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java" \
+            | tee "$RUNNER_TEMP/m3-strict-jtreg.log"
+
+      - name: Re-test both contracts on jlink M3 minimal image
+        shell: bash
+        run: |
+          set -euo pipefail
+          linked="$RUNNER_TEMP/m3-strict-zip-jlink"
+          classes="$RUNNER_TEMP/m3-strict-zip-test-classes"
+          mkdir -p "$classes"
+          "$M3_JAVA_HOME/bin/jlink" --module-path "$M3_JAVA_HOME/jmods" \
+            --add-modules jdk.m3.collections --output "$linked"
+          "$M3_JAVA_HOME/bin/javac" --add-modules jdk.m3.collections \
+            -d "$classes" \
+            test/jdk/java/util/stream/Streams/StreamStrictAndAdjacentTest.java \
+            test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java
+          "$linked/bin/java" -ea --add-modules jdk.m3.collections -cp "$classes" \
+            StreamStrictAndAdjacentTest | tee "$RUNNER_TEMP/m3-strict-jlink-stream.log"
+          "$linked/bin/java" -ea --add-modules jdk.m3.collections -cp "$classes" \
+            ObjectStreamStrictZipContractTest | tee "$RUNNER_TEMP/m3-strict-jlink-object.log"
+          "$linked/bin/java" -Xint -ea --add-modules jdk.m3.collections -cp "$classes" \
+            StreamStrictAndAdjacentTest | tee "$RUNNER_TEMP/m3-strict-jlink-stream-Xint.log"
+          "$linked/bin/java" -Xint -ea --add-modules jdk.m3.collections -cp "$classes" \
+            ObjectStreamStrictZipContractTest | tee "$RUNNER_TEMP/m3-strict-jlink-object-Xint.log"
+          grep '^M3_STREAM_STRICT_ADJACENT_PASS checks=4028' "$RUNNER_TEMP/m3-strict-jlink-stream.log"
+          grep '^M3_OBJECT_STREAM_STRICT_ZIP_PASS checks=3018' "$RUNNER_TEMP/m3-strict-jlink-object.log"
+          grep '^M3_STREAM_STRICT_ADJACENT_PASS checks=4028' "$RUNNER_TEMP/m3-strict-jlink-stream-Xint.log"
+          grep '^M3_OBJECT_STREAM_STRICT_ZIP_PASS checks=3018' "$RUNNER_TEMP/m3-strict-jlink-object-Xint.log"
+
+      - name: Retain JDK source image and jtreg receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-strict-full-jdk-jtreg-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/m3-strict-jtreg.log
+            ${{ runner.temp }}/m3-strict-stream-javap.txt
+            ${{ runner.temp }}/m3-strict-object-javap.txt
+            ${{ runner.temp }}/m3-strict-jlink-stream.log
+            ${{ runner.temp }}/m3-strict-jlink-object.log
+            ${{ runner.temp }}/m3-strict-jlink-stream-Xint.log
+            ${{ runner.temp }}/m3-strict-jlink-object-Xint.log
+            build/*/configure.log
+            build/*/support/failure-summary
+            build/*/test-results/
+            build/*/test-support/
+          if-no-files-found: warn
