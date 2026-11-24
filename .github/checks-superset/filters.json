@@ -4557,7 +4557,25 @@
     "paths": [
      "m3/collections/pom.xml",
      "m3/collections/qualification/junit-resolution-20261022/**",
-     ".github/workflows/m3-collections-junit-resolution-20261022.yml"
+     ".github/workflows/m3-collections-junit-resolution-20261022.yml",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/SignalColumns.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/SourceSignalImage.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/SignalTopK.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/SignalOrder.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/SignalOrderNative.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/SignalRelations.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/IndexMaskCompactor.java",
+     "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/SignalDimensions.java",
+     "test/jdk/jdk/m3/collections/SignalColumnsTest.java",
+     "test/jdk/jdk/m3/collections/SignalDimensionsTest.java",
+     "test/jdk/jdk/m3/collections/SourceSignalImageTest.java",
+     "test/jdk/jdk/m3/collections/SignalTopKTest.java",
+     "test/jdk/jdk/m3/collections/SignalColumnsSelfTest.java",
+     "test/jdk/jdk/m3/collections/SignalDimensionsContract.java",
+     "test/jdk/jdk/m3/collections/SourceSignalImageSelfTest.java",
+     "test/jdk/jdk/m3/collections/SignalTopKSelfTest.java",
+     "m3/arrays/pom.xml",
+     "src/jdk.m3.collections/share/classes/module-info.java"
     ]
    },
    "workflow_dispatch": {
