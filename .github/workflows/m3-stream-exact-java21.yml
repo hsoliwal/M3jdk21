@@ -4,7 +4,7 @@ name: M3 stream original-owner exact Java21 patch proof
 on:
   pull_request:
     paths:
-      - '.github/workflows/m3-stream-exact-java21-20261122.yml'
+      - '.github/workflows/m3-stream-exact-java21.yml'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'src/java.base/share/classes/java/util/function/ext/ObjLongFunction.java'
       - 'src/java.base/share/classes/java/util/function/ext/DoubleLongToDoubleFunction.java'

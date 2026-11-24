@@ -4,7 +4,7 @@ name: M3 strict streams full JDK image and JTReg qualification
 on:
   pull_request:
     paths:
-      - '.github/workflows/m3-strict-stream-native-proof-20261122.yml'
+      - '.github/workflows/m3-strict-stream-native-proof.yml'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java'
