@@ -50,7 +50,9 @@ public class MethodReferenceEvolution {
         }
         Path root = Files.createTempDirectory(Path.of("."), "method-reference-evolution-");
         try {
-            new MethodReferenceEvolution(root).checkEvolution();
+            MethodReferenceEvolution test = new MethodReferenceEvolution(root);
+            test.checkEvolution();
+            test.checkConcreteEvolution();
             System.out.printf("PASS: %d compilations, %d expected refusals, "
                     + "%d runtime invocations, %d checks%n",
                     compilations, refusals, invocations, checks);
@@ -156,6 +158,164 @@ public class MethodReferenceEvolution {
         equal("begin:new:-1;worked:1;", invoke("p.NewClient", distinct, recompiled, newClient),
                 "distinct defaults delegate once to the original virtual hooks");
         equal(legacyDigest, digest(legacy), "the original client and provider binaries stay unchanged");
+    }
+
+
+    /** Concrete methods on an abstract base have the same source-selection risk. */
+    private void checkConcreteEvolution() throws Exception {
+        String provider = """
+                package p;
+                public final class IoProvider extends IoBase {
+                    public static final byte[] BYTES = {1, 2, 3};
+                    public static final Object MONITOR = new Object();
+                    private final StringBuilder trace = new StringBuilder();
+                    @Override public int read(byte[] bytes, int offset, int length, Object monitor) {
+                        checkIdentity(bytes, monitor);
+                        trace.append("read:").append(offset).append(':').append(length).append(';');
+                        return offset + length;
+                    }
+                    @Override public void write(byte[] bytes, int offset, int length, Object monitor) {
+                        checkIdentity(bytes, monitor);
+                        trace.append("write:").append(offset).append(':').append(length).append(';');
+                    }
+                    private static void checkIdentity(byte[] bytes, Object monitor) {
+                        if (bytes != BYTES || monitor != MONITOR) throw new AssertionError("identity");
+                    }
+                    public String trace() { return trace.toString(); }
+                }
+                """;
+        String client = """
+                package p;
+                @SuppressWarnings("overloads")
+                public final class IoClient {
+                    interface ReadPrimitive { int run(byte[] b, int o, int n, Object m); }
+                    interface ReadBoxed { Integer run(byte[] b, int o, int n, Object m); }
+                    interface WriteVoid { void run(byte[] b, int o, int n, Object m); }
+                    interface WriteValue { Object run(byte[] b, int o, int n, Object m); }
+                    interface UnboundReadPrimitive { int run(IoBase x, byte[] b, int o, int n, Object m); }
+                    interface UnboundReadBoxed { Integer run(IoBase x, byte[] b, int o, int n, Object m); }
+                    interface UnboundWriteVoid { void run(IoBase x, byte[] b, int o, int n, Object m); }
+                    interface UnboundWriteValue { Object run(IoBase x, byte[] b, int o, int n, Object m); }
+                    private static void selectRead(ReadPrimitive f) {
+                        if (f.run(IoProvider.BYTES, 1, 2, IoProvider.MONITOR) != 3)
+                            throw new AssertionError("primitive read result");
+                    }
+                    private static void selectRead(ReadBoxed f) { throw new AssertionError("boxed"); }
+                    private static void selectWrite(WriteVoid f) {
+                        f.run(IoProvider.BYTES, 0, 3, IoProvider.MONITOR);
+                    }
+                    private static void selectWrite(WriteValue f) { throw new AssertionError("value"); }
+                    private static void selectUnboundRead(UnboundReadPrimitive f, IoBase io) {
+                        if (f.run(io, IoProvider.BYTES, 1, 2, IoProvider.MONITOR) != 3)
+                            throw new AssertionError("unbound primitive read result");
+                    }
+                    private static void selectUnboundRead(UnboundReadBoxed f, IoBase io) {
+                        throw new AssertionError("unbound boxed");
+                    }
+                    private static void selectUnboundWrite(UnboundWriteVoid f, IoBase io) {
+                        f.run(io, IoProvider.BYTES, 0, 3, IoProvider.MONITOR);
+                    }
+                    private static void selectUnboundWrite(UnboundWriteValue f, IoBase io) {
+                        throw new AssertionError("unbound value");
+                    }
+                    public static String run() {
+                        IoProvider provider = new IoProvider();
+                        IoBase io = provider;
+                        selectRead(io::read);
+                        selectWrite(io::write);
+                        selectUnboundRead(IoBase::read, io);
+                        selectUnboundWrite(IoBase::write, io);
+                        return provider.trace();
+                    }
+                }
+                """;
+        Map<String, String> legacySources = Map.of("p.IoProvider", provider, "p.IoClient", client);
+        Path baseline = compile("concrete-baseline-api", concreteApi(""), null);
+        Path legacy = compile("concrete-legacy-client", legacySources, classPath(baseline));
+        String legacyDigest = digest(legacy);
+        String expected = "read:1:2;write:0:3;read:1:2;write:0:3;";
+        equal(expected, invoke("p.IoClient", baseline, legacy), "concrete baseline virtual hooks");
+
+        Path overloaded = compile("concrete-overloaded-api", concreteApi("""
+                public int read(byte[] bytes, Object monitor) {
+                    return read(bytes, 0, bytes.length, monitor);
+                }
+                public void write(byte[] bytes, Object monitor) {
+                    write(bytes, 0, bytes.length, monitor);
+                }
+                """), null);
+        equal(expected, invoke("p.IoClient", overloaded, legacy), "concrete old binary with overloads");
+        Compilation rejected = compileInto(root.resolve("concrete-rejected-client"), legacySources,
+                classPath(overloaded));
+        check(!rejected.success(), "concrete overloads must reject unchanged selector source");
+        equal(List.of("compiler.err.ref.ambiguous", "compiler.err.ref.ambiguous",
+                        "compiler.err.ref.ambiguous", "compiler.err.ref.ambiguous"),
+                rejected.errors().stream().map(CompileError::code).toList(),
+                "bound and unbound references fail only for ambiguity");
+        equal(List.of(lineOf(client, "selectRead(io::read);"),
+                        lineOf(client, "selectWrite(io::write);"),
+                        lineOf(client, "selectUnboundRead(IoBase::read, io);"),
+                        lineOf(client, "selectUnboundWrite(IoBase::write, io);")),
+                rejected.errors().stream().map(CompileError::line).sorted().toList(),
+                "diagnostics identify all four unchanged reference expressions");
+        check(rejected.errors().stream().allMatch(e -> e.source().endsWith("/p/IoClient.java")),
+                "concrete ambiguity diagnostics must belong to the client: " + rejected.errors());
+        refusals++;
+
+        // A cast edits the client. Its success is a mitigation, not source compatibility.
+        String typedClient = client
+                .replace("selectRead(io::read);", "selectRead((ReadPrimitive) io::read);")
+                .replace("selectWrite(io::write);", "selectWrite((WriteVoid) io::write);")
+                .replace("selectUnboundRead(IoBase::read, io);",
+                        "selectUnboundRead((UnboundReadPrimitive) IoBase::read, io);")
+                .replace("selectUnboundWrite(IoBase::write, io);",
+                        "selectUnboundWrite((UnboundWriteVoid) IoBase::write, io);");
+        check(!client.equals(typedClient), "the explicit-target control must change client source");
+        Path typed = compile("concrete-typed-client", Map.of("p.IoProvider", provider,
+                "p.IoClient", typedClient), classPath(overloaded));
+        equal(expected, invoke("p.IoClient", overloaded, typed), "explicit-target control dispatch");
+
+        Path distinct = compile("concrete-distinct-api", concreteApi("""
+                public int readWhole(byte[] bytes, Object monitor) {
+                    return read(bytes, 0, bytes.length, monitor);
+                }
+                public void writeWhole(byte[] bytes, Object monitor) {
+                    write(bytes, 0, bytes.length, monitor);
+                }
+                """), null);
+        equal(expected, invoke("p.IoClient", distinct, legacy), "concrete old binary with distinct names");
+        Path recompiled = compile("concrete-recompiled-client", legacySources, classPath(distinct));
+        equal(expected, invoke("p.IoClient", distinct, recompiled),
+                "concrete unchanged source preserves all four selector choices");
+        Path newClient = compile("concrete-new-client", Map.of("p.NewIoClient", """
+                package p;
+                public final class NewIoClient {
+                    public static String run() {
+                        IoProvider provider = new IoProvider();
+                        IoBase io = provider;
+                        if (io.readWhole(IoProvider.BYTES, IoProvider.MONITOR) != 3)
+                            throw new AssertionError("whole-array result");
+                        io.writeWhole(IoProvider.BYTES, IoProvider.MONITOR);
+                        return provider.trace();
+                    }
+                }
+                """), classPath(distinct, recompiled));
+        equal("read:0:3;write:0:3;", invoke("p.NewIoClient", distinct, recompiled, newClient),
+                "distinct concrete methods delegate once with original array and monitor identity");
+        equal(legacyDigest, digest(legacy), "the original concrete provider/client binaries stay unchanged");
+    }
+
+    private static Map<String, String> concreteApi(String additions) {
+        return Map.of("p.IoBase", """
+                package p;
+                public abstract class IoBase {
+                    public int read(byte[] bytes, int offset, int length, Object monitor) {
+                        throw new AssertionError("existing read override bypassed");
+                    }
+                    public void write(byte[] bytes, int offset, int length, Object monitor) {
+                        throw new AssertionError("existing write override bypassed");
+                    }
+                """ + additions + "}\n");
     }
 
     private static Map<String, String> api(String additions) {

@@ -48,9 +48,11 @@ the handling of a null task. The distinct defaults add no monitor state or
 callbacks. Existing concrete class methods retain Java's normal precedence.
 
 The existing whole-array monitored I/O overloads in `InputStream`, `OutputStream`,
-`Reader` and `Writer` provide the corresponding concrete-method pattern. Keep
-their established virtual hooks and regression tests. A new abstract base is not
-required to obtain this behavior.
+`Reader` and `Writer` demonstrate the concrete-method delegation pattern. Their
+delegating bodies and old-binary tests do not establish unchanged-source
+compatibility: the overload groups have the method-reference limitation below.
+Keep their established virtual hooks and regression tests. A new abstract base
+is not required to obtain the delegation behavior.
 
 An unsupported-operation fallback is valid only where the new API explicitly
 defines that operation as optional. A no-op is valid only where it satisfies the
@@ -86,6 +88,43 @@ and `workedOneUnit()`, leaving both established method groups unchanged.
 Test method references passed to overloaded functional-interface parameters as
 well as method references assigned to a single known target type. Different
 arity alone is not sufficient evidence that an overload preserves old source.
+
+### Existing monitored-I/O source-selection limitation
+
+The same different-arity counterexample applies to concrete methods in abstract
+classes. A source-sealed comparison of the actual pre-overload and current
+M3JDK21 owners reproduces unchanged-source ambiguity for these five method groups:
+
+| Existing four-argument hook | Added whole-array overload |
+| --- | --- |
+| `InputStream.readMonitored(byte[], int, int, ProgressMonitor)` | `readMonitored(byte[], ProgressMonitor)` |
+| `InputStream.readNBytesMonitored(byte[], int, int, ProgressMonitor)` | `readNBytesMonitored(byte[], ProgressMonitor)` |
+| `OutputStream.writeMonitored(byte[], int, int, ProgressMonitor)` | `writeMonitored(byte[], ProgressMonitor)` |
+| `Reader.readMonitored(char[], int, int, ProgressMonitor)` | `readMonitored(char[], ProgressMonitor)` |
+| `Writer.writeMonitored(char[], int, int, ProgressMonitor)` | `writeMonitored(char[], ProgressMonitor)` |
+
+An overloaded selector accepting either a primitive-int-returning or
+boxed-Integer-returning four-argument function can reject `input::readMonitored`.
+A selector accepting either a void-returning or Object-returning four-argument
+function can similarly reject `output::writeMonitored`. The same caller source
+compiles before the whole-array overloads are added; its frozen old binaries
+continue to execute the established four-argument hooks afterward. This is a
+source compatibility defect in these M3 extension groups, distinct from a
+failure of a stock Java 21 API or the old binary linkage in the tested cases.
+
+An explicit functional-interface target or a suitably typed lambda can
+disambiguate a caller. Those are client source changes, not proof that unchanged
+source remains compatible. A distinct name avoids this particular ambiguity
+when choosing a new API before publication. Adding an alias after publication
+does not make an already overloaded method group exact again.
+
+The published declarations remain intact. Their unrestricted unchanged-source
+compatibility qualification remains unresolved; removal or renaming could
+break newer consumers and requires a separately reviewed compatibility decision.
+The concrete-base cases in `MethodReferenceEvolution.java` retain both the
+negative language example and distinct-name/explicit-target controls. Exact
+actual-owner inputs, compiler diagnostics and old-binary hashes remain in the
+canonical Synexia `m3-api-companions-20261029` recipe family.
 
 Unrelated inherited defaults can conflict at compilation and can cause an
 `IncompatibleClassChangeError` when an old binary invokes the method. A superclass
