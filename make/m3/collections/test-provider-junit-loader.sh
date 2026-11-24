@@ -4,8 +4,8 @@
 # Prove that platform-loaded module tests cannot see application-only JUnit annotations.
 set -euo pipefail
 
-if [[ $# -ne 1 ]]; then
-  echo 'usage: test-provider-junit-loader.sh /absolute/JDK21' >&2
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+  echo 'usage: test-provider-junit-loader.sh /absolute/JDK21 [pinned-junit-console.jar]' >&2
   exit 64
 fi
 jdk="$1"
@@ -60,3 +60,38 @@ fi
 grep -Fx 'M3_PROVIDER_JUNIT_DISCOVERY_PASS classes=1 methods=1' \
   "$work/positive.log"
 echo 'M3_PROVIDER_JUNIT_LOADER_SELFTEST_PASS negative=refused positive=1'
+
+if [[ $# -eq 2 ]]; then
+  junit="$2"
+  if [[ ! -s "$junit" || -L "$junit" ]]; then
+    echo 'A genuine pinned JUnit standalone jar is required' >&2
+    exit 76
+  fi
+  mkdir -p "$work/real-src/javax/sql" "$work/real-classes"
+  cat > "$work/real-src/javax/sql/RealJupiterPlatformTest.java" <<'JAVA'
+package javax.sql;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+class RealJupiterPlatformTest {
+    @Test void originalProviderAssertion() { assertEquals(42, 40 + 2); }
+}
+JAVA
+  "$jdk/bin/javac" -source 21 -target 21 -proc:none -Xlint:all,-module -Werror \
+    --patch-module "java.sql=$work/real-src" --add-reads java.sql=ALL-UNNAMED \
+    -cp "$junit" -d "$work/real-classes" \
+    "$work/real-src/javax/sql/RealJupiterPlatformTest.java"
+  real=(--add-modules java.sql --patch-module "java.sql=$work/real-classes" \
+    --add-reads java.sql=ALL-UNNAMED --add-opens java.sql/javax.sql=ALL-UNNAMED \
+    -cp "$junit" org.junit.platform.console.ConsoleLauncher execute \
+    --select-class javax.sql.RealJupiterPlatformTest --disable-banner \
+    --details=summary --fail-if-no-tests)
+  if "$jdk/bin/java" "${real[@]}" >"$work/real-negative.log" 2>&1; then
+    echo 'BUG: application-only JUnit console unexpectedly discovered the module test' >&2
+    exit 77
+  fi
+  grep -Eq '\[[[:space:]]+0 tests found[[:space:]]+\]' "$work/real-negative.log"
+  "$jdk/bin/java" -Xbootclasspath/a:"$junit" "${real[@]}" \
+    | tee "$work/real-positive.log"
+  grep -Eq '\[[[:space:]]+1 tests successful[[:space:]]+\]' "$work/real-positive.log"
+  echo 'M3_PROVIDER_REAL_JUNIT_LOADER_SELFTEST_PASS tests=1 negative=refused'
+fi
