@@ -76,7 +76,7 @@ jobs:
             build-essential autoconf zip unzip file \
             libasound2-dev libcups2-dev libfreetype-dev \
             libx11-dev libxext-dev libxrender-dev libxtst-dev libxrandr-dev \
-            libfontconfig1-dev libffi-dev jtreg8
+            libxt-dev libfontconfig1-dev libffi-dev jtreg8
       - name: Prove package-owned JTReg8 launcher discovery and refusals
         shell: bash
         run: |
