@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'ci/m3-viewport-scheduler-affinity-junit-20261123'
+      - 'ci/m3-viewport-current-module-requal-20261124'
   pull_request:
     paths:
       - 'm3/viewport-core/src/main/java/jdk/m3/viewport/M3ViewportScheduler.java'
@@ -117,6 +118,19 @@ jobs:
           set -euo pipefail
           test "$(git hash-object m3/viewport-core/src/main/java/jdk/m3/viewport/M3ViewportScheduler.java)" = 004a8474138931da92ce36ee6c9f6b6a7b338c95
           test "$(git hash-object m3/viewport-core/src/test/java/jdk/m3/viewport/M3ViewportSchedulerTest.java)" = 2fcf6fb7247b0b54c21590ca462e4cb4b3b93c7e
+      - name: Refuse non-public Java 21 Streams dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          path=src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java
+          test -s "$path"
+          if grep -Fq 'import java.util.stream.Streams;' "$path"; then
+            echo 'Host stock JDK21 cannot access java.util.stream.Streams' >&2
+            exit 1
+          fi
+          grep -Fq 'ObjectStreamLanguageKernels.pairwise' "$path"
+          grep -Fq 'ObjectStreamLoopKernels.mapWhile' "$path"
+          echo M3_VIEWPORT_HOST_JDK21_STREAMS_ADMISSION_PASS
       - name: Build existing source-vendored JUnit and original M3 dependencies
         shell: bash
         run: |
@@ -128,18 +142,35 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/viewport-core/pom.xml -Dtest=M3ViewportSchedulerTest test
+          mvn -B -ntp -f m3/viewport-core/pom.xml -Dtest=M3ViewportSchedulerTest,M3ViewportSnapshotTest test
           python3 - <<'PY'
           from pathlib import Path
           import xml.etree.ElementTree as ET
-          path=Path("m3/viewport-core/target/surefire-reports/TEST-jdk.m3.viewport.M3ViewportSchedulerTest.xml")
-          if not path.is_file():raise SystemExit("FAIL no original M3 JUnit XML")
-          root=ET.parse(path).getroot()
-          counts=tuple(int(root.get(k,"-1")) for k in ("tests","failures","errors","skipped"))
-          if counts!=(8,0,0,0):raise SystemExit("FAIL original module JUnit counts: "+str(counts))
-          actual={case.get("name") for case in root.findall(".//testcase")}
-          if len(actual)!=8:raise SystemExit("FAIL original module method coverage")
-          print("M3_VIEWPORT_AFFINITY_ORIGINAL_MODULE_JUNIT_PASS tests=8")
+          base=Path("m3/viewport-core/target/surefire-reports")
+          expected={
+            "M3ViewportSchedulerTest":{
+              "burstCoalescesCpuAndUiWork",
+              "invalidatesComputedButNotPresentedFrame",
+              "invalidatesInFlightCpuComputation",
+              "closeDiscardsPendingAndRejectsRequests",
+              "computesFailureOnWorkerButDeliversOnUi",
+              "checkedCpuExecutorRejectsUiCallerRunsFallback",
+              "checkedUiExecutorRefusesOffThreadPresentation",
+              "checkedCpuAndUiExecutorsPreserveLatestGeneration"},
+            "M3ViewportSnapshotTest":{
+              "ownsPrimitiveLanesInsteadOfAliasingCpuArrays",
+              "copiesOnlyResidentWindowToCallerScratch",
+              "rejectsInvalidLaneSizesAndGeometry"}}
+          for suite,methods in expected.items():
+              file=base/("TEST-jdk.m3.viewport."+suite+".xml")
+              if not file.is_file():raise SystemExit("FAIL missing original JUnit "+suite)
+              report=ET.parse(file).getroot()
+              counts=tuple(int(report.get(k,"-1")) for k in ("tests","failures","errors","skipped"))
+              if counts!=(len(methods),0,0,0):
+                  raise SystemExit("FAIL original-module JUnit counters "+suite+" "+repr(counts))
+              actual={c.get("name") for c in report.findall(".//testcase")}
+              if actual!=methods:raise SystemExit("FAIL original-module method selection "+suite+" "+repr(actual^methods))
+          print("M3_VIEWPORT_ORIGINAL_MODULE_CPU_UI_JUNIT_PASS tests=11 suites=2")
           PY
       - name: Preserve original module JUnit XML
         if: always()
