@@ -7,6 +7,7 @@ on:
       - '.github/workflows/m3-strict-stream-native-proof-20261122.yml'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java'
       - 'test/jdk/java/util/stream/Streams/StreamStrictAndAdjacentTest.java'
       - 'test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java'
   workflow_dispatch:
@@ -33,10 +34,11 @@ jobs:
           set -euo pipefail
           git diff --check
           printf '%s  %s\n' \
-            '91e40e3322a5377c0c0e7e35dd5379da0cdc7e55502700b4fde0408d427c3617' 'src/java.base/share/classes/java/util/stream/Streams.java' \
-            '2a22852aa0b68209fa7ef7ab50a935149b5a697d837cd00a38330118957d119b' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java' \
+            '4bffa37f859058a97117802adf2f6db60c55f57f847ee190e9b6c92e3acdf35f' 'src/java.base/share/classes/java/util/stream/Streams.java' \
+            'aeb6c3f614aa223cfe37cc5ddbc991f9dd4d9106b4f5940fd707ff57e106a465' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java' \
+            'fd565bea1630eddb3cadf5ce139e113bbf961602287922777b9c08865815fc23' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java' \
             '12ddd2e21e43d3ee3bf41d08629978d5e1cca52f2a44ab64da306d3628fd7d17' 'test/jdk/java/util/stream/Streams/StreamStrictAndAdjacentTest.java' \
-            '4db258ab88e335eda443c66aa1c68f2101fc0324dd3c93b5d3bc043c91dc24a3' 'test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java' \
+            '171033c95034fd8ee331112edecf7ca1d11e0ab4fee24caffbf919bc1e569d5e' 'test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java' \
             | sha256sum --check -
           git diff --name-status HEAD^ HEAD || true
 

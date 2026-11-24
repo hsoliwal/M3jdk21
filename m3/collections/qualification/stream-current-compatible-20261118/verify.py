@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[4]
 # The exact prior guard and seals remain in its canonical recipe beforeimage.
 FILES = {
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java":
-        "1e635db39f8b2a1b30f54d7f7ee4a9c48589034b1cf693b3dd4b191e2e5b99d8",
+        "aeb6c3f614aa223cfe37cc5ddbc991f9dd4d9106b4f5940fd707ff57e106a465",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamAdvancedKernels.java":
         "fc9a3d1a0c0ab7114b6f2765f0214915115272a2dc02d6e85168b600e0ad31d3",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLoopKernels.java":
@@ -28,7 +28,7 @@ FILES = {
     "test/jdk/jdk/m3/collections/ObjectStreamCompatibilityGateTest.java":
         "56b64efee5f246baea4a0c274f8ef684286bbbf9d7de79be725ff5a8cd764a90",
     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java":
-        "c74cc7b797660e2a57548ca8a64931077e544ddf042c90ea015ceab4a5994e14",
+        "fd565bea1630eddb3cadf5ce139e113bbf961602287922777b9c08865815fc23",
     "test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java":
         "8cfb6c344d69dab1957e499fdfb0cc5b8b33fa61708e1c5595a5c7dc47c08f2f",
 }

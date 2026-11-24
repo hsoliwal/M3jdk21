@@ -277,8 +277,9 @@ public final class ObjectStream<T> {
             Function<? super T, ? extends K> keyExtractor, int maxRunLength) {
         Objects.requireNonNull(keyExtractor, "keyExtractor");
         requireWidth(maxRunLength);
-        return delegateStream(input ->
-                Streams.groupAdjacent(input, keyExtractor, maxRunLength));
+        return new ObjectStream<>(
+                () -> ObjectStreamLanguageKernels.chunkBy(stream(), keyExtractor, maxRunLength),
+                replayable);
     }
 
     /** Suppress only adjacent duplicate keys using constant additional state. */
@@ -322,18 +323,25 @@ public final class ObjectStream<T> {
 
     /**
      * Python-style strict zip over two replay-aware plans. A complete terminal
-     * traversal refuses unequal source lengths rather than truncating silently.
+     * traversal refuses unequal source lengths with
+     * {@code IllegalArgumentException} rather than truncating silently.
      * A short-circuiting terminal may stop before the first mismatch.
      *
      * <p>Streams are opened per evaluation, preserving both plans' snapshot,
      * live and one-shot semantics. The result is replayable only if both
-     * inputs are replayable. The java.base Streams owner performs strict
-     * length checking; this facade creates no second zip engine.
+     * inputs are replayable. Strict length checking is the strict variant of
+     * the existing M3 ObjectStreamLanguageKernels zip kernel that already
+     * backs the truncating {@code zip}; this facade creates no second zip
+     * engine. Like {@code pairwise}, it does not use java.util.stream.Streams,
+     * which is package-private on a stock Java 21 JDK, so it also compiles
+     * and runs in the standalone Maven module.
      *
      * <p>Opening the second input or constructing the paired traversal can
      * fail. Such failures close any inputs already opened here, suppressing
      * close failures on the original exception. On successful construction,
-     * terminal completion closes both through the original java.base owner.
+     * closing the opened result stream, which every ObjectStream terminal
+     * operation does, closes both inputs through the M3 kernel, exactly as
+     * for the truncating zip.
      *
      * @param other the right input plan
      * @param mapper the ordered pair mapping function
@@ -351,7 +359,7 @@ public final class ObjectStream<T> {
             Stream<? extends U> second = null;
             try {
                 second = other.stream();
-                return Streams.zipStrict(first, second, mapper);
+                return ObjectStreamLanguageKernels.zipStrict(first, second, mapper);
             } catch (RuntimeException | Error failure) {
                 try { first.close(); }
                 catch (RuntimeException | Error closing) {

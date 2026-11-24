@@ -7,6 +7,8 @@ on:
       - '.github/workflows/m3-stream-exact-java21-20261122.yml'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'src/java.base/share/classes/java/util/function/ext/ObjLongFunction.java'
+      - 'src/java.base/share/classes/java/util/function/ext/DoubleLongToDoubleFunction.java'
+      - 'src/java.base/share/classes/java/util/function/ext/IntLongToIntFunction.java'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream*.java'
       - 'test/jdk/java/util/stream/Streams/StreamStrictAndAdjacentTest.java'
       - 'test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java'
@@ -17,7 +19,7 @@ permissions:
 
 jobs:
   original-java21:
-    name: Exact java.base and M3 source closures (stock JDK21 patch, not full JDK image)
+    name: Exact java.base patch and stock-JDK21 M3 source closures (not full JDK image)
     runs-on: ubuntu-22.04
     timeout-minutes: 25
     steps:
@@ -33,10 +35,11 @@ jobs:
         run: |
           set -euo pipefail
           printf '%s  %s\n' \
-            '91e40e3322a5377c0c0e7e35dd5379da0cdc7e55502700b4fde0408d427c3617' 'src/java.base/share/classes/java/util/stream/Streams.java' \
-            '2a22852aa0b68209fa7ef7ab50a935149b5a697d837cd00a38330118957d119b' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java' \
+            '4bffa37f859058a97117802adf2f6db60c55f57f847ee190e9b6c92e3acdf35f' 'src/java.base/share/classes/java/util/stream/Streams.java' \
+            'aeb6c3f614aa223cfe37cc5ddbc991f9dd4d9106b4f5940fd707ff57e106a465' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java' \
+            'fd565bea1630eddb3cadf5ce139e113bbf961602287922777b9c08865815fc23' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java' \
             '12ddd2e21e43d3ee3bf41d08629978d5e1cca52f2a44ab64da306d3628fd7d17' 'test/jdk/java/util/stream/Streams/StreamStrictAndAdjacentTest.java' \
-            '4db258ab88e335eda443c66aa1c68f2101fc0324dd3c93b5d3bc043c91dc24a3' 'test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java' \
+            '171033c95034fd8ee331112edecf7ca1d11e0ab4fee24caffbf919bc1e569d5e' 'test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java' \
             | sha256sum --check -
           git diff --check
 
@@ -49,11 +52,16 @@ jobs:
             "$work/java.base" "$work/jdk.m3.collections" "$work/tests"
           cp src/java.base/share/classes/java/util/stream/Streams.java \
             "$work/patch/java/util/stream/Streams.java"
-          cp src/java.base/share/classes/java/util/function/ext/ObjLongFunction.java \
-            "$work/patch/java/util/function/ext/ObjLongFunction.java"
+          # Streams.java has also imported DoubleLongToDoubleFunction and IntLongToIntFunction since #3390.
+          for ext in ObjLongFunction DoubleLongToDoubleFunction IntLongToIntFunction; do
+            cp "src/java.base/share/classes/java/util/function/ext/$ext.java" \
+              "$work/patch/java/util/function/ext/$ext.java"
+          done
           javac -Xlint:all,-exports -Werror --patch-module "java.base=$work/patch" \
             -d "$work/java.base" \
             "$work/patch/java/util/function/ext/ObjLongFunction.java" \
+            "$work/patch/java/util/function/ext/DoubleLongToDoubleFunction.java" \
+            "$work/patch/java/util/function/ext/IntLongToIntFunction.java" \
             "$work/patch/java/util/stream/Streams.java"
           printf 'M3_EXACT_WORK=%s\n' "$work" >> "$GITHUB_ENV"
 
@@ -74,34 +82,29 @@ jobs:
           grep '^M3_STREAM_STRICT_ADJACENT_PASS checks=' "$RUNNER_TEMP/m3-stream-normal.log"
           grep '^M3_STREAM_STRICT_ADJACENT_PASS checks=' "$RUNNER_TEMP/m3-stream-interpreted.log"
 
-      - name: Compile exact M3 ObjectStream original source closure
+      # ObjectStream.zipStrict uses the M3 ObjectStreamLanguageKernels strict zip, not
+      # java.util.stream.Streams (package-private on stock JDK 21, see #3388), so the
+      # M3 closure and its contract compile and run on the unpatched stock JDK 21.
+      - name: Compile exact M3 ObjectStream source closure on unpatched stock JDK21
         shell: bash
         run: |
           set -euo pipefail
           javac -Xlint:all,-exports,-module -Werror \
-            --patch-module "java.base=$M3_EXACT_WORK/java.base" \
-            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
             -sourcepath src/jdk.m3.collections/share/classes \
             -d "$M3_EXACT_WORK/jdk.m3.collections" \
             src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java
 
-      - name: Run exact M3 ObjectStream contract in normal and interpreted modes
+      - name: Run exact M3 ObjectStream contract on stock JDK21 in normal and interpreted modes
         shell: bash
         run: |
           set -euo pipefail
           javac -Xlint:all,-exports,-module -Werror \
-            --patch-module "java.base=$M3_EXACT_WORK/java.base" \
-            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
             -cp "$M3_EXACT_WORK/jdk.m3.collections" \
             -d "$M3_EXACT_WORK/tests" \
             test/jdk/jdk/m3/collections/ObjectStreamStrictZipContractTest.java
-          java --patch-module "java.base=$M3_EXACT_WORK/java.base" \
-            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
-            -cp "$M3_EXACT_WORK/jdk.m3.collections:$M3_EXACT_WORK/tests" \
+          java -cp "$M3_EXACT_WORK/jdk.m3.collections:$M3_EXACT_WORK/tests" \
             ObjectStreamStrictZipContractTest | tee "$RUNNER_TEMP/m3-object-normal.log"
-          java -Xint --patch-module "java.base=$M3_EXACT_WORK/java.base" \
-            --add-exports java.base/java.util.function.ext=ALL-UNNAMED \
-            -cp "$M3_EXACT_WORK/jdk.m3.collections:$M3_EXACT_WORK/tests" \
+          java -Xint -cp "$M3_EXACT_WORK/jdk.m3.collections:$M3_EXACT_WORK/tests" \
             ObjectStreamStrictZipContractTest | tee "$RUNNER_TEMP/m3-object-interpreted.log"
           grep '^M3_OBJECT_STREAM_STRICT_ZIP_PASS checks=' "$RUNNER_TEMP/m3-object-normal.log"
           grep '^M3_OBJECT_STREAM_STRICT_ZIP_PASS checks=' "$RUNNER_TEMP/m3-object-interpreted.log"

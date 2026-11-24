@@ -5,7 +5,8 @@
 
 /*
  * @test
- * @summary M3 ObjectStream strict zip and original chunkBy compatibility with java.base
+ * @summary M3 ObjectStream strict zip and consecutive chunkBy contracts, checked
+ *          against local oracles without java.util.stream.Streams (stock Java 21)
  * @modules jdk.m3.collections
  * @run main ObjectStreamStrictZipContractTest
  */
@@ -18,7 +19,6 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
-import java.util.stream.Streams;
 import jdk.m3.collections.ObjectStream;
 
 public final class ObjectStreamStrictZipContractTest {
@@ -43,6 +43,28 @@ public final class ObjectStreamStrictZipContractTest {
             if (outcome instanceof AssertionError assertion) throw assertion;
             check(klass.isInstance(outcome), name + " failed with " + outcome);
         }
+    }
+
+    /**
+     * Local adjacent-run oracle replacing the java.base Streams.groupAdjacent
+     * comparison, which a stock Java 21 JDK does not export: consecutive
+     * values with equal identity keys form one run, and a run longer than
+     * {@code cap} is refused with IllegalStateException.
+     */
+    private static Object adjacentRunsOracle(List<Integer> values, int cap) {
+        List<List<Integer>> runs = new ArrayList<>();
+        List<Integer> run = null;
+        for (Integer value : values) {
+            if (run != null && Objects.equals(run.get(0), value)) {
+                if (run.size() >= cap) return IllegalStateException.class;
+                run.add(value);
+            } else {
+                run = new ArrayList<>();
+                run.add(value);
+                runs.add(run);
+            }
+        }
+        return runs;
     }
 
     public static void main(String[] args) {
@@ -120,13 +142,7 @@ public final class ObjectStreamStrictZipContractTest {
                         "random exact zip " + trial);
             }
 
-            Object expectedRuns;
-            try (Stream<List<Integer>> original = Streams.groupAdjacent(a.stream(),
-                    Function.identity(), cap)) {
-                expectedRuns = original.toList();
-            } catch (IllegalStateException exceeded) {
-                expectedRuns = IllegalStateException.class;
-            }
+            Object expectedRuns = adjacentRunsOracle(a, cap);
             Object actualRuns;
             try {
                 actualRuns = ObjectStream.snapshot(a).chunkBy(Function.identity(), cap)
@@ -134,7 +150,7 @@ public final class ObjectStreamStrictZipContractTest {
             } catch (IllegalStateException exceeded) {
                 actualRuns = IllegalStateException.class;
             }
-            equal(actualRuns, expectedRuns, "adjacent delegation " + trial);
+            equal(actualRuns, expectedRuns, "adjacent oracle " + trial);
         }
 
         System.out.println("M3_OBJECT_STREAM_STRICT_ZIP_PASS checks=" + checks);
