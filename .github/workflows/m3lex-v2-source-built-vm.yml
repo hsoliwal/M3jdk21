@@ -66,9 +66,9 @@ jobs:
           set -euo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
-            build-essential autoconf zip unzip file \
+            build-essential autoconf zip unzip file curl python3 \
             libasound2-dev libcups2-dev libfreetype-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxrandr-dev \
+            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libxrandr-dev \
             libfontconfig1-dev libffi-dev jtreg8
       - name: Verify distribution jtreg meets exact JDK source requirement
         shell: bash
@@ -79,14 +79,58 @@ jobs:
             echo "::error::JDK source requires jtreg >= 8.2.1+1, found $version"
             exit 1
           }
-          jtreg_bin="$(command -v jtreg8 || true)"
+          jtreg_files="$(dpkg-query -L jtreg8)"
+          jtreg_bin=
+          while IFS= read -r candidate; do
+            case "$candidate" in
+              /*/bin/jtreg)
+                if test -x "$candidate"; then
+                  resolved="$(readlink -f "$candidate")"
+                  printf '%s\n' "$jtreg_files" | grep -Fx -- "$resolved" > /dev/null || {
+                    echo "::error::jtreg launcher resolves outside the jtreg8 package: $candidate"
+                    exit 1
+                  }
+                  test -z "$jtreg_bin" || test "$jtreg_bin" = "$resolved" || {
+                    echo "::error::Ambiguous executable launchers in jtreg8 package"
+                    exit 1
+                  }
+                  jtreg_bin="$resolved"
+                fi
+                ;;
+            esac
+          done <<< "$jtreg_files"
           test -n "$jtreg_bin" && test -x "$jtreg_bin" || {
-            echo "::error::No executable jtreg8 from reviewed Ubuntu 26.04 package"
+            echo "::error::No package-owned executable jtreg from reviewed Ubuntu 26.04 package"
             exit 1
           }
           "$jtreg_bin" -version
           echo "M3_JTREG_BIN=$jtreg_bin" >> "$GITHUB_ENV"
           echo "M3LEX_JTREG_VERSION_ADMITTED $version"
+      - name: Acquire hash-pinned bundled Skia build tools
+        run: |
+          set -euo pipefail
+          tools_dir="$RUNNER_TEMP/m3-native-build-tools"
+          mkdir -p "$tools_dir/gn" "$tools_dir/ninja"
+          curl --fail --location --retry 3 \
+            'https://chrome-infra-packages.appspot.com/dl/gn/gn/linux-amd64/+/git_revision:b2afae122eeb6ce09c52d63f67dc53fc517dbdc8' \
+            -o "$tools_dir/gn.zip"
+          printf '%s  %s\n' \
+            '6a3bfc53d825bccac5e5b4b7bdcc10ce9396a04a689ac684ec3308ca5c7f3d9c' \
+            "$tools_dir/gn.zip" | sha256sum --check -
+          unzip -q "$tools_dir/gn.zip" -d "$tools_dir/gn"
+          curl --fail --location --retry 3 \
+            'https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip' \
+            -o "$tools_dir/ninja.zip"
+          printf '%s  %s\n' \
+            '6f98805688d19672bd699fbbfa2c2cf0fc054ac3df1f0e6a47664d963d530255' \
+            "$tools_dir/ninja.zip" | sha256sum --check -
+          unzip -q "$tools_dir/ninja.zip" -d "$tools_dir/ninja"
+          "$tools_dir/gn/gn" --version | tee "$RUNNER_TEMP/m3-gn-version.log"
+          "$tools_dir/ninja/ninja" --version | tee "$RUNNER_TEMP/m3-ninja-version.log"
+          grep -Fx '2175 (b2afae122eeb)' "$RUNNER_TEMP/m3-gn-version.log"
+          grep -Fx '1.12.1' "$RUNNER_TEMP/m3-ninja-version.log"
+          printf 'M3_GN=%s\n' "$tools_dir/gn/gn" >> "$GITHUB_ENV"
+          printf 'M3_NINJA=%s\n' "$tools_dir/ninja/ninja" >> "$GITHUB_ENV"
       - name: Configure unmodified OpenJDK build machinery for this fork
         shell: bash
         run: |
@@ -94,6 +138,7 @@ jobs:
           test -x "$JAVA_HOME/bin/java"
           "$JAVA_HOME/bin/java" -version
           bash configure --with-boot-jdk="$JAVA_HOME" \
+            --with-gn="$M3_GN" --with-ninja="$M3_NINJA" \
             --with-debug-level=release --with-jvm-variants=server
       - name: Build real fork JDK images (no stock-JDK substitution)
         shell: bash

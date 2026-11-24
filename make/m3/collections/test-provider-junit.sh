@@ -100,7 +100,7 @@ if [[ ${#cases[@]} -ne 15 ]]; then
   exit 73
 fi
 selects=()
-test_names=()
+case_names=()
 opens=()
 declare -A seen=()
 for source in "${cases[@]}"; do
@@ -111,7 +111,7 @@ for source in "${cases[@]}"; do
   }
   name="$(basename "$source" .java)"
   selects+=(--select-class "$pkg.$name")
-  test_names+=("$pkg.$name")
+  case_names+=("$pkg.$name")
   if [[ -z "${seen[$pkg]:-}" ]]; then
     opens+=("--add-opens=jdk.m3.collections/$pkg=ALL-UNNAMED")
     seen[$pkg]=1
@@ -119,6 +119,8 @@ for source in "${cases[@]}"; do
 done
 printf '%s\n' "${cases[@]}" > "$out/test-classes.txt"
 runtime=(--add-modules jdk.m3.collections
+  -XX:-OmitStackTraceInFastThrow
+  "-Xbootclasspath/a:$junit"
   --patch-module "jdk.m3.collections=$out/classes"
   --add-reads jdk.m3.collections=ALL-UNNAMED
   "${opens[@]}")
@@ -127,10 +129,21 @@ if [[ -n "${M3_ARRAYS_NATIVE_PATH:-}" ]]; then
   runtime+=("-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH")
   sha256sum "$M3_ARRAYS_NATIVE_PATH" >> "$out/inputs-sha256.txt"
 fi
-# Named JDK module classes may be bootstrap/platform-loaded; their annotations are
-# invisible if Jupiter is only on the child application class loader. The exact
-# SHA-256-verified standalone JUnit jar is appended to the bootstrap lookup for
-# these test subprocesses only. Preserve original JPMS module ownership.
+# JDK product modules use the platform class loader. An application-only
+# JUnit jar leaves runtime @Test annotations invisible (zero tests discovered).
+# Keep one pinned jar on the bootstrap append path for the test process only;
+# prove all 15 owning-module test classes have visible annotations first.
+mkdir -p "$out/harness"
+"$jdk/bin/javac" --release 21 -Xlint:all -Werror \
+  -d "$out/harness" "$repo/make/m3/collections/M3ProviderJUnitDiscoveryProbe.java"
+"$jdk/bin/java" -ea -Xmx2g -Xbootclasspath/a:"$junit" \
+  "${runtime[@]}" -cp "$out/harness:$junit" M3ProviderJUnitDiscoveryProbe \
+  "${case_names[@]}" | tee "$out/discovery.log"
+grep -E '^M3_PROVIDER_JUNIT_DISCOVERY_PASS classes=15 methods=[1-9][0-9]*$' \
+  "$out/discovery.log"
+# Second, independent probe: exact owning module name and class count, no
+# duplicate selector, and every Jupiter method annotation kind (Test,
+# RepeatedTest, ParameterizedTest, TestFactory, TestTemplate).
 mkdir -p "$out/discovery-probe"
 "$jdk/bin/javac" --release 21 -proc:none -Xlint:all -Werror \
   -d "$out/discovery-probe" \
@@ -138,11 +151,11 @@ mkdir -p "$out/discovery-probe"
   2>&1 | tee "$out/discovery-compile.log"
 "$jdk/bin/java" "-Xbootclasspath/a:$junit" -ea -Xmx2g "${runtime[@]}" \
   -cp "$out/discovery-probe:$junit" ProviderJUnitDiscoveryProbe \
-  jdk.m3.collections 15 "${test_names[@]}" \
+  jdk.m3.collections 15 "${case_names[@]}" \
   2>&1 | tee "$out/discovery-annotations.log"
 grep -E '^M3_PROVIDER_JUNIT_ANNOTATIONS_VISIBLE module=jdk[.]m3[.]collections classes=15 methods=[1-9][0-9]*$' \
   "$out/discovery-annotations.log"
-"$jdk/bin/java" "-Xbootclasspath/a:$junit" -ea -Xmx2g "${runtime[@]}" -cp "$junit" \
+"$jdk/bin/java" -ea -Xmx2g -Xbootclasspath/a:"$junit" "${runtime[@]}" -cp "$junit" \
   org.junit.platform.console.ConsoleLauncher execute \
   "${selects[@]}" --disable-banner --details=summary \
   --fail-if-no-tests 2>&1 | tee "$out/provider-junit.log"

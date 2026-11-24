@@ -2140,12 +2140,12 @@
    "key": "m3-object-residency-pressure",
    "pull_request": {
     "paths": [
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Address28.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLane28.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Residency.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectResidency.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/Address28.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLane28.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/BitLane28.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/SlotAllocator28.java",
+     "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/Residency.java",
      "m3/tooling/object-residency/**",
      ".github/workflows/m3-object-residency-pressure.yml"
     ]
@@ -2155,12 +2155,12 @@
      "master"
     ],
     "paths": [
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3ObjectResidency.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Address28.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3IntLane28.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3BitLane28.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3SlotAllocator28.java",
-     "src/jdk.m3.collections/share/classes/jdk/m3/collections/M3Residency.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectResidency.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/Address28.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/IntLane28.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/BitLane28.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/SlotAllocator28.java",
+     "src/jdk.m3.collections/share/classes/jdk/internal/m3/collections/Residency.java",
      "m3/tooling/object-residency/**",
      ".github/workflows/m3-object-residency-pressure.yml"
     ]
@@ -10892,7 +10892,16 @@
      "test/jdk/jdk/m3/collections/M3BudgetedMaskWindowContract.java",
      "m3/arrays/pom.xml",
      "m3/collections/pom.xml",
-     ".github/workflows/m3jdk21-current-array-mask-acceptance.yml"
+     ".github/workflows/m3jdk21-current-array-mask-acceptance.yml",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/IndexMaskWindow.java",
+     "test/jdk/jdk/m3/collections/BudgetedMaskWindowContract.java",
+     "make/m3/arrays/**",
+     "src/jdk.m3.collections/share/classes/jdk/m3/arrays/**",
+     "src/jdk.m3.collections/share/native/libm3arrays/**",
+     "test/jdk/jdk/m3/arrays/**",
+     "m3/native/include/**",
+     "test/jdk/jdk/m3/collections/M3ArrayListRemoveIfProof.java",
+     "src/jdk.m3.collections/share/classes/jdk/m3/collections/IndexMaskCompactor.java"
     ]
    },
    "workflow_dispatch": {

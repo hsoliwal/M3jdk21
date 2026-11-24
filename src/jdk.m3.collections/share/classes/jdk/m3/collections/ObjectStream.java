@@ -322,6 +322,61 @@ public final class ObjectStream<T> {
     }
 
     /**
+     * Python-style strict zip over two replay-aware plans. A complete terminal
+     * traversal refuses unequal source lengths with
+     * {@code IllegalArgumentException} rather than truncating silently.
+     * A short-circuiting terminal may stop before the first mismatch.
+     *
+     * <p>Streams are opened per evaluation, preserving both plans' snapshot,
+     * live and one-shot semantics. The result is replayable only if both
+     * inputs are replayable. Strict length checking is the strict variant of
+     * the existing M3 ObjectStreamLanguageKernels zip kernel that already
+     * backs the truncating {@code zip}; this facade creates no second zip
+     * engine. Like {@code pairwise}, it does not use java.util.stream.Streams,
+     * which is package-private on a stock Java 21 JDK, so it also compiles
+     * and runs in the standalone Maven module.
+     *
+     * <p>Opening the second input or constructing the paired traversal can
+     * fail. Such failures close any inputs already opened here, suppressing
+     * close failures on the original exception. On successful construction,
+     * closing the opened result stream, which every ObjectStream terminal
+     * operation does, closes both inputs through the M3 kernel, exactly as
+     * for the truncating zip.
+     *
+     * @param other the right input plan
+     * @param mapper the ordered pair mapping function
+     * @param <U> right input type
+     * @param <R> result type
+     * @return strict lazy pairing plan
+     * @throws NullPointerException if an argument is null
+     */
+    public <U, R> ObjectStream<R> zipStrict(ObjectStream<? extends U> other,
+            BiFunction<? super T, ? super U, ? extends R> mapper) {
+        Objects.requireNonNull(other, "other");
+        Objects.requireNonNull(mapper, "mapper");
+        return new ObjectStream<>(() -> {
+            Stream<T> first = stream();
+            Stream<? extends U> second = null;
+            try {
+                second = other.stream();
+                return ObjectStreamLanguageKernels.zipStrict(first, second, mapper);
+            } catch (RuntimeException | Error failure) {
+                try { first.close(); }
+                catch (RuntimeException | Error closing) {
+                    if (failure != closing) failure.addSuppressed(closing);
+                }
+                if (second != null) {
+                    try { second.close(); }
+                    catch (RuntimeException | Error closing) {
+                        if (failure != closing) failure.addSuppressed(closing);
+                    }
+                }
+                throw failure;
+            }
+        }, replayable && other.replayable());
+    }
+
+    /**
      * Lazily map overlapping adjacent pairs using the existing M3
      * ObjectStreamLanguageKernels. Its one-pass Java 21 implementation also
      * works when the standalone Maven module is compiled against a stock JDK

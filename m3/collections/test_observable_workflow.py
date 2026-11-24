@@ -1,3 +1,4 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 # SPDX-License-Identifier: Apache-2.0
 """Source-backed wiring regressions for the two standalone observable contracts.
 
@@ -6,14 +7,17 @@ or execute shell, compile Java, or qualify the Java 21 runtime contracts.
 """
 
 from pathlib import Path
+import json
 import re
 import shlex
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW = Path(".github/workflows/m3-observable-indexed-views-20261021.yml")
+FILTERS = Path(".github/checks-superset/filters.json")
 CONTRACTS = {"ObservableListContract", "ObservableIndexedViewsContract"}
 
 
@@ -46,10 +50,44 @@ def run_commands(workflow):
     return commands
 
 
-def pull_request_paths(workflow):
-    """Read the explicit path list in this workflow's pull_request event."""
+def pull_request_paths(workflow, registry=None, *, root=ROOT):
+    """Read live inline filters or the registered superset member, never comments.
+
+    The original workflow is now dispatch-only. filters.json owns its PR
+    routing; validate member identity and unique shard custody before using it.
+    The optional registry is an immutable test input for refusal fixtures.
+    Otherwise the registry belongs to the inspected source root.
+    """
     lines = workflow.splitlines()
     matches = [i for i, line in enumerate(lines) if line == "  pull_request:"]
+    if not matches:
+        events = re.findall(r"(?m)^on:\n((?:[ \t]+[^\n]*\n|\n)*)", workflow)
+        require(len(events) == 1 and events[0].strip() == "workflow_dispatch:",
+                "expected dispatch-only member or one pull_request event")
+        if registry is None:
+            registry = json.loads((root / FILTERS).read_text(encoding="utf-8"))
+        require(isinstance(registry, dict), "invalid superset registry")
+        members, shards = registry.get("members"), registry.get("shards")
+        require(isinstance(members, dict) and isinstance(shards, dict), "invalid superset registry")
+        member = members.get(WORKFLOW.stem)
+        require(isinstance(member, dict) and member.get("file") == WORKFLOW.name
+                and member.get("key") == WORKFLOW.stem, "superset member identity mismatch")
+        shard = member.get("shard")
+        require(isinstance(shard, str) and re.fullmatch(r"[0-9]{2}", shard),
+                "invalid superset shard identifier")
+        require(all(isinstance(names, list) and all(isinstance(n, str) for n in names)
+                    for names in shards.values()), "invalid shard membership")
+        custody = [shard for shard, names in shards.items() for name in names if name == WORKFLOW.stem]
+        require(custody == [shard], "superset member must have one matching shard")
+        event = member.get("pull_request")
+        require(isinstance(event, dict) and "paths-ignore" not in event,
+                "missing or unsupported registered pull_request event")
+        paths = event.get("paths")
+        require(isinstance(paths, list) and paths and all(isinstance(p, str) and p for p in paths),
+                "invalid registered pull_request paths")
+        require(len(paths) == len(set(paths)) and not any(p.startswith("!") for p in paths),
+                "duplicate or negative registered pull_request paths")
+        return list(paths)
     require(len(matches) == 1, "expected one pull_request event")
     paths = []
     in_paths = False
@@ -86,7 +124,7 @@ def java_identity(root, relative, source_roots):
     return package_name + "." + class_name, text
 
 
-def module_source_inputs(root, workflow, compiler, descriptor):
+def module_source_inputs(root, workflow, compiler, descriptor, filters):
     """Verify the complete actual Java21 module tree is an explicit javac input.
 
     Both declared source roots must be scanned; selecting only collections
@@ -120,7 +158,6 @@ def module_source_inputs(root, workflow, compiler, descriptor):
             "unsupported module-source finder")
     require(descriptor.parent.as_posix() == expected_roots[0],
             "module descriptor outside the canonical source root")
-    filters = pull_request_paths(workflow)
     for source_root in expected_roots:
         require(source_root + "/**" in filters,
                 "complete module source tree needs a PR path filter")
@@ -143,7 +180,7 @@ def module_source_inputs(root, workflow, compiler, descriptor):
     return {"source_array": variable, "module_source_roots": expected_roots,
             "module_inputs": [p.relative_to(root).as_posix() for p in sources]}
 
-def inspect_wiring(root, workflow=None, *, verify_module=True):
+def inspect_wiring(root, workflow=None, *, verify_module=True, registry=None):
     """Cross-check actual compile operands, declarations, launches and filters."""
     if workflow is None:
         workflow = (root / WORKFLOW).read_text(encoding="utf-8")
@@ -195,12 +232,12 @@ def inspect_wiring(root, workflow=None, *, verify_module=True):
     require(len(owners) == 1, "expected one observable owner in the source path")
     identity, _ = java_identity(root, owners[0], source_roots)
     require(identity == owner_identity, "observable owner declaration mismatch")
-    filters = pull_request_paths(workflow)
+    filters = pull_request_paths(workflow, registry, root=root)
     required = [*inputs.values(), owners[0], descriptors[0], WORKFLOW,
                 Path("m3/collections/test_observable_workflow.py")]
     for relative in required:
         require(relative.as_posix() in filters, f"missing exact PR path filter: {relative}")
-    module_inputs = (module_source_inputs(root, workflow, compiler, descriptors[0])
+    module_inputs = (module_source_inputs(root, workflow, compiler, descriptors[0], filters)
                      if verify_module else {"source_array": "collection_sources",
                                             "module_source_roots": [
                                                 "m3/collections/src/main/java",
@@ -222,7 +259,7 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
     def test_compile_omission_is_not_masked_by_path_filter(self):
         paths = inspect_wiring(ROOT, self.workflow)["compiled_inputs"]
         contract = next(p for p in paths if p.endswith("ObservableIndexedViewsContract.java"))
-        self.assertIn("      - '" + contract + "'", self.workflow)
+        self.assertIn(contract, pull_request_paths(self.workflow))
         changed = self.workflow.replace("            " + contract + "\n", "\n", 1)
         self.assertNotEqual(changed, self.workflow)
         with self.assertRaisesRegex(AssertionError, "both contract inputs"):
@@ -247,7 +284,7 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
         wiring = inspect_wiring(ROOT, self.workflow)
         with tempfile.TemporaryDirectory(prefix="m3-observable-wiring-") as temporary:
             root = Path(temporary)
-            for relative in wiring["compiled_inputs"] + [wiring["owner"]]:
+            for relative in wiring["compiled_inputs"] + [wiring["owner"], FILTERS.as_posix()]:
                 target = root / relative
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes((ROOT / relative).read_bytes())
@@ -267,9 +304,10 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
     def test_missing_contract_trigger_is_rejected(self):
         wiring = inspect_wiring(ROOT, self.workflow)
         contract = next(p for p in wiring["compiled_inputs"] if p.endswith("ObservableListContract.java"))
-        changed = self.workflow.replace("      - '" + contract + "'\n", "", 1)
+        registry = json.loads((ROOT / FILTERS).read_text(encoding="utf-8"))
+        registry["members"][WORKFLOW.stem]["pull_request"]["paths"].remove(contract)
         with self.assertRaisesRegex(AssertionError, "missing exact PR path filter"):
-            inspect_wiring(ROOT, changed)
+            inspect_wiring(ROOT, self.workflow, registry=registry)
 
 
     def test_missing_module_input_array_is_rejected(self):
@@ -305,7 +343,8 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
         wiring = inspect_wiring(ROOT, self.workflow)
         with tempfile.TemporaryDirectory(prefix="m3-observable-exports-") as temporary:
             root = Path(temporary)
-            for relative in sorted(set(wiring["compiled_inputs"] + wiring["module_inputs"])):
+            for relative in sorted(set(wiring["compiled_inputs"] + wiring["module_inputs"]
+                                       + [FILTERS.as_posix()])):
                 target = root / relative
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes((ROOT / relative).read_bytes())
@@ -319,11 +358,93 @@ class ObservableWorkflowWiringTest(unittest.TestCase):
 
     def test_missing_complete_module_trigger_is_rejected(self):
         wiring = inspect_wiring(ROOT, self.workflow)
-        trigger = "      - '" + wiring["module_source_roots"][0] + "/**'\n"
-        changed = self.workflow.replace(trigger, "", 1)
-        self.assertNotEqual(changed, self.workflow)
+        registry = json.loads((ROOT / FILTERS).read_text(encoding="utf-8"))
+        registry["members"][WORKFLOW.stem]["pull_request"]["paths"].remove(
+                wiring["module_source_roots"][0] + "/**")
         with self.assertRaisesRegex(AssertionError, "complete module source tree needs a PR path filter"):
-            inspect_wiring(ROOT, changed)
+            inspect_wiring(ROOT, self.workflow, registry=registry)
+
+    def test_archived_trigger_comments_are_not_authority(self):
+        changed = re.sub(r"(?m)^#.*\n", "", self.workflow)
+        self.assertEqual(pull_request_paths(self.workflow), pull_request_paths(changed))
+        with patch.object(Path, "read_text", side_effect=FileNotFoundError("missing registry")):
+            with self.assertRaises(FileNotFoundError):
+                pull_request_paths(self.workflow)
+
+    def test_inline_pull_request_layout_is_still_checked(self):
+        self.assertEqual(["src/**"], pull_request_paths("on:\n  pull_request:\n    paths:\n      - 'src/**'\n"))
+        with self.assertRaisesRegex(AssertionError, "expected one pull_request event"):
+            pull_request_paths("on:\n  pull_request:\n  pull_request:\n")
+
+    def test_invalid_registry_custody_and_filters_are_rejected(self):
+        original = json.loads((ROOT / FILTERS).read_text(encoding="utf-8"))
+        mutations = [
+            lambda r: r["members"].pop(WORKFLOW.stem),
+            lambda r: r["members"][WORKFLOW.stem].update(file="wrong.yml"),
+            lambda r: r["members"][WORKFLOW.stem].update(key="wrong"),
+            lambda r: r["members"][WORKFLOW.stem].update(shard="99"),
+            lambda r: r["shards"]["03"].remove(WORKFLOW.stem),
+            lambda r: r["shards"]["03"].append(WORKFLOW.stem),
+            lambda r: r["shards"].update(other=[WORKFLOW.stem]),
+            lambda r: r["members"][WORKFLOW.stem].pop("pull_request"),
+            lambda r: r["members"][WORKFLOW.stem]["pull_request"].update({"paths-ignore": ["**"]}),
+            lambda r: r["members"][WORKFLOW.stem]["pull_request"].update(paths="**"),
+            lambda r: r["members"][WORKFLOW.stem]["pull_request"].update(paths=[]),
+            lambda r: r["members"][WORKFLOW.stem]["pull_request"].update(paths=[1]),
+            lambda r: r["members"][WORKFLOW.stem]["pull_request"].update(paths=["a", "a"]),
+            lambda r: r["members"][WORKFLOW.stem]["pull_request"].update(paths=["!**"]),
+        ]
+        for index, mutate in enumerate(mutations):
+            with self.subTest(index=index):
+                registry = json.loads(json.dumps(original))
+                mutate(registry)
+                with self.assertRaises(AssertionError):
+                    pull_request_paths(self.workflow, registry)
+        for events in ("on:\n  push:\n", "on:\n  workflow_dispatch:\n  push:\n",
+                       "on:\n  workflow_dispatch:\non:\n  workflow_dispatch:\n"):
+            with self.subTest(events=events):
+                with self.assertRaisesRegex(AssertionError, "dispatch-only"):
+                    pull_request_paths(events, original)
+
+
+
+    def test_inspected_root_missing_registry_is_rejected(self):
+        wiring = inspect_wiring(ROOT, self.workflow)
+        with tempfile.TemporaryDirectory(prefix="m3-observable-missing-registry-") as temporary:
+            root = Path(temporary)
+            for relative in wiring["compiled_inputs"] + [wiring["owner"]]:
+                target = root / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes((ROOT / relative).read_bytes())
+            with self.assertRaises(FileNotFoundError):
+                inspect_wiring(root, self.workflow, verify_module=False)
+
+    def test_inspected_root_registry_cannot_borrow_an_outer_contract_filter(self):
+        wiring = inspect_wiring(ROOT, self.workflow)
+        with tempfile.TemporaryDirectory(prefix="m3-observable-root-registry-") as temporary:
+            root = Path(temporary)
+            for relative in wiring["compiled_inputs"] + [wiring["owner"], FILTERS.as_posix()]:
+                target = root / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes((ROOT / relative).read_bytes())
+            registry = json.loads((root / FILTERS).read_text(encoding="utf-8"))
+            contract = next(p for p in wiring["compiled_inputs"] if p.endswith("ObservableListContract.java"))
+            registry["members"][WORKFLOW.stem]["pull_request"]["paths"].remove(contract)
+            (root / FILTERS).write_text(json.dumps(registry), encoding="utf-8")
+            with self.assertRaisesRegex(AssertionError, "missing exact PR path filter"):
+                inspect_wiring(root, self.workflow, verify_module=False)
+
+    def test_invalid_shard_identifier_refuses_even_matching_custody(self):
+        original = json.loads((ROOT / FILTERS).read_text(encoding="utf-8"))
+        for shard in ("3", "003", "not-a-shard"):
+            with self.subTest(shard=shard):
+                registry = json.loads(json.dumps(original))
+                member = registry["members"][WORKFLOW.stem]
+                previous = member["shard"]
+                member["shard"] = shard
+                registry["shards"][shard] = registry["shards"].pop(previous)
+                with self.assertRaisesRegex(AssertionError, "invalid superset shard identifier"):
+                    pull_request_paths(self.workflow, registry)
 
 
 if __name__ == "__main__":

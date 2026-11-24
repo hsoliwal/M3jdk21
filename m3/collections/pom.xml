@@ -190,6 +190,13 @@
             <exclude>**/RelationForEachTest.java</exclude>
             <exclude>**/SdkOwnerFactoryTest.java</exclude>
             <exclude>**/SequenceContractTest.java</exclude>
+            <exclude>**/LFUCacheRebaseProductTest.java</exclude>
+            <exclude>**/LFUCacheRebaseReceivingTest.java</exclude>
+            <exclude>**/LongArena28BulkTest.java</exclude>
+            <exclude>**/ObjectPhysicalMaskTest.java</exclude>
+            <exclude>**/ObjectSlotIndexTest.java</exclude>
+            <exclude>**/SegmentedLaneBulkContractTest.java</exclude>
+            <exclude>**/SegmentedPrimitiveStorageTest.java</exclude>
           </excludes>
         </configuration>
       </plugin>
@@ -230,7 +237,7 @@
               <useModulePath>false</useModulePath>
               <excludes combine.self="override"/>
               <!-- The self-loading owners call System.loadLibrary; java.library.path must be set at JVM start. -->
-              <argLine>-Djava.library.path=${m3.collections.jni.dir}</argLine>
+              <argLine>${argLine} -Djava.library.path=${m3.collections.jni.dir}</argLine>
               <systemPropertyVariables>
                 <m3.arrays.native.path>${m3.collections.native.dir}/${m3.collections.native.prefix}m3_arrays${m3.collections.native.suffix}</m3.arrays.native.path>
                 <m3.counted.native>${m3.collections.jni.dir}/${m3.collections.jni.prefix}m3_count_lanes${m3.collections.native.suffix}</m3.counted.native>
@@ -246,12 +253,17 @@
                 <m3.collections.lane.native>true</m3.collections.lane.native>
                 <m3.collections.all.native.required>true</m3.collections.all.native.required>
                 <m3.mask.spans.native.required>true</m3.mask.spans.native.required>
+                <!-- The matrix owner uses an explicit path and its own required-native test gate. -->
+                <m3.matmatrix.native.path>${m3.collections.jni.dir}/${m3.collections.jni.prefix}m3_mat_bitmatrix${m3.collections.native.suffix}</m3.matmatrix.native.path>
+                <m3.bitmatrix.requireNative>true</m3.bitmatrix.requireNative>
               </systemPropertyVariables>
             </configuration>
           </plugin>
         </plugins>
       </build>
       <properties>
+        <!-- Retain caller JVM diagnostics/instrumentation together with the required library path. -->
+        <argLine/>
         <m3.collections.native.prefix>lib</m3.collections.native.prefix>
         <m3.collections.native.suffix>.so</m3.collections.native.suffix>
         <m3.collections.jni.dir>${m3.collections.native.dir}</m3.collections.jni.dir>

@@ -3382,7 +3382,7 @@ PREFIXED	m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/M3LexiconReceiverProof
 PREFIXED	m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/M3LexiconWireProof.java
 PREFIXED	m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/M3RegexWordTransferBoundaryProof.java
 PREFIXED	m3/lexicon/receiver/src/test/java/jdk/m3/lexicon/M3RegexWordTransferCompositionProof.java
-PREFIXED	m3/llm/src/main/java/jdk/m3/llm/internal/M3ContractException.java
+PREFIXED	src/jdk.m3.llm/share/classes/jdk/m3/llm/internal/M3ContractException.java
 PREFIXED	m3/m3-import/pure-int-recipe-custody/src/main/java/jdk/internal/m3/rewrite/M3CanonicalMultiPassPlan.java
 PREFIXED	m3/m3-import/pure-int-recipe-custody/src/main/java/jdk/internal/m3/rewrite/M3ContractMode.java
 PREFIXED	m3/m3-import/pure-int-recipe-custody/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java
@@ -3479,8 +3479,8 @@ PREFIXED	test/jdk/jdk/internal/m3/indexstring/M3IndexCharacterFlagsCombineSmoke.
 PREFIXED	test/jdk/jdk/internal/m3/indexstring/M3IndexCharacterFlagsCombineSmokeMain.java
 PREFIXED	test/jdk/jdk/internal/m3/indexstring/M3IndexCharacterFlagsDump.java
 PREFIXED	m3/ports/jfx-viewport/src/main/java/jdk/m3/desktop/jfx/M3JavaFxViewport.java
-PREFIXED	m3/ports/parallel-bulk/src/main/java/jdk/m3/parallel/bulk/M3ParallelBitCountProvider.java
-PREFIXED	m3/ports/parallel-bulk/src/main/java/jdk/m3/parallel/bulk/M3ParallelIntAddProvider.java
+PREFIXED	src/m3.parallel.bulk.provider/share/classes/jdk/m3/parallel/bulk/M3ParallelBitCountProvider.java
+PREFIXED	src/m3.parallel.bulk.provider/share/classes/jdk/m3/parallel/bulk/M3ParallelIntAddProvider.java
 PREFIXED	m3/ports/parallel-bulk/src/test/java/jdk/m3/parallel/bulk/M3ParallelBitCountProof.java
 PREFIXED	m3/ports/parallel-bulk/src/test/java/jdk/m3/parallel/bulk/M3ParallelBitCountProviderTest.java
 PREFIXED	m3/ports/parallel-bulk/src/test/java/jdk/m3/parallel/bulk/M3ParallelIntAddProviderTest.java
