@@ -485,6 +485,40 @@ jobs:
             JTREG="JAVA_OPTIONS=-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
             TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/jdk/m3/collections/GinqHashJoinTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
             | tee "$RUNNER_TEMP/m3-groovy-jtreg.log"
+      - name: Run exact eight provider main jtreg contracts against the built M3 image
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          provider_cases=(
+            'ArraySizingStrategyAdoptionTest.java:06e20ae72280002eb8b232bd10efcffa8ca412f7'
+            'ArraySizingStrategyPrimitiveAdoptionTest.java:f4fd2926a9a6aec3cecb3779eabaf92040b15cf1'
+            'ArraySizingStrategySupersetTest.java:a5ea368458bab592d7ef2ef791355ee299e0714c'
+            'EqualityStrategyAdaptersTest.java:f86292dc01fe1b804d74dca0fe3118328c0f40a2'
+            'EquivalenceFromFunctionsTest.java:4698fedff23af6a8cd44e710d9c3e7c4a2d5987e'
+            'HashedMapEquatorTest.java:3e4f6754997247e76786c683d62a89a3eb7c3cc0'
+            'LinkedHashMultimapLanesTest.java:73602251b20ec63405575f9bc516eadc1054afe5'
+            'StrategyHashMapTest.java:e4edd25750f05d00dec01094c47f07c15242b034'
+          )
+          test "${#provider_cases[@]}" -eq 8
+          suite=()
+          for binding in "${provider_cases[@]}"; do
+            name="${binding%%:*}"
+            pin="${binding#*:}"
+            file="test/jdk/jdk/m3/collections/providers/$name"
+            [[ -f "$file" && ! -L "$file" ]] || { echo "provider main missing: $file" >&2; exit 90; }
+            [[ "$(git hash-object -- "$file")" = "$pin" ]] || { echo "provider main source drift: $file" >&2; exit 91; }
+            grep -Eq '^[[:space:]]*\*[[:space:]]*@test[[:space:]]*$' "$file"
+            grep -Eq '^[[:space:]]*\*[[:space:]]*@modules[[:space:]]+' "$file"
+            grep -Eq '^[[:space:]]*\*[[:space:]]*@run[[:space:]]+main(/othervm)?[[:space:]]+' "$file"
+            ! grep -Eq 'org[.]junit[.]' "$file"
+            suite+=("jtreg:$file")
+          done
+          make CONF=m3-groovy-native-proof JOBS=2 test \
+            JTREG="JAVA_OPTIONS=-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
+            TEST="${suite[*]}" \
+            | tee "$RUNNER_TEMP/m3-provider-main-jtreg.log"
+          grep -Eq '^Test results: passed: 8([[:space:]]|$)' "$RUNNER_TEMP/m3-provider-main-jtreg.log"
       - name: Compile original provider JUnit tests against the complete installed module
         run: |
           set -euo pipefail
@@ -759,6 +793,7 @@ jobs:
             ${{ runner.temp }}/m3-ginq-jlink-image.log
             ${{ runner.temp }}/m3-ginq-installed-receipt/
             ${{ runner.temp }}/m3-provider-junit/
+            ${{ runner.temp }}/m3-provider-main-jtreg.log
             ${{ runner.temp }}/m3-stream-junit-classpath.txt
             ${{ runner.temp }}/m3-groovy-count-native-configure.log
             ${{ runner.temp }}/m3-groovy-count-native-build.log
