@@ -162,13 +162,34 @@ jobs:
           receipt=json.loads(Path('m3/tooling/atom-census/contract/M3_SEMANTIC_CENSUS_V2_RECEIPT.json').read_text())
           if receipt['external_api_changed'] or receipt['jni_abi_changed']:
               raise SystemExit('REFUSED: ABI unlock')
+          # The V2 receipt stays as written. Its postimages moved on afterwards; the append-only carry receipt
+          # chains each V2 postimage to its live file. A step sealed by a later receipt is checked against it; a
+          # rename step (M3 prefix dropped, path and bytes) is the reviewed carry record itself.
+          carry=json.loads(Path('m3/tooling/atom-census/contract/M3_SEMANTIC_CENSUS_V2_CARRY_RECEIPT.json').read_text())
+          if carry['schema']!='M3_SEMANTIC_CENSUS_V2_CARRY/1':
+              raise SystemExit('REFUSED: carry schema')
           for key in ('source_change','test_change'):
               row=receipt[key]
-              path=Path(row['path'])
+              chain=carry[key]
+              first=chain[0]
+              if (first['path'],first['blob'],first['sha256'])!=(row['path'],row['post_blob'],row['post_sha256']):
+                  raise SystemExit('REFUSED: carry does not start at the V2 postimage '+key)
+              for before,after in zip(chain,chain[1:]):
+                  if after['step']=='receipt':
+                      sealed={t['path']:t for t in json.loads(Path(after['receipt']).read_text())['targets']}.get(before['path'])
+                      if after['path']!=before['path'] or sealed is None or (sealed['pre'],sealed['post'])!=(before['sha256'],after['sha256']):
+                          raise SystemExit('REFUSED: carry step not sealed by '+after['receipt'])
+                  elif after['step']=='drop-product-prefix':
+                      head,_,name=before['path'].rpartition('/')
+                      if not name.startswith('M3') or after['path']!=head+'/'+name[2:]:
+                          raise SystemExit('REFUSED: rename step is not the M3 prefix drop '+before['path'])
+                  else:
+                      raise SystemExit('REFUSED: unattested carry step '+key)
+              path=Path(chain[-1]['path'])
               if path.is_symlink() or not path.is_file():
                   raise SystemExit('REFUSED: missing or linked postimage '+str(path))
               sha=hashlib.sha256(path.read_bytes()).hexdigest()
-              if sha!=row['post_sha256']:
+              if sha!=chain[-1]['sha256']:
                   raise SystemExit('REFUSED: postimage drift '+str(path))
           print('M3_SEMANTIC_CENSUS_V2_SOURCE_SEALS_PASS')
           PY
@@ -181,6 +202,7 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-semantic" \
             "$root/src/main/java/jdk/m3/tooling/atoms/contract/AtomKind.java" \
             "$root/src/main/java/jdk/m3/tooling/atoms/AtomCensus.java" \
+            "$root/src/main/java/jdk/m3/tooling/atoms/JniDeclarationProjection.java" \
             "$root/src/test/java/jdk/m3/tooling/atoms/AtomCensusSemanticSelfTest.java"
           java -cp "$RUNNER_TEMP/m3-semantic" jdk.m3.tooling.atoms.AtomCensusSemanticSelfTest \
             | tee "$RUNNER_TEMP/m3-semantic.log"
@@ -329,15 +351,15 @@ jobs:
           import json
           root=Path('m3/tooling/atom-census')
           receipt=json.loads((root/'contract/M3_JNI_EXPORT_JOIN_RECEIPT.json').read_text())
-          assert receipt['schema']=='M3_JNI_EXPORT_JOIN_RECEIVER/1'
+          assert receipt['schema']=='M3_SYNEXIA_JNI_EXPORT_JOIN_RECEIVER/1'
           required={
-            'src/main/java/jdk/m3/tooling/atoms/JniExportJoin.java': 'b6aa82f5fb88cc93eddd5c3ba8e28667f68c903d92099ae6ace17719ee0bf7fc',
-            'src/test/java/jdk/m3/tooling/atoms/JniExportJoinSelfTest.java': '3cb59a8a3c26d58cd12333affe5a3c586e204836305d693342bfcaf7be193720',
-            'src/test/java/jdk/m3/tooling/atoms/JniExportJoinTest.java': '6c0a20e08a88e625428f3769652049882c33d132b4a67157bba239d96dd25275',
+            'src/main/java/jdk/m3/tooling/atoms/JniExportJoin.java': '422d649bfd5b10a3cecdf05ff7e1eb0e065edac0acf1c1cdfa3fee1145322dbf',
+            'src/test/java/jdk/m3/tooling/atoms/JniExportJoinSelfTest.java': '0abf5725286b6c64b8ce9a69e7dec49045017e5bf512da302c6a3606375a3fe2',
+            'src/test/java/jdk/m3/tooling/atoms/JniExportJoinTest.java': '4a30eda53e858f99dec0283950fd1c9d1decb926d438086f213d1b14d4f4d29b',
             'test-fixtures/jni-export-join/JniJoinRuntime.java': '6feda8e0868db0beccf0728c8606d1dbd46ee8618ede52f35444ceba2a61f4e6',
             'test-fixtures/jni-export-join/demo/pkg/Outer.java': '6b92a80fc03677194d100ea4f4038540abe5deed1fc3fde615c39a31de8906f4',
             'test-fixtures/jni-export-join/m3jni_export_join.c': '8ae1fa0283ddd70856b049450418d487e3d2cfe661bd6942243502bb11d970f5',
-            'verify-jni-export-join.sh': '7b39603b8309bf41d8d411f23b0f7577bdd28e57b7ffb445efba5f22821f83e9',
+            'verify-jni-export-join.sh': 'ca0a8955e330903218f2910249792e8a931fa8688020bd5589716f0eef854ab7',
             'contract/JNI_EXPORT_JOIN_V1.md': '2ddbcbbdbcac089699ce258c057e0c8cdc925823dc9fd56f844ef8dabb65bfb9',
           }
           for name,expected in required.items():

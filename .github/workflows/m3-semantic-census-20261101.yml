@@ -38,13 +38,34 @@ jobs:
           receipt=json.loads(Path('m3/tooling/atom-census/contract/M3_SEMANTIC_CENSUS_V2_RECEIPT.json').read_text())
           if receipt['external_api_changed'] or receipt['jni_abi_changed']:
               raise SystemExit('REFUSED: ABI unlock')
+          # The V2 receipt stays as written. Its postimages moved on afterwards; the append-only carry receipt
+          # chains each V2 postimage to its live file. A step sealed by a later receipt is checked against it; a
+          # rename step (M3 prefix dropped, path and bytes) is the reviewed carry record itself.
+          carry=json.loads(Path('m3/tooling/atom-census/contract/M3_SEMANTIC_CENSUS_V2_CARRY_RECEIPT.json').read_text())
+          if carry['schema']!='M3_SEMANTIC_CENSUS_V2_CARRY/1':
+              raise SystemExit('REFUSED: carry schema')
           for key in ('source_change','test_change'):
               row=receipt[key]
-              path=Path(row['path'])
+              chain=carry[key]
+              first=chain[0]
+              if (first['path'],first['blob'],first['sha256'])!=(row['path'],row['post_blob'],row['post_sha256']):
+                  raise SystemExit('REFUSED: carry does not start at the V2 postimage '+key)
+              for before,after in zip(chain,chain[1:]):
+                  if after['step']=='receipt':
+                      sealed={t['path']:t for t in json.loads(Path(after['receipt']).read_text())['targets']}.get(before['path'])
+                      if after['path']!=before['path'] or sealed is None or (sealed['pre'],sealed['post'])!=(before['sha256'],after['sha256']):
+                          raise SystemExit('REFUSED: carry step not sealed by '+after['receipt'])
+                  elif after['step']=='drop-product-prefix':
+                      head,_,name=before['path'].rpartition('/')
+                      if not name.startswith('M3') or after['path']!=head+'/'+name[2:]:
+                          raise SystemExit('REFUSED: rename step is not the M3 prefix drop '+before['path'])
+                  else:
+                      raise SystemExit('REFUSED: unattested carry step '+key)
+              path=Path(chain[-1]['path'])
               if path.is_symlink() or not path.is_file():
                   raise SystemExit('REFUSED: missing or linked postimage '+str(path))
               sha=hashlib.sha256(path.read_bytes()).hexdigest()
-              if sha!=row['post_sha256']:
+              if sha!=chain[-1]['sha256']:
                   raise SystemExit('REFUSED: postimage drift '+str(path))
           print('M3_SEMANTIC_CENSUS_V2_SOURCE_SEALS_PASS')
           PY
@@ -57,6 +78,7 @@ jobs:
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-semantic" \
             "$root/src/main/java/jdk/m3/tooling/atoms/contract/AtomKind.java" \
             "$root/src/main/java/jdk/m3/tooling/atoms/AtomCensus.java" \
+            "$root/src/main/java/jdk/m3/tooling/atoms/JniDeclarationProjection.java" \
             "$root/src/test/java/jdk/m3/tooling/atoms/AtomCensusSemanticSelfTest.java"
           java -cp "$RUNNER_TEMP/m3-semantic" jdk.m3.tooling.atoms.AtomCensusSemanticSelfTest \
             | tee "$RUNNER_TEMP/m3-semantic.log"
