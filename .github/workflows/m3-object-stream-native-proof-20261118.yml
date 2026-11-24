@@ -17,6 +17,8 @@ on:
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/ProviderJUnitReportsCheck.java'
+      - 'make/m3/collections/ProviderJUnitReportsCheckSelfTest.java'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -52,6 +54,8 @@ on:
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
       - 'm3/compatibility/groovy/test-ginq-runner-negative.sh'
       - 'make/m3/collections/test-provider-junit.sh'
+      - 'make/m3/collections/ProviderJUnitReportsCheck.java'
+      - 'make/m3/collections/ProviderJUnitReportsCheckSelfTest.java'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
       - 'test/jdk/jdk/m3/collections/apache/**'
@@ -91,6 +95,10 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
       - name: Verify clean diff and source receipts
         run: |
           set -euo pipefail
@@ -106,6 +114,16 @@ jobs:
           bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash m3/compatibility/groovy/test-ginq-runner-negative.sh
           bash -n make/m3/collections/test-provider-junit.sh
+          provider_report_classes="$RUNNER_TEMP/m3-provider-junit-validator"
+          mkdir -p "$provider_report_classes"
+          javac --release 21 -Xlint:all -Werror \
+            -d "$provider_report_classes" \
+            make/m3/collections/ProviderJUnitReportsCheck.java \
+            make/m3/collections/ProviderJUnitReportsCheckSelfTest.java
+          java -cp "$provider_report_classes" ProviderJUnitReportsCheckSelfTest \
+            | tee "$RUNNER_TEMP/m3-provider-junit-report-selftest.log"
+          grep -Fx 'M3_PROVIDER_JUNIT_REPORT_SELFTEST_PASS negatives=12' \
+            "$RUNNER_TEMP/m3-provider-junit-report-selftest.log"
           python3 - <<'PY'
           import pathlib, subprocess
           root = pathlib.Path.cwd()
@@ -124,6 +142,14 @@ jobs:
               assert actual == digest, new
           print('M3_PROVIDER_SOURCE_RELOCATION_PASS files=54 junitClasses=14')
           PY
+
+      - name: Retain source-only provider report validator evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-provider-report-selftest-${{ github.run_id }}
+          path: ${{ runner.temp }}/m3-provider-junit-report-selftest.log
+          if-no-files-found: warn
 
   actual-m3jdk:
     name: Build modified M3JDK21 image and execute stream JUnit
@@ -423,6 +449,8 @@ jobs:
             "$RUNNER_TEMP/m3-provider-junit"
           grep -Fx 'M3_PROVIDER_JUNIT_PASS classes=15 sourceFiles=57' \
             "$RUNNER_TEMP/m3-provider-junit/status.txt"
+          grep -E '^M3_PROVIDER_JUNIT_REPORT_PASS classes=15 tests=[1-9][0-9]*$' \
+            "$RUNNER_TEMP/m3-provider-junit/report-verification.log"
       - name: Compile current M3 collections and execute real JUnit
         run: |
           set -euo pipefail

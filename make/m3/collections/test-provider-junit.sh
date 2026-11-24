@@ -100,6 +100,7 @@ if [[ ${#cases[@]} -ne 15 ]]; then
   exit 73
 fi
 selects=()
+selected_classes=()
 opens=()
 declare -A seen=()
 for source in "${cases[@]}"; do
@@ -110,12 +111,14 @@ for source in "${cases[@]}"; do
   }
   name="$(basename "$source" .java)"
   selects+=(--select-class "$pkg.$name")
+  selected_classes+=("$pkg.$name")
   if [[ -z "${seen[$pkg]:-}" ]]; then
     opens+=("--add-opens=jdk.m3.collections/$pkg=ALL-UNNAMED")
     seen[$pkg]=1
   fi
 done
 printf '%s\n' "${cases[@]}" > "$out/test-classes.txt"
+printf '%s\n' "${selected_classes[@]}" > "$out/selected-classes.txt"
 runtime=(--add-modules jdk.m3.collections
   --patch-module "jdk.m3.collections=$out/classes"
   --add-reads jdk.m3.collections=ALL-UNNAMED
@@ -125,9 +128,24 @@ if [[ -n "${M3_ARRAYS_NATIVE_PATH:-}" ]]; then
   runtime+=("-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH")
   sha256sum "$M3_ARRAYS_NATIVE_PATH" >> "$out/inputs-sha256.txt"
 fi
-"$jdk/bin/java" -ea -Xmx2g "${runtime[@]}" -cp "$junit" \
+# Test classes belong to a JDK module loaded by the platform class loader.
+# Merely adding a readability edge to ALL-UNNAMED does not let that loader
+# resolve JUnit annotations from the application class loader. Put the exact
+# SHA-256-pinned Console Standalone JAR on the bootstrap append search path.
+# This corrects the observed 0-tests-discovered failure without moving or
+# weakening the original module-patched JUnit tests.
+mkdir -p "$out/validator"
+sha256sum "$repo/make/m3/collections/ProviderJUnitReportsCheck.java" \
+  >> "$out/inputs-sha256.txt"
+"$jdk/bin/javac" --release 21 -proc:none -Xlint:all -Werror \
+  -d "$out/validator" "$repo/make/m3/collections/ProviderJUnitReportsCheck.java"
+"$jdk/bin/java" "-Xbootclasspath/a:$junit" -ea -Xmx2g "${runtime[@]}" -cp "$junit" \
   org.junit.platform.console.ConsoleLauncher execute \
-  "${selects[@]}" --disable-banner --details=summary \
+  "${selects[@]}" --include-engine junit-jupiter \
+  --disable-banner --details=summary --reports-dir "$out/junit-reports" \
   --fail-if-no-tests 2>&1 | tee "$out/provider-junit.log"
+"$jdk/bin/java" -ea -cp "$out/validator" ProviderJUnitReportsCheck \
+  "$out/selected-classes.txt" "$out/junit-reports/TEST-junit-jupiter.xml" \
+  | tee "$out/report-verification.log"
 printf 'M3_PROVIDER_JUNIT_PASS classes=15 sourceFiles=57\n' \
   | tee "$out/status.txt"
