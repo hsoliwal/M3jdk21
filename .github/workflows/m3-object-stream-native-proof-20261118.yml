@@ -12,6 +12,7 @@ on:
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'src/jdk.m3.collections/providers/classes/jdk/m3/collections/vavr/collection/BitSet.java'
       - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
       - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
@@ -21,6 +22,7 @@ on:
       - 'make/m3/collections/test-provider-junit-loader.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/vavr/collection/BitSetPrefixAllocationTest.java'
       - 'test/jdk/jdk/m3/collections/apache/**'
       - 'test/jdk/jdk/m3/collections/eclipse/**'
       - 'test/jdk/jdk/m3/collections/guava/**'
@@ -49,6 +51,7 @@ on:
       - 'm3/collections/test_verify_stream_current.py'
       - 'm3/collections/pom.xml'
       - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java'
+      - 'src/jdk.m3.collections/providers/classes/jdk/m3/collections/vavr/collection/BitSet.java'
       - 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java'
       - 'm3/compatibility/groovy/run-ginq-join-installed.sh'
       - 'm3/compatibility/groovy/run-ginq-join-installed.ps1'
@@ -58,6 +61,7 @@ on:
       - 'make/m3/collections/test-provider-junit-loader.sh'
       - 'm3/collections/qualification/provider-tests-20261123.*'
       - 'test/jdk/jdk/m3/collections/providers/**'
+      - 'test/jdk/jdk/m3/collections/vavr/collection/BitSetPrefixAllocationTest.java'
       - 'test/jdk/jdk/m3/collections/apache/**'
       - 'test/jdk/jdk/m3/collections/eclipse/**'
       - 'test/jdk/jdk/m3/collections/guava/**'
@@ -109,6 +113,10 @@ jobs:
             '4b95a5e0746e3e4163174e52794796f142e5a36d4dc122c2a55f9aad236da430' 'm3/compatibility/groovy/tests/M3GroovyCountByManyTest.java' \
             '2009c9fd180c441317051a9164a6c010f924fb4278207e37b9b089068a4e20c8' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/GinqHashJoin.java' \
             '5af43c760da207b7fb173bb48773ce0f1fd903c6e283f4c0868a72f48d3faabd' 'test/jdk/jdk/m3/collections/GinqHashJoinTest.java' \
+            '1e9fa447590f14a83592ee455f0198d155e00ad087370c9477738a688dfd5d27' 'src/jdk.m3.collections/providers/classes/jdk/m3/collections/vavr/collection/BitSet.java' \
+            'b84917c20e2674404cf39d3b69f1753ef155aa754371f5ed0dbab6152d71b8b3' 'test/jdk/jdk/m3/collections/providers/vavr/collection/BitSetWordOpsOracleTest.java' \
+            '3f4222fd0100ebe5415daf46928217e62d99d494dfb24d24bf4a2deb434377ab' 'test/jdk/jdk/m3/collections/providers/vavr/collection/RefBitSetModule.java' \
+            'e65574e20d9b6c0f596a06529ad02acaa5ddebdf06af0a2abb2fe30ce21ddd5b' 'test/jdk/jdk/m3/collections/vavr/collection/BitSetPrefixAllocationTest.java' \
             | sha256sum --check -
           bash -n m3/compatibility/groovy/run-ginq-join-installed.sh
           bash -n m3/compatibility/groovy/test-ginq-runner-negative.sh
