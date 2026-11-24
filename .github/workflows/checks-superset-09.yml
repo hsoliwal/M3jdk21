@@ -931,7 +931,14 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Build actual M3 arrays and their JNI library, including tests
-        run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux install
+        run: |
+          cmake -S make/m3/arrays -B m3/arrays/target/native \
+            -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON "-DJAVA_HOME=$JAVA_HOME"
+          cmake --build m3/arrays/target/native --config Release --parallel 2
+          ctest --test-dir m3/arrays/target/native --output-on-failure -C Release
+          test -s m3/arrays/target/native/libm3_arrays.so
+          mvn -B -ntp -f m3/arrays/pom.xml -Dm3.arrays.native.required=true \
+            "-DargLine=-Xcheck:jni -Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" install
       - name: Build and run all available Maven collection tests
         run: mvn -B -ntp -f m3/collections/pom.xml "-Dm3.arrays.native.path=$GITHUB_WORKSPACE/m3/arrays/target/native/libm3_arrays.so" test
       - name: Executable array-backed list identity, stable order and fail-fast checks
@@ -943,7 +950,7 @@ jobs:
       - name: Executable bounded mask window Java parity
         run: |
           java -ea -cp m3/collections/target/classes:m3/collections/target/test-classes \
-            jdk.m3.collections.M3BudgetedMaskWindowContract
+            jdk.m3.collections.BudgetedMaskWindowContract
       - name: Build unchanged JNI selector against matching Java 21 headers
         run: |
           gcc -std=c11 -O2 -fPIC -shared -Wall -Wextra -Werror \
@@ -955,7 +962,7 @@ jobs:
         run: |
           java -ea -Djava.library.path="$RUNNER_TEMP" \
             -cp m3/collections/target/classes:m3/collections/target/test-classes \
-            jdk.m3.collections.M3BudgetedMaskWindowContract --native
+            jdk.m3.collections.BudgetedMaskWindowContract --native
 
   primitive-indexed-collections__java21-primitive-indexes-and-jni:
     name: "Primitive indexed collection contracts / java21-primitive-indexes-and-jni"
