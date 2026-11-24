@@ -140,10 +140,7 @@ mkdir -p "$out/discovery-probe"
   -cp "$out/discovery-probe:$junit" ProviderJUnitDiscoveryProbe \
   jdk.m3.collections 15 "${test_names[@]}" \
   2>&1 | tee "$out/discovery-annotations.log"
-grep -E '^M3_PROVIDER_JUNIT_ANNOTATIONS_VISIBLE module=jdk[.]m3[.]collections classes=15 methods=[1-9][0-9]*
-printf 'M3_PROVIDER_JUNIT_PASS classes=15 sourceFiles=57\n' \
-  | tee "$out/status.txt"
- \
+grep -E '^M3_PROVIDER_JUNIT_ANNOTATIONS_VISIBLE module=jdk[.]m3[.]collections classes=15 methods=[1-9][0-9]*$' \
   "$out/discovery-annotations.log"
 "$jdk/bin/java" "-Xbootclasspath/a:$junit" -ea -Xmx2g "${runtime[@]}" -cp "$junit" \
   org.junit.platform.console.ConsoleLauncher execute \
