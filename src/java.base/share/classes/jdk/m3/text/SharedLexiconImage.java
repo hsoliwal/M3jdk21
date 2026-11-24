@@ -156,6 +156,24 @@ public final class SharedLexiconImage {
         return Integer.compare(leftUnits, rightUnits);
     }
 
+    /**
+     * Exact UTF-16 equality directly against mapped code units. No String, char[], byte[],
+     * or retained view is created. The image must retain its normal corruption/lifetime rules.
+     */
+    public boolean recordEquals(int index, String expected) {
+        return compareRecordTo(index, Objects.requireNonNull(expected)) == 0;
+    }
+
+    /** Validated UTF-16 code-unit length without decoding the mapped record. */
+    public int recordUtf16Length(int index) {
+        return lengths[Objects.checkIndex(index, lengths.length)];
+    }
+
+    /** Java String-compatible UTF-16 hash calculated from the mapped record. */
+    public int recordJavaHash(int index) {
+        return javaHash(index);
+    }
+
     /** Exact UTF-16 text for a record; unpaired surrogates are preserved. */
     String recordText(int index) {
         ByteBuffer record = recordBytes(index);

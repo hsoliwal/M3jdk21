@@ -364,8 +364,13 @@ public final class SharedLexiconCatalog {
     private void validateShardSidecars(int shardId, SharedLexiconImage image) throws IOException {
         int first = rowOffsets == null ? 0 : rowOffsets[shardId];
         for (int row = 0; row < image.size(); row++) {
-            String text = image.recordText(row);
-            for (SourceMapping mapping : mappingRows[first + row]) {
+            // The first already-decoded sidecar lexeme is the comparison anchor.
+            // Compare it to mapped UTF-16 once, then compare sibling mappings by String value.
+            List<SourceMapping> rowMappings = mappingRows[first + row];
+            String text = rowMappings.get(0).lexeme();
+            if (!image.recordEquals(row, text))
+                throw new IOException("mapping lexeme does not match image coordinate");
+            for (SourceMapping mapping : rowMappings) {
                 if (!mapping.lexeme().equals(text))
                     throw new IOException("mapping lexeme does not match image coordinate");
             }
@@ -473,8 +478,8 @@ public final class SharedLexiconCatalog {
         SharedLexiconImage image = SharedLexiconImage.open(shard.path);
         if (image.version() != 2 || image.size() != shard.expectedRecords
                 || image.utf16Units() != shard.expectedUnits
-                || !image.recordText(0).equals(shard.firstLexeme)
-                || !image.recordText(image.size() - 1).equals(shard.lastLexeme))
+                || !image.recordEquals(0, shard.firstLexeme)
+                || !image.recordEquals(image.size() - 1, shard.lastLexeme))
             throw new IOException("shard metadata does not match image");
         return image;
     }
@@ -524,7 +529,8 @@ public final class SharedLexiconCatalog {
             } catch (IllegalArgumentException failure) {
                 throw malformed(lineNumber, "invalid precompute_payload: " + failure.getMessage());
             }
-            if (verifyImageText && !imageText(shards, coordinate).equals(lexeme))
+            if (verifyImageText && !imageFor(shards, coordinate)
+                    .recordEquals(coordinate.imageRow(), lexeme))
                 throw malformed(lineNumber, "mapping lexeme does not match image coordinate");
             SourceMapping mapping = new SourceMapping(fields[0], fields[1], fields[2], fields[3],
                     fields[4], lexeme, coordinate, fields[8], fields[9], fields[10], fields[11], fields[12]);
@@ -546,8 +552,10 @@ public final class SharedLexiconCatalog {
             long units = parseNonNegativeLong(fields[2], lineNumber, "utf16_units");
             long hash = parseUnsignedHash(fields[3], lineNumber);
             if (verifyImageText) {
-                String text = imageText(shards, coordinate);
-                if (units != text.length() || hash != Integer.toUnsignedLong(javaHash(text)))
+                SharedLexiconImage image = imageFor(shards, coordinate);
+                int row = coordinate.imageRow();
+                if (units != image.recordUtf16Length(row)
+                        || hash != Integer.toUnsignedLong(image.recordJavaHash(row)))
                     throw malformed(lineNumber, "precompute text facts do not match image");
             }
             int codePoints = parseNonNegativeInt(fields[4], lineNumber, "code_points");
@@ -702,10 +710,11 @@ public final class SharedLexiconCatalog {
         return new Coordinate(shardId, imageRow);
     }
 
-    private static String imageText(List<ShardSlot> shards, Coordinate coordinate) {
+    /** The caller has verified that the shard is opened before sidecar comparison. */
+    private static SharedLexiconImage imageFor(List<ShardSlot> shards, Coordinate coordinate) {
         SharedLexiconImage image = shards.get(coordinate.shardId()).image;
         if (image == null) throw new IllegalStateException("image not opened");
-        return image.recordText(coordinate.imageRow());
+        return image;
     }
 
     private static int javaHash(String value) {
