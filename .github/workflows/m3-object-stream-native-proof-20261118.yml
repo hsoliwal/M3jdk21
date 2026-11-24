@@ -24,6 +24,12 @@ on:
       - 'test/jdk/jdk/m3/collections/guava/**'
       - 'test/jdk/jdk/m3/collections/vavr/**'
       - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/StringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/StringBuffer.java'
+      - 'src/java.base/share/classes/java/lang/M3String*.java'
+      - 'test/jdk/java/lang/StringBuilder/M3CompositeBuilderSearchReverseTest.java'
+      - 'test/jdk/java/lang/StringBuilder/M3CompositeBuilderMiddleEditTest.java'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'test/jdk/java/lang/String/StringCaseFamily*.java'
       - 'test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java'
@@ -53,6 +59,12 @@ on:
       - 'test/jdk/jdk/m3/collections/guava/**'
       - 'test/jdk/jdk/m3/collections/vavr/**'
       - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/StringBuilder.java'
+      - 'src/java.base/share/classes/java/lang/StringBuffer.java'
+      - 'src/java.base/share/classes/java/lang/M3String*.java'
+      - 'test/jdk/java/lang/StringBuilder/M3CompositeBuilderSearchReverseTest.java'
+      - 'test/jdk/java/lang/StringBuilder/M3CompositeBuilderMiddleEditTest.java'
       - 'src/java.base/share/classes/java/util/stream/Streams.java'
       - 'test/jdk/java/lang/String/StringCaseFamily*.java'
       - 'test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java'
@@ -223,6 +235,12 @@ jobs:
           grep -F 'public final class java.util.stream.Streams' "$RUNNER_TEMP/m3-streams-api.txt"
           grep -F 'mapWhile(' "$RUNNER_TEMP/m3-streams-api.txt"
           grep -F 'pairwise(' "$RUNNER_TEMP/m3-streams-api.txt"
+      - name: Run composite builder jtreg modes on the built M3 image
+        run: |
+          set -euo pipefail
+          make CONF=m3-groovy-native-proof JOBS=2 test \
+            TEST="jtreg:test/jdk/java/lang/StringBuilder/M3CompositeBuilderSearchReverseTest.java jtreg:test/jdk/java/lang/StringBuilder/M3CompositeBuilderMiddleEditTest.java" \
+            | tee "$RUNNER_TEMP/m3-composite-builder-jtreg.log"
       - name: Compile actual M3 arrays dependency
         run: |
           set -euo pipefail
@@ -546,6 +564,7 @@ jobs:
             ${{ runner.temp }}/m3-ninja-version.log
             ${{ runner.temp }}/m3-jtreg-version.log
             ${{ runner.temp }}/m3-groovy-jtreg.log
+            ${{ runner.temp }}/m3-composite-builder-jtreg.log
             ${{ runner.temp }}/m3-packaged-image-identity.log
             build/*/configure.log
             build/*/spec.gmk
