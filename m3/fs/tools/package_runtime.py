@@ -18,7 +18,8 @@ import subprocess
 import sys
 import zipfile
 
-from vfs_pack_support import (collect_legal, load_dependencies, verify_jar_legal,
+from vfs_pack_support import (collect_legal, load_dependencies, load_product_dependencies,
+                              runtime_dependencies, verify_jar_legal,
                               verify_linked_legal, write_pack_inputs)
 
 DONOR_COMMIT = "289e32f130c9c8e4a1cf0edc1066327d699393bf"
@@ -128,6 +129,8 @@ def main(argv=None):
                         help="Pinned VFS provider dependency closure; required for a VFS-enabled M3FS JAR")
     parser.add_argument("--provider-dependency-lock", type=Path,
                         help="Defaults to tools/vfs-dependencies.lock.json when a provider cache is supplied")
+    parser.add_argument("--product-dependency-lock", type=Path,
+                        help="Reviewed file/collections/arrays JAR and legal hashes in the provider cache")
     parser.add_argument("--repository-root", type=Path,
                         default=Path(__file__).resolve().parents[3])
     args = parser.parse_args(argv)
@@ -144,6 +147,7 @@ def main(argv=None):
     sqlite = input_file(args.sqlite_library)
     with zipfile.ZipFile(jar) as archive:
         contains_vfs = "jdk/m3/fs/vfs/M3VFS.class" in archive.namelist()
+        inlined_logging = "org/apache/commons/logging/LogFactory.class" in archive.namelist()
         if "module-info.class" not in archive.namelist():
             raise ValueError("packaged modular M3FS jar required; run Maven install first")
     repository = args.repository_root.resolve(strict=True)
@@ -156,9 +160,14 @@ def main(argv=None):
         raise ValueError("VFS-enabled M3FS requires --provider-dependency-cache with the complete pinned closure")
     if args.provider_dependency_lock is not None and args.provider_dependency_cache is None:
         raise ValueError("--provider-dependency-lock requires --provider-dependency-cache")
+    if args.product_dependency_lock is not None and args.provider_dependency_cache is None:
+        raise ValueError("--product-dependency-lock requires --provider-dependency-cache")
     dependency_lock = args.provider_dependency_lock or module_root / "tools/vfs-dependencies.lock.json"
     dependencies = (load_dependencies(dependency_lock, args.provider_dependency_cache, module_root)
                     if args.provider_dependency_cache is not None else [])
+    product_dependencies = (load_product_dependencies(args.product_dependency_lock, args.provider_dependency_cache)
+                            if args.product_dependency_lock is not None else [])
+    dependencies = runtime_dependencies(dependencies, inlined_logging) + product_dependencies
     if contains_vfs:
         verify_jar_legal(module_root, jar)
     probe = input_file(module_root / "verification/M3FsRuntimeProbe.java")
@@ -194,6 +203,10 @@ def main(argv=None):
                                   for row in dependencies],
         "provider_dependency_lock": ({"path": str(input_file(dependency_lock)), "sha256": digest(dependency_lock)}
                                      if dependencies else None),
+        "product_dependency_lock": ({"path": str(input_file(args.product_dependency_lock)),
+                                     "sha256": digest(args.product_dependency_lock)}
+                                    if args.product_dependency_lock is not None else None),
+        "inlined_logging": inlined_logging,
         "probe_source": {"path": str(probe), "sha256": digest(probe)},
         "jdk_home": str(jdk), "jdk_release": release, "roots": ROOTS,
         "removed_environment_names": removed, "legal": notices,
@@ -224,7 +237,17 @@ def main(argv=None):
         raise RuntimeError("linked probe did not emit its success marker")
     provider_legal_proof = verify_linked_legal(out, dependencies, provider_legal_hashes)
     if dependencies:
+        if digest(input_file(dependency_lock)) != inputs["provider_dependency_lock"]["sha256"]:
+            raise ValueError("provider dependency lock changed during packaging")
         load_dependencies(dependency_lock, args.provider_dependency_cache, module_root)
+    if args.product_dependency_lock is not None:
+        if digest(input_file(args.product_dependency_lock)) != inputs["product_dependency_lock"]["sha256"]:
+            raise ValueError("product dependency lock changed during packaging")
+        load_product_dependencies(args.product_dependency_lock, args.provider_dependency_cache)
+    for path, key in ((jar, "jar"), (native, "jni_library"), (sqlite, "sqlite_library"),
+                      (packer, "existing_packer"), (probe, "probe_source")):
+        if digest(input_file(path)) != inputs[key]["sha256"]:
+            raise ValueError("packaging input changed during use: " + key)
     linked_native = image / "lib/libm3fs.so"
     linked_sqlite = image / "lib" / sqlite_soname
     report = {

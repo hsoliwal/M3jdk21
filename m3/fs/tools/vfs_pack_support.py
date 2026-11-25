@@ -16,6 +16,7 @@ RECEIVER_BASE = "73f59218dc4ef1a3ef79aad990e77273db2a2d60"
 DEPENDENCY_MODULES = frozenset({"commons.logging", "org.apache.commons.lang3",
                                 "org.apache.commons.io", "org.apache.commons.compress",
                                 "org.apache.commons.codec"})
+PRODUCT_MODULES = frozenset({"org.m3jdk.file", "jdk.m3.collections", "jdk.m3.arrays"})
 OMITTED_PROVIDERS = frozenset({"ftp", "ftps", "http", "https", "http4", "http4s",
                               "http5", "http5s", "sftp"})
 OMITTED_FILES = frozenset({"cache/LRUFilesCache.java", "provider/URLFileName.java",
@@ -170,6 +171,62 @@ def load_dependencies(lock_path, cache, module_root):
     if seen != DEPENDENCY_MODULES:
         raise ValueError("missing dependency module")
     return sorted(resolved, key=lambda row: row["module"])
+
+
+def load_product_dependencies(lock_path, cache):
+    """Admit the exact source-built file/collections/arrays artifacts and legal bytes.
+
+    The caller supplies a reviewed lock; this function never creates or repairs it.
+    Actual module names and dependency edges are verified by javac and the shared
+    module graph/packer, rather than inferred from JAR filenames.
+    """
+    lock = json.loads(input_file(lock_path).read_text(encoding="utf-8"))
+    rows = lock.get("dependencies")
+    if lock.get("schema") != 1 or not isinstance(rows, list) or len(rows) != len(PRODUCT_MODULES):
+        raise ValueError("the complete three-module M3 product dependency closure is required")
+    cache = Path(cache).resolve(strict=True)
+    seen, resolved = set(), []
+    for row in rows:
+        name = row.get("module")
+        if name not in PRODUCT_MODULES or name in seen:
+            raise ValueError("duplicate or unexpected product module: " + str(name))
+        seen.add(name)
+        archive = input_file(cache / relative_path(row["repository_path"]))
+        if not archive.is_relative_to(cache):
+            raise ValueError("product dependency must remain inside the supplied cache")
+        expected = row.get("sha256", "")
+        if not re.fullmatch(r"[0-9a-f]{64}", expected) or digest(archive) != expected:
+            raise ValueError("product dependency SHA-256 drift: " + name)
+        legal = row.get("legal_sha256")
+        if not isinstance(legal, dict) or not legal:
+            raise ValueError("original product legal resource pins required: " + name)
+        with zipfile.ZipFile(archive) as source:
+            names = source.namelist()
+            if len(names) != len(set(names)):
+                raise ValueError("duplicate product ZIP entries: " + name)
+            if "module-info.class" not in names:
+                raise ValueError("explicit product module descriptor required: " + name)
+            original_legal = {entry for entry in names if entry.startswith("META-INF/")
+                              and not entry.endswith("/")
+                              and ("LICENSE" in entry.upper() or "NOTICE" in entry.upper()
+                                   or "/legal/" in entry or entry == "META-INF/m3collections.md")}
+            if not original_legal or set(legal) != original_legal:
+                raise ValueError("complete original product legal resource pins required: " + name)
+            for entry, expected_legal in legal.items():
+                relative_path(entry)
+                if (not entry.startswith("META-INF/") or not isinstance(expected_legal, str)
+                        or re.fullmatch(r"[0-9a-f]{64}", expected_legal) is None
+                        or entry not in names
+                        or hashlib.sha256(source.read(entry)).hexdigest() != expected_legal):
+                    raise ValueError("product legal text drift: " + name + "/" + entry)
+        resolved.append(dict(row, jar=archive, descriptor_kind="published"))
+    return sorted(resolved, key=lambda row: row["module"])
+
+
+def runtime_dependencies(dependencies, inlined_logging):
+    """Keep legacy external Logging, or select its already inlined product owner."""
+    return [row for row in dependencies
+            if not (inlined_logging and row["module"] == "commons.logging")]
 
 
 def write_pack_inputs(receipts, jar, dependencies):
