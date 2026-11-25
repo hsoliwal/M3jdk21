@@ -111,6 +111,25 @@ def audit(expected, observed_hashes, actual_java):
     }
 
 
+def mat_prefix_review_candidates(unobserved, unlisted):
+    """Candidates only: never infer equivalent Java behavior from matching names.
+
+    This reports matching parent-path + Mat-prefix removal, without changing
+    the original source identities or authorizing any successor receipt.
+    """
+    current = set(unlisted)
+    suggestions = []
+    for original in sorted(unobserved):
+        parent, separator, leaf = original.rpartition("/")
+        if not separator or not leaf.startswith("Mat") or len(leaf) <= 3:
+            continue
+        candidate = parent + "/" + leaf[3:]
+        if candidate in current:
+            suggestions.append({"historical": original, "candidate": candidate,
+                                "identity": "UNVERIFIED_SOURCE_SEMANTICS"})
+    return suggestions
+
+
 def self_test():
     rows = [("m3/collections/src/main/java/jdk/a/Foo.java", "a" * 64),
             ("m3/collections/src/main/c/a.c", "b" * 64)]
@@ -127,7 +146,14 @@ def self_test():
     new = audit(rows, dict(rows), declared | {"m3/collections/src/main/java/New.java"})
     assert new["java_unlisted_in_receipts"] == [
         "m3/collections/src/main/java/New.java"]
-    print("M3_COLLECTION_SOURCE_AUDIT_SELF_TEST_PASS cases=4")
+    mat_pair = mat_prefix_review_candidates(
+        ["m3/collections/src/main/java/jdk/internal/m3/collections/mat/MatFoo.java"],
+        ["m3/collections/src/main/java/jdk/internal/m3/collections/mat/Foo.java"])
+    assert len(mat_pair) == 1 and mat_pair[0]["identity"] == "UNVERIFIED_SOURCE_SEMANTICS"
+    assert not mat_prefix_review_candidates(
+        ["m3/collections/src/main/java/jdk/internal/m3/collections/mat/MatFoo.java"],
+        ["m3/collections/src/test/java/jdk/internal/m3/collections/mat/Foo.java"])
+    print("M3_COLLECTION_SOURCE_AUDIT_SELF_TEST_PASS cases=6")
 
 
 def main():
@@ -163,6 +189,9 @@ def main():
         if report["missing_paths"] != sorted(missing + aliases):
             raise ValueError("source inventory discrepancy")
         report["aliased_paths"] = sorted(aliases)
+        report["candidate_mat_prefix_renames"] = mat_prefix_review_candidates(
+            report["java_declared_not_in_source_roots"],
+            report["java_unlisted_in_receipts"])
         report["source_receipt_chain"] = list(TRANSITIONS)
         report["source_manifest_sha256"] = verifier.read_donation_packet()[
             "installed_source_manifest_sha256"]
