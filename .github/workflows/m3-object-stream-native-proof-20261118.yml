@@ -524,14 +524,29 @@ jobs:
             grep -Eq '^[[:space:]]*\*[[:space:]]*@test[[:space:]]*$' "$file"
             grep -Eq '^[[:space:]]*\*[[:space:]]*@modules[[:space:]]+' "$file"
             grep -Eq '^[[:space:]]*\*[[:space:]]*@run[[:space:]]+main(/othervm)?[[:space:]]+' "$file"
-            ! grep -Eq 'org[.]junit[.]' "$file"
+            # A bare `! grep` never stops a `set -e` script, so the JUnit refusal is explicit.
+            if grep -Eq 'org[.]junit[.]' "$file"; then
+              echo "provider main uses JUnit: $file" >&2; exit 92
+            fi
             suite+=("jtreg:$file")
           done
+          log="$RUNNER_TEMP/m3-provider-main-jtreg.log"
           make CONF=m3-groovy-native-proof JOBS=2 test \
             JTREG="JAVA_OPTIONS=-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
             TEST="${suite[*]}" \
-            | tee "$RUNNER_TEMP/m3-provider-main-jtreg.log"
-          grep -Eq '^Test results: passed: 8([[:space:]]|$)' "$RUNNER_TEMP/m3-provider-main-jtreg.log"
+            | tee "$log"
+          # make runs every jtreg:<file> selection as its own jtreg run, so each of the eight pinned cases
+          # reports its own "Passed:" line and "Test results: passed: 1"; there is no aggregate "passed: 8".
+          for binding in "${provider_cases[@]}"; do
+            name="${binding%%:*}"
+            passed="$(grep -Fxc "Passed: jdk/m3/collections/providers/$name" "$log" || true)"
+            [[ "$passed" = 1 ]] || { echo "provider main did not pass exactly once ($passed): $name" >&2; exit 93; }
+          done
+          runs="$(grep -Ec '^Test results: ' "$log" || true)"
+          [[ "$runs" = 8 ]] || { echo "expected 8 jtreg runs, saw $runs" >&2; exit 94; }
+          passes="$(grep -Exc 'Test results: passed: 1' "$log" || true)"
+          [[ "$passes" = 8 ]] || { echo "expected 8 single-test passes, saw $passes" >&2; exit 95; }
+          grep -Fxq 'TEST SUCCESS' "$log" || { echo 'make test did not report TEST SUCCESS' >&2; exit 96; }
       - name: Compile original provider JUnit tests against the complete installed module
         run: |
           set -euo pipefail
