@@ -38,7 +38,7 @@ jobs:
             m3/collections/qualification/installed_source_drift_audit.py
           python3 m3/collections/qualification/mat_history_source_proof.py \
             --self-test | tee "$RUNNER_TEMP/m3-mat-public-selftest.log"
-          grep -Fx 'M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=16' \
+          grep -Fx 'M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=17' \
             "$RUNNER_TEMP/m3-mat-public-selftest.log"
       - name: Compare reviewed original PR history against exact installed-source inventory
         shell: bash
