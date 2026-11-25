@@ -2083,24 +2083,85 @@ public class BasicTableUI extends TableUI
     }
 
     /**
-     * Returns {@code table.getCellRect(row, column, includeSpacing)} for a row
-     * painted in the same pass as {@code first}, the rectangle of the same
-     * column and spacing in an earlier row. {@code JTable.getCellRect} walks
-     * every column before {@code column}, which made a paint cost the visible
-     * rows times the columns left of the view. When the table keeps that
-     * method, the column axis is taken from {@code first} and only the row
-     * axis is asked for: {@code getCellRect(row, -1, true)} answers the row's
-     * y and height without walking columns, and the row margin is applied as
-     * {@code getCellRect} applies it.
+     * The column axis of the cells that one paint draws in one view column:
+     * the x and width of the last rectangle {@code JTable.getCellRect} answered
+     * for that column, with the orientation and column model state it was
+     * computed from. When a renderer changes the column geometry or the
+     * orientation while a paint runs, the axis no longer matches and the next
+     * row asks {@code getCellRect} again.
      */
-    private Rectangle paintedCellRect(int row, int column, boolean includeSpacing,
-                                      Rectangle first) {
-        if (first == null || !OWN_CELL_RECT.get(table.getClass())) {
-            return table.getCellRect(row, column, includeSpacing);
+    private static final class PaintedColumn {
+        private final int column;
+        private final boolean includeSpacing;
+        private boolean valid;
+        private int x;
+        private int width;
+        private TableColumnModel model;
+        private boolean leftToRight;
+        private int count;
+        private int margin;
+        private int totalWidth;
+        private TableColumn atColumn;
+
+        PaintedColumn(int column, boolean includeSpacing) {
+            this.column = column;
+            this.includeSpacing = includeSpacing;
+        }
+
+        /** Records the column axis of {@code r}, answered by getCellRect for this column. */
+        void capture(Rectangle r, TableColumnModel cm, boolean ltr) {
+            int columns = cm.getColumnCount();
+            valid = column >= 0 && column < columns;
+            if (valid) {
+                x = r.x;
+                width = r.width;
+                model = cm;
+                leftToRight = ltr;
+                count = columns;
+                margin = cm.getColumnMargin();
+                totalWidth = cm.getTotalColumnWidth();
+                atColumn = cm.getColumn(column);
+            }
+        }
+
+        /** Whether the column model still has the geometry the axis was taken from. */
+        boolean matches(TableColumnModel cm, boolean ltr) {
+            return valid && cm == model && ltr == leftToRight
+                    && cm.getColumnCount() == count
+                    && cm.getColumnMargin() == margin
+                    && cm.getTotalColumnWidth() == totalWidth
+                    && cm.getColumn(column) == atColumn;
+        }
+    }
+
+    /**
+     * Returns {@code table.getCellRect(row, axis.column, axis.includeSpacing)}
+     * for a row of the current paint. {@code JTable.getCellRect} walks every
+     * column before the requested one (after it, right to left), which made a
+     * paint cost the visible rows times the columns left of the view. When the
+     * table keeps that method and the axis still matches, the column axis is
+     * reused and only the row axis is asked for: {@code getCellRect(row, -1,
+     * true)} answers the row's y and height without walking columns, and the
+     * row margin is applied as {@code getCellRect} applies it. Otherwise the
+     * row asks {@code getCellRect} as before and its answer becomes the axis.
+     * Undetected are only changes that keep the column count, margin, total
+     * width and the column at {@code axis.column}, such as two width changes
+     * that cancel out, made by a renderer within one paint.
+     */
+    private Rectangle paintedCellRect(int row, PaintedColumn axis) {
+        boolean own = OWN_CELL_RECT.get(table.getClass());
+        TableColumnModel cm = table.getColumnModel();
+        boolean ltr = table.getComponentOrientation().isLeftToRight();
+        if (!own || !axis.matches(cm, ltr)) {
+            Rectangle r = table.getCellRect(row, axis.column, axis.includeSpacing);
+            if (own) {
+                axis.capture(r, cm, ltr);
+            }
+            return r;
         }
         Rectangle r = table.getCellRect(row, -1, true);
-        int rowMargin = includeSpacing ? 0 : Math.min(table.getRowMargin(), r.height);
-        r.setBounds(first.x, r.y + rowMargin / 2, first.width, r.height - rowMargin);
+        int rowMargin = axis.includeSpacing ? 0 : Math.min(table.getRowMargin(), r.height);
+        r.setBounds(axis.x, r.y + rowMargin / 2, axis.width, r.height - rowMargin);
         return r;
     }
 
@@ -2114,13 +2175,10 @@ public class BasicTableUI extends TableUI
         Rectangle cellRect;
         TableColumn aColumn;
         int columnWidth;
-        Rectangle firstCellRect = null;
+        PaintedColumn firstColumn = new PaintedColumn(cMin, false);
         if (table.getComponentOrientation().isLeftToRight()) {
             for(int row = rMin; row <= rMax; row++) {
-                cellRect = paintedCellRect(row, cMin, false, firstCellRect);
-                if (firstCellRect == null) {
-                    firstCellRect = new Rectangle(cellRect);
-                }
+                cellRect = paintedCellRect(row, firstColumn);
                 for(int column = cMin; column <= cMax; column++) {
                     aColumn = cm.getColumn(column);
                     columnWidth = aColumn.getWidth();
@@ -2133,10 +2191,7 @@ public class BasicTableUI extends TableUI
             }
         } else {
             for(int row = rMin; row <= rMax; row++) {
-                cellRect = paintedCellRect(row, cMin, false, firstCellRect);
-                if (firstCellRect == null) {
-                    firstCellRect = new Rectangle(cellRect);
-                }
+                cellRect = paintedCellRect(row, firstColumn);
                 aColumn = cm.getColumn(cMin);
                 if (aColumn != draggedColumn) {
                     columnWidth = aColumn.getWidth();
@@ -2201,24 +2256,18 @@ public class BasicTableUI extends TableUI
             g.drawLine(x2, y1, x2, y2);
         }
 
-        Rectangle firstCellRect = null;
-        Rectangle firstSpacedRect = null;
+        PaintedColumn cellColumn = new PaintedColumn(draggedColumnIndex, false);
+        PaintedColumn spacedColumn = new PaintedColumn(draggedColumnIndex, true);
         for(int row = rMin; row <= rMax; row++) {
             // Render the cell value
-            Rectangle r = paintedCellRect(row, draggedColumnIndex, false, firstCellRect);
-            if (firstCellRect == null) {
-                firstCellRect = new Rectangle(r);
-            }
+            Rectangle r = paintedCellRect(row, cellColumn);
             r.x += distance;
             paintCell(g, r, row, draggedColumnIndex);
 
             // Paint the (lower) horizontal grid line if necessary.
             if (table.getShowHorizontalLines()) {
                 g.setColor(table.getGridColor());
-                Rectangle rcr = paintedCellRect(row, draggedColumnIndex, true, firstSpacedRect);
-                if (firstSpacedRect == null) {
-                    firstSpacedRect = new Rectangle(rcr);
-                }
+                Rectangle rcr = paintedCellRect(row, spacedColumn);
                 rcr.x += distance;
                 int x1 = rcr.x;
                 int y1 = rcr.y;

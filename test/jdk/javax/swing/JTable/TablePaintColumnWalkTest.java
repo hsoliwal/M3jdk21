@@ -22,11 +22,13 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.lang.management.ManagementFactory;
 import java.util.Arrays;
+import java.util.function.Consumer;
 import javax.swing.CellRendererPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
 
@@ -49,6 +51,7 @@ public class TablePaintColumnWalkTest {
 
     private static void runAll() {
         run("pixels-and-reads-equal-per-row-path", TablePaintColumnWalkTest::differential);
+        run("renderer-changes-geometry-mid-paint", TablePaintColumnWalkTest::geometryChangedByRenderer);
         run("column-work-bounded-per-paint", TablePaintColumnWalkTest::columnWork);
         run("only-visible-rows-read", TablePaintColumnWalkTest::visibleRowsOnly);
         run("no-per-row-residency", TablePaintColumnWalkTest::residency);
@@ -222,6 +225,100 @@ public class TablePaintColumnWalkTest {
                         check(fastModel.reads == refModel.reads && fastModel.reads > 0,
                                 "same number of reads " + config + ": " + fastModel.reads + " vs " + refModel.reads);
                         check(fastModel.readOrderHash == refModel.readOrderHash, "same read order " + config);
+                    }
+                }
+            }
+        }
+    }
+
+    /** A renderer that changes the table once, when it is asked for one cell. */
+    static final class ChangingRenderer extends DefaultTableCellRenderer {
+        private final int row;
+        private final int column;
+        private final Consumer<JTable> change;
+        private boolean changed;
+
+        ChangingRenderer(int row, int column, Consumer<JTable> change) {
+            this.row = row;
+            this.column = column;
+            this.change = change;
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean selected,
+                                                       boolean focus, int row, int column) {
+            if (!changed && row == this.row && column == this.column) {
+                changed = true;
+                change.accept(table);
+            }
+            return super.getTableCellRendererComponent(table, value, selected, focus, row, column);
+        }
+    }
+
+    /**
+     * A renderer that changes the column geometry or the orientation while a paint runs: every
+     * later row is drawn where the per-row getCellRect path draws it, left to right and right to left.
+     */
+    private static void geometryChangedByRenderer() {
+        int rows = 400;
+        int columns = 40;
+        String[] names = {"margin", "own column wider", "column before the view wider",
+            "column moved across the view", "orientation flipped", "two cancelling widths"};
+        for (boolean rtl : new boolean[] {false, true}) {
+            for (boolean drag : new boolean[] {false, true}) {
+                for (int kind = 0; kind < names.length; kind++) {
+                    int[] pixels = null;
+                    long readHash = 0;
+                    for (boolean perRowReference : new boolean[] {false, true}) {
+                        CountingModel model = new CountingModel(rows, columns);
+                        JTable table = table(perRowReference, rows, columns, model, new CountingColumnModel());
+                        configure(table, rtl, 1, 1, false, 0);
+                        Rectangle clip = new Rectangle(rtl ? 900 : 1_100, 16 * 100 + 3, 700, 400);
+                        int firstColumn = table.columnAtPoint(new java.awt.Point(clip.x + (rtl ? clip.width - 1 : 0), clip.y));
+                        int changeRow = 100 + 6;
+                        // visible columns are firstColumn.. in both orientations; the origin of
+                        // firstColumn sums the columns before it (LTR) or after it (RTL)
+                        int changeColumn = firstColumn + 2;
+                        int before = rtl ? Math.min(columns - 1, firstColumn + 12) : Math.max(0, firstColumn - 3);
+                        int after = rtl ? Math.max(0, firstColumn - 5) : Math.min(columns - 1, firstColumn + 5);
+                        int k = kind;
+                        Consumer<JTable> change = t -> {
+                            switch (k) {
+                                case 0 -> t.getColumnModel().setColumnMargin(6);
+                                case 1 -> t.getColumnModel().getColumn(changeColumn).setMinWidth(140);
+                                case 2 -> t.getColumnModel().getColumn(before).setWidth(75 + 41);
+                                case 3 -> t.getColumnModel().moveColumn(before, after);
+                                case 4 -> t.setComponentOrientation(rtl ? ComponentOrientation.LEFT_TO_RIGHT
+                                        : ComponentOrientation.RIGHT_TO_LEFT);
+                                default -> {
+                                    t.getColumnModel().getColumn(before).setWidth(75 + 30);
+                                    t.getColumnModel().getColumn(after).setWidth(75 - 30);
+                                }
+                            }
+                        };
+                        table.setDefaultRenderer(Object.class, new ChangingRenderer(changeRow, changeColumn, change));
+                        if (drag) {
+                            int dragged = firstColumn + 4;
+                            table.getTableHeader().setDraggedColumn(table.getColumnModel().getColumn(dragged));
+                            table.getTableHeader().setDraggedDistance(-17);
+                        }
+                        model.reset();
+                        int[] painted = pixels(paint(table, clip));
+                        if (pixels == null) {
+                            pixels = painted;
+                            readHash = model.readOrderHash;
+                        } else {
+                            String config = names[kind] + " rtl=" + rtl + " drag=" + drag;
+                            if (kind == names.length - 1) {
+                                // Cancelling widths keep every value the axis is checked against; the
+                                // owner path is documented not to see them, so only report the result.
+                                System.out.println("cancelling widths rtl=" + rtl + " drag=" + drag
+                                        + " same pixels=" + Arrays.equals(pixels, painted));
+                            } else {
+                                check(Arrays.equals(pixels, painted), "identical pixels after " + config);
+                                check(readHash == model.readOrderHash, "same read order after " + config);
+                            }
+                        }
                     }
                 }
             }
