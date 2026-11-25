@@ -116,6 +116,26 @@ jobs:
           sudo apt-get install gcc-${{ inputs.gcc-major-version }}${{ inputs.gcc-package-suffix }} g++-${{ inputs.gcc-major-version }}${{ inputs.gcc-package-suffix }} libxrandr-dev${{ steps.arch.outputs.suffix }} libxtst-dev${{ steps.arch.outputs.suffix }} libcups2-dev${{ steps.arch.outputs.suffix }} libasound2-dev${{ steps.arch.outputs.suffix }} ${{ inputs.apt-extra-packages }}
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${{ inputs.gcc-major-version }} 100 --slave /usr/bin/g++ g++ /usr/bin/g++-${{ inputs.gcc-major-version }}
 
+      - name: 'Get pinned GN and Ninja for bundled Skia'
+        id: skia-tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          skia="$GITHUB_WORKSPACE/src/jdk.m3.graphics/share/native/libm3graphics/skia"
+          test -f "$skia/BUILD.gn"
+          test -f "$skia/bin/fetch-gn"
+          test -f "$skia/bin/fetch-ninja"
+          python3 "$skia/bin/fetch-gn"
+          python3 "$skia/bin/fetch-ninja"
+          gn="$skia/bin/gn"
+          ninja="$skia/third_party/ninja/ninja"
+          test -x "$gn"
+          test -x "$ninja"
+          [[ "$("$gn" --version)" == "2175 (b2afae"* ]]
+          "$ninja" --version
+          printf 'gn=%s\n' "$gn" >> "$GITHUB_OUTPUT"
+          printf 'ninja=%s\n' "$ninja" >> "$GITHUB_OUTPUT"
+
       - name: 'Configure'
         run: >
           bash configure
@@ -126,6 +146,9 @@ jobs:
           --with-jtreg=${{ steps.jtreg.outputs.path }}
           --with-gtest=${{ steps.gtest.outputs.path }}
           --with-zlib=system
+          --with-skia=bundled
+          --with-gn=${{ steps.skia-tools.outputs.gn }}
+          --with-ninja=${{ steps.skia-tools.outputs.ninja }}
           --with-jmod-compress=zip-1
           ${{ inputs.extra-conf-options }} ${{ inputs.configure-arguments }} || (
           echo "Dumping config.log:" &&
