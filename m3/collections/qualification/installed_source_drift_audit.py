@@ -103,6 +103,9 @@ def audit(expected, observed_hashes, actual_java):
         "declared_java": len(declared),
         "observed": len(observed_hashes),
         "missing_paths": missing,
+        "missing_source_preimages": [
+            {"path": path, "sha256": expected[path]} for path in missing
+        ],
         "source_digest_drift": [
             {"path": p, "expected": e, "actual": a} for p, e, a in changed
         ],
@@ -130,6 +133,18 @@ def mat_prefix_review_candidates(unobserved, unlisted):
     return suggestions
 
 
+def unlisted_postimages(paths, read_digest):
+    """Capture actual SHA-256 for source-review candidates without admitting them."""
+    records = []
+    for path in sorted(paths):
+        category, digest = read_digest(path)
+        if (category != "FILE" or digest is None or len(digest) != 64
+                or any(c not in "0123456789abcdef" for c in digest)):
+            raise ValueError("unlisted Java source is missing, aliased, or unreadable: " + path)
+        records.append({"path": path, "sha256": digest})
+    return records
+
+
 def self_test():
     rows = [("m3/collections/src/main/java/jdk/a/Foo.java", "a" * 64),
             ("m3/collections/src/main/c/a.c", "b" * 64)]
@@ -140,6 +155,8 @@ def self_test():
         "java_declared_not_in_source_roots"))
     changed = audit(rows, {rows[0][0]: "c" * 64}, set())
     assert changed["missing_paths"] == [rows[1][0]]
+    assert changed["missing_source_preimages"] == [
+        {"path": rows[1][0], "sha256": "b" * 64}]
     assert changed["source_digest_drift"] == [
         {"path": rows[0][0], "expected": "a" * 64, "actual": "c" * 64}]
     assert changed["java_declared_not_in_source_roots"] == [rows[0][0]]
@@ -153,7 +170,19 @@ def self_test():
     assert not mat_prefix_review_candidates(
         ["m3/collections/src/main/java/jdk/internal/m3/collections/mat/MatFoo.java"],
         ["m3/collections/src/test/java/jdk/internal/m3/collections/mat/Foo.java"])
-    print("M3_COLLECTION_SOURCE_AUDIT_SELF_TEST_PASS cases=6")
+    fake = unlisted_postimages(
+        ["m3/collections/src/main/java/Foo.java"],
+        lambda path: ("FILE", "d" * 64))
+    assert fake == [{"path": "m3/collections/src/main/java/Foo.java",
+                     "sha256": "d" * 64}]
+    try:
+        unlisted_postimages(
+            ["m3/collections/src/main/java/Foo.java"],
+            lambda path: ("ALIEN_ALIAS", None))
+        raise AssertionError("aliased unlisted source accepted")
+    except ValueError:
+        pass
+    print("M3_COLLECTION_SOURCE_AUDIT_SELF_TEST_PASS cases=8")
 
 
 def main():
@@ -192,6 +221,8 @@ def main():
         report["candidate_mat_prefix_renames"] = mat_prefix_review_candidates(
             report["java_declared_not_in_source_roots"],
             report["java_unlisted_in_receipts"])
+        report["unlisted_java_postimages"] = unlisted_postimages(
+            report["java_unlisted_in_receipts"], guarded_source)
         report["source_receipt_chain"] = list(TRANSITIONS)
         report["source_manifest_sha256"] = verifier.read_donation_packet()[
             "installed_source_manifest_sha256"]
