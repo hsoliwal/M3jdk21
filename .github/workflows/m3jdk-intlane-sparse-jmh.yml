@@ -6,6 +6,12 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/IntLaneAlgorithms.java'
       - 'test/micro/org/openjdk/bench/jdk/m3/arrays/IntLaneSparseRange.java'
       - '.github/workflows/m3jdk-intlane-sparse-jmh.yml'
+  push:
+    branches:
+      - codex/m3jdk-adaptive-sparse-range-receiver-20261125
+    paths:
+      - 'test/micro/org/openjdk/bench/jdk/m3/arrays/IntLaneSparseRange.java'
+      - '.github/workflows/m3jdk-intlane-sparse-jmh.yml'
   workflow_dispatch:
 permissions:
   contents: read
