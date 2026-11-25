@@ -158,15 +158,25 @@ public final class M3QualifiedLexicon {
 
     /**
      * One verified local piece paired with portable image metadata and a local semantic
-     * occurrence. This is a checked *composition*, not an interned Java object.
+     * occurrence. Only the checked registry admission path can construct this value;
+     * no caller may manufacture a purportedly verified binding directly.
      */
-    public record ImageBinding(SharedLexiconImage.AtomCoordinate atomCoordinate,
-            M3OccurrenceKey occurrence, LocalM3StringPiece verifiedLocalContent) {
-        public ImageBinding {
-            Objects.requireNonNull(atomCoordinate, "atomCoordinate");
-            Objects.requireNonNull(occurrence, "occurrence");
-            Objects.requireNonNull(verifiedLocalContent, "verifiedLocalContent");
+    public static final class ImageBinding {
+        private final SharedLexiconImage.AtomCoordinate atomCoordinate;
+        private final M3OccurrenceKey occurrence;
+        private final LocalM3StringPiece verifiedLocalContent;
+
+        private ImageBinding(SharedLexiconImage.AtomCoordinate coordinate,
+                M3OccurrenceKey occurrence, LocalM3StringPiece verifiedLocalContent) {
+            this.atomCoordinate = Objects.requireNonNull(coordinate, "atomCoordinate");
+            this.occurrence = Objects.requireNonNull(occurrence, "occurrence");
+            this.verifiedLocalContent = Objects.requireNonNull(verifiedLocalContent,
+                    "verifiedLocalContent");
         }
+
+        public SharedLexiconImage.AtomCoordinate atomCoordinate() { return atomCoordinate; }
+        public M3OccurrenceKey occurrence() { return occurrence; }
+        public LocalM3StringPiece verifiedLocalContent() { return verifiedLocalContent; }
     }
 
     private Entry requireEqual(Entry entry, long backingId, int length) {

@@ -72,6 +72,8 @@ public final class M3ImageOccurrenceAdmissionTest {
             var entry = lexicon.intern(key,2L);
             LocalM3Arena arena = new LocalM3Arena();
             var binding = lexicon.admitImageRecord(entry,image,value,10L,7L,arena);
+            check(M3QualifiedLexicon.ImageBinding.class.getConstructors().length == 0,
+                    "verified binding has no forgeable public constructor");
             check(binding.atomCoordinate().equals(value), "portable value retained");
             check("beta".contentEquals(binding.verifiedLocalContent()), "verified local copy");
             check(binding.occurrence().lexiconEntry().equals(key), "semantic key retained");
