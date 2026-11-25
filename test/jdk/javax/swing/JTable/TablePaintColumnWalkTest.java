@@ -5,10 +5,13 @@
 
 /*
  * @test
- * @summary BasicTableUI paints a wide, 1M-row JTable with work bounded by the visible cells:
- *          the column axis is resolved once per paint, not once per painted row, the pixels
- *          and model reads equal the per-row getCellRect path, only visible rows are read and
- *          no per-row object or renderer component is retained
+ * @summary With -Dm3.swing.viewport=true, BasicTableUI paints a wide, 1M-row JTable with
+ *          column work bounded per paint instead of per painted row, with the pixels and model
+ *          reads of the per-row getCellRect path, also when a renderer changes the geometry
+ *          mid-paint (except changes that keep every checked value, which are reported).
+ *          Without the property every row asks getCellRect exactly as the stock JDK does:
+ *          same pixels, same reads, same column lookups. In both modes only visible rows are
+ *          read and no per-row object or renderer component is retained.
  * @run main/othervm -Djava.awt.headless=true -Xmx512m TablePaintColumnWalkTest
  * @run main/othervm -Djava.awt.headless=true -Xmx512m -Dm3.swing.viewport=true TablePaintColumnWalkTest
  */
@@ -37,11 +40,14 @@ public class TablePaintColumnWalkTest {
     private static final int COLUMNS = 4_000;
     private static final int VIEW_WIDTH = 800;
     private static final int VIEW_HEIGHT = 600;
+    /** Whether this run takes the M3 column-axis path. */
+    private static final boolean M3 = Boolean.getBoolean("m3.swing.viewport");
 
     private static int checks;
     private static int failures;
 
     public static void main(String[] args) throws Exception {
+        System.out.println("m3.swing.viewport=" + M3);
         SwingUtilities.invokeAndWait(TablePaintColumnWalkTest::runAll);
         System.out.println("TABLE_PAINT_COLUMN_WALK checks=" + checks + " failures=" + failures);
         if (failures != 0) {
@@ -53,6 +59,7 @@ public class TablePaintColumnWalkTest {
         run("pixels-and-reads-equal-per-row-path", TablePaintColumnWalkTest::differential);
         run("renderer-changes-geometry-mid-paint", TablePaintColumnWalkTest::geometryChangedByRenderer);
         run("column-work-bounded-per-paint", TablePaintColumnWalkTest::columnWork);
+        run("summing-column-model-never-costs-more", TablePaintColumnWalkTest::summingColumnModel);
         run("only-visible-rows-read", TablePaintColumnWalkTest::visibleRowsOnly);
         run("no-per-row-residency", TablePaintColumnWalkTest::residency);
     }
@@ -124,6 +131,26 @@ public class TablePaintColumnWalkTest {
         public TableColumn getColumn(int columnIndex) {
             lookups++;
             return super.getColumn(columnIndex);
+        }
+    }
+
+    /** A column model that adds up its widths on every getTotalColumnWidth call. */
+    static final class SummingColumnModel extends DefaultTableColumnModel {
+        long lookups;
+
+        @Override
+        public TableColumn getColumn(int columnIndex) {
+            lookups++;
+            return super.getColumn(columnIndex);
+        }
+
+        @Override
+        public int getTotalColumnWidth() {
+            int total = 0;
+            for (int i = 0; i < getColumnCount(); i++) {
+                total += getColumn(i).getWidth();
+            }
+            return total;
         }
     }
 
@@ -263,7 +290,9 @@ public class TablePaintColumnWalkTest {
         int rows = 400;
         int columns = 40;
         String[] names = {"margin", "own column wider", "column before the view wider",
-            "column moved across the view", "orientation flipped", "two cancelling widths"};
+            "column moved across the view", "orientation flipped", "two cancelling widths",
+            "widths refit to the table width"};
+        int keepsCheckedValues = 5;
         for (boolean rtl : new boolean[] {false, true}) {
             for (boolean drag : new boolean[] {false, true}) {
                 for (int kind = 0; kind < names.length; kind++) {
@@ -290,9 +319,14 @@ public class TablePaintColumnWalkTest {
                                 case 3 -> t.getColumnModel().moveColumn(before, after);
                                 case 4 -> t.setComponentOrientation(rtl ? ComponentOrientation.LEFT_TO_RIGHT
                                         : ComponentOrientation.RIGHT_TO_LEFT);
-                                default -> {
+                                case 5 -> {
                                     t.getColumnModel().getColumn(before).setWidth(75 + 30);
                                     t.getColumnModel().getColumn(after).setWidth(75 - 30);
+                                }
+                                default -> {
+                                    // the total stays the table width, as under an auto-resize mode
+                                    t.getColumnModel().getColumn(before).setPreferredWidth(75 * 3);
+                                    t.sizeColumnsToFit(-1);
                                 }
                             }
                         };
@@ -309,11 +343,12 @@ public class TablePaintColumnWalkTest {
                             readHash = model.readOrderHash;
                         } else {
                             String config = names[kind] + " rtl=" + rtl + " drag=" + drag;
-                            if (kind == names.length - 1) {
-                                // Cancelling widths keep every value the axis is checked against; the
-                                // owner path is documented not to see them, so only report the result.
-                                System.out.println("cancelling widths rtl=" + rtl + " drag=" + drag
-                                        + " same pixels=" + Arrays.equals(pixels, painted));
+                            if (M3 && kind >= keepsCheckedValues) {
+                                // These keep every value the M3 axis is checked against: a documented
+                                // difference of the opt-in leaf (DESIGN.md section 12), reported only.
+                                System.out.println("known difference, " + config
+                                        + ": same pixels=" + Arrays.equals(pixels, painted));
+                                check(readHash == model.readOrderHash, "same read order after " + config);
                             } else {
                                 check(Arrays.equals(pixels, painted), "identical pixels after " + config);
                                 check(readHash == model.readOrderHash, "same read order after " + config);
@@ -348,9 +383,43 @@ public class TablePaintColumnWalkTest {
             long bound = 6L * COLUMNS + 8L * visibleRows * visibleColumns;
             System.out.println("column lookups per paint rtl=" + rtl + ": owner path=" + fastColumns.lookups
                     + " per-row reference=" + refColumns.lookups + " bound=" + bound);
-            check(fastColumns.lookups <= bound, "column lookups " + fastColumns.lookups + " exceed " + bound);
             check(refColumns.lookups > (long) (visibleRows - 2) * (COLUMNS - visibleColumns),
                     "reference walks the columns per row: " + refColumns.lookups);
+            if (M3) {
+                check(fastColumns.lookups <= bound, "column lookups " + fastColumns.lookups + " exceed " + bound);
+            } else {
+                check(fastColumns.lookups == refColumns.lookups,
+                        "stock path: " + fastColumns.lookups + " lookups, per-row reference " + refColumns.lookups);
+            }
+        }
+    }
+
+    /**
+     * A column model whose total width is not cached keeps the per-row path in both modes, so it
+     * never costs more column lookups than the per-row reference, near the start or at the far end.
+     */
+    private static void summingColumnModel() {
+        for (boolean farRight : new boolean[] {false, true}) {
+            CountingModel model = new CountingModel(ROWS, COLUMNS);
+            SummingColumnModel summing = new SummingColumnModel();
+            JTable owner = new JTable(model, summing);
+            CountingColumnModel counting = new CountingColumnModel();
+            JTable reference = new PerRowCellRectTable(new CountingModel(ROWS, COLUMNS), counting);
+            for (JTable table : new JTable[] {owner, reference}) {
+                table.setAutoCreateColumnsFromModel(true);
+                table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                table.setSize(table.getPreferredSize());
+            }
+            Rectangle clip = farRight ? farRightMiddle(owner)
+                    : new Rectangle(0, owner.getHeight() / 2 + 5, VIEW_WIDTH, VIEW_HEIGHT);
+            summing.lookups = 0;
+            counting.lookups = 0;
+            paint(owner, clip);
+            paint(reference, clip);
+            System.out.println("summing model farRight=" + farRight + ": owner path=" + summing.lookups
+                    + " per-row reference=" + counting.lookups);
+            check(summing.lookups <= counting.lookups,
+                    "summing model " + summing.lookups + " lookups, per-row reference " + counting.lookups);
         }
     }
 

@@ -495,6 +495,7 @@ property kept only as a kill switch. Nothing here is applied yet; the default st
 | 3 | `M3ListRows` | the UI class is outside `java.desktop`, or `cellHeights` is null |
 | 4 | `M3ListMeasure` | renderer other than `DefaultListCellRenderer`(`.UIResource`), fixed cell height, disabled list, wrapped layout, UI outside `java.desktop` |
 | 5 | `M3ExpandedState` | the `JTree` class overrides `getDescendantToggledPaths`; a table mutation the index did not see (none in `JTree`) |
+| 9 | `BasicTableUI` column axis per paint | the `JTable` class overrides `getCellRect`; the column model is not a `DefaultTableColumnModel` keeping its cached `getTotalColumnWidth`; the orientation, column model, column count, margin, total width or column at the painted index changed since the previous row |
 
 **Known differences from stock.** Each needs a decision before the flip: accept it as a documented change, make
 M3 match stock, or keep that leaf opt-in.
@@ -505,6 +506,7 @@ M3 match stock, or keep that leaf opt-in.
 | D4 | 2 | reproduced on purpose; M3 equals stock | none |
 | leaf 4 | 4 | a value changed without a list data event: stock re-measures it at the next layout, M3 when its row gets an event or all rows are re-measured | accept, documented as a `ListModel` contract requirement; or keep leaf 4 opt-in |
 | leaf 5 | 5 | a path component whose `hashCode` changes while the tree shows it can make the index miss keys the stock loop finds | accept (the stock `Hashtable` breaks under the same misuse) |
+| leaf 9 | 9 | a renderer that changes the column geometry during a paint while the column count, margin, total width and the column at the painted index stay equal (two width changes that cancel out; `doLayout` or `sizeColumnsToFit` under `AUTO_RESIZE_SUBSEQUENT_COLUMNS` or `AUTO_RESIZE_ALL_COLUMNS`, which keep the total at the table width) leaves the rest of that frame at the earlier column origin; stock places every row from the live geometry. The width change schedules a relayout and repaint, so the next frame matches; printing and offscreen capture keep the frame | make detection complete before the flip (a stamp invalidated by a `TableColumnModelListener` and the `componentOrientation` property, fast path only for models known to fire those events), or accept; until then leaf 9 stays opt-in |
 
 Already unconditional, so they apply whichever way the user decides: D3 (JDK-8299722,
 `DefaultRowSorter.getComparator`), D2 (`insureRowContinuity`), D5 (JDK-8366188) and D6 (JDK-6727200). Each turned an
@@ -715,3 +717,33 @@ more object. The bench's 1,000-pair medians put M3 behind in 9 of 10 runs. A pro
 the JVM order alternated measures the two as equal (flag on 0.94-2.70 ms, off 1.00-3.29 ms per 1,000 pairs). The
 next step is a JFR profile on a quiet machine. If the extra object is the cost, the dense form can keep the
 `SizeSequence` tree array itself.
+
+## 16. Leaf 9: `BasicTableUI` resolves the column axis once per paint, not once per painted row
+
+**The stock cost.** `BasicTableUI.paintCells` asks `JTable.getCellRect(row, cMin, false)` for every painted row, and
+`paintDraggedArea` asks twice per row. `getCellRect` walks every column before `cMin` (after it, right to left), so a
+paint costs the visible rows times the columns left of the view: 169,396 `TableColumnModel.getColumn` lookups for
+one far-right 800x600 paint of a 1,000,000 x 4,000 table, against about 400 visible cells.
+
+**The leaf.** With `-Dm3.swing.viewport=true` (read once in `BasicTableUI`, like the other leaves' `ENABLED`), each
+painted column keeps the x and width of the last `getCellRect` answer with the orientation, column model, column
+count, margin, total width and column it came from. A later row whose check still matches asks only the row axis,
+`getCellRect(row, -1, true)`, which `getCellRect`'s javadoc keeps independent of the column axis, and applies the
+row margin as `getCellRect` does. Any mismatch asks `getCellRect` again. Without the property every row asks
+`getCellRect` exactly as stock; the gates above decide when the per-row call stays even with it.
+
+| Proof (2026-11-25, JDK 21.0.13, `--patch-module java.desktop` with master's modified Swing owners) | Result |
+|---|---|
+| `test/jdk/javax/swing/JTable/TablePaintColumnWalkTest`, property off | stock path: pixels, `getValueAt` order and column lookups equal the per-row reference, including renderers that change the geometry mid-paint |
+| the same test, property on | pixels and read order equal the per-row reference in 32 static configurations and for mid-paint margin, column width, column move and orientation changes; the leaf 9 difference above is reported, not asserted; a summing column model keeps the per-row path |
+| master vs head pixel CRCs over 36 mid-paint configurations | property off: 0 differ; property on: the 12 cancel-out and refit configurations differ (leaf 9 row above) |
+| `make`, jtreg | PENDING_CI |
+
+| 1,000,000 rows, far right, p50 of 200 paints, property on | stock | M3 |
+|---|---|---|
+| column lookups per paint, 4,000 columns, LTR / RTL | 169,396 / 161,838 | 21,841 / 13,876 |
+| paint time, 4,000 / 20,000 columns (one shared machine, single runs vary) | 6.5 / 39.8 ms | 1.6 / 4.2 ms |
+| allocation per paint | 457,520 B | about 457,570 B |
+
+The remaining O(columns) per paint is `columnAtPoint` (`DefaultTableColumnModel.getColumnIndexAtX` is linear) and the
+two `getCellRect` calls of `paintGrid`; removing it needs column prefix sums with their own invalidation.
