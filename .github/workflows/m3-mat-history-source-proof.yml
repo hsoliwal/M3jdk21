@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+name: M3 original MAT history and installed-source candidate evidence
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-mat-history-source-proof.yml'
+      - 'm3/collections/qualification/mat_history_source_proof.py'
+      - 'm3/collections/qualification/installed_source_drift_audit.py'
+      - 'm3/collections/verify_donation.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m3-public-mat-source-history-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  historical-mat-source:
+    name: Verify exact public MAT rename source lineage (non-admission)
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify original no-write history reader and its own refusal tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 -m py_compile \
+            m3/collections/qualification/mat_history_source_proof.py \
+            m3/collections/qualification/installed_source_drift_audit.py
+          python3 m3/collections/qualification/mat_history_source_proof.py \
+            --self-test | tee "$RUNNER_TEMP/m3-mat-public-selftest.log"
+          grep -Fx 'M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=5' \
+            "$RUNNER_TEMP/m3-mat-public-selftest.log"
+      - name: Compare reviewed original PR history against exact installed-source inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s\n' "M3_PRODUCT_HEAD=$(git rev-parse HEAD)" \
+            | tee "$RUNNER_TEMP/m3-mat-public-head.txt"
+          python3 m3/collections/qualification/mat_history_source_proof.py \
+            | tee "$RUNNER_TEMP/m3-mat-public-lineage.json"
+          grep -Fx 'M3_PUBLIC_MAT_HISTORY_PASS pairs=106 special=3 unresolvedOld=5 otherUnlisted=255 unchangedOriginalVerifier=YES installedAcceptance=HOLD' \
+            "$RUNNER_TEMP/m3-mat-public-lineage.json"
+      - name: Preserve full original public history report, even on refusal
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-mat-source-history-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/m3-mat-public-head.txt
+            ${{ runner.temp }}/m3-mat-public-selftest.log
+            ${{ runner.temp }}/m3-mat-public-lineage.json
+          if-no-files-found: warn
