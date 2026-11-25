@@ -482,29 +482,39 @@ def self_test():
     refuse_if(PROVIDER_TRANSFER[0].endswith("M3StrategyHashMap.java") or
               not PROVIDER_TRANSFER[0].endswith("StrategyHashMap.java"),
               "original StrategyHashMap name was not supposed to change")
-    initial = [("a", "a" * 64), ("b", "b" * 64)]
+    alpha = "m3/collections/src/main/java/jdk/m3/collections/TestAlpha.java"
+    beta = "m3/collections/src/main/java/jdk/m3/collections/TestBeta.java"
+    gamma = "m3/collections/src/main/java/jdk/m3/collections/TestGamma.java"
+    initial = [(alpha, "a" * 64), (beta, "b" * 64)]
     changed = preview_complete_receipt(initial, [
-        ("a", "a" * 64, "c" * 64),
-        ("b", "b" * 64, "REMOVED"),
-        ("c", "ABSENT", "d" * 64),
+        (alpha, "a" * 64, "c" * 64),
+        (beta, "b" * 64, "REMOVED"),
+        (gamma, "ABSENT", "d" * 64),
     ])
-    refuse_if(changed != [("a", "c" * 64), ("c", "d" * 64)],
+    refuse_if(changed != [(alpha, "c" * 64), (gamma, "d" * 64)],
               "in-memory complete source-key operations failed")
     try:
         preview_complete_receipt(initial, [
-            ("a", "a" * 64, "c" * 64),
-            ("a", "a" * 64, "REMOVED"),
+            (alpha, "a" * 64, "c" * 64),
+            (alpha, "a" * 64, "REMOVED"),
         ])
         raise ValueError("duplicate modification allowed")
     except ValueError as e:
         refuse_if(str(e) == "duplicate modification allowed",
                   "source-key duplicate was not refused")
     try:
-        preview_complete_receipt(initial, [("a", "wrong", "REMOVED")])
+        preview_complete_receipt(initial, [(alpha, "wrong", "REMOVED")])
         raise ValueError("wrong predecessor removal allowed")
     except ValueError as e:
         refuse_if(str(e) == "wrong predecessor removal allowed",
                   "wrong predecessor digest was not refused")
+    try:
+        preview_complete_receipt(initial, [
+            ("unscoped.java", "ABSENT", "d" * 64)])
+        raise ValueError("unscoped addition allowed")
+    except ValueError as e:
+        refuse_if(str(e) == "unscoped addition allowed",
+                  "out-of-scope Java source was admitted")
     print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=16")
 
 
