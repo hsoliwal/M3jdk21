@@ -59,15 +59,33 @@ jobs:
           set -euo pipefail
           jars="$GITHUB_WORKSPACE/build/jmh/jars"
           mkdir -p "$jars"
-          base='https://repo.maven.apache.org/maven2'
-          curl --fail --location --retry 3 --connect-timeout 15 --max-time 120 \
-            "$base/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar" -o "$jars/jmh-core-1.37.jar"
-          curl --fail --location --retry 3 --connect-timeout 15 --max-time 120 \
-            "$base/org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37.jar" -o "$jars/jmh-generator-annprocess-1.37.jar"
-          curl --fail --location --retry 3 --connect-timeout 15 --max-time 120 \
-            "$base/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar" -o "$jars/jopt-simple-5.0.4.jar"
-          curl --fail --location --retry 3 --connect-timeout 15 --max-time 120 \
-            "$base/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar" -o "$jars/commons-math3-3.6.1.jar"
+          # Maven Central may intermittently return 404 from hosted runners.
+          # Mirrors supply bytes only; fixed SHA-256 values below own admission.
+          download() {
+            local artifact="$1"
+            local filename="${artifact##*/}.jar"
+            local source
+            for source in \
+              'https://repo.maven.apache.org/maven2' \
+              'https://repo1.maven.org/maven2' \
+              'https://maven-central.storage-download.googleapis.com/maven2' \
+              'https://archiva.wikimedia.org/repository/mirror-maven-central'; do
+              if curl --fail --silent --show-error --location \
+                  --connect-timeout 10 --max-time 50 \
+                  "$source/$artifact.jar" -o "$jars/$filename.part"; then
+                mv "$jars/$filename.part" "$jars/$filename"
+                echo "RETRIEVED_JMH_ARTIFACT $filename from $source"
+                return 0
+              fi
+              rm -f "$jars/$filename.part"
+            done
+            echo "HOLD: no pinned download source available for $artifact" >&2
+            return 1
+          }
+          download 'org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37'
+          download 'org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37'
+          download 'net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4'
+          download 'org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1'
           (cd "$jars" && cat <<'SHA256' | sha256sum --check --status
           dc0eaf2bbf0036a70b60798c785d6e03a9daf06b68b8edb0f1ba9eb3421baeb3  jmh-core-1.37.jar
           6a5604b5b804e0daca1145df1077609321687734a8b49387e49f10557c186c77  jmh-generator-annprocess-1.37.jar
