@@ -45,6 +45,21 @@ sources are **114 main / 247 test**. These categories **overlap** (a missing
 declared Java source also appears in the missing-file category); their counts
 must not be added as if each were a separate source file.
 
+The original gate's first failing `M3WeakHashMap.java` source has expected
+SHA-256 `0d2f9f30efc83a1374231cf1d4007e06efb9e860a306979fa417a3531a5e6d06`
+and observed SHA-256
+`aae6c0ae77e1c7754bc63ddd84d8ef0cf8ef82dceaabedb21292c91d6ffec745`.
+This is only **one** of the 120 existing-source mismatches.
+
+The source audit's subsequent refinement records every missing historical
+expected SHA-256 and every unlisted current Java source's actual SHA-256 in
+separate `missing_source_preimages` and `unlisted_java_postimages` arrays,
+without admitting those values. The 120 changed-source records already
+contain both hashes, yielding **592 candidate change/removal/addition
+records** for separate review (120 + 111 + 361), subject to the same
+source-location/alias refusal. Do not treat this as 592 independent API
+breaks or approve any of these source transitions automatically.
+
 The complete original machine-readable report and exact checkout identity
 were uploaded as [artifact 14983502633](https://github.com/hsoliwal/M3jdk21/actions/runs/45528200040/artifacts/14983502633).
 The gate's current head was
