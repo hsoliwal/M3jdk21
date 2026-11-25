@@ -102,6 +102,16 @@ def audit_lineage():
     declared_java = {p for p in expected if p.endswith(".java") and "/src/" in p}
     missing = {p for p in declared_java if p not in physical}
     unlisted = physical - declared_java
+    # Capture the full independent preimage receipt so the canonical private
+    # successor can later pin the EXACT 1,957-row predecessor, not a guess.
+    predecessor = "".join(path + "\t" + digest + "\n" for path, digest in rows)
+    predecessor_sha256 = hashlib.sha256(predecessor.encode("utf-8")).hexdigest()
+    unlisted_sha256 = {}
+    for path in sorted(unlisted):
+        category, digest = audit.guarded_source(path)
+        refuse_if(category != "FILE" or digest is None or len(digest) != 64,
+                  "unlisted Java file is missing/aliased/unreadable: " + path)
+        unlisted_sha256[path] = digest
     seen_a, seen_d = status_paths()
     pairs = []
     for old in sorted(missing):
@@ -117,7 +127,8 @@ def audit_lineage():
         label, old_sha = audit.guarded_source(old)
         current_label, new_sha = audit.guarded_source(new)
         refuse_if(label != "MISSING" or current_label != "FILE"
-                  or old_sha is not None or new_sha is None,
+                  or old_sha is not None or new_sha is None
+                  or new_sha != unlisted_sha256[new],
                   "current missing/live MAT source mismatch")
         pairs.append({
             "old": old, "new": new, "historical_sha256": expected[old],
@@ -135,19 +146,32 @@ def audit_lineage():
               len(unlisted - assigned_new) != 255,
               "unattributed source inventory changed")
     changed = []
+    observed_missing = set()
     for old, expected_sha in rows:
         category, actual_sha = audit.guarded_source(old)
-        if category == "FILE" and actual_sha != expected_sha:
-            changed.append(old)
-    refuse_if(len(changed) != 120,
-              "current historical source SHA-256 mismatch census changed")
+        refuse_if(category == "ALIEN_ALIAS", "source alias refused: " + old)
+        if category == "MISSING":
+            observed_missing.add(old)
+        elif actual_sha != expected_sha:
+            changed.append({"path": old, "expected": expected_sha,
+                            "actual": actual_sha})
+    refuse_if(len(changed) != 120 or observed_missing != missing,
+              "current source SHA-256/absence census changed")
     return {
         "sourceAuditHead": SOURCE_AUDIT_HEAD,
         "historicalMatPrMerge": HIST_MERGE,
+        "originalPredecessorSha256": predecessor_sha256,
+        "originalPredecessorRows": len(rows),
         "pairs": pairs,
-        "unresolvedMissing": sorted(missing - assigned_old),
-        "otherUnlisted": sorted(unlisted - assigned_new),
-        "existingSourceDrift": sorted(changed),
+        "unresolvedMissing": [
+            {"path": path, "sha256": expected[path]}
+            for path in sorted(missing - assigned_old)
+        ],
+        "otherUnlisted": [
+            {"path": path, "sha256": unlisted_sha256[path]}
+            for path in sorted(unlisted - assigned_new)
+        ],
+        "existingSourceDrift": sorted(changed, key=lambda x: x["path"]),
         "sourceOnly": True,
         "installedAcceptance": "HOLD",
     }
