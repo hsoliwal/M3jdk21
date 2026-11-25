@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+name: M3 collections installed source receipt drift inventory
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-collections-installed-source-audit.yml'
+      - 'm3/collections/qualification/installed_source_drift_audit.py'
+      - 'm3/collections/verify_donation.py'
+      - 'm3/collections/m3-donation.json'
+      - 'm3/collections/qualification/*source*.tsv'
+      - 'm3/collections/recipe/**'
+      - 'm3/collections/src/**'
+      - 'src/jdk.m3.collections/**'
+      - 'test/jdk/jdk/m3/collections/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-installed-source-inventory:
+    name: Original 13-stage receipt composition and exact current source differences
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Verify immutable source tree and independent audit self-tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 -m py_compile m3/collections/qualification/installed_source_drift_audit.py
+          python3 m3/collections/qualification/installed_source_drift_audit.py --self-test
+      - name: Require current original installed source ledger to reconcile without waivers
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD | tee "$RUNNER_TEMP/m3-installed-source-head.txt"
+          python3 m3/collections/qualification/installed_source_drift_audit.py \
+            | tee "$RUNNER_TEMP/m3-installed-source-inventory.json"
+      - name: Retain full machine-readable source discrepancy inventory on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-installed-source-inventory-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/m3-installed-source-head.txt
+            ${{ runner.temp }}/m3-installed-source-inventory.json
+          if-no-files-found: warn
