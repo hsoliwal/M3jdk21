@@ -153,6 +153,69 @@ def preview_source_receipt(predecessor, pairs):
             + extra)
 
 
+def verify_other_history(expected, missing, unlisted, unlisted_sha256):
+    """Require four plain-type source migrations and one exact provider transfer."""
+    plain_added, plain_removed = status_paths(
+        PLAIN_TYPES_COMMIT + "^", PLAIN_TYPES_COMMIT)
+    provider_added, provider_removed = status_paths(
+        PROVIDER_TRANSFER_COMMIT + "^", PROVIDER_TRANSFER_COMMIT,
+        SOURCE_ROOTS + (
+            "src/jdk.m3.collections/providers/classes/jdk/internal/m3/collections",))
+    result = []
+    seen_old, seen_new = set(), set()
+    for old, new, historical_sha, source_sha in OTHER_TYPE_RENAMES:
+        refuse_if(old in seen_old or new in seen_new,
+                  "duplicate original plain-type migration")
+        seen_old.add(old)
+        seen_new.add(new)
+        refuse_if(old not in missing or new not in unlisted or
+                  expected.get(old) != historical_sha or
+                  unlisted_sha256.get(new) != source_sha,
+                  "historical plain-type source identity drift")
+        old_physical = verifier.located(old).relative_to(verifier.REPO).as_posix()
+        new_physical = verifier.located(new).relative_to(verifier.REPO).as_posix()
+        refuse_if(old_physical not in plain_removed or
+                  new_physical not in plain_added,
+                  "plain-type rename not found in exact Git source commit")
+        kind, current_sha = audit.guarded_source(new)
+        refuse_if(kind != "FILE" or current_sha != source_sha,
+                  "plain-type current file has unexpected SHA-256")
+        result.append({
+            "old": old, "new": new,
+            "historical_sha256": historical_sha, "current_sha256": source_sha,
+            "history": "GIT_RENAME", "commit": PLAIN_TYPES_COMMIT,
+        })
+    old, provider, historical_sha, source_sha = PROVIDER_TRANSFER
+    refuse_if(old not in missing or expected.get(old) != historical_sha or
+              old in seen_old or provider in unlisted,
+              "StrategyHashMap must remain only in provider source root")
+    old_physical = verifier.located(old).relative_to(verifier.REPO).as_posix()
+    refuse_if(old_physical not in provider_removed or
+              provider not in provider_added,
+              "StrategyHashMap provider migration has no exact Git source proof")
+    physical = verifier.REPO / provider
+    directory = verifier.REPO
+    for component in Path(provider).parts:
+        directory = directory / component
+        refuse_if(directory.is_symlink() or
+                  getattr(directory, "is_junction", lambda: False)(),
+                  "aliased StrategyHashMap provider source")
+    refuse_if(not physical.is_file() or
+              hashlib.sha256(physical.read_bytes()).hexdigest() != source_sha,
+              "live provider StrategyHashMap source digest drift")
+    result.append({
+        "old": old, "new": provider,
+        "historical_sha256": historical_sha, "current_sha256": source_sha,
+        "history": "GIT_PROVIDER_TRANSFER",
+        "commit": PROVIDER_TRANSFER_COMMIT,
+    })
+    refuse_if(len(result) != 5 or
+              {x["old"] for x in result} != missing or
+              len(unlisted - seen_new) != 251,
+              "five extra source migrations do not close historic missing set")
+    return result
+
+
 def audit_lineage():
     rows = audit.exact_rows()
     expected = dict(rows)
