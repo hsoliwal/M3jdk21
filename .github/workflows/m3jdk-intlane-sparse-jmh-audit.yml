@@ -30,8 +30,8 @@ jobs:
         run: |
           set -euo pipefail
           base='test/micro/org/openjdk/bench/jdk/m3/arrays'
-          printf '%s  %s\n' '4ca7ca091ba334a571123ba7e38f9ca3b6735d9480b8baa1a256b50b5a1bd05b' "$base/audit_intlane_jmh.py" | sha256sum --check -
-          printf '%s  %s\n' '65b53cc75b0d28b1fd81c483172612ed56ab7f16b22cd8523f32cda0f47c4d10' "$base/test_audit_intlane_jmh.py" | sha256sum --check -
+          printf '%s  %s\n' 'e72c175bc8d055734cc299eb90e56e223d6a1c6a82e9dc8e67d4b1d2fea5c406' "$base/audit_intlane_jmh.py" | sha256sum --check -
+          printf '%s  %s\n' 'fa7f561b43088739150ae6ff62dd11ffc9f755581773df4461df891adf8e2a3c' "$base/test_audit_intlane_jmh.py" | sha256sum --check -
           echo 'M3_INTLANE_JMH_REVIEW_SOURCE_SEAL_PASS'
       - name: Execute hermetic JMH parser and negative admission controls
         shell: bash
@@ -78,7 +78,7 @@ jobs:
             fi
             printf '%s\n' "$report" >> "$RUNNER_TEMP/intlane-jmh-files.txt"
           done
-      - name: Fail closed on missing pairs and observed performance regressions
+      - name: Reject missing pairs, insufficient replication and repeated slowdowns
         shell: bash
         run: |
           set -euo pipefail

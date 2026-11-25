@@ -54,3 +54,7 @@ JNI symbol or sealed source recipe; this is **qualification infrastructure**.
 **Release policy:** broad sparse improvements are measurable and worth retaining,
 but these dense random warnings require review. Avoid inventing a global speedup
 claim; no JMH numbers justify waiving the Synexia Maven/OpenRewrite proof gate.
+
+## November 25: single-run admission is now explicitly incomplete
+
+The upstream `workflow_run` trigger can supply **only one** successful JMH producer run, even when it contains all 64 baseline/candidate pairs. One run is **not independent replication**, and its slowdown cannot truthfully be labeled `repeatable_regression`. The updated source-audited tool now sets `minimum_independent_runs=2`, returns `INSUFFICIENT_REPLICATION` and exits **2 on `--enforce`** for any single valid input (regardless of whether the observed ratios are good or bad); it never claims a green performance admission or a repeated slowdown from one run. Its JSON preserves `single_run_observational_warnings` for triage. The negative suite has grown from seven to **nine** tests, now including a clean single run and a slow single run. These tests passed locally, and the same historical two-source-built-run dataset still returns exactly `PERF_HOLD runs=2 paired_keys=64 flagged=2`, with a regenerated permanent CSV byte-identical to the committed 128-row snapshot. This is a **qualification correctness fix only**: no Java runtime, JMH benchmark or source-sealed recipe changes.

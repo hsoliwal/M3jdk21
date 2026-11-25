@@ -136,7 +136,7 @@ def calculate(runs: list[dict[str, dict[tuple[str, str, str], Measurement]]],
         entries.append({
             'distribution': distribution, 'universe': universe, 'updates': updates,
             'runs': measures,
-            'repeatable_regression': all(m['above_observation_gate'] for m in measures),
+            'repeatable_regression': len(runs) >= 2 and all(m['above_observation_gate'] for m in measures),
         })
     flagged = [r for r in entries if r['repeatable_regression']]
     return entries, flagged
@@ -152,7 +152,13 @@ def output_report(out: Path, files: list[Path], digests: list[str],
         'independent_runs': len(files), 'pairs_per_run': len(entries),
         'threshold_ratio': threshold_ratio, 'threshold_delta_us': threshold_delta_us,
         'repeated_observational_regressions': len(flagged),
-        'status': 'PERF_HOLD' if flagged else 'NO_REPEATED_THRESHOLD_REGRESSION',
+        'minimum_independent_runs': 2,
+        'single_run_observational_warnings': (
+            sum(any(r['above_observation_gate'] for r in entry['runs']) for entry in entries)
+            if len(files) == 1 else 0
+        ),
+        'status': ('INSUFFICIENT_REPLICATION' if len(files) < 2 else
+                   'PERF_HOLD' if flagged else 'NO_REPEATED_THRESHOLD_REGRESSION'),
         'cases': entries,
     }
     (out / 'audit.json').write_text(json.dumps(summary, indent=2, sort_keys=True) + '\n', encoding='utf-8')
@@ -179,6 +185,7 @@ def output_report(out: Path, files: list[Path], digests: list[str],
     lines += ['', f'Observation gate: candidate/baseline ≥ {threshold_ratio:.2f} and '
               f'candidate–baseline ≥ {threshold_delta_us:.1f} µs/op in **every independent run**.',
               'This is a conservative review gate, **not** proof of statistical significance.',
+              'At least two distinct complete JMH runs are required for a repeated-regression verdict or an enforced pass.',
               'The reported JMH 99.9% score errors and fork/sample count must be reviewed.', '',
               '| Distribution | Rows | Updates | Run ratios | Absolute slowdowns (µs/op) |',
               '|---|---:|---:|---:|---:|']
@@ -203,7 +210,7 @@ def main(argv=None) -> int:
     ap.add_argument('--output', type=Path, default=Path('jmh-audit'))
     ap.add_argument('--ratio', type=float, default=1.20)
     ap.add_argument('--delta-us', type=float, default=5.0)
-    ap.add_argument('--enforce', action='store_true', help='exit 2 on repeated/observed threshold regressions')
+    ap.add_argument('--enforce', action='store_true', help='exit 2 on repeatable observations or fewer than two independent runs')
     args = ap.parse_args(argv)
     if not math.isfinite(args.ratio) or args.ratio < 1 or not math.isfinite(args.delta_us) or args.delta_us < 0:
         raise JmhAdmissionError('invalid admission threshold')
@@ -219,12 +226,14 @@ def main(argv=None) -> int:
     entries, flagged = calculate(runs, args.ratio, args.delta_us)
     output_report(args.output, args.runs, hashes, entries, flagged, args.ratio, args.delta_us)
     medians = [statistics.median(r['ratio'] for r in (case['runs'])) for case in entries]
-    print(f"M3_INTLANE_JMH_AUDIT {'PERF_HOLD' if flagged else 'PASS'} runs={len(runs)} "
+    status = ('INSUFFICIENT_REPLICATION' if len(runs) < 2 else
+              'PERF_HOLD' if flagged else 'PASS')
+    print(f"M3_INTLANE_JMH_AUDIT {status} runs={len(runs)} "
           f'paired_keys=64 flagged={len(flagged)} median_case_ratio={statistics.median(medians):.4f}')
     for case in flagged:
         print('REGRESSION', case['distribution'], case['universe'], case['updates'],
               'ratios=' + ','.join(f"{r['ratio']:.4f}" for r in case['runs']))
-    return 2 if args.enforce and flagged else 0
+    return 2 if args.enforce and (flagged or len(runs) < 2) else 0
 
 
 if __name__ == '__main__':

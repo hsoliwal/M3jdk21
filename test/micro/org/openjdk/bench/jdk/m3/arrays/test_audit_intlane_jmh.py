@@ -51,7 +51,12 @@ class TestIntLaneJmhAudit(unittest.TestCase):
             root = Path(folder)
             source = root / 'one.csv'
             source.write_text(self.csv, encoding='utf-8')
-            self.assertEqual(0, audit.main([str(source), '--output', str(root / 'report'), '--enforce']))
+            second = root / 'two.csv'
+            def independently_measured(rows):
+                rows[0]['Score'] = '100.1'
+            second.write_text(modify_rows(self.csv, independently_measured), encoding='utf-8')
+            self.assertEqual(0, audit.main([
+                str(source), str(second), '--output', str(root / 'report'), '--enforce']))
             self.assertTrue((root / 'report' / 'paired.csv').is_file())
             self.assertIn('NO_REPEATED_THRESHOLD_REGRESSION', (root / 'report' / 'audit.json').read_text())
 
@@ -101,6 +106,43 @@ class TestIntLaneJmhAudit(unittest.TestCase):
         with self.assertRaises(audit.JmhAdmissionError):
             audit.parse_jmh(damaged)
 
+    def test_single_clean_run_requires_replication_in_enforced_mode(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            source = root / 'one.csv'
+            source.write_text(self.csv, encoding='utf-8')
+            out = root / 'review'
+            self.assertEqual(2, audit.main([str(source), '--output', str(out), '--enforce']))
+            summary = (out / 'audit.json').read_text(encoding='utf-8')
+            self.assertIn('INSUFFICIENT_REPLICATION', summary)
+            self.assertIn('"minimum_independent_runs": 2', summary)
+            self.assertIn('"repeated_observational_regressions": 0', summary)
+
+    def test_single_slow_run_not_misclassified_as_repeatable(self):
+        key = ('RANDOM', '65536', '9000')
+        def increase(rows):
+            for row in rows:
+                if row['Benchmark'] == audit.CANDIDATE and (
+                    row['Param: distribution'], row['Param: universe'], row['Param: updates']
+                ) == key:
+                    row['Score'] = '133.4'
+        measured = audit.parse_jmh(modify_rows(self.csv, increase))
+        entries, flagged = audit.calculate([measured], 1.20, 5.0)
+        self.assertEqual([], flagged)
+        target = next(x for x in entries if (
+            x['distribution'], x['universe'], x['updates']) == key)
+        self.assertTrue(target['runs'][0]['above_observation_gate'])
+        self.assertFalse(target['repeatable_regression'])
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            source = root / 'one.csv'
+            source.write_text(modify_rows(self.csv, increase), encoding='utf-8')
+            out = root / 'review'
+            self.assertEqual(2, audit.main([str(source), '--output', str(out), '--enforce']))
+            summary = (out / 'audit.json').read_text(encoding='utf-8')
+            self.assertIn('INSUFFICIENT_REPLICATION', summary)
+            self.assertIn('"single_run_observational_warnings": 1', summary)
+
     def test_nonindependent_duplicated_results_refused(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
@@ -118,7 +160,13 @@ class TestIntLaneJmhAudit(unittest.TestCase):
             root = Path(folder)
             f = root / 'jmh-result.csv'
             f.write_text(modify_rows(self.csv, extra))
-            self.assertEqual(2, audit.main([str(f), '--output', str(root / 'review'), '--enforce']))
+            second = root / 'another-jmh-result.csv'
+            def second_host(rows):
+                extra(rows)
+                rows[0]['Score'] = '100.1'
+            second.write_text(modify_rows(self.csv, second_host))
+            self.assertEqual(2, audit.main([
+                str(f), str(second), '--output', str(root / 'review'), '--enforce']))
             self.assertIn('PERF_HOLD', (root / 'review' / 'AUDIT.md').read_text())
 
 
