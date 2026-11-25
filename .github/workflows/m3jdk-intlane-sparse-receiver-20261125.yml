@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 exact sparse-range receiver Java21 + real JNI
+on:
+  pull_request:
+    paths:
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/IntLaneAlgorithms.java'
+      - 'test/jdk/jdk/m3/arrays/IntLaneSparseRangeJtreg.java'
+      - 'test/jdk/jdk/m3/arrays/verify_sparse_range_receiver.sh'
+      - '.github/workflows/m3jdk-intlane-sparse-receiver-20261125.yml'
+  push:
+    branches:
+      - codex/m3jdk-adaptive-sparse-range-receiver-20261125
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-built-jni-receiver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source-sealed original and receiving class, native C11 and UBSan, JIT/Xint/GC
+        shell: bash
+        run: bash test/jdk/jdk/m3/arrays/verify_sparse_range_receiver.sh
+      - name: Preserve Java21 original/candidate, JNI, UBSan and bounded jtreg receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk-intlane-sparse-receiver-java21-jni-evidence
+          if-no-files-found: warn
+          path: |
+            build/m3jdk-sparse-receiver-evidence/*.log
+            build/m3jdk-sparse-receiver-evidence/*.txt
