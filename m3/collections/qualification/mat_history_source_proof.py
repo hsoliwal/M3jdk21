@@ -34,6 +34,10 @@ SOURCE_ROOTS = (
     "test/jdk/jdk/m3/collections",
     "test/jdk/jdk/internal/m3/collections",
 )
+MEMO_TEST_RENAME = (
+    "m3/collections/src/test/java/jdk/internal/m3/collections/MatMemoTableTest.java",
+    "m3/collections/src/test/java/jdk/internal/m3/collections/MemoTableTest.java",
+)
 
 
 def refuse_if(condition, message):
@@ -80,6 +84,10 @@ def status_paths():
 
 
 def infer_candidate(recorded_path):
+    # The original PR #3268 also renamed this one test outside the internal
+    # .mat package. It is an explicit historical exception, not a wildcard.
+    if recorded_path == MEMO_TEST_RENAME[0]:
+        return MEMO_TEST_RENAME[1]
     parent, separator, name = recorded_path.rpartition("/")
     if (not separator or "/mat/" not in recorded_path or
             not name.startswith("Mat") or not name.endswith(".java")):
@@ -198,7 +206,12 @@ def self_test():
               "unprefixed source was admitted as a rename")
     refuse_if(len(SPECIAL) != 3 or len(SOURCE_ROOTS) != 4,
               "unreviewed history scope change")
-    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=5")
+    refuse_if(infer_candidate(MEMO_TEST_RENAME[0]) != MEMO_TEST_RENAME[1],
+              "one original out-of-package MemoTable test rename is required")
+    refuse_if(infer_candidate(
+        MEMO_TEST_RENAME[0].replace("MatMemoTableTest.java", "MatUnreviewedTest.java"))
+        is not None, "non-historical test rename admitted")
+    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=7")
 
 
 def main():
