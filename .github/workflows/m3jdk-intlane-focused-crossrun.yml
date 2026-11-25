@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 focused dense-range independent JMH cross-run evidence
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk-intlane-focused-crossrun.yml'
+      - 'test/micro/org/openjdk/bench/jdk/m3/arrays/compare_intlane_focused_runs.py'
+      - 'test/micro/org/openjdk/bench/jdk/m3/arrays/test_compare_intlane_focused_runs.py'
+      - 'test/micro/org/openjdk/bench/jdk/m3/arrays/evidence/focused-*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused-crossrun-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout M3JDK21 exact PR evidence
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Refuse code and hosted-JMH evidence drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          root='test/micro/org/openjdk/bench/jdk/m3/arrays'
+          cat <<'SHA256' | sha256sum --check --status
+          6d3bfd2af0faed6bb914f685f879396ad04e6172ba98ed2842aea660b58f0033  test/micro/org/openjdk/bench/jdk/m3/arrays/audit_intlane_dense_focused.py
+          953db72747bf110fe329f9ef852cee3019539227f93f799dee67288bd25335c5  test/micro/org/openjdk/bench/jdk/m3/arrays/compare_intlane_focused_runs.py
+          aa8d84de8136c9abf2dadc05b31340beddd0fbeaae999b7280a2a9da1dc41e67  test/micro/org/openjdk/bench/jdk/m3/arrays/test_compare_intlane_focused_runs.py
+          f4c035a1d8fc77747f581ad2bf7067c09ec472ef9769e1b878f31fec3b9e30a5  test/micro/org/openjdk/bench/jdk/m3/arrays/evidence/focused-run-45593591175.csv
+          891d987673f06710148a30ef2559cab3be4c344349c5d268919cd835c6937504  test/micro/org/openjdk/bench/jdk/m3/arrays/evidence/focused-run-45597337526.csv
+          150bc1ff0470d35dc1102dcbb78f0b85d6c0a3bf13ad45fa7ce75334c5c77419  test/micro/org/openjdk/bench/jdk/m3/arrays/evidence/focused-crossrun.csv
+          99ba8162787c4c9a905ae496d706da559c893a0865f9f972d637ac5d903a34e2  test/micro/org/openjdk/bench/jdk/m3/arrays/evidence/focused-crossrun.md
+          SHA256
+          echo 'FOCUSED_JMH_TWO_HOSTED_RUNS_SOURCE_SEAL_PASS'
+      - name: Execute 30 validation and negative-control tests and compare two real hosted JMH runs
+        shell: bash
+        run: |
+          set -euo pipefail
+          root='test/micro/org/openjdk/bench/jdk/m3/arrays'
+          python3 -m unittest discover -v -s "$root" -p 'test_audit_intlane_dense_focused.py'
+          python3 -m unittest discover -v -s "$root" -p 'test_compare_intlane_focused_runs.py'
+          out="$RUNNER_TEMP/m3jdk-intlane-crossrun"
+          python3 "$root/compare_intlane_focused_runs.py" \
+            "$root/evidence/focused-run-45593591175.csv" \
+            "$root/evidence/focused-run-45597337526.csv" --output "$out"
+          cmp "$root/evidence/focused-crossrun.csv" "$out/focused-crossrun.csv"
+          cmp "$root/evidence/focused-crossrun.md" "$out/focused-crossrun.md"
+          # This proves admission and reproducibility, NOT runtime nonregression.
+          grep -q '"status": "PERFORMANCE_REVIEW_HOLD"' "$out/focused-crossrun.json"
+          echo 'FOCUSED_JMH_TWO_REAL_RUNS_REPLAY_PASS tests=30 cases=2 PERFORMANCE_REVIEW_HOLD'
+      - name: Preserve raw and generated focused JMH evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk-intlane-focused-crossrun-evidence
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            test/micro/org/openjdk/bench/jdk/m3/arrays/evidence/focused-*.csv
+            test/micro/org/openjdk/bench/jdk/m3/arrays/evidence/focused-crossrun.md
+            ${{ runner.temp }}/m3jdk-intlane-crossrun/

@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: distribution","Param: universe","Param: updates"
+"org.openjdk.bench.jdk.m3.arrays.IntLaneSparseRange.originalDenseRangeAddMaximum","avgt",1,50,66.124678,0.415744,"us/op",RANDOM,65535,9000
+"org.openjdk.bench.jdk.m3.arrays.IntLaneSparseRange.originalDenseRangeAddMaximum","avgt",1,50,65.875088,0.332576,"us/op",RANDOM,65536,9000
+"org.openjdk.bench.jdk.m3.arrays.IntLaneSparseRange.wholeRangeAddMaximum","avgt",1,50,70.756716,1.011643,"us/op",RANDOM,65535,9000
+"org.openjdk.bench.jdk.m3.arrays.IntLaneSparseRange.wholeRangeAddMaximum","avgt",1,50,71.518899,1.270129,"us/op",RANDOM,65536,9000

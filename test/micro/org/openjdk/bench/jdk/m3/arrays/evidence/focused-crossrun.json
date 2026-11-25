@@ -1,0 +1,122 @@
+{
+  "case_summaries": [
+    {
+      "absolute_baseline_run2_to_run1": 0.6664263455213437,
+      "both_runs_over_20percent_and_five_microseconds": false,
+      "both_runs_over_five_percent": false,
+      "distribution": "RANDOM",
+      "over_five_percent_each_run": [
+        false,
+        true
+      ],
+      "ratios": [
+        1.0094802317834557,
+        1.070050065120922
+      ],
+      "reported_99_9_error_intervals_overlap": [
+        true,
+        false
+      ],
+      "universe": 65535,
+      "updates": 9000
+    },
+    {
+      "absolute_baseline_run2_to_run1": 0.6530815508956456,
+      "both_runs_over_20percent_and_five_microseconds": false,
+      "both_runs_over_five_percent": false,
+      "distribution": "RANDOM",
+      "over_five_percent_each_run": [
+        false,
+        true
+      ],
+      "ratios": [
+        1.003351486117676,
+        1.0856744358352888
+      ],
+      "reported_99_9_error_intervals_overlap": [
+        true,
+        false
+      ],
+      "universe": 65536,
+      "updates": 9000
+    }
+  ],
+  "limits": "JMH Score Error 99.9% intervals are not confidence intervals for ratios. Test order, host variation and JIT/GC remain unisolated. Historical 64-pair PERF_HOLD is not lifted by this report.",
+  "no_repeated_twenty_percent_slowdown_in_focused_runs": true,
+  "run_count": 2,
+  "schema": "m3jdk.intlane.focused-jmh-crossrun.v1",
+  "source_built_runs": [
+    {
+      "cases": [
+        {
+          "absolute_delta_us": 0.9406549999999925,
+          "baseline_error_99_9_us": 0.840884,
+          "baseline_us": 99.222785,
+          "candidate_error_99_9_us": 1.140982,
+          "candidate_to_baseline_ratio": 1.0094802317834557,
+          "candidate_us": 100.16344,
+          "distribution": "RANDOM",
+          "observed_direction": "candidate_slower",
+          "overlapping_99_9_intervals": true,
+          "samples_each": 50,
+          "universe": 65535,
+          "updates": 9000
+        },
+        {
+          "absolute_delta_us": 0.33805800000000374,
+          "baseline_error_99_9_us": 1.211473,
+          "baseline_us": 100.868089,
+          "candidate_error_99_9_us": 1.969196,
+          "candidate_to_baseline_ratio": 1.003351486117676,
+          "candidate_us": 101.206147,
+          "distribution": "RANDOM",
+          "observed_direction": "candidate_slower",
+          "overlapping_99_9_intervals": true,
+          "samples_each": 50,
+          "universe": 65536,
+          "updates": 9000
+        }
+      ],
+      "commit": "abbcbd2bfb3a9f1e81ea8da04c2905906d3333e7",
+      "csv_sha256": "f4c035a1d8fc77747f581ad2bf7067c09ec472ef9769e1b878f31fec3b9e30a5",
+      "run_id": 45593591175
+    },
+    {
+      "cases": [
+        {
+          "absolute_delta_us": 4.632037999999994,
+          "baseline_error_99_9_us": 0.415744,
+          "baseline_us": 66.124678,
+          "candidate_error_99_9_us": 1.011643,
+          "candidate_to_baseline_ratio": 1.070050065120922,
+          "candidate_us": 70.756716,
+          "distribution": "RANDOM",
+          "observed_direction": "candidate_slower",
+          "overlapping_99_9_intervals": false,
+          "samples_each": 50,
+          "universe": 65535,
+          "updates": 9000
+        },
+        {
+          "absolute_delta_us": 5.6438109999999995,
+          "baseline_error_99_9_us": 0.332576,
+          "baseline_us": 65.875088,
+          "candidate_error_99_9_us": 1.270129,
+          "candidate_to_baseline_ratio": 1.0856744358352888,
+          "candidate_us": 71.518899,
+          "distribution": "RANDOM",
+          "observed_direction": "candidate_slower",
+          "overlapping_99_9_intervals": false,
+          "samples_each": 50,
+          "universe": 65536,
+          "updates": 9000
+        }
+      ],
+      "commit": "d9f43afb48987a81ac59d3bb22aea49d681f5996",
+      "csv_sha256": "891d987673f06710148a30ef2559cab3be4c344349c5d268919cd835c6937504",
+      "run_id": 45597337526
+    }
+  ],
+  "source_owner_sha256": "d3f78a046a3ff1d1bc27dfebdfd0e82f34de3bc8e9b604fb722c9a728ab77fd8",
+  "status": "PERFORMANCE_REVIEW_HOLD"
+}
