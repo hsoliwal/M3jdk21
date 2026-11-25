@@ -79,7 +79,7 @@ jobs:
           bash configure --with-conf-name=m3jdk21-intlane-sparse \
             --with-boot-jdk=bootjdk/jdk \
             --with-jtreg=jtreg/installed \
-            --with-debug-level=release --with-zlib=system --with-jobs=2
+            --with-debug-level=release --with-zlib=system --with-skia=none --with-jobs=2
       - name: Build actual M3JDK21 image including jdk.m3.collections
         shell: bash
         run: |
