@@ -1507,28 +1507,38 @@ public class BasicListUI extends ListUI
      * measured. Without {@code -Dm3.swing.viewport=true} this is
      * {@code rendererPane.add(c)}, as in the stock JDK: every component the
      * renderer returns stays parented until the next paint empties the pane.
+     * <p>
      * With it (the M3 path of {@code sun.swing.list.M3ListRows}), a renderer
      * that returns a new component for every row no longer leaves one
-     * component per row in the pane: once the pane holds
-     * {@code MEASURED_COMPONENTS_LIMIT} components, the most recently added
-     * one is removed before a component the pane does not hold is added.
-     * Components added first, such as a renderer's shared component, stay
-     * parented and are added once. A renderer that cycles through more than
-     * {@code MEASURED_COMPONENTS_LIMIT} reused components re-adds the ones
-     * beyond the limit on this path.
+     * component per row in the pane. Once the pane holds
+     * {@code MEASURED_COMPONENTS_LIMIT} components, the last one (the most
+     * recently added) is removed before a component the pane does not hold is
+     * added. A component the renderer returns again while it sits in that last
+     * place is moved to the front with {@code setComponentZOrder}, which keeps
+     * its parent and fires no container or hierarchy event; a renderer's
+     * shared component is so added once, also when new components entered the
+     * pane before it. Two limits remain on this path: a shared component that
+     * strictly alternates with new components while it is in the last place
+     * is removed and re-added each time, and a renderer that cycles through
+     * more than {@code MEASURED_COMPONENTS_LIMIT} reused components re-adds
+     * the ones beyond the limit.
      */
     private void addMeasuredComponent(Component c) {
         if (!sun.swing.list.M3ListRows.ENABLED) {
             rendererPane.add(c);
             return;
         }
-        if (c.getParent() != rendererPane) {
-            int held = rendererPane.getComponentCount();
-            if (held >= MEASURED_COMPONENTS_LIMIT) {
-                rendererPane.remove(held - 1);
+        int held = rendererPane.getComponentCount();
+        if (c.getParent() == rendererPane) {
+            if (held >= MEASURED_COMPONENTS_LIMIT && rendererPane.getComponent(held - 1) == c) {
+                rendererPane.setComponentZOrder(c, 0);
             }
-            rendererPane.add(c);
+            return;
         }
+        if (held >= MEASURED_COMPONENTS_LIMIT) {
+            rendererPane.remove(held - 1);
+        }
+        rendererPane.add(c);
     }
 
     /**

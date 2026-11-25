@@ -7,7 +7,8 @@
  * @test
  * @summary With -Dm3.swing.viewport=true, BasicListUI measures JList rows without keeping one
  *          renderer component per row parented to its CellRendererPane (at most 8), while shared
- *          renderer components stay parented and are added once. Without the property the
+ *          renderer components stay parented and are added once, also when new components came
+ *          first or an earlier measure left components in the pane. Without the property the
  *          measure parents every returned component exactly as the stock JDK does. The measured
  *          sizes are unchanged in both modes.
  * @run main/othervm -Djava.awt.headless=true -Xmx768m ListMeasureRendererResidencyTest
@@ -21,6 +22,7 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.awt.event.HierarchyEvent;
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.CellRendererPane;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -55,6 +57,8 @@ public class ListMeasureRendererResidencyTest {
         run("reused-component-renderer", ListMeasureRendererResidencyTest::reusedComponent);
         run("alternating-reused-components", ListMeasureRendererResidencyTest::alternatingComponents);
         run("shared-plus-new-separator-renderer", ListMeasureRendererResidencyTest::sharedPlusNew);
+        run("shared-after-seven-new-components", ListMeasureRendererResidencyTest::lateShared);
+        run("shared-across-measures-without-paint", ListMeasureRendererResidencyTest::remeasureWithoutPaint);
         run("more-reused-components-than-limit", ListMeasureRendererResidencyTest::largePool);
         run("sizes-equal-full-measure", ListMeasureRendererResidencyTest::sizes);
     }
@@ -242,6 +246,90 @@ public class ListMeasureRendererResidencyTest {
             check(watch.removed == separators[0] - (PANE_LIMIT - 1), "only separators removed " + watch);
         } else {
             check(watch.removed == 0 && watch.held() == 1 + separators[0], "stock keeps every component " + watch);
+        }
+    }
+
+    /** Counts PARENT_CHANGED hierarchy events of one component. */
+    static int[] parentChanges(Component c) {
+        int[] count = {0};
+        c.addHierarchyListener(e -> {
+            if ((e.getChangeFlags() & HierarchyEvent.PARENT_CHANGED) != 0) {
+                count[0]++;
+            }
+        });
+        return count;
+    }
+
+    /**
+     * Seven new components enter the pane before the shared one, which therefore first lands in the
+     * last place: it is still added once and keeps its parent, as in the stock JDK.
+     */
+    private static void lateShared() {
+        DefaultListCellRenderer shared = new DefaultListCellRenderer();
+        int[] separators = {0};
+        JList<String> list = list(FRESH_ROWS, (l, value, index, selected, focus) -> {
+            if (index < 7 || index % 10 == 9) {
+                separators[0]++;
+                return new JSeparator();
+            }
+            return shared.getListCellRendererComponent(l, value, index, selected, focus);
+        });
+        int[] parentChanged = parentChanges(shared);
+        PaneWatch watch = new PaneWatch(list);
+        list.getPreferredSize();
+        System.out.println("late shared: separators=" + separators[0] + " " + watch
+                + " shared PARENT_CHANGED=" + parentChanged[0]);
+        check(watch.added == 1 + separators[0], "adds as in the stock JDK " + watch);
+        check(parentChanged[0] == 1, "shared component parented once: " + parentChanged[0]);
+        check(shared.getParent() != null, "shared component stays parented");
+        if (M3) {
+            check(watch.peak <= PANE_LIMIT, "peak parented " + watch);
+        } else {
+            check(watch.removed == 0, "stock removes nothing " + watch);
+        }
+    }
+
+    /**
+     * A list that is not painted between two measures: the first measure leaves seven components in
+     * the pane, the second returns a shared component at row 0; it is still added once.
+     */
+    private static void remeasureWithoutPaint() {
+        DefaultListModel<Object> first = new DefaultListModel<>();
+        for (int i = 0; i < 7; i++) {
+            first.addElement(new JSeparator());
+        }
+        DefaultListCellRenderer shared = new DefaultListCellRenderer();
+        JList<Object> list = new JList<>(first);
+        list.setCellRenderer((l, value, index, selected, focus) -> {
+            if (value instanceof Component c) {
+                return c;
+            }
+            if (index % 10 == 9) {
+                return new JSeparator();
+            }
+            return shared.getListCellRendererComponent(l, value, index, selected, focus);
+        });
+        list.getPreferredSize();
+        int[] parentChanged = parentChanges(shared);
+        AbstractListModel<Object> second = new AbstractListModel<>() {
+            @Override
+            public int getSize() {
+                return FRESH_ROWS;
+            }
+
+            @Override
+            public Object getElementAt(int index) {
+                return "row " + (index % 1000);
+            }
+        };
+        list.setModel(second);
+        PaneWatch watch = new PaneWatch(list);
+        list.getPreferredSize();
+        System.out.println("re-measure without paint: " + watch + " shared PARENT_CHANGED=" + parentChanged[0]);
+        check(parentChanged[0] == 1, "shared component parented once: " + parentChanged[0]);
+        check(shared.getParent() != null, "shared component stays parented");
+        if (M3) {
+            check(watch.peak <= PANE_LIMIT, "peak parented " + watch);
         }
     }
 
