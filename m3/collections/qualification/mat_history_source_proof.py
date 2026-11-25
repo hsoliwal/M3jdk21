@@ -136,10 +136,18 @@ def audit_lineage():
             "history": "EXACT_OLD_DELETE_NEW_ADD",
             "spelling": "SPECIAL" if old.rsplit("/", 1)[1] in SPECIAL else "MAT_PREFIX",
         })
-    refuse_if(len(pairs) != 106 or
-              len({p["new"] for p in pairs}) != 106 or
-              sum(p["spelling"] == "SPECIAL" for p in pairs) != 3,
-              "original MAT Git lineage count or mapping altered")
+    unique_new = len({p["new"] for p in pairs})
+    special_count = sum(p["spelling"] == "SPECIAL" for p in pairs)
+    if len(pairs) != 106 or unique_new != 106 or special_count != 3:
+        assigned = {p["old"] for p in pairs}
+        unresolved = sorted(p for p in missing if p not in assigned)
+        print("M3_PUBLIC_MAT_HISTORY_DIAGNOSTIC " +
+              json.dumps({"pairs": len(pairs), "uniqueCurrent": unique_new,
+                          "special": special_count, "missingHistorical": len(missing),
+                          "unlistedCurrent": len(unlisted),
+                          "unresolved": unresolved}, sort_keys=True),
+              file=sys.stderr)
+        raise ValueError("original MAT Git lineage count or mapping altered")
     assigned_old = {p["old"] for p in pairs}
     assigned_new = {p["new"] for p in pairs}
     refuse_if(len(missing - assigned_old) != 5 or
