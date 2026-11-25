@@ -82,9 +82,15 @@ class DonationPacketTest(unittest.TestCase):
             self.assertEqual(broken, source.read_text())
 
     def assert_transition_receipt_successor(self, name, record):
-        _, receipt_sha256, predecessor_sha256, transitions, result_rows, result_java = (
+        sealed_receipt, receipt_sha256, predecessor_sha256, transitions, result_rows, result_java = (
             VERIFIER.SOURCE_TRANSITION_SEALS[name])
-        receipt = HERE / record["successor_receipt"]
+        receipt_root = record.get("successor_receipt_root", "module")
+        self.assertIn(receipt_root, ("module", "repository"))
+        relative = Path(record["successor_receipt"])
+        self.assertFalse(relative.is_absolute())
+        self.assertNotIn("..", relative.parts)
+        receipt = (VERIFIER.REPO if receipt_root == "repository" else HERE) / relative
+        self.assertEqual(sealed_receipt, receipt)
         self.assertEqual(record["successor_receipt_sha256"], VERIFIER.digest(receipt))
         self.assertEqual(record["successor_receipt_sha256"], receipt_sha256)
         self.assertEqual(record["inherited_composed_manifest_sha256"],
@@ -149,6 +155,88 @@ class DonationPacketTest(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "Unit absent source cannot be removed"):
                 VERIFIER.admit_source_transitions(prior, "Unit", receipt, VERIFIER.digest(receipt), seal(prior),
                                                   1, 1, 1)
+
+
+    def test_current_source_custody_preserves_the_complete_predecessor_chain(self):
+        packet = VERIFIER.read_donation_packet()
+        self.assertEqual("current_source_custody_successor_20261125",
+                         packet["source_set_successor_current"])
+        record = packet[packet["source_set_successor_current"]]
+        self.assertEqual("SOURCE_CUSTODY_MAINTENANCE_ONLY", record["scope"])
+        self.assertEqual("INSTALLED_AND_PROVIDER_ACCEPTANCE_NOT_ASSERTED",
+                         record["qualification_status"])
+        manifest = HERE / packet["installed_source_manifest"]
+        rows = [line.split(chr(9)) for line in manifest.read_text().splitlines()
+                if line and not line.startswith("#")]
+        for step in (VERIFIER.include_filtered_view_successor,
+                     VERIFIER.include_stored_representative_successor,
+                     VERIFIER.include_path_mask_successor,
+                     VERIFIER.include_object_state_offset_successor,
+                     VERIFIER.include_tools4j_refinement_successor,
+                     VERIFIER.include_superset_source_successor,
+                     VERIFIER.include_master_source_successor,
+                     VERIFIER.include_module_source_successor,
+                     VERIFIER.include_current_context_source_successor,
+                     VERIFIER.include_current_receiver_source_successor,
+                     VERIFIER.include_current_probe_source_successor,
+                     VERIFIER.include_longlane_required_native_source_successor):
+            rows = step(rows)
+        self.assertEqual(1957, len(rows))
+        historical_rows = list(rows)
+        result = VERIFIER.include_current_source_custody_successor(rows)
+        self.assertEqual(historical_rows, rows)
+        self.assertEqual(2207, len(result))
+        self.assertEqual(2201, sum(path.endswith(".java") and "/src/" in path
+                                   for path, _ in result))
+        encoded = "".join(path + chr(9) + digest + chr(10)
+                          for path, digest in result).encode("utf-8")
+        self.assertEqual(record["resulting_composed_manifest_sha256"],
+                         hashlib.sha256(encoded).hexdigest())
+        self.assertEqual(record["full_verifier_source_successor"]["historical_sha256"],
+                         VERIFIER._HISTORICAL_FULL_VERIFIER_SHA256_20261113)
+        self.assertEqual(record["full_verifier_source_successor"]["current_sha256"],
+                         VERIFIER._FULL_VERIFIER_SHA256)
+        owner = VERIFIER.REPO / record["full_verifier_source_successor"]["path"]
+        self.assertEqual(VERIFIER._FULL_VERIFIER_SHA256, VERIFIER.digest(owner))
+
+    def test_source_transitions_refuse_resealed_membership_counterfeits(self):
+        path = "m3/collections/src/main/java/jdk/m3/collections/A.java"
+        added = "m3/collections/src/test/java/jdk/m3/collections/BTest.java"
+        old, new, fresh = "a" * 64, "b" * 64, "c" * 64
+        prior = [(path, old)]
+        predecessor = hashlib.sha256((path + chr(9) + old + chr(10)).encode()).hexdigest()
+        cases = (
+            ("duplicate", [(path, old, new), (path, new, fresh)], 2, 1, 1,
+             "duplicate or out-of-scope"),
+            ("outside-root", [("test/Outside.java", "ABSENT", fresh)], 1, 2, 2,
+             "duplicate or out-of-scope"),
+            ("occupied", [(path, "ABSENT", fresh)], 1, 2, 2,
+             "occupied source admission"),
+            ("unchanged", [(path, old, old)], 1, 1, 1,
+             "unchanged source is not a transition"),
+            ("wrong-row-count", [(path, old, new)], 2, 1, 1,
+             "must declare exactly"),
+            ("wrong-result-membership", [(added, "ABSENT", fresh)], 1, 3, 2,
+             "exact current source membership drift"),
+            ("wrong-java-membership", [(added, "ABSENT", fresh)], 1, 2, 1,
+             "exact current source membership drift"),
+            ("malformed", [(path, old, new, "extra")], 1, 1, 1,
+             "malformed source transition"),
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            receipt = Path(directory) / "receipt.tsv"
+            for label, entries, count, result_rows, result_java, refusal in cases:
+                with self.subTest(label=label):
+                    text = "".join(chr(9).join(row) + chr(10) for row in entries)
+                    receipt.write_text(text, encoding="utf-8")
+                    before = receipt.read_bytes()
+                    with self.assertRaisesRegex(SystemExit, refusal):
+                        VERIFIER.admit_source_transitions(
+                            prior, "Closed membership", receipt, VERIFIER.digest(receipt),
+                            predecessor, count, result_rows, result_java)
+                    self.assertEqual([(path, old)], prior)
+                    self.assertEqual(before, receipt.read_bytes())
+
 
 
 if __name__ == "__main__":

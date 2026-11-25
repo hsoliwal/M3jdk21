@@ -1128,7 +1128,7 @@
     "linux_acceptance": "PENDING_LINUX",
     "phase_advance": false
   },
-  "source_set_successor_current": "longlane_required_native_source_successor_20261113",
+  "source_set_successor_current": "current_source_custody_successor_20261125",
   "tools4j_unix_refinement_20261019": {
     "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V1",
     "receiver_baseline": "677437be295b23f7ccf7409be287008944d0e8b0",
@@ -1335,5 +1335,41 @@
     "historical_baseline_commit": "5e8a20b93790238c158bdc2d162cf8814e87448d",
     "current_source_commit": "2e25b01eefbe3c2e72650813f461ce35fa9f29a4",
     "origin": "Required supplied JNI long-page allocation, typed-directory/lifetime/public API retained; real Windows component proof separate from installed Linux acceptance"
+  },
+  "current_source_custody_successor_20261125": {
+    "schema": "M3_COLLECTION_EXACT_SOURCE_REFINEMENT_V2",
+    "scope": "SOURCE_CUSTODY_MAINTENANCE_ONLY",
+    "successor_receipt_root": "repository",
+    "successor_receipt": "test/jdk/jdk/m3/collections/installed-source-successor-20261125.tsv",
+    "successor_receipt_sha256": "0fb095162860b18b96a0235c86c1cead116e93759f0fb33940594ffacebcbec3",
+    "receipt_columns": [
+      "path",
+      "inherited_sha256",
+      "final_received_sha256_or_REMOVED"
+    ],
+    "inherited_composed_manifest_sha256": "10a8b59ab6bf9d48365e89f38c03c244b301ad5e9488d0a8864442b3a2697425",
+    "inherited_rows": 1957,
+    "successor_rows": 592,
+    "refined_rows": 120,
+    "added_rows": 361,
+    "removed_rows": 111,
+    "resulting_rows": 2207,
+    "exact_java_source_membership": 2201,
+    "resulting_composed_manifest_sha256": "9b04f49d24c441cc34cd4fafe1540b543595529c00e569869f3dab696d8c2973",
+    "predecessor_successor": "longlane_required_native_source_successor_20261113",
+    "historical_baseline_commit": "a604e082922f48ba3b4233721d5f31699793510d",
+    "current_source_commit": "e48f465bd1050834e53ad699e1e45c181f867660",
+    "phase_advance": false,
+    "active_phase": "STRING",
+    "full_verifier_source_successor": {
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "historical_sha256": "6bd246c84d91ab0ac6c8de02246d1a8c00db62aadc03387e3337bc4735b52947",
+      "current_git_blob": "e3889c431ee25ac2316884a35955756a4f8101d4",
+      "current_sha256": "df18bb3b7c169a68595525de760782be11d6c950b131a9060b3449daac184d9d",
+      "jvm_profile_seals": "UNCHANGED",
+      "acceptance": "MUST_EXECUTE_AFRESH_AT_RECEIVING_HEAD"
+    },
+    "qualification_status": "INSTALLED_AND_PROVIDER_ACCEPTANCE_NOT_ASSERTED",
+    "origin": "Exact custody reconciliation of already landed sources and rename destinations. Historical receipts, runtime implementations, dependency guards and test requirements remain protected. A source hash or historical owning-suite result does not certify the unexecuted installed module or provider/JDK-image closure."
   }
 }
