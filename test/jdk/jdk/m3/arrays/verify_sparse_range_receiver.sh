@@ -26,6 +26,10 @@ out="$PWD/build/m3jdk-sparse-receiver-evidence"
 mkdir -p "$out"
 rm -f "$out"/*.log "$out"/*.txt
 # The original is the exact pinned product preimage, never reconstructed by hand.
+if ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+  # Compatible with checkout --filter=blob:none and fetch-depth=1.
+  git fetch --no-tags --depth=1 origin "$base"
+fi
 git cat-file -e "$base^{commit}"
 mkdir -p "$work/original/src/jdk/m3/arrays" "$work/candidate/src/jdk/m3/arrays"
 git show "$base:$owner" > "$work/original/src/jdk/m3/arrays/IntLaneAlgorithms.java"
