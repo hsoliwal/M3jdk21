@@ -498,6 +498,30 @@ jobs:
             JTREG="JAVA_OPTIONS=-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
             TEST="jtreg:test/jdk/jdk/m3/collections/ObjectStreamCollateTest.java jtreg:test/jdk/jdk/m3/collections/GinqHashJoinTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyTest.java jtreg:test/jdk/java/lang/String/StringCaseFamilyDonorTest.java jtreg:test/jdk/java/util/stream/Streams/StreamMapNotNullTest.java" \
             | tee "$RUNNER_TEMP/m3-groovy-jtreg.log"
+      - name: Run source-sealed PrimitiveHashSet growth jtreg on built M3 JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          printf '%s  %s\n' \
+            '274c208fa7895d5c19acb44f7909be1a491e0a32d0e3a61ddc0e7ae96d9bb522' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/PrimitiveHashSet.java' \
+            'db9d2b3b6206e786295d4ad6a0aa510fc57c8228663c6db1fa71a8bacb3a4589' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/PrimitiveKind.java' \
+            '3632c6fe1c316ab7be21a8b8343385a87d2d129e99cf8e7edff26df4b0073eaa' 'src/jdk.m3.collections/share/classes/jdk/m3/collections/DenseHash.java' \
+            'b78415942e426aae040ef287c1c05ebc7668bd4a3640047ea99323283bef71d5' 'test/jdk/jdk/m3/collections/PrimitiveHashSetAtomicGrowthTest.java' \
+            | sha256sum --check -
+          log="$RUNNER_TEMP/m3-primitivehashset-atomic-jtreg.log"
+          make CONF=m3-groovy-native-proof JOBS=2 test \
+            JTREG="JAVA_OPTIONS=-Dm3.arrays.native.path=$M3_ARRAYS_NATIVE_PATH" \
+            TEST="jtreg:test/jdk/jdk/m3/collections/PrimitiveHashSetAtomicGrowthTest.java" \
+            | tee "$log"
+          passed="$(grep -Fxc 'Passed: jdk/m3/collections/PrimitiveHashSetAtomicGrowthTest.java' "$log" || true)"
+          [[ "$passed" = 1 ]] || { echo "PrimitiveHashSet jtreg missing/duplicate PASS: $passed" >&2; exit 97; }
+          runs="$(grep -Ec '^Test results: ' "$log" || true)"
+          [[ "$runs" = 1 ]] || { echo "PrimitiveHashSet unexpected jtreg run count: $runs" >&2; exit 98; }
+          single="$(grep -Fxc 'Test results: passed: 1' "$log" || true)"
+          [[ "$single" = 1 ]] || { echo "PrimitiveHashSet jtreg reported no single PASS" >&2; exit 99; }
+          grep -Fxq 'TEST SUCCESS' "$log" || { echo "PrimitiveHashSet make test lacked TEST SUCCESS" >&2; exit 100; }
+          echo "M3_PRIMITIVEHASHSET_SOURCE_BUILT_JTREG_PASS classes=1 kinds=8"
       - name: Run exact eight provider main jtreg contracts against the built M3 image
         shell: bash
         run: |
@@ -822,6 +846,7 @@ jobs:
             ${{ runner.temp }}/m3-ginq-installed-receipt/
             ${{ runner.temp }}/m3-provider-junit/
             ${{ runner.temp }}/m3-provider-main-jtreg.log
+            ${{ runner.temp }}/m3-primitivehashset-atomic-jtreg.log
             ${{ runner.temp }}/m3-stream-junit-classpath.txt
             ${{ runner.temp }}/m3-provider-bootstrap-discovery/
             ${{ runner.temp }}/m3-groovy-count-native-configure.log
