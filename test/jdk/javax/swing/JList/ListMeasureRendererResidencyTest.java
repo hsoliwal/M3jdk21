@@ -5,10 +5,11 @@
 
 /*
  * @test
- * @summary BasicListUI measures JList rows (1M rows for reused renderer components, 100k for a
- *          component per row) without keeping one renderer component per row
- *          parented to its CellRendererPane; reused renderer components are added once as before
- *          and the measured sizes are unchanged
+ * @summary With -Dm3.swing.viewport=true, BasicListUI measures JList rows without keeping one
+ *          renderer component per row parented to its CellRendererPane (at most 8), while shared
+ *          renderer components stay parented and are added once. Without the property the
+ *          measure parents every returned component exactly as the stock JDK does. The measured
+ *          sizes are unchanged in both modes.
  * @run main/othervm -Djava.awt.headless=true -Xmx768m ListMeasureRendererResidencyTest
  * @run main/othervm -Djava.awt.headless=true -Xmx768m -Dm3.swing.viewport=true ListMeasureRendererResidencyTest
  */
@@ -18,25 +19,30 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
+import java.awt.event.HierarchyEvent;
 import javax.swing.AbstractListModel;
 import javax.swing.CellRendererPane;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JSeparator;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 
 public class ListMeasureRendererResidencyTest {
     private static final int ROWS = 1_000_000;
-    /** Rows for renderers that create a component per row; enough to show the pane stays bounded. */
+    /** Rows for renderers that create components per row; enough to show the pane stays bounded. */
     private static final int FRESH_ROWS = 100_000;
-    /** BasicListUI keeps at most this many measured renderer components parented. */
+    /** BasicListUI keeps at most this many measured renderer components parented on the M3 path. */
     private static final int PANE_LIMIT = 8;
+    /** Whether this run takes the M3 path. */
+    private static final boolean M3 = Boolean.getBoolean("m3.swing.viewport");
 
     private static int checks;
     private static int failures;
 
     public static void main(String[] args) throws Exception {
+        System.out.println("m3.swing.viewport=" + M3);
         SwingUtilities.invokeAndWait(ListMeasureRendererResidencyTest::runAll);
         System.out.println("LIST_MEASURE_RENDERER_RESIDENCY checks=" + checks + " failures=" + failures);
         if (failures != 0) {
@@ -48,6 +54,8 @@ public class ListMeasureRendererResidencyTest {
         run("new-component-per-row-renderer", ListMeasureRendererResidencyTest::freshComponents);
         run("reused-component-renderer", ListMeasureRendererResidencyTest::reusedComponent);
         run("alternating-reused-components", ListMeasureRendererResidencyTest::alternatingComponents);
+        run("shared-plus-new-separator-renderer", ListMeasureRendererResidencyTest::sharedPlusNew);
+        run("more-reused-components-than-limit", ListMeasureRendererResidencyTest::largePool);
         run("sizes-equal-full-measure", ListMeasureRendererResidencyTest::sizes);
     }
 
@@ -131,10 +139,11 @@ public class ListMeasureRendererResidencyTest {
         public void componentRemoved(ContainerEvent e) {
             removed++;
         }
-    }
 
-    private static JList<String> list(ListCellRenderer<? super String> renderer) {
-        return list(ROWS, renderer);
+        @Override
+        public String toString() {
+            return "added=" + added + " removed=" + removed + " peak=" + peak + " held=" + held();
+        }
     }
 
     private static JList<String> list(int rows, ListCellRenderer<? super String> renderer) {
@@ -143,64 +152,135 @@ public class ListMeasureRendererResidencyTest {
         return list;
     }
 
+    private static JLabel sized(JLabel label, int index) {
+        label.setPreferredSize(new Dimension(widthOf(index), heightOf(index)));
+        return label;
+    }
+
     /** A renderer that returns a new component for every row, as many applications write it. */
     private static void freshComponents() {
         int[] created = {0};
         JList<String> list = list(FRESH_ROWS, (l, value, index, selected, focus) -> {
             created[0]++;
-            JLabel label = new JLabel(value);
-            label.setPreferredSize(new Dimension(widthOf(index), heightOf(index)));
-            return label;
+            return sized(new JLabel(value), index);
         });
         PaneWatch watch = new PaneWatch(list);
-        Dimension size = list.getPreferredSize();
-        System.out.println("fresh components: created=" + created[0] + " peak parented=" + watch.peak
-                + " parented after measure=" + watch.held() + " added=" + watch.added + " removed=" + watch.removed);
+        list.getPreferredSize();
+        System.out.println("fresh components: created=" + created[0] + " " + watch);
         check(created[0] >= FRESH_ROWS, "every row measured: " + created[0]);
-        check(watch.peak <= PANE_LIMIT, "peak renderer components parented " + watch.peak);
-        check(watch.held() <= PANE_LIMIT, "renderer components parented after measure " + watch.held());
-        check(size.width == 100, "preferred width " + size.width);
+        check(watch.added == FRESH_ROWS, "every new component parented once: " + watch);
+        if (M3) {
+            check(watch.peak <= PANE_LIMIT, "peak renderer components parented " + watch);
+            check(watch.held() <= PANE_LIMIT, "renderer components parented after measure " + watch);
+        } else {
+            check(watch.removed == 0 && watch.held() == FRESH_ROWS, "stock keeps every component parented " + watch);
+        }
     }
 
-    /** The documented renderer pattern: one component for all rows is added once, as before. */
+    /** The documented renderer pattern: one component for all rows is added once, in both modes. */
     private static void reusedComponent() {
         DefaultListCellRenderer renderer = new DefaultListCellRenderer();
-        JList<String> list = list(renderer);
+        JList<String> list = list(ROWS, renderer);
         PaneWatch watch = new PaneWatch(list);
         list.getPreferredSize();
-        check(watch.added == 1 && watch.removed == 0, "added " + watch.added + " removed " + watch.removed);
-        check(watch.held() == 1, "the reused component stays parented " + watch.held());
+        check(watch.added == 1 && watch.removed == 0, "reused component " + watch);
+        check(watch.held() == 1, "the reused component stays parented " + watch);
         check(renderer.getParent() != null, "renderer component parented to the pane");
     }
 
-    /** Two reused components (for example a separator and a label) are each added once. */
+    /** Two reused components (for example a separator and a label) are each added once, in both modes. */
     private static void alternatingComponents() {
         JLabel even = new JLabel();
         JLabel odd = new JLabel();
-        JList<String> list = list((l, value, index, selected, focus) -> {
+        JList<String> list = list(ROWS, (l, value, index, selected, focus) -> {
             JLabel label = index % 2 == 0 ? even : odd;
             label.setText(value);
-            label.setPreferredSize(new Dimension(widthOf(index), heightOf(index)));
-            return label;
+            return sized(label, index);
         });
         PaneWatch watch = new PaneWatch(list);
         list.getPreferredSize();
-        check(watch.added == 2 && watch.removed == 0, "added " + watch.added + " removed " + watch.removed);
-        check(watch.held() == 2, "both reused components stay parented " + watch.held());
+        check(watch.added == 2 && watch.removed == 0, "alternating reused components " + watch);
+        check(watch.held() == 2, "both reused components stay parented " + watch);
+    }
+
+    /**
+     * A shared DefaultListCellRenderer for ordinary rows and a new JSeparator for every tenth row:
+     * the shared component is added once and never removed, in both modes, so it sees exactly the
+     * hierarchy events of the stock JDK; only the new separators are bounded on the M3 path.
+     */
+    private static void sharedPlusNew() {
+        DefaultListCellRenderer shared = new DefaultListCellRenderer();
+        int[] separators = {0};
+        JList<String> list = list(FRESH_ROWS, (l, value, index, selected, focus) -> {
+            if (index % 10 == 9) {
+                separators[0]++;
+                return new JSeparator();
+            }
+            return shared.getListCellRendererComponent(l, value, index, selected, focus);
+        });
+        int[] parentChanged = {0};
+        int[] displayabilityChanged = {0};
+        shared.addHierarchyListener(e -> {
+            if ((e.getChangeFlags() & HierarchyEvent.PARENT_CHANGED) != 0) {
+                parentChanged[0]++;
+            }
+            if ((e.getChangeFlags() & HierarchyEvent.DISPLAYABILITY_CHANGED) != 0) {
+                displayabilityChanged[0]++;
+            }
+        });
+        PaneWatch watch = new PaneWatch(list);
+        list.getPreferredSize();
+        System.out.println("shared plus new: separators=" + separators[0] + " " + watch
+                + " shared PARENT_CHANGED=" + parentChanged[0] + " DISPLAYABILITY_CHANGED=" + displayabilityChanged[0]);
+        check(watch.added == 1 + separators[0], "adds as in the stock JDK " + watch);
+        check(parentChanged[0] == 1 && displayabilityChanged[0] == 0,
+                "shared component parented once: PARENT_CHANGED=" + parentChanged[0]
+                + " DISPLAYABILITY_CHANGED=" + displayabilityChanged[0]);
+        check(shared.getParent() != null, "shared component stays parented");
+        if (M3) {
+            check(watch.peak <= PANE_LIMIT, "peak parented " + watch);
+            check(watch.removed == separators[0] - (PANE_LIMIT - 1), "only separators removed " + watch);
+        } else {
+            check(watch.removed == 0 && watch.held() == 1 + separators[0], "stock keeps every component " + watch);
+        }
+    }
+
+    /**
+     * A renderer that cycles through 16 reused components. The stock JDK adds each once and keeps
+     * all 16; the M3 path keeps at most 8 and re-adds the components beyond the limit.
+     */
+    private static void largePool() {
+        int pool = 16;
+        JLabel[] labels = new JLabel[pool];
+        for (int i = 0; i < pool; i++) {
+            labels[i] = new JLabel();
+        }
+        JList<String> list = list(FRESH_ROWS, (l, value, index, selected, focus) -> {
+            JLabel label = labels[index % pool];
+            label.setText(value);
+            return sized(label, index);
+        });
+        PaneWatch watch = new PaneWatch(list);
+        Dimension size = list.getPreferredSize();
+        System.out.println("pool of " + pool + ": " + watch);
+        if (M3) {
+            check(watch.peak <= PANE_LIMIT && watch.held() <= PANE_LIMIT, "pool bounded " + watch);
+            for (int i = 0; i < PANE_LIMIT - 1; i++) {
+                check(labels[i].getParent() != null, "early pool component " + i + " stays parented");
+            }
+        } else {
+            check(watch.added == pool && watch.removed == 0 && watch.held() == pool, "stock pool " + watch);
+        }
+        check(size.width == 100, "preferred width " + size.width);
     }
 
     /** Cell geometry is the full measure of every row, whatever the renderer returns. */
     private static void sizes() {
-        JList<String> fresh = list(FRESH_ROWS, (l, value, index, selected, focus) -> {
-            JLabel label = new JLabel(value);
-            label.setPreferredSize(new Dimension(widthOf(index), heightOf(index)));
-            return label;
-        });
+        JList<String> fresh = list(FRESH_ROWS, (l, value, index, selected, focus) -> sized(new JLabel(value), index));
         JLabel shared = new JLabel();
-        JList<String> reused = list((l, value, index, selected, focus) -> {
+        JList<String> reused = list(ROWS, (l, value, index, selected, focus) -> {
             shared.setText(value);
-            shared.setPreferredSize(new Dimension(widthOf(index), heightOf(index)));
-            return shared;
+            return sized(shared, index);
         });
         for (JList<String> list : java.util.List.of(fresh, reused)) {
             int rows = list.getModel().getSize();
