@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3jdk-intlane-dense-focused-jmh.yml'
+      - 'test/micro/org/openjdk/bench/jdk/m3/arrays/audit_intlane_dense_focused.py'
+      - 'test/micro/org/openjdk/bench/jdk/m3/arrays/test_audit_intlane_dense_focused.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,6 +19,15 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+      - name: Check standalone focused JMH evidence parser and its negative tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          root='test/micro/org/openjdk/bench/jdk/m3/arrays/'
+          printf '%s  %s\n' 6d3bfd2af0faed6bb914f685f879396ad04e6172ba98ed2842aea660b58f0033 "${root}audit_intlane_dense_focused.py" | sha256sum --check -
+          printf '%s  %s\n' b119c646b31c616f400ac8738206949447820488fbc37007da7faf84a0ab21dc "${root}test_audit_intlane_dense_focused.py" | sha256sum --check -
+          python3 -m unittest discover -v -s "$root" -p test_audit_intlane_dense_focused.py
+          echo 'M3_INTLANE_FOCUSED_JMH_AUDITOR_16_TESTS_PASS'
       - name: Check exact source and benchmark identities
         shell: bash
         run: |
@@ -114,39 +125,9 @@ jobs:
           mapfile -t files < <(find "$results" -type f -name 'jmh-result.csv' | sort)
           test "${#files[@]}" -eq 1 || { echo 'HOLD: expected one narrow JMH CSV' >&2; exit 2; }
           test -s "${files[0]}"
-          python3 - "${files[0]}" <<'PY_JMH'
-          import csv
-          import math
-          import sys
-          keys = {('RANDOM','65535','9000'),('RANDOM','65536','9000')}
-          data = {'originalDenseRangeAddMaximum': {}, 'wholeRangeAddMaximum': {}}
-          with open(sys.argv[1], newline='', encoding='utf-8') as stream:
-              for i, row in enumerate(csv.DictReader(stream), 1):
-                  method = row['Benchmark'].rsplit('.', 1)[-1]
-                  key = row['Param: distribution'], row['Param: universe'], row['Param: updates']
-                  if method not in data or key not in keys:
-                      raise SystemExit(f'HOLD: unexpected focused JMH method or geometry row {i}')
-                  if row['Mode'] != 'avgt' or row['Unit'] != 'us/op' or row['Threads'] != '1':
-                      raise SystemExit(f'HOLD: unsupported JMH mode/unit/threads row {i}')
-                  score, error, samples = float(row['Score']), float(row['Score Error (99.9%)']), int(row['Samples'])
-                  if not math.isfinite(score) or score <= 0 or not math.isfinite(error) or error < 0 or samples < 40:
-                      raise SystemExit(f'HOLD: invalid score/error or insufficient forks/samples row {i}')
-                  if key in data[method]:
-                      raise SystemExit(f'HOLD: duplicate focused JMH row {i}')
-                  data[method][key] = score, error, samples
-          if any(set(v) != keys for v in data.values()):
-              raise SystemExit('HOLD: both original/candidate methods must cover exactly two warning cases')
-          for key in sorted(keys):
-              baseline, be, bs = data['originalDenseRangeAddMaximum'][key]
-              candidate, ce, cs = data['wholeRangeAddMaximum'][key]
-              overlap = candidate - ce <= baseline + be
-              print(f'M3_INTLANE_FOCUSED_DENSE_JMH_RESULT universe={key[1]} updates={key[2]} '
-                    f'baseline_us={baseline:.6f} candidate_us={candidate:.6f} '
-                    f'ratio={candidate / baseline:.4f} samples={bs}/{cs} '
-                    f'overlapping_99_9_errors={overlap}')
-          print('M3_INTLANE_FOCUSED_DENSE_JMH_EVIDENCE_PASS pairs=2 forks=5 '
-                'measured_iterations_per_fork=10 PERFORMANCE_REVIEW_HOLD')
-          PY_JMH
+          source='test/micro/org/openjdk/bench/jdk/m3/arrays/audit_intlane_dense_focused.py'
+          python3 "$source" "${files[0]}" --output "$RUNNER_TEMP/intlane-focused-review" \
+            | tee "$RUNNER_TEMP/intlane-focused-review.log"
       - name: Preserve actual JMH/installed-image result files
         if: always()
         uses: actions/upload-artifact@v4
@@ -159,3 +140,5 @@ jobs:
             build/m3jdk21-intlane-jmh/build.log
             build/m3jdk21-intlane-jmh/test-results/
             build/m3jdk21-intlane-jmh/test-support/
+            ${{ runner.temp }}/intlane-focused-review/
+            ${{ runner.temp }}/intlane-focused-review.log
