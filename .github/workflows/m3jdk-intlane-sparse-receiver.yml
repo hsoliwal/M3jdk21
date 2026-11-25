@@ -6,7 +6,7 @@ on:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/IntLaneAlgorithms.java'
       - 'test/jdk/jdk/m3/arrays/IntLaneSparseRangeJtreg.java'
       - 'test/jdk/jdk/m3/arrays/verify_sparse_range_receiver.sh'
-      - '.github/workflows/m3jdk-intlane-sparse-receiver-20261125.yml'
+      - '.github/workflows/m3jdk-intlane-sparse-receiver.yml'
   workflow_dispatch:
 permissions:
   contents: read

@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/jdk.m3.collections/share/classes/jdk/m3/arrays/IntLaneAlgorithms.java'
       - 'test/jdk/jdk/m3/arrays/IntLaneSparseRangeJtreg.java'
-      - '.github/workflows/m3jdk-intlane-sparse-full-image-20261125.yml'
+      - '.github/workflows/m3jdk-intlane-sparse-full-image.yml'
   workflow_dispatch:
 permissions:
   contents: read
