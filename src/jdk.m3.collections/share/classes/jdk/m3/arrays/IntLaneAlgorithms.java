@@ -3,6 +3,7 @@
 package jdk.m3.arrays;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -114,7 +115,8 @@ public final class IntLaneAlgorithms {
      * start/end/delta are aligned operation columns, not per-operation objects.
      * Empty input of size zero yields zero; a nonempty operation requires size > 0.
      * Uses checked signed-long arithmetic rather than silently wrapping.
-     * O(size + operations) time, O(size) extra primitive memory.
+     * Dense: O(size + operations) time and O(size) scratch. Sparse: O(operations log operations)
+     * time and O(operations) scratch. Empty operation columns require no scratch.
      */
     public static long rangeAddMaximum(int size, int[] start, int[] end, long[] delta) {
         if (size < 0) throw new IllegalArgumentException("negative size");
@@ -127,6 +129,12 @@ public final class IntLaneAlgorithms {
         if (size == 0) {
             if (start.length != 0) throw new IndexOutOfBoundsException("update of empty lane");
             return 0L;
+        }
+        // No operations need neither a universe-sized lane nor an event tape.
+        if (start.length == 0) return 0L;
+        // Retain dense scanning for small domains or high operation density.
+        if (size >= 65536 && (long) size >= 256L * start.length) {
+            return sparseRangeAddMaximum(size, start, end, delta);
         }
         // The last subtraction at end + 1 is unnecessary: only [0,size) is read.
         long[] difference = new long[size];
@@ -145,6 +153,58 @@ public final class IntLaneAlgorithms {
         long maximum = Long.MIN_VALUE;
         for (long increment : difference) {
             running = Math.addExact(running, increment);
+            if (running > maximum) maximum = running;
+        }
+        return maximum;
+    }
+
+
+    /**
+     * Event-compressed difference scan for a large universe with few updates.
+     * Sort only ephemeral primitive boundary offsets, replay every source
+     * operation in its original order with checked arithmetic, then scan
+     * the event prefixes. Gaps between event offsets carry the previous
+     * value and cannot introduce a new maximum. No new retained data store.
+     */
+    private static long sparseRangeAddMaximum(
+            int size, int[] start, int[] end, long[] delta) {
+        // With admitted size >= 256 * count, 1 + 2 * count cannot overflow.
+        int[] offsets = new int[1 + 2 * start.length];
+        offsets[0] = 0;
+        int count = 1;
+        for (int i = 0; i < start.length; i++) {
+            offsets[count++] = start[i];
+            // These are candidate event locations. The replay below retains
+            // exact original invalid-range failure order.
+            if (end[i] >= 0 && end[i] < size - 1) {
+                offsets[count++] = end[i] + 1;
+            }
+        }
+        Arrays.sort(offsets, 0, count);
+        int unique = 0;
+        for (int i = 0; i < count; i++) {
+            if (unique == 0 || offsets[i] != offsets[unique - 1]) {
+                offsets[unique++] = offsets[i];
+            }
+        }
+        long[] differences = new long[unique];
+        for (int i = 0; i < start.length; i++) {
+            int left = start[i];
+            int right = end[i];
+            if (left < 0 || right < left || right >= size) {
+                throw new IndexOutOfBoundsException("invalid inclusive range at operation " + i);
+            }
+            int first = Arrays.binarySearch(offsets, 0, unique, left);
+            differences[first] = Math.addExact(differences[first], delta[i]);
+            if (right + 1 < size) {
+                int afterLast = Arrays.binarySearch(offsets, 0, unique, right + 1);
+                differences[afterLast] = Math.subtractExact(differences[afterLast], delta[i]);
+            }
+        }
+        long running = 0L;
+        long maximum = Long.MIN_VALUE;
+        for (int i = 0; i < unique; i++) {
+            running = Math.addExact(running, differences[i]);
             if (running > maximum) maximum = running;
         }
         return maximum;
