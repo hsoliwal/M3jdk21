@@ -199,6 +199,12 @@ public class BasicListUI extends ListUI
 
     private static final int DROP_LINE_THICKNESS = 2;
 
+    /**
+     * Renderer components that measuring the rows leaves in {@code rendererPane}
+     * at most; see {@code addMeasuredComponent}.
+     */
+    private static final int MEASURED_COMPONENTS_LIMIT = 8;
+
     /** Row offsets over {@code cellHeights} for the M3 row path ({@code sun.swing.list.M3ListRows}). */
     private final sun.swing.list.M3ListRows m3Rows = new sun.swing.list.M3ListRows();
 
@@ -1467,7 +1473,7 @@ public class BasicListUI extends ListUI
                 for(int index = 0; index < dataModelSize; index++) {
                     Object value = dataModel.getElementAt(index);
                     Component c = renderer.getListCellRendererComponent(list, value, index, false, false);
-                    rendererPane.add(c);
+                    addMeasuredComponent(c);
                     Dimension cellSize = c.getPreferredSize();
                     if (fixedCellWidth == -1) {
                         cellWidth = Math.max(cellSize.width, cellWidth);
@@ -1493,6 +1499,25 @@ public class BasicListUI extends ListUI
         columnCount = 1;
         if (layoutOrientation != JList.VERTICAL) {
             updateHorizontalLayoutState(fixedCellWidth, fixedCellHeight);
+        }
+    }
+
+    /**
+     * Parents a renderer component to {@code rendererPane} before it is
+     * measured, as {@code rendererPane.add(c)} does. A renderer that returns a
+     * new component for every row would otherwise leave one component per row
+     * in the pane until the next paint empties it, or for as long as the list
+     * is not painted. Once the pane holds {@code MEASURED_COMPONENTS_LIMIT}
+     * components, the earliest one is removed before a component the pane
+     * does not hold is added. Components a renderer reuses stay parented and
+     * are added only once, as before.
+     */
+    private void addMeasuredComponent(Component c) {
+        if (c.getParent() != rendererPane) {
+            if (rendererPane.getComponentCount() >= MEASURED_COMPONENTS_LIMIT) {
+                rendererPane.remove(0);
+            }
+            rendererPane.add(c);
         }
     }
 
