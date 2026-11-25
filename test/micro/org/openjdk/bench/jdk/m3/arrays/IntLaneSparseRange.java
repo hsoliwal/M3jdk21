@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.openjdk.bench.jdk.m3.arrays;
 
+import java.util.Objects;
 import java.util.SplittableRandom;
 import java.util.concurrent.TimeUnit;
 import jdk.m3.arrays.IntLaneAlgorithms;
@@ -100,9 +101,48 @@ public class IntLaneSparseRange {
             maximum = Math.max(maximum, running);
         }
         long actual = IntLaneAlgorithms.rangeAddMaximum(universe, start, end, delta);
-        if (actual != maximum) {
+        long dense = originalDenseRangeAddMaximum();
+        if (dense != maximum || actual != maximum) {
             throw new AssertionError("range-add setup mismatch: expected=" + maximum + " actual=" + actual);
         }
+    }
+
+    /**
+     * Standalone JMH copy of the original dense source atom for matched-VM
+     * comparison only. It is not installed into the JDK or reused by the runtime.
+     */
+    @Benchmark
+    public long originalDenseRangeAddMaximum() {
+        if (universe < 0) throw new IllegalArgumentException("negative size");
+        Objects.requireNonNull(start, "start");
+        Objects.requireNonNull(end, "end");
+        Objects.requireNonNull(delta, "delta");
+        if (start.length != end.length || start.length != delta.length) {
+            throw new IllegalArgumentException("unaligned range columns");
+        }
+        if (universe == 0) {
+            if (start.length != 0) throw new IndexOutOfBoundsException("update of empty lane");
+            return 0L;
+        }
+        long[] difference = new long[universe];
+        for (int i = 0; i < start.length; i++) {
+            int left = start[i];
+            int right = end[i];
+            if (left < 0 || right < left || right >= universe) {
+                throw new IndexOutOfBoundsException("invalid inclusive range at operation " + i);
+            }
+            difference[left] = Math.addExact(difference[left], delta[i]);
+            if (right + 1 < universe) {
+                difference[right + 1] = Math.subtractExact(difference[right + 1], delta[i]);
+            }
+        }
+        long running = 0L;
+        long maximum = Long.MIN_VALUE;
+        for (long increment : difference) {
+            running = Math.addExact(running, increment);
+            if (running > maximum) maximum = running;
+        }
+        return maximum;
     }
 
     @Benchmark

@@ -32,7 +32,7 @@ jobs:
           owner='src/jdk.m3.collections/share/classes/jdk/m3/arrays/IntLaneAlgorithms.java'
           benchmark='test/micro/org/openjdk/bench/jdk/m3/arrays/IntLaneSparseRange.java'
           printf '%s  %s\n' d3f78a046a3ff1d1bc27dfebdfd0e82f34de3bc8e9b604fb722c9a728ab77fd8 "$owner" | sha256sum --check -
-          printf '%s  %s\n' 3f52e5043826e2da1841a9470ddb637112aaa0ac0e1380bbb28d24fd3e0f7efa "$benchmark" | sha256sum --check -
+          printf '%s  %s\n' f6f73b422d9122cb5534074614bcbfd2501dcfc37511399d486a64fbd2936b14 "$benchmark" | sha256sum --check -
           grep -Fq 'exports jdk.m3.arrays;' src/jdk.m3.collections/share/classes/module-info.java
           echo 'M3_INTLANE_JMH_SOURCE_SEAL_PASS'
       - name: Install source-build BootJDK
@@ -90,13 +90,13 @@ jobs:
           image=build/m3jdk21-intlane-jmh/images/jdk
           test -x "$image/bin/java"
           "$image/bin/java" --list-modules | grep -Eq '^jdk\.m3\.collections($|@)'
-      - name: Run actual JMH 64-case source-built benchmark
+      - name: Run matched original-dense/reference and candidate JMH benchmark
         shell: bash
         run: |
           set -euo pipefail
           unset JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS
           make CONF=m3jdk21-intlane-jmh JOBS=2 LOG=info test \
-            TEST='micro:org.openjdk.bench.jdk.m3.arrays.IntLaneSparseRange.wholeRangeAddMaximum' \
+            TEST='micro:org.openjdk.bench.jdk.m3.arrays.IntLaneSparseRange' \
             MICRO='FORK=1;WARMUP_ITER=2;WARMUP_TIME=1;ITER=3;TIME=1;RESULTS_FORMAT=csv'
           results='build/m3jdk21-intlane-jmh/test-results'
           test -d "$results"
@@ -104,10 +104,37 @@ jobs:
           test -s "$RUNNER_TEMP/jmh-matches.txt"
           while IFS= read -r report; do
             test -s "$report"
-            grep -Fq 'org.openjdk.bench.jdk.m3.arrays.IntLaneSparseRange.wholeRangeAddMaximum' "$report"
-            matches=$(grep -Fc 'org.openjdk.bench.jdk.m3.arrays.IntLaneSparseRange.wholeRangeAddMaximum' "$report")
-            test "$matches" -ge 64
-            echo "M3_INTLANE_JMH_64_CASES_PASS count=$matches report=$report"
+            python3 - "$report" <<'PY_JMH'
+          import csv
+          import math
+          import statistics
+          import sys
+          report = sys.argv[1]
+          expected = {
+              'originalDenseRangeAddMaximum': {},
+              'wholeRangeAddMaximum': {},
+          }
+          with open(report, newline='', encoding='utf-8') as reader:
+              rows = csv.DictReader(reader)
+              for row in rows:
+                  method = row['Benchmark'].split('.')[-1]
+                  if method not in expected:
+                      continue
+                  key = (row['Param: distribution'], row['Param: universe'], row['Param: updates'])
+                  value = float(row['Score'])
+                  if not math.isfinite(value) or value <= 0 or key in expected[method]:
+                      raise SystemExit('HOLD: missing/duplicate/nonfinite JMH result for ' + repr(key))
+                  expected[method][key] = value
+          reference = expected['originalDenseRangeAddMaximum']
+          candidate = expected['wholeRangeAddMaximum']
+          if len(reference) != 64 or set(reference) != set(candidate):
+              raise SystemExit(f'HOLD: expected 64 paired benchmark cases, got {len(reference)}/{len(candidate)}')
+          ratios = [candidate[key] / reference[key] for key in sorted(reference)]
+          print(f'M3_INTLANE_JMH_64_PAIRED_CASES_PASS count=64 median_candidate_to_original={statistics.median(ratios):.4f} max_ratio={max(ratios):.4f} report={report}')
+          # Timing variation cannot silently promote a production change. The
+          # paired table is evidence for explicit performance review, not an
+          # automatic claim that one host proves universal speedup.
+          PY_JMH
           done < "$RUNNER_TEMP/jmh-matches.txt"
       - name: Preserve actual JMH/installed-image result files
         if: always()
