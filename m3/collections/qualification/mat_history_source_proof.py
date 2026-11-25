@@ -103,6 +103,27 @@ def tracked_java_roots():
     return source_set
 
 
+def preview_source_receipt(predecessor, pairs):
+    """Simulate source-key moves in memory only, without product receipt writes."""
+    original = list(predecessor)
+    current = dict(original)
+    refuse_if(len(current) != len(original), "duplicate predecessor source path")
+    extra = []
+    targets = set()
+    for pair in pairs:
+        old, new = pair["old"], pair["new"]
+        before, after = pair["historical_sha256"], pair["current_sha256"]
+        refuse_if(current.get(old) != before,
+                  "historical source predecessor does not match exact old SHA-256")
+        refuse_if(new in current or new in targets,
+                  "candidate new Java source already admitted")
+        del current[old]
+        targets.add(new)
+        extra.append((new, after))
+    return ([(name, current[name]) for name, _ in original if name in current]
+            + extra)
+
+
 def audit_lineage():
     rows = audit.exact_rows()
     expected = dict(rows)
@@ -173,11 +194,34 @@ def audit_lineage():
                             "actual": actual_sha})
     refuse_if(len(changed) != 120 or observed_missing != missing,
               "current source SHA-256/absence census changed")
+    preview = preview_source_receipt(rows, pairs)
+    preview_java = {path for path, _ in preview if path.endswith(".java") and "/src/" in path}
+    refuse_if(len(preview) != 1957 or len(preview_java) != 1951 or
+              len(preview_java - physical) != 5 or len(physical - preview_java) != 255,
+              "source-only MAT preview changes unexpected rows or residual membership")
+    preview_text = "".join(path + "\t" + digest + "\n" for path, digest in preview)
+    dry_run_text = "".join(
+        p["old"] + "\t" + p["historical_sha256"] + "\tREMOVED\n" +
+        p["new"] + "\tABSENT\t" + p["current_sha256"] + "\n"
+        for p in pairs)
+    preview_sha256 = hashlib.sha256(preview_text.encode("utf-8")).hexdigest()
+    dry_run_sha256 = hashlib.sha256(dry_run_text.encode("utf-8")).hexdigest()
     return {
         "sourceAuditHead": SOURCE_AUDIT_HEAD,
         "historicalMatPrMerge": HIST_MERGE,
         "originalPredecessorSha256": predecessor_sha256,
         "originalPredecessorRows": len(rows),
+        "sourceOnlyProposedReceipt": {
+            "status": "UNAPPROVED_DRY_RUN",
+            "rowCount": len(preview),
+            "javaCount": len(preview_java),
+            "sha256": preview_sha256,
+            "uninstalledTransitions": 2 * len(pairs),
+            "uninstalledTransitionSha256": dry_run_sha256,
+            "remainingHistoricalPaths": len(preview_java - physical),
+            "remainingUnlistedJava": len(physical - preview_java),
+            "remainingChangedSources": len(changed),
+        },
         "pairs": pairs,
         "unresolvedMissing": [
             {"path": path, "sha256": expected[path]}
@@ -211,7 +255,27 @@ def self_test():
     refuse_if(infer_candidate(
         MEMO_TEST_RENAME[0].replace("MatMemoTableTest.java", "MatUnreviewedTest.java"))
         is not None, "non-historical test rename admitted")
-    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=7")
+    old_row = [("original", "a" * 64), ("untouched", "b" * 64)]
+    one = [{"old": "original", "new": "renamed",
+            "historical_sha256": "a" * 64, "current_sha256": "c" * 64}]
+    refuse_if(preview_source_receipt(old_row, one) !=
+              [("untouched", "b" * 64), ("renamed", "c" * 64)],
+              "source-only overlay must preserve row membership and ordering")
+    try:
+        preview_source_receipt(old_row, one + one)
+        raise ValueError("duplicate receiver transition admitted")
+    except ValueError as reason:
+        refuse_if(str(reason) == "duplicate receiver transition admitted",
+                  "duplicate receiving move was not refused")
+    try:
+        preview_source_receipt(old_row, [{"old": "original", "new": "new",
+                                         "historical_sha256": "d" * 64,
+                                         "current_sha256": "c" * 64}])
+        raise ValueError("false predecessor admitted")
+    except ValueError as reason:
+        refuse_if(str(reason) == "false predecessor admitted",
+                  "changed original source was admitted")
+    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=10")
 
 
 def main():
