@@ -39,10 +39,11 @@ jobs:
       - uses: ./.github/actions/get-bootjdk
         with:
           platform: linux-x64
-      # First admission stage: identify a public, pinned jtreg 8.2.1+1 binary
-      # without executing it. The repository's get-jtreg action expects an
-      # artifact in this SAME Actions run, but standalone PR runs have none.
-      - name: Resolve pinned JTReg distribution (discovery only; fail closed)
+      # The original get-jtreg action downloads a same-run Actions artifact
+      # that standalone PR workflows do not produce. Use the same repository-
+      # configured JTReg 8.2.1+1 version from a fixed, externally published
+      # distribution, with BOTH published MD5 and independently observed SHA-256.
+      - name: Install exact SHA-256 pinned JTReg 8.2.1+1 distribution
         shell: bash
         run: |
           set -euo pipefail
@@ -50,14 +51,14 @@ jobs:
           curl --fail --location --retry 3 --connect-timeout 15 --max-time 180 \
             --output "$archive" \
             'https://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-21.0.12.1/jtreg-8.2.1+1.tar.gz'
-          # The Linux From Scratch published checksum is an independent
-          # discovery check; future executable admission requires pinned SHA-256.
           printf '%s  %s\n' e5f9bac8e929180a6b1643f498755844 "$archive" | md5sum --check -
-          echo "JTREG_8_2_1_PLUS_1_SHA256=$(sha256sum "$archive" | cut -d' ' -f 1)"
-          tar -tzf "$archive" > "$RUNNER_TEMP/m3jdk-jtreg-archive-list.txt"
-          sed -n '1,35p' "$RUNNER_TEMP/m3jdk-jtreg-archive-list.txt"
-          echo 'HOLD: discovery only; pin the exact SHA-256 before unpacking or running JTReg' >&2
-          exit 78
+          printf '%s  %s\n' 0ee738bcc1e390c88c879b2fa516d52c170cbb47565062ff5345baa9d17374d7 "$archive" | sha256sum --check -
+          mkdir -p jtreg/installed
+          tar -xzf "$archive" -C jtreg/installed --strip-components=1 --no-same-owner
+          test -x jtreg/installed/bin/jtreg
+          test -r jtreg/installed/release
+          jtreg/installed/bin/jtreg -version
+          echo 'JTREG_8_2_1_PINNED_SHA256_PASS distribution installed and executable'
       - name: Install existing supported JDK-image build prerequisites
         shell: bash
         run: |
