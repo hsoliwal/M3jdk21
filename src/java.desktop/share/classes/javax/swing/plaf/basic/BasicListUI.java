@@ -1511,17 +1511,21 @@ public class BasicListUI extends ListUI
      * With it (the M3 path of {@code sun.swing.list.M3ListRows}), a renderer
      * that returns a new component for every row no longer leaves one
      * component per row in the pane. Once the pane holds
-     * {@code MEASURED_COMPONENTS_LIMIT} components, the last one (the most
-     * recently added) is removed before a component the pane does not hold is
-     * added. A component the renderer returns again while it sits in that last
-     * place is moved to the front with {@code setComponentZOrder}, which keeps
-     * its parent and fires no container or hierarchy event; a renderer's
-     * shared component is so added once, also when new components entered the
-     * pane before it. Two limits remain on this path: a shared component that
-     * strictly alternates with new components while it is in the last place
-     * is removed and re-added each time, and a renderer that cycles through
-     * more than {@code MEASURED_COMPONENTS_LIMIT} reused components re-adds
-     * the ones beyond the limit.
+     * {@code MEASURED_COMPONENTS_LIMIT} components, the last one in the pane's
+     * order is removed before a component the pane does not hold is added; new
+     * components are added at the end. A component the renderer returns again
+     * while it sits in that last place is moved to the front with
+     * {@code setComponentZOrder}, which keeps its parent and fires no container
+     * event, no {@code PARENT_CHANGED} or {@code DISPLAYABILITY_CHANGED}
+     * hierarchy event and no {@code addNotify} or {@code removeNotify};
+     * {@code Container.setComponentZOrder} does dispatch one
+     * {@code HIERARCHY_CHANGED} event to the component's hierarchy listeners.
+     * A renderer's shared component is so added once, also when new
+     * components entered the pane before it. Two limits remain on this path:
+     * a shared component that strictly alternates with new components while
+     * it is in the last place is removed and re-added each time, and a
+     * renderer that cycles through more than {@code MEASURED_COMPONENTS_LIMIT}
+     * reused components re-adds the ones beyond the limit.
      */
     private void addMeasuredComponent(Component c) {
         if (!sun.swing.list.M3ListRows.ENABLED) {

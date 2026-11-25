@@ -222,6 +222,7 @@ public class ListMeasureRendererResidencyTest {
             }
             return shared.getListCellRendererComponent(l, value, index, selected, focus);
         });
+        int[] events = hierarchyEvents(shared);
         int[] parentChanged = {0};
         int[] displayabilityChanged = {0};
         shared.addHierarchyListener(e -> {
@@ -241,6 +242,8 @@ public class ListMeasureRendererResidencyTest {
                 "shared component parented once: PARENT_CHANGED=" + parentChanged[0]
                 + " DISPLAYABILITY_CHANGED=" + displayabilityChanged[0]);
         check(shared.getParent() != null, "shared component stays parented");
+        // the shared component enters first, so it is never in the last place of a full pane
+        checkSharedEvents(events, 0, "shared plus new");
         if (M3) {
             check(watch.peak <= PANE_LIMIT, "peak parented " + watch);
             check(watch.removed == separators[0] - (PANE_LIMIT - 1), "only separators removed " + watch);
@@ -249,15 +252,37 @@ public class ListMeasureRendererResidencyTest {
         }
     }
 
-    /** Counts PARENT_CHANGED hierarchy events of one component. */
-    static int[] parentChanges(Component c) {
-        int[] count = {0};
+    /**
+     * Counts every hierarchy event of one component: {@code [0]} all of them, {@code [1]} those with
+     * PARENT_CHANGED, {@code [2]} HIERARCHY_CHANGED events without the PARENT_CHANGED,
+     * DISPLAYABILITY_CHANGED or SHOWING_CHANGED bits (what a same-parent setComponentZOrder sends).
+     */
+    static int[] hierarchyEvents(Component c) {
+        int[] count = {0, 0, 0};
+        long structural = HierarchyEvent.PARENT_CHANGED | HierarchyEvent.DISPLAYABILITY_CHANGED
+                | HierarchyEvent.SHOWING_CHANGED;
         c.addHierarchyListener(e -> {
+            count[0]++;
             if ((e.getChangeFlags() & HierarchyEvent.PARENT_CHANGED) != 0) {
-                count[0]++;
+                count[1]++;
+            }
+            if (e.getID() == HierarchyEvent.HIERARCHY_CHANGED && (e.getChangeFlags() & structural) == 0) {
+                count[2]++;
             }
         });
         return count;
+    }
+
+    /**
+     * The exact events of a shared component that one measure parents once. Stock: one
+     * PARENT_CHANGED event. M3 path, when the component was moved out of the last place once:
+     * that event plus one HIERARCHY_CHANGED event from setComponentZOrder.
+     */
+    static void checkSharedEvents(int[] events, int moves, String what) {
+        String seen = what + ": events=" + events[0] + " PARENT_CHANGED=" + events[1]
+                + " plain HIERARCHY_CHANGED=" + events[2];
+        check(events[1] == 1, "shared component parented once, " + seen);
+        check(events[2] == moves && events[0] == 1 + moves, "exact hierarchy events, " + seen);
     }
 
     /**
@@ -274,13 +299,15 @@ public class ListMeasureRendererResidencyTest {
             }
             return shared.getListCellRendererComponent(l, value, index, selected, focus);
         });
-        int[] parentChanged = parentChanges(shared);
+        int[] events = hierarchyEvents(shared);
         PaneWatch watch = new PaneWatch(list);
         list.getPreferredSize();
         System.out.println("late shared: separators=" + separators[0] + " " + watch
-                + " shared PARENT_CHANGED=" + parentChanged[0]);
+                + " shared events=" + events[0] + " PARENT_CHANGED=" + events[1]
+                + " plain HIERARCHY_CHANGED=" + events[2]);
         check(watch.added == 1 + separators[0], "adds as in the stock JDK " + watch);
-        check(parentChanged[0] == 1, "shared component parented once: " + parentChanged[0]);
+        // on the M3 path the shared component enters a full pane last and is moved to the front once
+        checkSharedEvents(events, M3 ? 1 : 0, "late shared");
         check(shared.getParent() != null, "shared component stays parented");
         if (M3) {
             check(watch.peak <= PANE_LIMIT, "peak parented " + watch);
@@ -310,7 +337,7 @@ public class ListMeasureRendererResidencyTest {
             return shared.getListCellRendererComponent(l, value, index, selected, focus);
         });
         list.getPreferredSize();
-        int[] parentChanged = parentChanges(shared);
+        int[] events = hierarchyEvents(shared);
         AbstractListModel<Object> second = new AbstractListModel<>() {
             @Override
             public int getSize() {
@@ -325,8 +352,10 @@ public class ListMeasureRendererResidencyTest {
         list.setModel(second);
         PaneWatch watch = new PaneWatch(list);
         list.getPreferredSize();
-        System.out.println("re-measure without paint: " + watch + " shared PARENT_CHANGED=" + parentChanged[0]);
-        check(parentChanged[0] == 1, "shared component parented once: " + parentChanged[0]);
+        System.out.println("re-measure without paint: " + watch + " shared events=" + events[0]
+                + " PARENT_CHANGED=" + events[1] + " plain HIERARCHY_CHANGED=" + events[2]);
+        // on the M3 path the first measure left seven components, so the shared one enters last
+        checkSharedEvents(events, M3 ? 1 : 0, "re-measure without paint");
         check(shared.getParent() != null, "shared component stays parented");
         if (M3) {
             check(watch.peak <= PANE_LIMIT, "peak parented " + watch);
