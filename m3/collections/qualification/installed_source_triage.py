@@ -9,6 +9,20 @@ from pathlib import Path, PurePosixPath
 import re
 import sys
 
+TRANSITIONS = (
+    'include_filtered_view_successor',
+    'include_stored_representative_successor',
+    'include_path_mask_successor',
+    'include_object_state_offset_successor',
+    'include_tools4j_refinement_successor',
+    'include_superset_source_successor',
+    'include_master_source_successor',
+    'include_module_source_successor',
+    'include_current_context_source_successor',
+    'include_current_receiver_source_successor',
+    'include_current_probe_source_successor',
+    'include_longlane_required_native_source_successor',
+)
 EXTRA = {
     'MatAdaptiveIntIntMap.java': 'AdaptiveIntToIntMap.java',
     'MatAdaptiveLongLongMap.java': 'AdaptiveLongToLongMap.java',
@@ -69,8 +83,7 @@ def review(doc, head):
     require(doc.get('status') == 'HOLD', 'inventory must be HOLD')
     digest(doc['source_manifest_sha256'])
     steps = doc['source_receipt_chain']
-    require(isinstance(steps, list) and len(steps) == 12
-            and len(set(steps)) == 12, 'historical source chain changed')
+    require(steps == list(TRANSITIONS), 'historical source chain or order changed')
     missing = source_paths(doc['missing_paths'], 'missing')
     declared = source_paths(doc['java_declared_not_in_source_roots'], 'declared missing')
     unlisted = source_paths(doc['java_unlisted_in_receipts'], 'unlisted')
@@ -173,7 +186,52 @@ def main():
             pass
         else:
             raise AssertionError('invalid source digest accepted')
-        print('M3_INSTALLED_TRIAGE_SELF_TEST_PASS negative=2')
+        root = 'm3/collections/src/main/java/jdk/internal/m3/collections/mat/'
+        mat_old, mat_new = root+'MatFoo.java', root+'Foo.java'
+        extra_old, extra_new = root+'MatIdIdMap.java', root+'IdToIdMap.java'
+        missing, unlisted, changed = root+'Gone.java', root+'New.java', root+'Changed.java'
+        sample = {
+            'status': 'HOLD', 'source_manifest_sha256': 'a'*64,
+            'source_receipt_chain': list(TRANSITIONS),
+            'counts': {'source_digest_drift': 1, 'source_missing_or_aliased': 3,
+                       'java_unlisted_in_receipts': 3, 'java_declared_not_in_source_roots': 3},
+            'expected': 5, 'observed': 2, 'declared_java': 4,
+            'missing_paths': [mat_old, extra_old, missing],
+            'java_declared_not_in_source_roots': [mat_old, extra_old, missing],
+            'java_unlisted_in_receipts': [mat_new, extra_new, unlisted],
+            'aliased_paths': [],
+            'missing_source_preimages': [{'path':x, 'sha256':'a'*64}
+                                         for x in [mat_old, extra_old, missing]],
+            'unlisted_java_postimages': [{'path':x, 'sha256':'b'*64}
+                                         for x in [mat_new, extra_new, unlisted]],
+            'source_digest_drift': [{'path':changed, 'expected':'c'*64, 'actual':'d'*64}],
+            'candidate_mat_prefix_renames': [{'historical':mat_old, 'candidate':mat_new,
+                                               'identity':'UNVERIFIED_SOURCE_SEMANTICS'}],
+        }
+        cases, totals = review(sample, '1'*40)
+        assert totals['review_units'] == 5 and totals['source_change_records'] == 7
+        assert totals['candidate_moves'] == 2 and totals['additional_name_only_pairs'] == 1
+        assert len({x['review_id'] for x in cases}) == 5
+        def rejected(modification, reason):
+            clone = json.loads(json.dumps(sample))
+            modification(clone)
+            try:
+                review(clone, '1'*40)
+            except (ValueError, KeyError):
+                return
+            raise AssertionError('HOLD: invalid source inventory admitted: ' + reason)
+        rejected(lambda x:x['counts'].update(source_digest_drift=0), 'tampered count')
+        rejected(lambda x:x['missing_paths'].append(mat_old), 'duplicate historical path')
+        rejected(lambda x:x['source_digest_drift'][0].update(actual='invalid'), 'invalid SHA')
+        rejected(lambda x:x['candidate_mat_prefix_renames'].append(
+            x['candidate_mat_prefix_renames'][0]), 'duplicate claimed name move')
+        rejected(lambda x:x['aliased_paths'].append(mat_old), 'aliased source')
+        rejected(lambda x:x.update(status='PASS'), 'false source-ledger PASS')
+        rejected(lambda x:x['java_unlisted_in_receipts'].append('m3/collections/../evil.java'),
+                 'source path traversal')
+        rejected(lambda x:x['missing_source_preimages'].pop(), 'missing source preimage')
+        rejected(lambda x:x['source_receipt_chain'].reverse(), 'historical transition order drift')
+        print('M3_INSTALLED_TRIAGE_SELF_TEST_PASS review_units=5 positive=1 negative=11')
         return 0
     if not args.inventory or not args.head or not args.output:
         p.error('--inventory, --head, --output are required')
