@@ -38,6 +38,12 @@ it reports without changing the JDK; `--enforce` exits 2 on a repeated
 Malformed and duplicate-source evidence is rejected with exit 3. Its hermetic
 negative mutation suite has seven passing test methods.
 
+A permanent 128-row comparison snapshot is committed alongside this report
+as `IntLaneSparseRangePairedEvidence.csv` (Git blob `722982ef04b6cc1b07d65a99574cd8aa55d3688e`,
+SHA-256 `184310702a935dc6d08b3e07f2a25522b9ebba7d875283260c1ec6d81e22ade0`).
+This preserves every 64-case original/candidate score, score-error and ratio
+across both runs after ephemeral Actions artifacts expire.
+
 The new lightweight GitHub Actions workflow downloads the two original
 GitHub-hosted JMH artifacts using read-only permissions, checks their exact
 SHA-256 bytes, runs the tests and auditor, and preserves receipts even on
