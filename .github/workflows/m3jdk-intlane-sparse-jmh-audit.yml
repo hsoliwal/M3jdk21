@@ -1,0 +1,99 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 sparse IntLane JMH regression audit
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk-intlane-sparse-jmh-audit.yml'
+      - 'test/micro/org/openjdk/bench/jdk/m3/arrays/audit_intlane_jmh.py'
+      - 'test/micro/org/openjdk/bench/jdk/m3/arrays/test_audit_intlane_jmh.py'
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - M3JDK21 adaptive sparse IntLane JMH profiling
+    types: [completed]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  paired-performance-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout published JMH evidence auditor
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Check immutable reviewer tool source pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='test/micro/org/openjdk/bench/jdk/m3/arrays'
+          printf '%s  %s\n' '4ca7ca091ba334a571123ba7e38f9ca3b6735d9480b8baa1a256b50b5a1bd05b' "$base/audit_intlane_jmh.py" | sha256sum --check -
+          printf '%s  %s\n' '65b53cc75b0d28b1fd81c483172612ed56ab7f16b22cd8523f32cda0f47c4d10' "$base/test_audit_intlane_jmh.py" | sha256sum --check -
+          echo 'M3_INTLANE_JMH_REVIEW_SOURCE_SEAL_PASS'
+      - name: Execute hermetic JMH parser and negative admission controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -v \
+            -s test/micro/org/openjdk/bench/jdk/m3/arrays \
+            -p test_audit_intlane_jmh.py
+      - name: Obtain real GitHub JMH artifacts with original byte SHA-256
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/intlane-jmh-raw"
+          if [[ "$GITHUB_EVENT_NAME" == 'workflow_run' ]]; then
+            # New source-built JMH workflow completed. Do not treat a failed
+            # producer or a non-paired older format as qualified evidence.
+            status="$(jq -r '.workflow_run.conclusion' "$GITHUB_EVENT_PATH")"
+            test "$status" = success || { echo "HOLD: source-built JMH producer status=$status" >&2; exit 2; }
+            runs=("$(jq -r '.workflow_run.id' "$GITHUB_EVENT_PATH")")
+          else
+            # The two independently completed, paired 64-case historical runs.
+            runs=(45580086807 45580077410)
+          fi
+          : > "$RUNNER_TEMP/intlane-jmh-files.txt"
+          for id in "${runs[@]}"; do
+            conclusion="$(gh api "repos/hsoliwal/M3jdk21/actions/runs/$id" --jq '.conclusion')"
+            test "$conclusion" = success || { echo "HOLD: JMH run $id $conclusion" >&2; exit 2; }
+            root="$RUNNER_TEMP/intlane-jmh-raw/run-$id"
+            mkdir -p "$root"
+            gh run download "$id" -R hsoliwal/M3jdk21 \
+              --name m3jdk-intlane-source-built-jmh-results --dir "$root"
+            mapfile -t matches < <(find "$root" -type f -name jmh-result.csv)
+            test "${#matches[@]}" -eq 1 || { echo "HOLD: not one JMH report for $id" >&2; exit 2; }
+            report="${matches[0]}"
+            case "$id" in
+              45580086807) expected=84e2e37e47936b9b3765b3c78dc33c1d8cfb5c0363cd720bc3521561467a8f58 ;;
+              45580077410) expected=711ec45e2897665256f933c018299a7ec645a16ebc7459b44875abd3eb682f18 ;;
+              *) expected='' ;;
+            esac
+            if [[ -n "$expected" ]]; then
+              printf '%s  %s\n' "$expected" "$report" | sha256sum --check -
+            fi
+            printf '%s\n' "$report" >> "$RUNNER_TEMP/intlane-jmh-files.txt"
+          done
+      - name: Fail closed on missing pairs and observed performance regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t results < "$RUNNER_TEMP/intlane-jmh-files.txt"
+          test "${#results[@]}" -ge 1
+          base='test/micro/org/openjdk/bench/jdk/m3/arrays'
+          python3 "$base/audit_intlane_jmh.py" --enforce \
+            --output "$RUNNER_TEMP/intlane-jmh-audit" "${results[@]}" \
+            | tee "$RUNNER_TEMP/intlane-jmh-audit.log"
+      - name: Preserve every raw input and audit receipt even on PERF_HOLD
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk-intlane-paired-jmh-performance-review
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            ${{ runner.temp }}/intlane-jmh-raw/
+            ${{ runner.temp }}/intlane-jmh-audit/
+            ${{ runner.temp }}/intlane-jmh-audit.log
