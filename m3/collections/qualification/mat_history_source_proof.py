@@ -216,6 +216,34 @@ def verify_other_history(expected, missing, unlisted, unlisted_sha256):
     return result
 
 
+def preview_complete_receipt(predecessor, transitions):
+    """Apply exact source-key identities in memory; never write receiver sources."""
+    original = list(predecessor)
+    current = dict(original)
+    refuse_if(len(current) != len(original), "duplicate original source receipt")
+    additions, seen = [], set()
+    for path, before, after in transitions:
+        refuse_if(path in seen or not path.startswith("m3/collections/") or
+                  ".." in Path(path).parts,
+                  "duplicate/out-of-scope full source transition")
+        seen.add(path)
+        if after == "REMOVED":
+            refuse_if(current.get(path) != before,
+                      "removed source predecessor SHA-256 mismatch")
+            del current[path]
+        elif before == "ABSENT":
+            refuse_if(path in current or len(after) != 64,
+                      "new source already exists in original receipt")
+            current[path] = after
+            additions.append((path, after))
+        else:
+            refuse_if(current.get(path) != before or len(after) != 64,
+                      "changed Java source predecessor SHA-256 mismatch")
+            current[path] = after
+    return ([(path, current[path]) for path, _ in original if path in current]
+            + additions)
+
+
 def audit_lineage():
     rows = audit.exact_rows()
     expected = dict(rows)
@@ -227,6 +255,9 @@ def audit_lineage():
     # successor can later pin the EXACT 1,957-row predecessor, not a guess.
     predecessor = "".join(path + "\t" + digest + "\n" for path, digest in rows)
     predecessor_sha256 = hashlib.sha256(predecessor.encode("utf-8")).hexdigest()
+    refuse_if(predecessor_sha256 !=
+              "10a8b59ab6bf9d48365e89f38c03c244b301ad5e9488d0a8864442b3a2697425",
+              "executed original 1,957-row source predecessor digest drift")
     unlisted_sha256 = {}
     for path in sorted(unlisted):
         category, digest = audit.guarded_source(path)
@@ -314,11 +345,56 @@ def audit_lineage():
     extended_text = "".join(path + "\t" + digest + "\n"
                             for path, digest in extended)
     extended_sha = hashlib.sha256(extended_text.encode("utf-8")).hexdigest()
+    complete_actions = sorted(
+        ([(path, expected[path], "REMOVED") for path in missing] +
+         [(path, "ABSENT", unlisted_sha256[path]) for path in unlisted] +
+         [(x["path"], x["expected"], x["actual"]) for x in changed]),
+        key=lambda row: row[0])
+    refuse_if(len(complete_actions) != 592 or
+              len({row[0] for row in complete_actions}) != 592 or
+              sum(row[2] == "REMOVED" for row in complete_actions) != 111 or
+              sum(row[1] == "ABSENT" for row in complete_actions) != 361,
+              "complete unapproved source successor membership changed")
+    complete_transitions = "".join(
+        "\t".join(row) + "\n" for row in complete_actions)
+    complete_transition_sha = hashlib.sha256(
+        complete_transitions.encode("utf-8")).hexdigest()
+    refuse_if(complete_transition_sha !=
+              "bb73012d7048837517389b327fb562ea16f1930b30b73bcc585c013d3620c4ed",
+              "independent private review of 592 source-key candidates disagrees")
+    complete = preview_complete_receipt(rows, complete_actions)
+    complete_java = {path for path, _ in complete
+                     if path.endswith(".java") and "/src/" in path}
+    refuse_if(len(complete) != 2207 or len(complete_java) != 2201 or
+              complete_java != physical,
+              "proposed full in-memory source inventory not equal to live source roots")
+    for source_path, source_digest in complete:
+        state, actual = audit.guarded_source(source_path)
+        refuse_if(state != "FILE" or actual != source_digest,
+                  "source-only complete preview has missing/drifted Java/source: " +
+                  source_path)
+    complete_sha = hashlib.sha256(
+        "".join(path + "\t" + digest + "\n" for path, digest in complete)
+        .encode("utf-8")).hexdigest()
     return {
         "sourceAuditHead": SOURCE_AUDIT_HEAD,
         "historicalMatPrMerge": HIST_MERGE,
         "originalPredecessorSha256": predecessor_sha256,
         "originalPredecessorRows": len(rows),
+        "sourceOnlyCompletePreview": {
+            "status": "UNAPPROVED_DRY_RUN",
+            "originalSourceRows": len(rows),
+            "proposedSourceRows": len(complete),
+            "proposedJavaSourceRows": len(complete_java),
+            "sourceSetMatchesCurrentCheckout": complete_java == physical,
+            "sha256": complete_sha,
+            "unapprovedTransitions": len(complete_actions),
+            "transitionSha256": complete_transition_sha,
+            "historicalRemovalCandidates": 111,
+            "unlistedAdditionCandidates": 361,
+            "modifiedExistingCandidates": len(changed),
+            "installedAcceptance": "HOLD",
+        },
         "sourceOnlyExtendedPreview": {
             "status": "UNAPPROVED_DRY_RUN",
             "sourceRows": len(extended),
@@ -406,7 +482,30 @@ def self_test():
     refuse_if(PROVIDER_TRANSFER[0].endswith("M3StrategyHashMap.java") or
               not PROVIDER_TRANSFER[0].endswith("StrategyHashMap.java"),
               "original StrategyHashMap name was not supposed to change")
-    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=13")
+    initial = [("a", "a" * 64), ("b", "b" * 64)]
+    changed = preview_complete_receipt(initial, [
+        ("a", "a" * 64, "c" * 64),
+        ("b", "b" * 64, "REMOVED"),
+        ("c", "ABSENT", "d" * 64),
+    ])
+    refuse_if(changed != [("a", "c" * 64), ("c", "d" * 64)],
+              "in-memory complete source-key operations failed")
+    try:
+        preview_complete_receipt(initial, [
+            ("a", "a" * 64, "c" * 64),
+            ("a", "a" * 64, "REMOVED"),
+        ])
+        raise ValueError("duplicate modification allowed")
+    except ValueError as e:
+        refuse_if(str(e) == "duplicate modification allowed",
+                  "source-key duplicate was not refused")
+    try:
+        preview_complete_receipt(initial, [("a", "wrong", "REMOVED")])
+        raise ValueError("wrong predecessor removal allowed")
+    except ValueError as e:
+        refuse_if(str(e) == "wrong predecessor removal allowed",
+                  "wrong predecessor digest was not refused")
+    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=16")
 
 
 def main():
@@ -423,7 +522,8 @@ def main():
         print("M3_PUBLIC_MAT_HISTORY_PASS pairs=106 special=3 "
               "unresolvedOld=5 otherUnlisted=255 unchangedOriginalVerifier=YES "
               "installedAcceptance=HOLD allHistoricalExplained=111 "
-              "plainRenames=4 providerTransfers=1 residualUnlisted=251")
+              "plainRenames=4 providerTransfers=1 residualUnlisted=251 "
+              "completeUnapproved=592 sourcePreviewJava=2201")
         return 0
     except (OSError, ValueError, UnicodeError) as err:
         print("M3_PUBLIC_MAT_HISTORY_REFUSED: " + str(err), file=sys.stderr)
