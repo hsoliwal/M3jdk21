@@ -515,7 +515,7 @@ def self_test():
     except ValueError as e:
         refuse_if(str(e) == "unscoped addition allowed",
                   "out-of-scope Java source was admitted")
-    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=16")
+    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=17")
 
 
 def main():
