@@ -52,7 +52,7 @@ public abstract class M3PopupSelector<V extends JComponent> extends JPanel {
         arrow.getAccessibleContext().setAccessibleName("Show choices");
         arrow.addActionListener(event -> setPopupVisible(!isPopupVisible()));
         add(text, BorderLayout.CENTER);
-        add(arrow, BorderLayout.EAST);
+        add(arrow, BorderLayout.LINE_END);
         getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
                 KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.ALT_DOWN_MASK), "m3.open");
         getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0), "m3.open");
