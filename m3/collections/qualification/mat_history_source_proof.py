@@ -274,6 +274,8 @@ def audit_lineage():
     refuse_if(len(missing - assigned_old) != 5 or
               len(unlisted - assigned_new) != 255,
               "unattributed source inventory changed")
+    other_lineages = verify_other_history(
+        expected, missing - assigned_old, unlisted - assigned_new, unlisted_sha256)
     changed = []
     observed_missing = set()
     for old, expected_sha in rows:
@@ -298,11 +300,37 @@ def audit_lineage():
         for p in pairs)
     preview_sha256 = hashlib.sha256(preview_text.encode("utf-8")).hexdigest()
     dry_run_sha256 = hashlib.sha256(dry_run_text.encode("utf-8")).hexdigest()
+    extra = [{"old": x["old"], "new": x["new"],
+              "historical_sha256": x["historical_sha256"],
+              "current_sha256": x["current_sha256"]}
+             for x in other_lineages if x["history"] == "GIT_RENAME"]
+    extended = preview_source_receipt(preview, extra)
+    extended_java = {path for path, _ in extended
+                     if path.endswith(".java") and "/src/" in path}
+    refuse_if(len(extended) != 1957 or len(extended_java) != 1951 or
+              len(extended_java - physical) != 1 or
+              len(physical - extended_java) != 251,
+              "source-only full lineage preview changed historic/JDK membership")
+    extended_text = "".join(path + "\t" + digest + "\n"
+                            for path, digest in extended)
+    extended_sha = hashlib.sha256(extended_text.encode("utf-8")).hexdigest()
     return {
         "sourceAuditHead": SOURCE_AUDIT_HEAD,
         "historicalMatPrMerge": HIST_MERGE,
         "originalPredecessorSha256": predecessor_sha256,
         "originalPredecessorRows": len(rows),
+        "sourceOnlyExtendedPreview": {
+            "status": "UNAPPROVED_DRY_RUN",
+            "sourceRows": len(extended),
+            "javaRows": len(extended_java),
+            "sha256": extended_sha,
+            "matOldNewPairs": 106,
+            "plainNameOldNewPairs": 4,
+            "providerTransferOutsideShareInventory": 1,
+            "missingHistoricalKeyStillInShareReceipt": 1,
+            "otherUnlistedJavaAfterPairs": 251,
+            "existingSourceDriftStillOpen": len(changed),
+        },
         "sourceOnlyProposedReceipt": {
             "status": "UNAPPROVED_DRY_RUN",
             "rowCount": len(preview),
@@ -315,6 +343,7 @@ def audit_lineage():
             "remainingChangedSources": len(changed),
         },
         "pairs": pairs,
+        "otherHistoricalLineages": other_lineages,
         "unresolvedMissing": [
             {"path": path, "sha256": expected[path]}
             for path in sorted(missing - assigned_old)
@@ -367,7 +396,17 @@ def self_test():
     except ValueError as reason:
         refuse_if(str(reason) == "false predecessor admitted",
                   "changed original source was admitted")
-    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=10")
+    refuse_if(len(OTHER_TYPE_RENAMES) != 4 or
+              len({x[0] for x in OTHER_TYPE_RENAMES}) != 4 or
+              len({x[1] for x in OTHER_TYPE_RENAMES}) != 4,
+              "four original plain type names changed")
+    refuse_if(not PROVIDER_TRANSFER[1].startswith(
+                  "src/jdk.m3.collections/providers/classes/"),
+              "StrategyHashMap must stay outside share-only module source")
+    refuse_if(PROVIDER_TRANSFER[0].endswith("M3StrategyHashMap.java") or
+              not PROVIDER_TRANSFER[0].endswith("StrategyHashMap.java"),
+              "original StrategyHashMap name was not supposed to change")
+    print("M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=13")
 
 
 def main():
@@ -383,7 +422,8 @@ def main():
         print(json.dumps({"head": head, **report}, sort_keys=True, indent=2))
         print("M3_PUBLIC_MAT_HISTORY_PASS pairs=106 special=3 "
               "unresolvedOld=5 otherUnlisted=255 unchangedOriginalVerifier=YES "
-              "installedAcceptance=HOLD")
+              "installedAcceptance=HOLD allHistoricalExplained=111 "
+              "plainRenames=4 providerTransfers=1 residualUnlisted=251")
         return 0
     except (OSError, ValueError, UnicodeError) as err:
         print("M3_PUBLIC_MAT_HISTORY_REFUSED: " + str(err), file=sys.stderr)
