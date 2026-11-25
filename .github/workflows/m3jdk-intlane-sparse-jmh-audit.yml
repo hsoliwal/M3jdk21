@@ -97,7 +97,7 @@ jobs:
           actual="$RUNNER_TEMP/intlane-jmh-audit/paired.csv"
           test -s "$review"
           test -s "$actual"
-          printf '%s  %s\\n' 184310702a935dc6d08b3e07f2a25522b9ebba7d875283260c1ec6d81e22ade0 "$review" | sha256sum --check -
+          printf '%s  %s\n' 184310702a935dc6d08b3e07f2a25522b9ebba7d875283260c1ec6d81e22ade0 "$review" | sha256sum --check -
           cmp "$review" "$actual"
           echo 'M3_INTLANE_PERMANENT_128_PAIRED_MEASUREMENTS_MATCH'
       - name: Preserve every raw input and audit receipt even on PERF_HOLD
