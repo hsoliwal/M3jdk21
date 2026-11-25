@@ -1,0 +1,161 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 focused dense-random JMH replication
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3jdk-intlane-dense-focused-jmh.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused-dense-jmh:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    steps:
+      - name: Checkout actual M3JDK21 source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Check exact source and benchmark identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          owner='src/jdk.m3.collections/share/classes/jdk/m3/arrays/IntLaneAlgorithms.java'
+          benchmark='test/micro/org/openjdk/bench/jdk/m3/arrays/IntLaneSparseRange.java'
+          printf '%s  %s\n' d3f78a046a3ff1d1bc27dfebdfd0e82f34de3bc8e9b604fb722c9a728ab77fd8 "$owner" | sha256sum --check -
+          printf '%s  %s\n' f6f73b422d9122cb5534074614bcbfd2501dcfc37511399d486a64fbd2936b14 "$benchmark" | sha256sum --check -
+          grep -Fq 'exports jdk.m3.arrays;' src/jdk.m3.collections/share/classes/module-info.java
+          echo 'M3_INTLANE_JMH_SOURCE_SEAL_PASS'
+      - name: Install source-build BootJDK
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: ./.github/actions/get-bootjdk
+        with:
+          platform: linux-x64
+      - name: Install supported native build dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y gcc-10 g++-10 make autoconf zip unzip \
+            libxrandr-dev libxtst-dev libcups2-dev libasound2-dev \
+            libfreetype6-dev libffi-dev zlib1g-dev
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 \
+            --slave /usr/bin/g++ g++ /usr/bin/g++-10
+      - name: Download and SHA-256-pin four JMH 1.37 artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          jars="$GITHUB_WORKSPACE/build/jmh/jars"
+          mkdir -p "$jars"
+          # Maven Central may intermittently return 404 from hosted runners.
+          # Mirrors supply bytes only; fixed SHA-256 values below own admission.
+          download() {
+            local artifact="$1"
+            local filename="${artifact##*/}.jar"
+            local source
+            for source in \
+              'https://repo.maven.apache.org/maven2' \
+              'https://repo1.maven.org/maven2' \
+              'https://maven-central.storage-download.googleapis.com/maven2' \
+              'https://archiva.wikimedia.org/repository/mirror-maven-central'; do
+              if curl --fail --silent --show-error --location \
+                  --connect-timeout 10 --max-time 50 \
+                  "$source/$artifact.jar" -o "$jars/$filename.part"; then
+                mv "$jars/$filename.part" "$jars/$filename"
+                echo "RETRIEVED_JMH_ARTIFACT $filename from $source"
+                return 0
+              fi
+              rm -f "$jars/$filename.part"
+            done
+            echo "HOLD: no pinned download source available for $artifact" >&2
+            return 1
+          }
+          download 'org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37'
+          download 'org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37'
+          download 'net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4'
+          download 'org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1'
+          (cd "$jars" && cat <<'SHA256' | sha256sum --check --status
+          dc0eaf2bbf0036a70b60798c785d6e03a9daf06b68b8edb0f1ba9eb3421baeb3  jmh-core-1.37.jar
+          6a5604b5b804e0daca1145df1077609321687734a8b49387e49f10557c186c77  jmh-generator-annprocess-1.37.jar
+          df26cc58f235f477db07f753ba5a3ab243ebe5789d9f89ecf68dd62ea9a66c28  jopt-simple-5.0.4.jar
+          1e56d7b058d28b65abd256b8458e3885b674c1d588fa43cd7d1cbb9c7ef2b308  commons-math3-3.6.1.jar
+          SHA256
+          )
+          echo 'M3_INTLANE_JMH_DEPENDENCIES_PINNED_PASS'
+      - name: Configure and build source JDK with actual JMH support
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS
+          test -x bootjdk/jdk/bin/java
+          bash configure --with-conf-name=m3jdk21-intlane-jmh \
+            --with-boot-jdk=bootjdk/jdk \
+            --with-jmh="$GITHUB_WORKSPACE/build/jmh/jars" \
+            --with-debug-level=release --with-zlib=system --with-skia=none --with-jobs=2
+          make CONF=m3jdk21-intlane-jmh JOBS=2 LOG=info images
+          image=build/m3jdk21-intlane-jmh/images/jdk
+          test -x "$image/bin/java"
+          "$image/bin/java" --list-modules | grep -Eq '^jdk\.m3\.collections($|@)'
+      - name: Remeasure only the two dense-random cases with independent forks
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS
+          # Historical runs: one fork and three measurements; wide JMH error bars.
+          # Source and JMH benchmark SHA-256 gates are unchanged above.
+          make CONF=m3jdk21-intlane-jmh JOBS=2 LOG=info test \
+            TEST='micro:org.openjdk.bench.jdk.m3.arrays.IntLaneSparseRange' \
+            MICRO='FORK=5;WARMUP_ITER=5;WARMUP_TIME=1;ITER=10;TIME=2;RESULTS_FORMAT=csv;OPTIONS=-p distribution=RANDOM -p universe=65535,65536 -p updates=9000'
+          results='build/m3jdk21-intlane-jmh/test-results'
+          mapfile -t files < <(find "$results" -type f -name 'jmh-result.csv' | sort)
+          test "${#files[@]}" -eq 1 || { echo 'HOLD: expected one narrow JMH CSV' >&2; exit 2; }
+          test -s "${files[0]}"
+          python3 - "${files[0]}" <<'PY_JMH'
+          import csv
+          import math
+          import sys
+          keys = {('RANDOM','65535','9000'),('RANDOM','65536','9000')}
+          data = {'originalDenseRangeAddMaximum': {}, 'wholeRangeAddMaximum': {}}
+          with open(sys.argv[1], newline='', encoding='utf-8') as stream:
+              for i, row in enumerate(csv.DictReader(stream), 1):
+                  method = row['Benchmark'].rsplit('.', 1)[-1]
+                  key = row['Param: distribution'], row['Param: universe'], row['Param: updates']
+                  if method not in data or key not in keys:
+                      raise SystemExit(f'HOLD: unexpected focused JMH method or geometry row {i}')
+                  if row['Mode'] != 'avgt' or row['Unit'] != 'us/op' or row['Threads'] != '1':
+                      raise SystemExit(f'HOLD: unsupported JMH mode/unit/threads row {i}')
+                  score, error, samples = float(row['Score']), float(row['Score Error (99.9%)']), int(row['Samples'])
+                  if not math.isfinite(score) or score <= 0 or not math.isfinite(error) or error < 0 or samples < 40:
+                      raise SystemExit(f'HOLD: invalid score/error or insufficient forks/samples row {i}')
+                  if key in data[method]:
+                      raise SystemExit(f'HOLD: duplicate focused JMH row {i}')
+                  data[method][key] = score, error, samples
+          if any(set(v) != keys for v in data.values()):
+              raise SystemExit('HOLD: both original/candidate methods must cover exactly two warning cases')
+          for key in sorted(keys):
+              baseline, be, bs = data['originalDenseRangeAddMaximum'][key]
+              candidate, ce, cs = data['wholeRangeAddMaximum'][key]
+              overlap = candidate - ce <= baseline + be
+              print(f'M3_INTLANE_FOCUSED_DENSE_JMH_RESULT universe={key[1]} updates={key[2]} '
+                    f'baseline_us={baseline:.6f} candidate_us={candidate:.6f} '
+                    f'ratio={candidate / baseline:.4f} samples={bs}/{cs} '
+                    f'overlapping_99_9_errors={overlap}')
+          print('M3_INTLANE_FOCUSED_DENSE_JMH_EVIDENCE_PASS pairs=2 forks=5 '
+                'measured_iterations_per_fork=10 PERFORMANCE_REVIEW_HOLD')
+          PY_JMH
+      - name: Preserve actual JMH/installed-image result files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk-intlane-focused-dense-jmh-results
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            build/m3jdk21-intlane-jmh/configure.log
+            build/m3jdk21-intlane-jmh/build.log
+            build/m3jdk21-intlane-jmh/test-results/
+            build/m3jdk21-intlane-jmh/test-support/
