@@ -38,6 +38,33 @@ MEMO_TEST_RENAME = (
     "m3/collections/src/test/java/jdk/internal/m3/collections/MatMemoTableTest.java",
     "m3/collections/src/test/java/jdk/internal/m3/collections/MemoTableTest.java",
 )
+PLAIN_TYPES_COMMIT = "06120d99868525ff7dac1e3785742f32f598150e"
+PROVIDER_TRANSFER_COMMIT = "6477fd0fe952012d1456f7c94cc980dffb38fb25"
+# Original M3 receiver source receipts predate these later, reviewed types.
+OTHER_TYPE_RENAMES = (
+    ("m3/collections/src/main/java/jdk/m3/collections/apache/M3ArrayStack.java",
+     "m3/collections/src/main/java/jdk/m3/collections/apache/ArrayStack.java",
+     "e8e3de6031e99bfa20583bdbccf29aa98b18523ecc3cdc08d3b263125c77f3d9",
+     "54a360750253be7fb0cb9761f238f2a7d340fad2816fcbf05d8e4788cfa7ed71"),
+    ("m3/collections/src/main/java/jdk/m3/collections/apache/M3NodeCachingLinkedList.java",
+     "m3/collections/src/main/java/jdk/m3/collections/apache/NodeCachingLinkedList.java",
+     "65e2963f8d44e109a7a1c687714e0326084f8cfb870ed4a2cc880d58ccd22498",
+     "9e3d1ebd5c5be2eb46e097488fcd6127d5f785d23a185b246107cd8c3e39328b"),
+    ("m3/collections/src/main/java/jdk/m3/collections/apache/M3TreeList.java",
+     "m3/collections/src/main/java/jdk/m3/collections/apache/TreeList.java",
+     "ad155c871d40d03dca1412443814e8670e8819c1ccd690f60f09f18e2ce9ca86",
+     "a41baffa6bafd82eaeedee95bda5f851d714eacebed0a0f4e919ae1ad6006c85"),
+    ("m3/collections/src/main/java/jdk/m3/collections/tooling/M3CountedCatalogue.java",
+     "m3/collections/src/main/java/jdk/m3/collections/tooling/CountedCatalogue.java",
+     "0128438ee625c58f355be774fc1f048ac1e9c9b5875d2e775067bbb176bd3dbc",
+     "a17d4395486f2f0ed114c3c2f64d081144c233bf1d35adca85226d31a4ad9b4e"),
+)
+PROVIDER_TRANSFER = (
+    "m3/collections/src/main/java/jdk/internal/m3/collections/StrategyHashMap.java",
+    "src/jdk.m3.collections/providers/classes/jdk/internal/m3/collections/StrategyHashMap.java",
+    "226909421841ccde6a6b89bfd5405d6c1bb65ad57be333b724f6ec49b76a85bc", 
+    "2c7a5c1feee057bb05360bab68874e001246e0a41b806cd9932ec7f5f919f6dd",
+)
 
 
 def refuse_if(condition, message):
@@ -65,13 +92,15 @@ def checked_header():
     refuse_if(bool(source_delta.strip()),
               "current original installed source roots differ from frozen audit")
     git("merge-base", "--is-ancestor", HIST_MERGE, current)
+    git("merge-base", "--is-ancestor", PLAIN_TYPES_COMMIT, current)
+    git("merge-base", "--is-ancestor", PROVIDER_TRANSFER_COMMIT, current)
     return current
 
 
-def status_paths():
+def status_paths(base=HIST_BASE, head=HIST_HEAD, roots=SOURCE_ROOTS):
     rows = git("diff", "--no-ext-diff", "--name-status", "-z",
-               "--no-renames", "--diff-filter=AD", HIST_BASE, HIST_HEAD,
-               "--", *SOURCE_ROOTS).split("\0")
+               "--no-renames", "--diff-filter=AD", base, head,
+               "--", *roots).split("\0")
     refuse_if(rows[-1] != "", "incomplete NUL-delimited historical diff")
     added, removed = set(), set()
     for i in range(0, len(rows) - 1, 2):
