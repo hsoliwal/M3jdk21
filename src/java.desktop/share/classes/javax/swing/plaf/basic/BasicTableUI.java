@@ -54,6 +54,23 @@ public class BasicTableUI extends TableUI
     private static final StringBuilder BASELINE_COMPONENT_KEY =
         new StringBuilder("Table.baselineComponent");
 
+    /**
+     * Whether a table class keeps {@code JTable.getCellRect(int, int, boolean)}.
+     * For such a table the column axis of a cell rectangle does not depend on
+     * the row, so one paint resolves it once instead of once per painted row.
+     */
+    private static final ClassValue<Boolean> OWN_CELL_RECT = new ClassValue<>() {
+        @Override
+        protected Boolean computeValue(Class<?> type) {
+            try {
+                return type.getMethod("getCellRect", int.class, int.class,
+                        boolean.class).getDeclaringClass() == JTable.class;
+            } catch (NoSuchMethodException e) {
+                return false;
+            }
+        }
+    };
+
 //
 // Instance Variables
 //
@@ -2065,6 +2082,28 @@ public class BasicTableUI extends TableUI
         return -1;
     }
 
+    /**
+     * Returns {@code table.getCellRect(row, column, includeSpacing)} for a row
+     * painted in the same pass as {@code first}, the rectangle of the same
+     * column and spacing in an earlier row. {@code JTable.getCellRect} walks
+     * every column before {@code column}, which made a paint cost the visible
+     * rows times the columns left of the view. When the table keeps that
+     * method, the column axis is taken from {@code first} and only the row
+     * axis is asked for: {@code getCellRect(row, -1, true)} answers the row's
+     * y and height without walking columns, and the row margin is applied as
+     * {@code getCellRect} applies it.
+     */
+    private Rectangle paintedCellRect(int row, int column, boolean includeSpacing,
+                                      Rectangle first) {
+        if (first == null || !OWN_CELL_RECT.get(table.getClass())) {
+            return table.getCellRect(row, column, includeSpacing);
+        }
+        Rectangle r = table.getCellRect(row, -1, true);
+        int rowMargin = includeSpacing ? 0 : Math.min(table.getRowMargin(), r.height);
+        r.setBounds(first.x, r.y + rowMargin / 2, first.width, r.height - rowMargin);
+        return r;
+    }
+
     private void paintCells(Graphics g, int rMin, int rMax, int cMin, int cMax) {
         JTableHeader header = table.getTableHeader();
         TableColumn draggedColumn = (header == null) ? null : header.getDraggedColumn();
@@ -2075,9 +2114,13 @@ public class BasicTableUI extends TableUI
         Rectangle cellRect;
         TableColumn aColumn;
         int columnWidth;
+        Rectangle firstCellRect = null;
         if (table.getComponentOrientation().isLeftToRight()) {
             for(int row = rMin; row <= rMax; row++) {
-                cellRect = table.getCellRect(row, cMin, false);
+                cellRect = paintedCellRect(row, cMin, false, firstCellRect);
+                if (firstCellRect == null) {
+                    firstCellRect = new Rectangle(cellRect);
+                }
                 for(int column = cMin; column <= cMax; column++) {
                     aColumn = cm.getColumn(column);
                     columnWidth = aColumn.getWidth();
@@ -2090,7 +2133,10 @@ public class BasicTableUI extends TableUI
             }
         } else {
             for(int row = rMin; row <= rMax; row++) {
-                cellRect = table.getCellRect(row, cMin, false);
+                cellRect = paintedCellRect(row, cMin, false, firstCellRect);
+                if (firstCellRect == null) {
+                    firstCellRect = new Rectangle(cellRect);
+                }
                 aColumn = cm.getColumn(cMin);
                 if (aColumn != draggedColumn) {
                     columnWidth = aColumn.getWidth();
@@ -2155,16 +2201,24 @@ public class BasicTableUI extends TableUI
             g.drawLine(x2, y1, x2, y2);
         }
 
+        Rectangle firstCellRect = null;
+        Rectangle firstSpacedRect = null;
         for(int row = rMin; row <= rMax; row++) {
             // Render the cell value
-            Rectangle r = table.getCellRect(row, draggedColumnIndex, false);
+            Rectangle r = paintedCellRect(row, draggedColumnIndex, false, firstCellRect);
+            if (firstCellRect == null) {
+                firstCellRect = new Rectangle(r);
+            }
             r.x += distance;
             paintCell(g, r, row, draggedColumnIndex);
 
             // Paint the (lower) horizontal grid line if necessary.
             if (table.getShowHorizontalLines()) {
                 g.setColor(table.getGridColor());
-                Rectangle rcr = table.getCellRect(row, draggedColumnIndex, true);
+                Rectangle rcr = paintedCellRect(row, draggedColumnIndex, true, firstSpacedRect);
+                if (firstSpacedRect == null) {
+                    firstSpacedRect = new Rectangle(rcr);
+                }
                 rcr.x += distance;
                 int x1 = rcr.x;
                 int y1 = rcr.y;
