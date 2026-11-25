@@ -38,7 +38,7 @@ jobs:
             m3/collections/qualification/installed_source_drift_audit.py
           python3 m3/collections/qualification/mat_history_source_proof.py \
             --self-test | tee "$RUNNER_TEMP/m3-mat-public-selftest.log"
-          grep -Fx 'M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=13' \
+          grep -Fx 'M3_PUBLIC_MAT_HISTORY_SELF_TEST_PASS cases=16' \
             "$RUNNER_TEMP/m3-mat-public-selftest.log"
       - name: Compare reviewed original PR history against exact installed-source inventory
         shell: bash
@@ -48,7 +48,7 @@ jobs:
             | tee "$RUNNER_TEMP/m3-mat-public-head.txt"
           python3 m3/collections/qualification/mat_history_source_proof.py \
             | tee "$RUNNER_TEMP/m3-mat-public-lineage.json"
-          grep -Fx 'M3_PUBLIC_MAT_HISTORY_PASS pairs=106 special=3 unresolvedOld=5 otherUnlisted=255 unchangedOriginalVerifier=YES installedAcceptance=HOLD allHistoricalExplained=111 plainRenames=4 providerTransfers=1 residualUnlisted=251' \
+          grep -Fx 'M3_PUBLIC_MAT_HISTORY_PASS pairs=106 special=3 unresolvedOld=5 otherUnlisted=255 unchangedOriginalVerifier=YES installedAcceptance=HOLD allHistoricalExplained=111 plainRenames=4 providerTransfers=1 residualUnlisted=251 completeUnapproved=592 sourcePreviewJava=2201' \
             "$RUNNER_TEMP/m3-mat-public-lineage.json"
           grep -F '"uninstalledTransitions": 212' \
             "$RUNNER_TEMP/m3-mat-public-lineage.json"
@@ -61,6 +61,12 @@ jobs:
           grep -F '"otherUnlistedJavaAfterPairs": 251' \
             "$RUNNER_TEMP/m3-mat-public-lineage.json"
           grep -F '"missingHistoricalKeyStillInShareReceipt": 1' \
+            "$RUNNER_TEMP/m3-mat-public-lineage.json"
+          grep -F '"unapprovedTransitions": 592' \
+            "$RUNNER_TEMP/m3-mat-public-lineage.json"
+          grep -F '"proposedJavaSourceRows": 2201' \
+            "$RUNNER_TEMP/m3-mat-public-lineage.json"
+          grep -F '"sourceSetMatchesCurrentCheckout": true' \
             "$RUNNER_TEMP/m3-mat-public-lineage.json"
       - name: Preserve full original public history report, even on refusal
         if: always()
