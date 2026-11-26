@@ -73,6 +73,7 @@ jobs:
           - 'hs/tier1 runtime'
           - 'hs/tier1 serviceability'
           - 'lib-test/tier1'
+          - 'm3/native graphics'
 
         include:
           - test-name: 'jdk/tier1 part 1'
@@ -119,6 +120,9 @@ jobs:
             test-suite: 'test/hotspot/jtreg/:tier1_serviceability'
             debug-suffix: -debug
 
+          - test-name: 'm3/native graphics'
+            test-suite: 'test/jdk/jdk/m3/graphics/NativeGraphics.java'
+
           - test-name: 'lib-test/tier1'
             test-suite: 'test/lib-test/:tier1'
             debug-suffix: -debug
@@ -156,6 +160,12 @@ jobs:
           # This will make GNU make available as 'make' and not only as 'gmake'
           echo '/usr/local/opt/make/libexec/gnubin' >> $GITHUB_PATH
         if: runner.os == 'macOS'
+
+      - name: 'Install native graphics runtime dependencies'
+        if: runner.os == 'Linux' && matrix.test-name == 'm3/native graphics'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libegl1 libgles2 libfontconfig1
 
       - name: 'Set PATH'
         id: path
