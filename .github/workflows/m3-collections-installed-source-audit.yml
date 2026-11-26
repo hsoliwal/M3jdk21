@@ -10,6 +10,7 @@ on:
       - 'm3/collections/verify_donation.py'
       - 'm3/collections/m3-donation.json'
       - 'm3/collections/qualification/*source*.tsv'
+      - 'm3/collections/qualification/installed_source_triage.py'
       - 'm3/collections/recipe/**'
       - 'm3/collections/src/**'
       - 'src/jdk.m3.collections/**'
@@ -36,6 +37,8 @@ jobs:
           git diff --check
           python3 -m py_compile m3/collections/qualification/installed_source_drift_audit.py
           python3 m3/collections/qualification/installed_source_drift_audit.py --self-test
+          python3 -m py_compile m3/collections/qualification/installed_source_triage.py
+          python3 m3/collections/qualification/installed_source_triage.py --self-test
       - name: Require current original installed source ledger to reconcile without waivers
         shell: bash
         run: |
@@ -43,6 +46,20 @@ jobs:
           git rev-parse HEAD | tee "$RUNNER_TEMP/m3-installed-source-head.txt"
           python3 m3/collections/qualification/installed_source_drift_audit.py \
             | tee "$RUNNER_TEMP/m3-installed-source-inventory.json"
+      - name: Build read-only, unverified source review queue on ledger failure
+        if: failure()
+        shell: bash
+        run: |
+          set -euo pipefail
+          report="$RUNNER_TEMP/m3-installed-source-inventory.json"
+          checkout="$RUNNER_TEMP/m3-installed-source-head.txt"
+          if [[ ! -s "$report" || ! -s "$checkout" ]]; then
+            echo "HOLD: no complete source inventory or exact checkout HEAD for triage" >&2
+            exit 1
+          fi
+          python3 m3/collections/qualification/installed_source_triage.py \
+            --inventory "$report" --head "$checkout" \
+            --output "$RUNNER_TEMP/m3-installed-source-triage"
       - name: Retain full machine-readable source discrepancy inventory on failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -51,4 +68,7 @@ jobs:
           path: |
             ${{ runner.temp }}/m3-installed-source-head.txt
             ${{ runner.temp }}/m3-installed-source-inventory.json
+            ${{ runner.temp }}/m3-installed-source-triage/*.tsv
+            ${{ runner.temp }}/m3-installed-source-triage/*.json
+            ${{ runner.temp }}/m3-installed-source-triage/*.md
           if-no-files-found: warn
