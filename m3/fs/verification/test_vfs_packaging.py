@@ -16,7 +16,8 @@ import zipfile
 
 MODULE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(MODULE / "tools"))
-from vfs_pack_support import (DEPENDENCY_MODULES, UPSTREAM_COMMIT, digest, load_dependencies,
+from vfs_pack_support import (DEPENDENCY_MODULES, PRODUCT_MODULES, UPSTREAM_COMMIT, digest, load_dependencies,
+                              load_product_dependencies, runtime_dependencies,
                               selected_vfs_source, source_inventory, verify_source_lock,
                               write_pack_inputs)
 
@@ -120,6 +121,104 @@ class PackagingAdmissionTest(unittest.TestCase):
         self.save_lock()
         with self.assertRaisesRegex(ValueError, "unsafe relative path"):
             load_dependencies(self.lock, self.cache, self.module)
+
+    def product_fixture(self):
+        rows = []
+        for name in sorted(PRODUCT_MODULES):
+            archive = self.cache / (name + ".jar")
+            legal = b"original product license\n"
+            with zipfile.ZipFile(archive, "w") as output:
+                output.writestr("module-info.class", b"fixture only; real descriptor tested by image integration")
+                output.writestr("META-INF/LICENSE", legal)
+            rows.append({"module": name, "repository_path": archive.name, "sha256": digest(archive),
+                         "legal_sha256": {"META-INF/LICENSE": hashlib.sha256(legal).hexdigest()}})
+        return rows
+
+    def admit_product(self, rows):
+        lock = self.root / "product-dependencies.json"
+        lock.write_text(json.dumps({"schema": 1, "dependencies": rows}), encoding="utf-8")
+        return load_product_dependencies(lock, self.cache)
+
+    def test_current_product_closure_uses_inlined_logging_owner(self):
+        old = load_dependencies(self.lock, self.cache, self.module)
+        self.assertEqual(old, runtime_dependencies(old, False))
+        current = runtime_dependencies(old, True) + self.admit_product(self.product_fixture())
+        self.assertEqual(7, len(current))
+        self.assertNotIn("commons.logging", {row["module"] for row in current})
+        self.assertTrue(PRODUCT_MODULES.issubset({row["module"] for row in current}))
+        jar = self.root / "product.jar"
+        jar.write_bytes(b"manifest fixture only")
+        image, manifest = write_pack_inputs(self.root, jar, current)
+        self.assertEqual(9, len(image.read_text().splitlines()))
+        self.assertEqual(["module\tunit_jars\ttarget"], manifest.read_text().splitlines())
+
+    def test_product_closure_missing_and_duplicate_modules_refused(self):
+        rows = self.product_fixture()
+        with self.assertRaisesRegex(ValueError, "complete three-module"):
+            self.admit_product(rows[:-1])
+        rows[-1] = rows[0]
+        with self.assertRaisesRegex(ValueError, "duplicate or unexpected product"):
+            self.admit_product(rows)
+
+    def test_product_dependency_byte_drift_refused(self):
+        rows = self.product_fixture()
+        with (self.cache / rows[0]["repository_path"]).open("ab") as stream:
+            stream.write(b"drift")
+        with self.assertRaisesRegex(ValueError, "product dependency SHA-256 drift"):
+            self.admit_product(rows)
+
+    def test_product_legal_drift_and_missing_pins_refused(self):
+        rows = self.product_fixture()
+        rows[0]["legal_sha256"]["META-INF/LICENSE"] = "0" * 64
+        with self.assertRaisesRegex(ValueError, "product legal text drift"):
+            self.admit_product(rows)
+        rows[0]["legal_sha256"] = {}
+        with self.assertRaisesRegex(ValueError, "original product legal"):
+            self.admit_product(rows)
+
+    def test_product_descriptor_required_even_when_archive_resealed(self):
+        rows = self.product_fixture()
+        archive = self.cache / rows[0]["repository_path"]
+        with zipfile.ZipFile(archive, "w") as output:
+            output.writestr("META-INF/LICENSE", b"original product license\n")
+        rows[0]["sha256"] = digest(archive)
+        with self.assertRaisesRegex(ValueError, "explicit product module descriptor"):
+            self.admit_product(rows)
+
+    def test_product_notice_cannot_be_omitted_from_lock(self):
+        rows = self.product_fixture()
+        archive = self.cache / rows[0]["repository_path"]
+        with zipfile.ZipFile(archive, "a") as output:
+            output.writestr("META-INF/NOTICE", b"additional original notice\n")
+        rows[0]["sha256"] = digest(archive)
+        with self.assertRaisesRegex(ValueError, "complete original product legal"):
+            self.admit_product(rows)
+
+    def test_duplicate_product_zip_entries_refused(self):
+        import warnings
+        rows = self.product_fixture()
+        archive = self.cache / rows[0]["repository_path"]
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", UserWarning)
+            with zipfile.ZipFile(archive, "a") as output:
+                output.writestr("META-INF/LICENSE", b"duplicate license\n")
+        rows[0]["sha256"] = digest(archive)
+        with self.assertRaisesRegex(ValueError, "duplicate product ZIP entries"):
+            self.admit_product(rows)
+
+    def test_product_parent_and_symlink_escape_refused(self):
+        rows = self.product_fixture()
+        original = rows[0]["repository_path"]
+        rows[0]["repository_path"] = "../escape.jar"
+        with self.assertRaisesRegex(ValueError, "unsafe relative path"):
+            self.admit_product(rows)
+        rows[0]["repository_path"] = original
+        archive = self.cache / original
+        outside = self.root / "outside.jar"
+        archive.rename(outside)
+        archive.symlink_to(outside)
+        with self.assertRaisesRegex(ValueError, "inside the supplied cache"):
+            self.admit_product(rows)
 
     def source_fixture(self):
         for relative in source_inventory(self.module):

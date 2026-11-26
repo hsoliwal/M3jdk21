@@ -39,6 +39,24 @@
     </dependency>
   </dependencies>
   <build>
+    <!-- Preserve the existing module attribution and original Apache legal texts in
+         every packaged artifact, including downstream JMOD/image assembly. -->
+    <resources>
+      <resource><directory>src/main/resources</directory></resource>
+      <resource>
+        <directory>${project.basedir}</directory>
+        <targetPath>META-INF</targetPath>
+        <includes><include>NOTICE</include></includes>
+      </resource>
+      <resource>
+        <directory>${project.basedir}/recipe/delta-generator-20261106/donor</directory>
+        <targetPath>META-INF</targetPath>
+        <includes>
+          <include>commons-text-LICENSE.txt</include>
+          <include>commons-text-NOTICE.txt</include>
+        </includes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

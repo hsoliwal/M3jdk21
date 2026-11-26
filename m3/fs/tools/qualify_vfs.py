@@ -23,6 +23,7 @@ import xml.etree.ElementTree as ET
 import zipfile
 
 from vfs_pack_support import (VFS_PREFIX, collect_legal, digest, input_file, load_dependencies,
+                              load_product_dependencies, runtime_dependencies,
                               selected_vfs_source, verify_jar_legal, verify_linked_legal,
                               verify_source_lock, write_pack_inputs)
 
@@ -103,6 +104,8 @@ def main(argv=None):
     parser.add_argument("--jdk-home", type=Path, required=True)
     parser.add_argument("--dependency-cache", type=Path, required=True)
     parser.add_argument("--dependency-lock", type=Path)
+    parser.add_argument("--product-dependency-lock", type=Path,
+                        help="Reviewed file/collections/arrays JAR and legal hashes in the dependency cache")
     parser.add_argument("--source-lock", type=Path, required=True,
                         help="Reviewed canonical-materialization TSV inventory; path and sha256 columns")
     parser.add_argument("--entry-api-sha256",
@@ -123,6 +126,10 @@ def main(argv=None):
         entry_proof = {"path": str(entry_api), "sha256": args.entry_api_sha256}
     lock = args.dependency_lock or module / "tools/vfs-dependencies.lock.json"
     dependencies = load_dependencies(lock, args.dependency_cache, module)
+    product_dependencies = (load_product_dependencies(args.product_dependency_lock, args.dependency_cache)
+                            if args.product_dependency_lock is not None else [])
+    logging_sources = sorted((module / "src/main/java/org/apache/commons/logging").rglob("*.java"))
+    dependencies = runtime_dependencies(dependencies, bool(logging_sources)) + product_dependencies
     jdk = args.jdk_home.resolve(strict=True)
     release = input_file(jdk / "release").read_text(encoding="utf-8")
     if re.search(r'(?m)^JAVA_VERSION="21(?:\.|\+|\")', release) is None:
@@ -143,6 +150,9 @@ def main(argv=None):
     receipts = {
         "scope": SCOPE, "source": source_proof, "entry_api": entry_proof, "jdk_home": str(jdk), "jdk_release": release,
         "dependency_lock": {"path": str(input_file(lock)), "sha256": digest(lock)},
+        "product_dependency_lock": ({"path": str(input_file(args.product_dependency_lock)),
+                                     "sha256": digest(args.product_dependency_lock)}
+                                    if args.product_dependency_lock is not None else None),
         "dependencies": [{"module": row["module"], "jar": str(row["jar"]),
                            "sha256": row["sha256"], "descriptor_kind": row["descriptor_kind"]}
                           for row in dependencies],
@@ -156,13 +166,22 @@ def main(argv=None):
     classpath = os.pathsep.join(str(row["jar"]) for row in dependencies)
     source_paths = sorted((module / "src/main/java").rglob("*.java"))
     vfs = [path for path in source_paths if selected_vfs_source(path.relative_to(module).as_posix())]
-    owned = [path for path in source_paths if not path.relative_to(module).as_posix().startswith(VFS_PREFIX)]
+    owned = [path for path in source_paths if not path.relative_to(module).as_posix().startswith(VFS_PREFIX)
+             and path not in logging_sources]
     if entry_proof is not None:
         owned.append(entry_api)
     if not owned or not any(path.name == "M3FS.java" for path in owned):
         raise ValueError("complete existing M3FS product sources required")
+    if logging_sources:
+        checked([jdk / "bin/javac", "--release", "21", "-Xlint:all", "-implicit:none",
+                 "-sourcepath", "", "-d", classes, *logging_sources],
+                environment, out / "logging-compile.log")
+    # VFS default bulk methods and M3-owned batch types have mutual references.
+    # Bootstrap that exact source closure together, then recompile every owned
+    # source with -Werror below; no first-party diagnostics are waived.
     checked([jdk / "bin/javac", "--release", "21", "-Xlint:all", "-implicit:none",
-             "-sourcepath", "", "-cp", classpath, "-d", classes, *vfs],
+             "-sourcepath", "", "-cp", str(classes) + os.pathsep + classpath,
+             "-d", classes, *vfs, *owned],
             environment, out / "provider-compile.log")
     checked([jdk / "bin/javac", "--release", "21", "-Xlint:all", "-Werror", "-implicit:none",
              "-sourcepath", "", "-cp", str(classes) + os.pathsep + classpath, "-d", classes, *owned],
@@ -217,14 +236,21 @@ def main(argv=None):
     if entry_proof is not None and digest(input_file(entry_api)) != entry_proof["sha256"]:
         raise ValueError("root-owned M3File.java changed during qualification")
     verify_source_lock(module, args.source_lock)
+    if digest(input_file(lock)) != receipts["dependency_lock"]["sha256"]:
+        raise ValueError("provider dependency lock changed during qualification")
     load_dependencies(lock, args.dependency_cache, module)
+    if args.product_dependency_lock is not None:
+        if digest(input_file(args.product_dependency_lock)) != receipts["product_dependency_lock"]["sha256"]:
+            raise ValueError("product dependency lock changed during qualification")
+        load_product_dependencies(args.product_dependency_lock, args.dependency_cache)
     report = {
         "status": "PASS", "scope": SCOPE, "image": str(image),
         "jar": {"path": str(jar), "sha256": digest(jar)},
         "compiled_m3fs_java_sources": len(owned), "compiled_vfs_java_sources": len(vfs),
+        "compiled_inlined_logging_java_sources": len(logging_sources),
         "provider_lint_policy": "-Xlint:all; upstream warnings recorded, not errors",
         "m3fs_lint_policy": "-Xlint:all -Werror; existing strict gate retained",
-        "module_descriptor_lint_exception": "requires-automatic and requires-transitive-automatic only, for the unchanged Maven-input Commons Logging 1.2 JAR; JMOD descriptor is explicit",
+        "module_descriptor_lint_exception": "requires-automatic and requires-transitive-automatic only; retained for the legacy external Logging input lane",
         "legal": legal_proof, "consumer": dict(line.split("=", 1) for line in result.splitlines() if "=" in line),
         "maven_lifecycle": "NOT_RUN_BY_THIS_HELPER", "native_sqlite_probe": "NOT_RUN",
         "source_built_m3jdk21": "NOT_RUN", "omitted_remote_providers": "SOURCE_CUSTODY_ONLY",
