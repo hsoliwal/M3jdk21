@@ -105,6 +105,74 @@ public final class SharedLexiconImage {
     /** Number of UTF-16 code units in the image payload, without materializing it. */
     public long utf16Units() { return utf16Units; }
 
+    /**
+     * Portable *value* coordinate for one validated image row. Two JVMs opening
+     * the same immutable M3LEX bytes derive the same value without sharing Java
+     * objects or VM-local namespaces. This is not source/owner semantics and does
+     * not authorize use of a mapped file modified after validation.
+     */
+    public AtomCoordinate atomCoordinate(int row) {
+        Objects.checkIndex(row, offsets.length);
+        return new AtomCoordinate(imageIdentity, version, row);
+    }
+
+    /**
+     * Canonical image-digest/version/row value, independent of virtual addresses,
+     * loader IDs and VM-local object identity. Consumers still have to verify
+     * exact UTF-16 content and owner/generation when asserting semantic identity.
+     */
+    public record AtomCoordinate(String imageDigest, int imageVersion, int imageRow) {
+        public AtomCoordinate {
+            Objects.requireNonNull(imageDigest, "imageDigest");
+            if (imageDigest.length() != 64) {
+                throw new IllegalArgumentException("image SHA-256 requires 64 hex digits");
+            }
+            for (int i = 0; i < 64; i++) {
+                char hex = imageDigest.charAt(i);
+                if (!((hex >= '0' && hex <= '9') || (hex >= 'a' && hex <= 'f'))) {
+                    throw new IllegalArgumentException("image identity must be lowercase hex");
+                }
+            }
+            if (imageVersion != 1 && imageVersion != 2) {
+                throw new IllegalArgumentException("unsupported M3LEX image version");
+            }
+            if (imageRow < 0 || imageRow >= MAX_RECORDS) {
+                throw new IllegalArgumentException("image row outside M3LEX record limit");
+            }
+        }
+
+        /** Deterministic, locale-independent wire value; no object identity. */
+        public String externalForm() {
+            return "m3lex:v" + imageVersion + ":" + imageDigest + ":" + imageRow;
+        }
+
+        /** Refuses alternate spellings so comparison across runtimes is unambiguous. */
+        public static AtomCoordinate parse(String external) {
+            Objects.requireNonNull(external, "external");
+            if (external.length() > 96) {
+                throw new IllegalArgumentException("M3LEX coordinate too long");
+            }
+            String[] parts = external.split(":", -1);
+            if (parts.length != 4 || !"m3lex".equals(parts[0])
+                    || parts[1].length() != 2 || parts[1].charAt(0) != 'v') {
+                throw new IllegalArgumentException("invalid M3LEX coordinate");
+            }
+            AtomCoordinate result = new AtomCoordinate(parts[2],
+                    Integer.parseInt(parts[1].substring(1)), Integer.parseInt(parts[3]));
+            if (!result.externalForm().equals(external)) {
+                throw new IllegalArgumentException("noncanonical M3LEX coordinate");
+            }
+            return result;
+        }
+
+        /** Metadata match only; does not revalidate the underlying mapped bytes. */
+        public boolean matchesSnapshotMetadata(SharedLexiconImage image) {
+            return image != null && imageVersion == image.version
+                    && imageDigest.equals(image.imageIdentity)
+                    && imageRow < image.offsets.length;
+        }
+    }
+
     private ByteBuffer recordBytes(int index) {
         Objects.checkIndex(index, offsets.length);
         int begin = payloadOffset + offsets[index] * 2;
