@@ -1328,7 +1328,8 @@
      "m3/vendor/third_party/lucene-queryparser/**",
      "m3/vendor/third_party/slf4j-api-2.0.12/**",
      "m3/vendor/third_party/slf4j-simple/**",
-     ".github/workflows/m3sdk-jmod-receiver.yml"
+     ".github/workflows/m3sdk-jmod-receiver.yml",
+     "test/jdk/jdk/m3/file/NlpInputPreflightTest.py"
     ]
    },
    "workflow_dispatch": {
