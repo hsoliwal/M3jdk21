@@ -23,14 +23,15 @@ SHADOW = 'm3-file-shadow-stream-20261020.yml'
 LAYERED = 'm3-native-shadow-stream-progress-20261020.yml'
 DELTA = 'm3-file-delta-20261020.yml'
 IMPACT = 'm3-file-build-impact-20261020.yml'
+CONTENT = 'm3-file-content-delta.yml'
 
 
 def workflow(name):
     return (WORKFLOWS / name).read_text(encoding='utf-8')
 
 
-def receipt_guard():
-    lines = workflow(SHADOW).splitlines()
+def receipt_guard(name=SHADOW):
+    lines = workflow(name).splitlines()
     start = next(i for i, line in enumerate(lines) if line.endswith("<<'PY'")) + 1
     end = next(i for i in range(start, len(lines)) if lines[i].strip() == 'PY')
     return textwrap.dedent('\n'.join(lines[start:end]))
@@ -80,19 +81,56 @@ def source_receipt():
     }
 
 
-def check_receipt(receipt, *, duplicate_state=False):
+def check_receipt(receipt, *, duplicate_state=False, workflow_name=SHADOW):
     with tempfile.TemporaryDirectory(prefix='m3-file-receipt-test-') as directory:
         path = Path(directory) / 'receipt.json'
         text = json.dumps(receipt)
         if duplicate_state:
             text = '{"state":"PASSED",' + text[1:]
         path.write_text(text, encoding='utf-8')
-        return subprocess.run([sys.executable, '-c', receipt_guard(), str(path)],
+        return subprocess.run([sys.executable, '-c', receipt_guard(workflow_name), str(path)],
                               text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                               check=False, timeout=30)
 
 
 class FileWorkflowWiringTest(unittest.TestCase):
+    def test_content_workflow_builds_real_dependencies_before_file_verify(self):
+        text = workflow(CONTENT)
+        commands = ['mvn -B -ntp -f m3/arrays/pom.xml install',
+                    'mvn -B -ntp -f m3/collections/pom.xml install',
+                    'mvn -B -ntp -f m3/file/pom.xml verify']
+        positions = [text.index(command) for command in commands]
+        self.assertEqual(positions, sorted(positions))
+        for flag in ('skipTests', 'maven.test.skip', 'testFailureIgnore'):
+            self.assertNotIn(flag, text)
+        self.assertIn('set -euo pipefail', text)
+        filters = json.loads((ROOT / '.github/checks-superset/filters.json').read_text())
+        paths = filters['members']['m3-file-content-delta']['pull_request']['paths']
+        for path in ('m3/arrays/**', 'm3/collections/**', 'src/jdk.m3.collections/**',
+                     'test/jdk/jdk/m3/arrays/**', 'test/jdk/jdk/m3/collections/**',
+                     'test/jdk/jdk/internal/m3/**'):
+            self.assertIn(path, paths)
+
+    def test_content_receipt_uses_same_exact_current_contract(self):
+        self.assertEqual(receipt_guard(CONTENT), receipt_guard(SHADOW))
+        receipt = source_receipt()
+        result = check_receipt(receipt, workflow_name=CONTENT)
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertNotEqual(check_receipt(receipt, workflow_name=CONTENT,
+                                         duplicate_state=True).returncode, 0)
+        for mutation in ('old-census', 'missing-image', 'wrong-state', 'false-maven'):
+            with self.subTest(mutation=mutation):
+                receipt = source_receipt()
+                if mutation == 'old-census':
+                    receipt['contract_inventory']['source_count'] = 19
+                elif mutation == 'missing-image':
+                    del receipt['image_module_contracts']['M3ChunkDeltaWorkspaceProbe:distance']
+                elif mutation == 'wrong-state':
+                    receipt['state'] = 'STARTED'
+                else:
+                    receipt['maven_fork_execution'] = 'PASSED'
+                self.assertNotEqual(check_receipt(receipt, workflow_name=CONTENT).returncode, 0)
+
     def test_current_source_roles_are_disjoint_and_complete(self):
         roles = declared_roles()
         partitions = [set(roles[name]) for name in
