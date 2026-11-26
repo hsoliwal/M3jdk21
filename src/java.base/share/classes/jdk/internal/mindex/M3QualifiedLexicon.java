@@ -14,7 +14,11 @@
  */
 package jdk.internal.mindex;
 
+import java.io.IOException;
 import java.util.Objects;
+import jdk.m3.text.LocalM3Arena;
+import jdk.m3.text.LocalM3StringPiece;
+import jdk.m3.text.SharedLexiconImage;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -110,6 +114,69 @@ public final class M3QualifiedLexicon {
         return entry.key.equals(occurrence.lexiconEntry())
                 && generations.getOrDefault(occurrence.ownerId(), 0L)
                     == occurrence.generation();
+    }
+
+    /**
+     * Binds an image/row *value* to a qualified semantic occurrence only after two proofs:
+     * the existing image's record digest is verified during its owned local copy, then
+     * every UTF-16 code unit in that copy matches the canonical lexicon backing.
+     *
+     * <p>No image bytes are retained by the registry. The already-verified local piece
+     * is returned, not discarded or recopied. The image-coordinate value may be portable
+     * between JVMs; the semantic occurrence and the piece remain VM/owner-local.
+     * The calling owner must still manage snapshot lifetimes and generation changes.
+     * A read-only mapped image is not a filesystem immutability seal.</p>
+     *
+     * @throws IOException if a mapped record changed since the image was opened
+     * @throws IllegalArgumentException if the coordinate or exact content mismatches
+     */
+    public ImageBinding admitImageRecord(Entry entry, SharedLexiconImage image,
+            SharedLexiconImage.AtomCoordinate coordinate, long ownerId,
+            long occurrenceId, LocalM3Arena arena) throws IOException {
+        requireOwnedEntry(entry);
+        Objects.requireNonNull(image, "image");
+        Objects.requireNonNull(coordinate, "coordinate");
+        Objects.requireNonNull(arena, "arena");
+        checkOwner(ownerId);
+        if (occurrenceId < 0L) {
+            throw new IllegalArgumentException("negative occurrence id");
+        }
+        if (!coordinate.matchesSnapshotMetadata(image)) {
+            throw new IllegalArgumentException("image coordinate does not match opened image");
+        }
+        LocalM3StringPiece localCopy = image.copyRecord(coordinate.imageRow(), arena);
+        if (localCopy.length() != entry.utf16Length) {
+            throw new IllegalArgumentException(COLLISION);
+        }
+        for (int i = 0; i < entry.utf16Length; i++) {
+            if (localCopy.charAt(i) != backing.charAt(entry.backingId, i)) {
+                throw new IllegalArgumentException(COLLISION);
+            }
+        }
+        return new ImageBinding(coordinate, occurrence(entry, ownerId, occurrenceId), localCopy);
+    }
+
+    /**
+     * One verified local piece paired with portable image metadata and a local semantic
+     * occurrence. Only the checked registry admission path can construct this value;
+     * no caller may manufacture a purportedly verified binding directly.
+     */
+    public static final class ImageBinding {
+        private final SharedLexiconImage.AtomCoordinate atomCoordinate;
+        private final M3OccurrenceKey occurrence;
+        private final LocalM3StringPiece verifiedLocalContent;
+
+        private ImageBinding(SharedLexiconImage.AtomCoordinate coordinate,
+                M3OccurrenceKey occurrence, LocalM3StringPiece verifiedLocalContent) {
+            this.atomCoordinate = Objects.requireNonNull(coordinate, "atomCoordinate");
+            this.occurrence = Objects.requireNonNull(occurrence, "occurrence");
+            this.verifiedLocalContent = Objects.requireNonNull(verifiedLocalContent,
+                    "verifiedLocalContent");
+        }
+
+        public SharedLexiconImage.AtomCoordinate atomCoordinate() { return atomCoordinate; }
+        public M3OccurrenceKey occurrence() { return occurrence; }
+        public LocalM3StringPiece verifiedLocalContent() { return verifiedLocalContent; }
     }
 
     private Entry requireEqual(Entry entry, long backingId, int length) {
