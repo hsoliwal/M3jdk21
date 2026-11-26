@@ -440,6 +440,23 @@ def include_longlane_required_native_source_successor(previous_rows, receipt=_LO
                                     _LONG_NATIVE_RESULT_JAVA)
 
 
+# Exact current source-custody successor. This records the already landed source set;
+# it does not certify runtime behavior or the separate provider/JDK-image test closure.
+_CURRENT_CUSTODY_RECEIPT = REPO / 'test/jdk/jdk/m3/collections/installed-source-successor-20261125.tsv'
+_CURRENT_CUSTODY_RECEIPT_SHA256 = '0fb095162860b18b96a0235c86c1cead116e93759f0fb33940594ffacebcbec3'
+_CURRENT_CUSTODY_PREDECESSOR_SHA256 = '10a8b59ab6bf9d48365e89f38c03c244b301ad5e9488d0a8864442b3a2697425'
+_CURRENT_CUSTODY_TRANSITIONS = 592
+_CURRENT_CUSTODY_RESULT_ROWS = 2207
+_CURRENT_CUSTODY_RESULT_JAVA = 2201
+
+
+def include_current_source_custody_successor(previous_rows, receipt=_CURRENT_CUSTODY_RECEIPT):
+    """Admit the closed current source inventory without changing runtime admission."""
+    return admit_source_transitions(previous_rows, 'Current source custody', receipt,
+        _CURRENT_CUSTODY_RECEIPT_SHA256, _CURRENT_CUSTODY_PREDECESSOR_SHA256,
+        _CURRENT_CUSTODY_TRANSITIONS, _CURRENT_CUSTODY_RESULT_ROWS, _CURRENT_CUSTODY_RESULT_JAVA)
+
+
 # The transition-receipt successors by their m3-donation.json record: (receipt, receipt SHA-256,
 # predecessor SHA-256, transitions, resulting rows, exact Java source membership).
 SOURCE_TRANSITION_SEALS = {
@@ -457,11 +474,16 @@ SOURCE_TRANSITION_SEALS = {
         _CURRENT_PROBE_TRANSITIONS, _CURRENT_PROBE_RESULT_ROWS, _CURRENT_PROBE_RESULT_JAVA),
     'longlane_required_native_source_successor_20261113': (_LONG_NATIVE_RECEIPT, _LONG_NATIVE_RECEIPT_SHA256, _LONG_NATIVE_PREDECESSOR_SHA256,
         _LONG_NATIVE_TRANSITIONS, _LONG_NATIVE_RESULT_ROWS, _LONG_NATIVE_RESULT_JAVA),
+    'current_source_custody_successor_20261125': (_CURRENT_CUSTODY_RECEIPT, _CURRENT_CUSTODY_RECEIPT_SHA256, _CURRENT_CUSTODY_PREDECESSOR_SHA256,
+        _CURRENT_CUSTODY_TRANSITIONS, _CURRENT_CUSTODY_RESULT_ROWS, _CURRENT_CUSTODY_RESULT_JAVA),
 }
 
 
 
-_FULL_VERIFIER_SHA256 = "6bd246c84d91ab0ac6c8de02246d1a8c00db62aadc03387e3337bc4735b52947"
+# The former owner seal remains historical. The current source owner produced the
+# exact-head baseline proof; installed acceptance still executes it afresh below.
+_HISTORICAL_FULL_VERIFIER_SHA256_20261113 = "6bd246c84d91ab0ac6c8de02246d1a8c00db62aadc03387e3337bc4735b52947"
+_FULL_VERIFIER_SHA256 = "df18bb3b7c169a68595525de760782be11d6c950b131a9060b3449daac184d9d"
 _FULL_PROFILE_SHA256 = {"java": "3156a2fd1b43f002062a4a1c282756d07ad687333ad54ee3b109ac5ea8bf38b9", "native": "d8188c990d2586771a9254e22c889d9e845deafb3e0c18a676f57560515a3fd1"}
 
 
@@ -674,6 +696,7 @@ def main():
     rows = include_current_receiver_source_successor(rows)
     rows = include_current_probe_source_successor(rows)
     rows = include_longlane_required_native_source_successor(rows)
+    rows = include_current_source_custody_successor(rows)
     if len({row[0] for row in rows}) != len(rows):
         raise SystemExit('Duplicate installed source path')
     for path, expected in rows:
