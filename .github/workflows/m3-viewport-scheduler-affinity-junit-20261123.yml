@@ -9,6 +9,15 @@ on:
     paths:
       - 'm3/viewport-core/src/main/java/jdk/m3/viewport/M3ViewportScheduler.java'
       - 'm3/viewport-core/src/test/java/jdk/m3/viewport/M3ViewportSchedulerTest.java'
+      - 'm3/viewport-core/**'
+      - 'm3/arrays/pom.xml'
+      - 'm3/collections/pom.xml'
+      - 'm3/vendor/third_party/pom.xml'
+      - 'm3/vendor/third_party/junit-jupiter-5.10.2/**'
+      - 'm3/vendor/third_party/junit-platform-launcher-1.10.2/**'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStream.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLanguageKernels.java'
+      - 'src/jdk.m3.collections/share/classes/jdk/m3/collections/ObjectStreamLoopKernels.java'
       - '.github/workflows/m3-viewport-scheduler-affinity-junit-20261123.yml'
   workflow_dispatch:
 permissions:
