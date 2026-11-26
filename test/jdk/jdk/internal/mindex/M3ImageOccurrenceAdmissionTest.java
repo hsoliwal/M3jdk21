@@ -3,7 +3,7 @@
  */
 /*
  * @test
- * @summary A mapped image coordinate is not a semantic identity without verified UTF-16 and generation
+ * @summary Require checked UTF-16 and owner generations for mapped image coordinates
  * @requires (os.family == "linux")
  * @modules java.base/jdk.internal.mindex java.base/jdk.m3.text
  * @run main/othervm M3ImageOccurrenceAdmissionTest
@@ -43,7 +43,9 @@ public final class M3ImageOccurrenceAdmissionTest {
         public int unpairedSurrogateCount(long id) { return 0; }
         public int hashCode(long id) { return text(id).hashCode(); }
         public char charAt(long id,int index) { return text(id).charAt(index); }
-        public CharBuffer utf16View(long id) { return CharBuffer.wrap(text(id)).asReadOnlyBuffer(); }
+        public CharBuffer utf16View(long id) {
+            return CharBuffer.wrap(text(id)).asReadOnlyBuffer();
+        }
         public ByteBuffer utf8View(long id) {
             return ByteBuffer.wrap(text(id).getBytes(StandardCharsets.UTF_8)).asReadOnlyBuffer();
         }
@@ -110,7 +112,8 @@ public final class M3ImageOccurrenceAdmissionTest {
             check(lexicon.size()==4,"only explicit canonical entries admitted");
             // A metadata match is insufficient after a second process modifies mapped bytes.
             try(FileChannel writer=FileChannel.open(file,StandardOpenOption.WRITE)) {
-                writer.write(ByteBuffer.wrap(new byte[]{(byte)'c'}),64+8L*sorted.size()+2L*sorted.get(0).length());
+                writer.write(ByteBuffer.wrap(new byte[]{(byte)'c'}),
+                        64 + 8L * sorted.size() + 2L * sorted.get(0).length());
                 writer.force(true);
             }
             rejected(IOException.class,()->lexicon.admitImageRecord(
