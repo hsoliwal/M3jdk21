@@ -33,7 +33,7 @@ public final class EliasFanoLongList {
 
     private final int size;
     private final int lowerBits;
-    private final long lowerMask;
+    private final long maximum;
     private final PackedUnsignedLongVector lows;
     private final long[] highWords;
     private final int[] selectSamples;
@@ -41,7 +41,7 @@ public final class EliasFanoLongList {
     public EliasFanoLongList(long[] sortedNonNegative) {
         Objects.requireNonNull(sortedNonNegative, "sortedNonNegative");
         size = sortedNonNegative.length;
-        long maximum = size == 0 ? 0 : sortedNonNegative[size - 1];
+        maximum = size == 0 ? 0 : sortedNonNegative[size - 1];
         long previous = -1;
         for (long value : sortedNonNegative) {
             if (value < 0) {
@@ -55,7 +55,7 @@ public final class EliasFanoLongList {
 
         long ratio = size == 0 ? 0 : maximum / Math.max(1L, size);
         lowerBits = ratio <= 1 ? 0 : 63 - Long.numberOfLeadingZeros(ratio);
-        lowerMask = lowerBits == 0 ? 0L : (1L << lowerBits) - 1L;
+        long lowerMask = lowerBits == 0 ? 0L : (1L << lowerBits) - 1L;
         lows = lowerBits == 0 ? null : new PackedUnsignedLongVector(lowerBits, size);
 
         long highMaximum = size == 0 ? 0 : maximum >>> lowerBits;
@@ -104,6 +104,7 @@ public final class EliasFanoLongList {
 
     public long get(int index) {
         Objects.checkIndex(index, size);
+        if (index == size - 1) return maximum;
         long upper = (long) select1(index) - index;
         long lower = lows == null ? 0L : lows.get(index);
         return (upper << lowerBits) | lower;
