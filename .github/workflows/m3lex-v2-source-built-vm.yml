@@ -12,6 +12,7 @@ on:
     branches:
       - m3lex-v2-contiguous-geometry-20261123
       - m3lex-jtreg-package-launcher-20261124
+      - m3lex-native-egl-gles-link-20261126
     paths:
       - 'src/java.base/share/classes/java/lang/M3StringPool.java'
       - 'm3/lexicon/receiver/**'
