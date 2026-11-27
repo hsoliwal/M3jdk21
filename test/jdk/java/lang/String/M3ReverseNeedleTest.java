@@ -32,6 +32,7 @@
  * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3ReverseNeedleTest
  */
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,13 @@ public class M3ReverseNeedleTest {
     private static final int[] LENGTHS = {0, 1, 2, 15, 16, 17, 100, 255, 256, 1000, 2048, 4095, 4096, 4097, 16384, 20000};
     private static final int[] NEEDLE_LENGTHS = {1, 2, 15, 16, 17, 31, 32, 64, 100, 257, 1024, 4097};
     private static long checks;
-    private static String context = "";
+    private static final long EXPECTED_SEARCH_CHECKS = 428_544L;
+    private static long fixtureChecks;
+    private static ThreadLocal<Boolean> admitting;
+    private static int contextLength;
+    private static int contextKind;
+    private static int contextNeedle;
+    private static int contextShape;
     private static Method internChars;
     private static Method concat;
     private static Method slice;
@@ -55,28 +62,48 @@ public class M3ReverseNeedleTest {
 
     public static void main(String[] args) throws Exception {
         bind();
+        flatFixtureStates();
         Random random = new Random(0x5245564552534545L);
         for (int length : LENGTHS) {
             for (int kind = 0; kind < 6; kind++) {
-                String text = spell(random, length, kind);
+                String text = flatSpell(random, length, kind);
                 StringBuilder builder = new StringBuilder(text);
-                List<String> needles = needles(text, random, kind);
+                List<String> needles = flatNeedles(text, random, kind);
                 for (int n = 0; n < needles.size(); n++) {
-                    String needle = needles.get(n);
-                    Object[] shapes = shapes(needle, random);
+                    String needle = flat(needles.get(n).toCharArray());
+                    Object needleValue = UNSAFE.getReference(needle, valueOffset);
+                    Object textValue = UNSAFE.getReference(text, valueOffset);
+                    Object[] shapes = flatShapes(needle, random);
+                    Oracle oracle = new Oracle(text, builder, needle);
                     for (int s = 0; s < shapes.length; s++) {
-                        context = "length " + length + " kind " + kind + " needle " + n + " (" + needle.length() + " units) shape " + s + " ";
-                        search(text, builder, needle, shaped(needle, shapes[s]), random);
+                        contextLength = length;
+                        contextKind = kind;
+                        contextNeedle = n;
+                        contextShape = s;
+                        String canonical = shaped(needle, shapes[s]);
+                        search(text, builder, needle, canonical, random, oracle);
+                        fixture(UNSAFE.getReference(text, m3Offset) == null, "haystack must stay flat");
+                        fixture(UNSAFE.getReference(needle, m3Offset) == null, "oracle needle must stay flat");
+                        fixture(UNSAFE.getReference(canonical, m3Offset) == shapes[s], "canonical needle identity changed");
+                        fixture(UNSAFE.getReference(text, valueOffset) == textValue, "haystack payload changed");
+                        fixture(UNSAFE.getReference(needle, valueOffset) == needleValue, "oracle needle payload changed");
+                        fixture(UNSAFE.getReference(canonical, valueOffset) == needleValue, "canonical shadow changed");
                     }
                 }
             }
         }
-        System.out.println("M3ReverseNeedleTest checks=" + checks);
+        fixture(checks == EXPECTED_SEARCH_CHECKS, "search corpus count changed");
+        System.out.println("M3ReverseNeedleTest checks=" + checks + " fixtureChecks=" + fixtureChecks);
     }
 
     private static void bind() throws Exception {
         Class<?> pool = Class.forName("java.lang.M3StringPool");
         Class<?> m3 = Class.forName("java.lang.M3String");
+        Field admission = m3.getDeclaredField("ADMITTING");
+        admission.setAccessible(true);
+        @SuppressWarnings("unchecked")
+        ThreadLocal<Boolean> threadAdmission = (ThreadLocal<Boolean>) admission.get(null);
+        admitting = threadAdmission;
         internChars = accessible(pool.getDeclaredMethod("internChars", char[].class, int.class, int.class));
         concat = accessible(m3.getDeclaredMethod("concat", m3));
         slice = accessible(m3.getDeclaredMethod("slice", int.class, int.class));
@@ -85,16 +112,90 @@ public class M3ReverseNeedleTest {
         m3Offset = UNSAFE.objectFieldOffset(String.class.getDeclaredField("m3"));
     }
 
-    private static void search(String text, StringBuilder builder, String needle, String m3, Random random) {
+    private static void search(String text, StringBuilder builder, String needle, String m3, Random random, Oracle oracle) {
         int length = text.length();
         int[] froms = {length, 0, -5, length + 5, length - needle.length(), length == 0 ? 0 : random.nextInt(length + 1), length / 2};
-        check(text.lastIndexOf(m3) == text.lastIndexOf(needle), context + "lastIndexOf " + text.lastIndexOf(m3) + " vs " + text.lastIndexOf(needle));
-        check(builder.lastIndexOf(m3) == builder.lastIndexOf(needle), context + "StringBuilder.lastIndexOf");
+        int expected = oracle.fullString;
+        int actual = text.lastIndexOf(m3);
+        check(actual, expected, "lastIndexOf", length, needle.length());
+        check(builder.lastIndexOf(m3), oracle.fullBuilder,
+                "StringBuilder.lastIndexOf", length, needle.length());
         for (int from : froms) {
-            int expected = text.lastIndexOf(needle, from);
-            int actual = text.lastIndexOf(m3, from);
-            check(actual == expected, context + "lastIndexOf from " + from + " " + actual + " vs " + expected);
-            check(builder.lastIndexOf(m3, from) == builder.lastIndexOf(needle, from), context + "StringBuilder.lastIndexOf from " + from);
+            int slot = oracle.slot(from);
+            expected = oracle.stringResults[slot];
+            actual = text.lastIndexOf(m3, from);
+            check(actual, expected, "lastIndexOf from", from, needle.length());
+            check(builder.lastIndexOf(m3, from), oracle.builderResults[slot],
+                    "StringBuilder.lastIndexOf from", from, needle.length());
+        }
+    }
+
+    /** Flat String and StringBuilder reference results are independent of the needle shape.
+     * Preserve both no-arg calls and every distinct explicit from-index, including random ones.
+     * The candidate calls still run once for every original comparison. */
+    private static final class Oracle {
+        final String text;
+        final StringBuilder builder;
+        final String needle;
+        final int fullString;
+        final int fullBuilder;
+        final int[] froms = new int[21];
+        final int[] stringResults = new int[21];
+        final int[] builderResults = new int[21];
+        int size;
+
+        Oracle(String text, StringBuilder builder, String needle) {
+            this.text = text;
+            this.builder = builder;
+            this.needle = needle;
+            fullString = text.lastIndexOf(needle);
+            fullBuilder = builder.lastIndexOf(needle);
+        }
+
+        int slot(int from) {
+            for (int index = 0; index < size; index++) {
+                if (froms[index] == from) return index;
+            }
+            int index = size++;
+            froms[index] = from;
+            stringResults[index] = text.lastIndexOf(needle, from);
+            builderResults[index] = builder.lastIndexOf(needle, from);
+            return index;
+        }
+    }
+
+    // Admission is disabled only while constructing reference data. The explicit
+    // pool/concat/slice calls still create the intended canonical descriptors.
+    private static String flatSpell(Random random, int length, int kind) {
+        Boolean previous = admitting.get();
+        admitting.set(Boolean.TRUE);
+        try {
+            return flat(spell(random, length, kind).toCharArray());
+        } finally {
+            if (previous == null) admitting.remove();
+            else admitting.set(previous);
+        }
+    }
+
+    private static List<String> flatNeedles(String text, Random random, int kind) {
+        Boolean previous = admitting.get();
+        admitting.set(Boolean.TRUE);
+        try {
+            return needles(text, random, kind);
+        } finally {
+            if (previous == null) admitting.remove();
+            else admitting.set(previous);
+        }
+    }
+
+    private static Object[] flatShapes(String text, Random random) throws Exception {
+        Boolean previous = admitting.get();
+        admitting.set(Boolean.TRUE);
+        try {
+            return shapes(text, random);
+        } finally {
+            if (previous == null) admitting.remove();
+            else admitting.set(previous);
         }
     }
 
@@ -182,7 +283,50 @@ public class M3ReverseNeedleTest {
         return concat.invoke(tupleOf(text.substring(0, cut), random, depth - 1), tupleOf(text.substring(cut), random, depth - 1));
     }
 
+    /** Build a physically flat oracle and restore admission state even on failure. */
+    private static String flat(char[] units) {
+        Boolean previous = admitting.get();
+        admitting.set(Boolean.TRUE);
+        String value;
+        try {
+            value = new String(units);
+        } finally {
+            if (previous == null) admitting.remove();
+            else admitting.set(previous);
+        }
+        fixture(UNSAFE.getReference(value, m3Offset) == null, "flat fixture unexpectedly admitted");
+        return value;
+    }
+
+    /** Do not consume any random draws while checking the flat fixture. */
+    private static void flatFixtureStates() {
+        Boolean previous = admitting.get();
+        char[] units = {'A', 0, '\u00ff', '\u0100', '\ud800', '\udc00', '\uffff'};
+        try {
+            for (Boolean state : new Boolean[] {null, Boolean.FALSE, Boolean.TRUE}) {
+                if (state == null) admitting.remove();
+                else admitting.set(state);
+                String value = flat(units);
+                fixture(admitting.get() == state, "successful admission state restoration");
+                for (int index = 0; index < units.length; index++) {
+                    fixture(value.charAt(index) == units[index], "flat fixture UTF-16 unit");
+                }
+                try {
+                    flat(null);
+                    throw new AssertionError("null flat fixture must fail");
+                } catch (NullPointerException expected) {
+                    // The String constructor owns the validation.
+                }
+                fixture(admitting.get() == state, "exceptional admission state restoration");
+            }
+        } finally {
+            if (previous == null) admitting.remove();
+            else admitting.set(previous);
+        }
+    }
+
     private static String shaped(String flat, Object storage) throws Exception {
+        fixture(storage != null, "canonical pool declined needle fixture");
         String out = (String) UNSAFE.allocateInstance(String.class);
         UNSAFE.putReference(out, valueOffset, UNSAFE.getReference(flat, valueOffset));
         UNSAFE.putByte(out, coderOffset, UNSAFE.getByte(flat, coderOffset));
@@ -195,8 +339,18 @@ public class M3ReverseNeedleTest {
         return method;
     }
 
-    private static void check(boolean ok, String message) {
-        checks++;
+    private static void fixture(boolean ok, String message) {
+        fixtureChecks++;
         if (!ok) throw new AssertionError(message);
+    }
+
+    /** Render diagnostics only on mismatch, never repeat an expensive search. */
+    private static void check(int actual, int expected, String operation, int from, int needleLength) {
+        checks++;
+        if (actual != expected) {
+            throw new AssertionError("length " + contextLength + " kind " + contextKind
+                    + " needle " + contextNeedle + " (" + needleLength + " units) shape " + contextShape
+                    + " " + operation + " from " + from + " " + actual + " vs " + expected);
+        }
     }
 }

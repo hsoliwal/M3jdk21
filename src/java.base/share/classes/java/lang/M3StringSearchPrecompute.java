@@ -41,15 +41,15 @@ final class M3StringSearchPrecompute {
     private M3StringSearchPrecompute() {}
 
     /** A maximal suffix and its period, packed as (critical position, period). */
-    private static long factor(CharSequence needle, boolean backwards, boolean oppositeOrder) {
-        int length = needle.length();
+    private static long factor(CharSequence needle, byte[] needleBytes, byte needleCoder,
+            int length, boolean backwards, boolean oppositeOrder) {
         int suffix = -1;
         int candidate = 0;
         int offset = 1;
         int period = 1;
         while (offset < length - candidate) {
-            char next = needleUnit(needle, candidate + offset, backwards);
-            char previous = needleUnit(needle, suffix + offset, backwards);
+            char next = needleUnit(needle, needleBytes, needleCoder, length, candidate + offset, backwards);
+            char previous = needleUnit(needle, needleBytes, needleCoder, length, suffix + offset, backwards);
             if (next == previous) {
                 if (offset == period) {
                     candidate += period;
@@ -70,8 +70,10 @@ final class M3StringSearchPrecompute {
         return ((long) (suffix + 1) << Integer.SIZE) | (period & 0xffff_ffffL);
     }
 
-    private static char needleUnit(CharSequence needle, int index, boolean backwards) {
-        return needle.charAt(backwards ? needle.length() - 1 - index : index);
+    private static char needleUnit(CharSequence needle, byte[] needleBytes, byte needleCoder,
+            int length, int index, boolean backwards) {
+        int at = backwards ? length - 1 - index : index;
+        return needleBytes == null ? needle.charAt(at) : rawUnit(needleBytes, needleCoder, at);
     }
 
     private static char searchUnit(byte[] flat, byte flatCoder, int length,
@@ -79,7 +81,7 @@ final class M3StringSearchPrecompute {
             M3String.CodeUnitCursor cursor, int index, boolean backwards) {
         int at = backwards ? length - 1 - index : index;
         if (canonical != null) return sourceUnit(canonical, cursor, at);
-        return lane == null ? sourceUnit(flat, flatCoder, at) : lane.charAt(flat, flatCoder, at);
+        return lane == null ? rawUnit(flat, flatCoder, at) : lane.charAt(flat, flatCoder, at);
     }
 
     /**
@@ -93,30 +95,95 @@ final class M3StringSearchPrecompute {
         return twoWay(flat, flatCoder, length, lane, null, null, needle, first, backwards);
     }
 
-    /** One exact matcher for flat bytes, builder coordinates and canonical text. */
-    private static int twoWay(byte[] flat, byte flatCoder, int length,
-            M3StringBuilderLane lane, M3String canonical, M3String.CodeUnitCursor cursor,
-            CharSequence needle, int first, boolean backwards) {
-        int size = needle.length();
-        long normal = factor(needle, backwards, false);
-        long opposite = factor(needle, backwards, true);
+    /** Bounded, weak identity metadata for repeated searches of immutable flat needles. */
+    private static final class FlatFactors {
+        private static final int SLOTS = 64;
+        private static final int MIN_UNITS = 16;
+        // Separate forward and reverse slots; no cache entry owns text or an array.
+        static final AtomicReferenceArray<FlatFactor> ENTRIES = allocate();
+
+        private static AtomicReferenceArray<FlatFactor> allocate() {
+            try {
+                return new AtomicReferenceArray<>(2 * SLOTS);
+            } catch (OutOfMemoryError unavailable) {
+                return null;
+            }
+        }
+    }
+
+    private static final class FlatFactor extends WeakReference<String> {
+        final long packed;
+
+        FlatFactor(String needle, long packed) {
+            super(needle);
+            this.packed = packed;
+        }
+    }
+
+    private static long flatFactorization(CharSequence needle, byte[] needleBytes,
+            byte needleCoder, int size, boolean backwards) {
+        // Mutable CharSequences and canonical coordinates retain the original calculation.
+        if (needleBytes == null || size < FlatFactors.MIN_UNITS || size > MAX_PATTERN_UNITS) {
+            return factorization(needle, needleBytes, needleCoder, size, backwards);
+        }
+        AtomicReferenceArray<FlatFactor> entries = FlatFactors.ENTRIES;
+        if (entries == null) return factorization(needle, needleBytes, needleCoder, size, backwards);
+        String text = (String) needle;
+        int slot = (System.identityHashCode(text) & (FlatFactors.SLOTS - 1))
+                + (backwards ? FlatFactors.SLOTS : 0);
+        FlatFactor cached = entries.get(slot);
+        if (cached != null && cached.refersTo(text)) return cached.packed;
+        long packed = factorization(needle, needleBytes, needleCoder, size, backwards);
+        try {
+            entries.set(slot, new FlatFactor(text, packed));
+        } catch (OutOfMemoryError unavailable) {
+            // Metadata is optional; the exact calculation has already succeeded.
+        }
+        return packed;
+    }
+
+    /** Pack the exact critical position, period and periodicity, without a temporary object. */
+    private static long factorization(CharSequence needle, byte[] needleBytes,
+            byte needleCoder, int size, boolean backwards) {
+        long normal = factor(needle, needleBytes, needleCoder, size, backwards, false);
+        long opposite = factor(needle, needleBytes, needleCoder, size, backwards, true);
         long selected = (normal >>> Integer.SIZE) >= (opposite >>> Integer.SIZE)
                 ? normal : opposite;
         int critical = (int) (selected >>> Integer.SIZE);
         int period = (int) selected;
         boolean periodic = period <= size - critical;
         for (int index = 0; periodic && index < critical; index++) {
-            periodic = needleUnit(needle, index, backwards)
-                    == needleUnit(needle, index + period, backwards);
+            periodic = needleUnit(needle, needleBytes, needleCoder, size, index, backwards)
+                    == needleUnit(needle, needleBytes, needleCoder, size, index + period, backwards);
         }
         if (!periodic) period = Math.max(critical - 1, size - critical) + 1;
+        return ((long) critical << Integer.SIZE) | (period & 0xffff_ffffL)
+                | (periodic ? Long.MIN_VALUE : 0L);
+
+    }
+
+    /** One exact matcher for flat bytes, builder coordinates and canonical text. */
+    private static int twoWay(byte[] flat, byte flatCoder, int length,
+            M3StringBuilderLane lane, M3String canonical, M3String.CodeUnitCursor cursor,
+            CharSequence needle, int first, boolean backwards) {
+        int size = needle.length();
+        byte[] needleBytes = null;
+        byte needleCoder = 0;
+        if (needle instanceof String text && text.m3() == null) {
+            needleBytes = text.value();
+            needleCoder = text.coder();
+        }
+        long plan = flatFactorization(needle, needleBytes, needleCoder, size, backwards);
+        int critical = (int) ((plan & Long.MAX_VALUE) >>> Integer.SIZE);
+        int period = (int) plan;
+        boolean periodic = plan < 0;
 
         int memory = 0;
         int position = first;
         int limit = length - size;
         while (position <= limit) {
             int index = Math.max(critical, memory);
-            while (index < size && needleUnit(needle, index, backwards)
+            while (index < size && needleUnit(needle, needleBytes, needleCoder, size, index, backwards)
                     == searchUnit(flat, flatCoder, length, lane, canonical, cursor,
                             position + index, backwards)) {
                 index++;
@@ -127,7 +194,7 @@ final class M3StringSearchPrecompute {
                 memory = 0;
             } else {
                 index = critical;
-                while (index > memory && needleUnit(needle, index - 1, backwards)
+                while (index > memory && needleUnit(needle, needleBytes, needleCoder, size, index - 1, backwards)
                         == searchUnit(flat, flatCoder, length, lane, canonical, cursor,
                                 position + index - 1, backwards)) {
                     index--;
@@ -144,7 +211,7 @@ final class M3StringSearchPrecompute {
     }
 
     /**
-     * Conservative upper bound for primitive metadata retained by both direct-mapped caches.
+     * Conservative upper bound for primitive metadata retained by the bounded direct-mapped caches.
      * Object/reference overhead is intentionally excluded; cache cardinality is separately fixed.
      */
     static long maximumRetainedPrimitiveBytes() {
@@ -154,7 +221,8 @@ final class M3StringSearchPrecompute {
                                 + 256L * Integer.BYTES);
         long sourceBytes =
                 (long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES;
-        return Math.addExact(patternBytes, sourceBytes);
+        long flatFactorBytes = (long) 2 * FlatFactors.SLOTS * Long.BYTES;
+        return Math.addExact(Math.addExact(patternBytes, sourceBytes), flatFactorBytes);
     }
 
     static Plan prepare(M3String pattern) {
@@ -808,7 +876,20 @@ final class M3StringSearchPrecompute {
         if (sourceCoder == String.LATIN1) {
             while (index >= floor && (source[index] & 0xff) != unit) index--;
         } else {
-            while (index >= floor && StringUTF16.getChar(source, index) != unit) index--;
+            // UTF-16 String bytes use native byte order. Compute the two bytes
+            // once and compare the pair without decoding every rejected unit.
+            boolean bigEndian = Utf16Order.BIG_ENDIAN;
+            byte first = (byte) (bigEndian ? unit >>> 8 : unit);
+            byte second = (byte) (bigEndian ? unit : unit >>> 8);
+            int offset = index << 1;
+            int bottom = floor << 1;
+            while (offset >= bottom) {
+                if (source[offset] == first && source[offset + 1] == second) {
+                    return offset >>> 1;
+                }
+                offset -= 2;
+            }
+            return -1;
         }
         return index >= floor ? index : -1;
     }
@@ -838,9 +919,16 @@ final class M3StringSearchPrecompute {
      * {@link #sourceUnit} are not repeated per unit there.
      */
     private static char rawUnit(byte[] source, byte sourceCoder, int index) {
-        return sourceCoder == String.LATIN1
-                ? (char) (source[index] & 0xff)
-                : StringUTF16.getChar(source, index);
+        if (sourceCoder == String.LATIN1) return (char) (source[index] & 0xff);
+        int offset = index << 1;
+        int first = source[offset] & 0xff;
+        int second = source[offset + 1] & 0xff;
+        return (char) (Utf16Order.BIG_ENDIAN ? (first << 8) | second : first | (second << 8));
+    }
+
+    /** The native order is initialized only on use of the UTF-16 lane. */
+    private static final class Utf16Order {
+        static final boolean BIG_ENDIAN = jdk.internal.misc.Unsafe.getUnsafe().isBigEndian();
     }
 
     /** The per-unit reverse search of master, kept for a needle whose units cannot be copied. */
