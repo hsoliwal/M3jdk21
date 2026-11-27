@@ -3,7 +3,7 @@
  */
 /*
  * @test
- * @summary M3LEX image row coordinates survive a second JVM; mapped bytes still require publication checks
+ * @summary Portable M3LEX row values across JVMs and checked mapped-byte publication
  * @requires (os.family == "linux")
  * @modules java.base/jdk.m3.text
  * @run main/othervm M3PortableAtomValueTest
@@ -35,7 +35,7 @@ public final class M3PortableAtomValueTest {
         catch (IllegalArgumentException | IndexOutOfBoundsException expected) { refused = true; }
         ok(refused, "invalid image coordinate refused");
     }
-    private static byte[] encodeV2(List<String> words) throws Exception {
+    private static byte[] encodeImageWithRecordHashes(List<String> words) throws Exception {
         int units = 0;
         for (String word : words) units = Math.addExact(units, word.length());
         int payload = 64 + 12 * words.size();
@@ -111,7 +111,7 @@ public final class M3PortableAtomValueTest {
             ok(id.equals(SharedLexiconImage.open(duplicate).atomCoordinate(1)),
                     "same image bytes, different path, same value");
             Path second = dir.resolve("words-v2.m3lex");
-            Files.write(second, encodeV2(words));
+            Files.write(second, encodeImageWithRecordHashes(words));
             var v2 = SharedLexiconImage.open(second);
             var v2Id = v2.atomCoordinate(1);
             ok(v2Id.imageVersion() == 2 && !v2Id.equals(id), "version-qualified key");
@@ -121,7 +121,8 @@ public final class M3PortableAtomValueTest {
             var published = v1.copyRecord(1, arena);
             int payload = 64 + 8 * words.size();
             try (FileChannel writer = FileChannel.open(first, StandardOpenOption.WRITE)) {
-                writer.write(ByteBuffer.wrap(new byte[]{(byte)'c'}), payload + 2 * words.get(0).length());
+                writer.write(ByteBuffer.wrap(new byte[]{(byte)'c'}),
+                        payload + 2 * words.get(0).length());
                 writer.force(true);
             }
             ok(v1.recordEquals(1, "ceta"), "read-only mapping is not a file seal");
