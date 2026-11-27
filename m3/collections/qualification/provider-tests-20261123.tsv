@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
-# Original provider-dependent JUnit and helper Java sources relocated without altering bytes.
+# Original provider-dependent JUnit/helper relocation identities, with reviewed successors noted below.
+# 2026-11-26: MapGetLastEdgeTest measurement-only successor via canonical m3file-allocation-meter-20261126.
+# Original relocation blob 3fb96fc620fb07399616c6fc3e768b183af88e30; current exact blob a3d0bce6a29c976df40799fb464639f3f8636c66.
+# Original behavioral cases retained; zero-baseline and escaping-allocation controls strengthen the meter.
 # oldPath\tnewPath\tgitBlobSha
 test/jdk/jdk/m3/collections/apache/map/CountingLinkedMap.java	test/jdk/jdk/m3/collections/providers/apache/map/CountingLinkedMap.java	362b8bd4825b839778f76e6afc840e76da65838d
 test/jdk/jdk/m3/collections/apache/map/LinkedMapListIteratorLockstepTest.java	test/jdk/jdk/m3/collections/providers/apache/map/LinkedMapListIteratorLockstepTest.java	401542147340f28ecf3c44526dfa742ca7406dd9
@@ -29,7 +32,7 @@ test/jdk/jdk/m3/collections/eclipse/impl/map/ordered/mutable/OrderedHashMapHeadT
 test/jdk/jdk/m3/collections/eclipse/impl/map/ordered/mutable/OrderedHashMapReference.java	test/jdk/jdk/m3/collections/providers/eclipse/impl/map/ordered/mutable/OrderedHashMapReference.java	c92165d1e1be1e5190a27164bfb3be11de8d01b3
 test/jdk/jdk/m3/collections/eclipse/impl/map/sorted/mutable/GetLastKeys.java	test/jdk/jdk/m3/collections/providers/eclipse/impl/map/sorted/mutable/GetLastKeys.java	ebbdba185d56c389b03f016982694835ec1c6222
 test/jdk/jdk/m3/collections/eclipse/impl/map/sorted/mutable/GetLastOracle.java	test/jdk/jdk/m3/collections/providers/eclipse/impl/map/sorted/mutable/GetLastOracle.java	2b76f6d7aacc298f4b080687898a0a3d2b895473
-test/jdk/jdk/m3/collections/eclipse/impl/map/sorted/mutable/MapGetLastEdgeTest.java	test/jdk/jdk/m3/collections/providers/eclipse/impl/map/sorted/mutable/MapGetLastEdgeTest.java	3fb96fc620fb07399616c6fc3e768b183af88e30
+test/jdk/jdk/m3/collections/eclipse/impl/map/sorted/mutable/MapGetLastEdgeTest.java	test/jdk/jdk/m3/collections/providers/eclipse/impl/map/sorted/mutable/MapGetLastEdgeTest.java	a3d0bce6a29c976df40799fb464639f3f8636c66
 test/jdk/jdk/m3/collections/eclipse/impl/map/sorted/mutable/MapGetLastFaultTest.java	test/jdk/jdk/m3/collections/providers/eclipse/impl/map/sorted/mutable/MapGetLastFaultTest.java	7fca4035850e1b2cf4b85d8eb15cb0f6e1a14ab9
 test/jdk/jdk/m3/collections/eclipse/impl/map/sorted/mutable/MapGetLastLaneTest.java	test/jdk/jdk/m3/collections/providers/eclipse/impl/map/sorted/mutable/MapGetLastLaneTest.java	f255cb684e2c5ba71bde70f5bad4b2521b6ed0a9
 test/jdk/jdk/m3/collections/guava/collect/ImmutableRangeSetIndexOfLaneTest.java	test/jdk/jdk/m3/collections/providers/guava/collect/ImmutableRangeSetIndexOfLaneTest.java	9bbd92903daf13e51e97e62e6a8be5771fdcf8ca

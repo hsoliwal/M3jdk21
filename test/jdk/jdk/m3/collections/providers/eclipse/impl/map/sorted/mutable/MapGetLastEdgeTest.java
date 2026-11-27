@@ -24,13 +24,16 @@ import static jdk.m3.collections.eclipse.impl.map.sorted.mutable.GetLastOracle.t
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Method;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -221,15 +224,31 @@ class MapGetLastEdgeTest {
                 .forEach(lane -> putBoth(lane, new Key(id), new Val(id))));
         allocated(() -> { });
         long baseline = allocated(() -> { });
-        assertEquals(baseline, allocated(tree.ordered()::getLast), "tree getLast bytes");
-        assertEquals(baseline, allocated(ordered.ordered()::getLast), "ordered getLast bytes");
+        assertEquals(0L, baseline, "measurement-loop bytes");
+        assertEquals(baseline, allocated(() -> AllocationMeter.sink = tree.ordered().getLast()), "tree getLast bytes");
+        assertEquals(baseline, allocated(() -> AllocationMeter.sink = ordered.ordered().getLast()), "ordered getLast bytes");
     }
 
-    /** Thread-allocated bytes over CALLS warmed calls (com.sun.management, by reflection). */
+    @Test
+    void allocationMeterDetectsEscapingObjects() {
+        assertTrue(allocated(() -> AllocationMeter.sink = new Object()) >= CALLS,
+                "the meter must observe each escaping allocation");
+    }
+
+    /**
+     * Thread-allocated bytes over CALLS warmed calls. Warm the primitive counter
+     * outside the interval; the measured loop creates no streams or callbacks.
+     * A volatile sink keeps tested results and positive-control objects observable.
+     */
     private static long allocated(Runnable action) {
-        IntStream.range(0, CALLS).forEach(i -> action.run());
+        for (int i = 0; i < CALLS; i++) {
+            action.run();
+            AllocationMeter.bytes();
+        }
         long before = AllocationMeter.bytes();
-        IntStream.range(0, CALLS).forEach(i -> action.run());
+        for (int i = 0; i < CALLS; i++) {
+            action.run();
+        }
         return AllocationMeter.bytes() - before;
     }
 
@@ -237,17 +256,19 @@ class MapGetLastEdgeTest {
         assertSame(lane.model().put(key, value), lane.map().put(key, value), "put " + key);
     }
 
-    /** Reads com.sun.management.ThreadMXBean.getCurrentThreadAllocatedBytes reflectively. */
+    /** Primitive-returning counter, with no reflective Long/varargs allocation. */
     private static final class AllocationMeter {
-        private static final Object BEAN;
-        private static final Method READ;
+        private static final MethodHandle READ;
+        private static volatile Object sink;
 
         static {
             try {
-                BEAN = Class.forName("java.lang.management.ManagementFactory")
+                Object bean = Class.forName("java.lang.management.ManagementFactory")
                         .getMethod("getThreadMXBean").invoke(null);
-                READ = Class.forName("com.sun.management.ThreadMXBean")
-                        .getMethod("getCurrentThreadAllocatedBytes");
+                READ = MethodHandles.publicLookup().findVirtual(
+                        Class.forName("com.sun.management.ThreadMXBean"),
+                        "getCurrentThreadAllocatedBytes", MethodType.methodType(long.class))
+                        .bindTo(bean);
             } catch (ReflectiveOperationException failure) {
                 throw new ExceptionInInitializerError(failure);
             }
@@ -255,8 +276,14 @@ class MapGetLastEdgeTest {
 
         static long bytes() {
             try {
-                return (long) READ.invoke(BEAN);
-            } catch (ReflectiveOperationException failure) {
+                long value = (long) READ.invokeExact();
+                if (value < 0) {
+                    throw new IllegalStateException("thread allocation measurement unavailable");
+                }
+                return value;
+            } catch (RuntimeException | Error failure) {
+                throw failure;
+            } catch (Throwable failure) {
                 throw new IllegalStateException(failure);
             }
         }
