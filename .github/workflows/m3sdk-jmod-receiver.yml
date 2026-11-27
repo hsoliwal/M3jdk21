@@ -134,6 +134,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Verify complete input-custody reporting and refusal contracts
+        run: python3 test/jdk/jdk/m3/file/NlpInputPreflightTest.py
       - name: Build ten JMODs and run full file JNI NLP and M3AST contracts
         run: >-
           python3 m3/tooling/module-packs/nlp-search/build.py

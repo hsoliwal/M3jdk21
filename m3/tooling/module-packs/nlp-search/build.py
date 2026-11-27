@@ -22,6 +22,83 @@ def digest(path):
 
 
 
+def audit_input_lock(root, lock):
+    """Observe every sealed input; never update a seal or infer replacement owners."""
+    if not isinstance(lock, dict):
+        raise ValueError("input lock must be an object")
+    for section in ("files", "java_source_sets", "native_source_sets"):
+        if not isinstance(lock.get(section), dict):
+            raise ValueError("input lock section must be an object: " + section)
+    files = []
+    for name, expected in sorted(lock["files"].items()):
+        if not isinstance(name, str) or not isinstance(expected, str):
+            raise ValueError("file names and digests must be strings")
+        row = {"path": name, "expected_sha256": expected}
+        try:
+            row["actual_sha256"] = digest(root / name)
+            row["state"] = "MATCH" if row["actual_sha256"] == expected else "HASH_DRIFT"
+        except FileNotFoundError as failure:
+            row.update(state="MISSING", error=str(failure))
+        except OSError as failure:
+            row.update(state="UNREADABLE", error=str(failure))
+        files.append(row)
+    inventories = []
+    for section, suffixes in (("java_source_sets", (".java",)),
+                              ("native_source_sets", (".c", ".h"))):
+        for directory, expected in sorted(lock[section].items()):
+            if not isinstance(directory, str) or not isinstance(expected, list) or any(
+                    not isinstance(name, str) for name in expected):
+                raise ValueError("source inventory must contain a directory and list of paths")
+            row = {"section": section, "path": directory, "expected_count": len(expected)}
+            try:
+                source = root / directory
+                entries = (source.rglob("*.java") if section == "java_source_sets" else
+                           (path for path in source.rglob("*") if path.is_file() and path.suffix in suffixes))
+                actual = sorted(str(path.relative_to(root)) for path in entries)
+                row.update(actual_count=len(actual),
+                           missing=sorted(set(expected) - set(actual)),
+                           unexpected=sorted(set(actual) - set(expected)))
+                row["state"] = ("MISSING" if not source.is_dir() else
+                                "MATCH" if actual == expected else "INVENTORY_DRIFT")
+            except OSError as failure:
+                row.update(state="UNREADABLE", error=str(failure))
+            inventories.append(row)
+    return {"schema": 1, "gate": "NLP_INPUT_CUSTODY_ONLY",
+            "state": "PASS" if all(row["state"] == "MATCH" for row in files + inventories) else "HOLD",
+            "files": files, "source_inventories": inventories}
+
+
+def verify_input_lock(root, owner, out):
+    """Persist a complete preflight result before refusing any compilation on drift."""
+    lock_path = owner / "INPUTS.json"
+    lock_sha256 = None
+    try:
+        raw = lock_path.read_bytes()
+        lock_sha256 = hashlib.sha256(raw).hexdigest()
+        report = audit_input_lock(root, json.loads(raw.decode("utf-8")))
+    except (OSError, UnicodeError, ValueError, TypeError) as failure:
+        report = {"schema": 1, "gate": "NLP_INPUT_CUSTODY_ONLY", "state": "HOLD",
+                  "files": [], "source_inventories": [],
+                  "lock_error": {"type": type(failure).__name__, "message": str(failure)}}
+    report["input_lock_sha256"] = lock_sha256
+    report_path = out / "INPUT_CHECK.json"
+    report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    failed = [row for row in report["files"] + report["source_inventories"] if row["state"] != "MATCH"]
+    summary = ("M3_NLP_INPUT_CUSTODY_" + report["state"] +
+               " files=" + str(len(report["files"])) +
+               " inventories=" + str(len(report["source_inventories"])) +
+               " mismatches=" + str(len(failed)) +
+               " lock_error=" + str("lock_error" in report).lower())
+    lines = [summary] + [row["state"] + " " + row["path"] for row in failed]
+    if "lock_error" in report:
+        lines.append(report["lock_error"]["type"] + ": " + report["lock_error"]["message"])
+    (out / "input-check.log").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(summary, flush=True)
+    if report["state"] != "PASS":
+        raise ValueError("NLP/file integration input custody failed; see " + str(report_path))
+    return report
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--jdk-home", type=Path, required=True)
@@ -60,19 +137,7 @@ def main():
             raise RuntimeError(name + " failed; see " + str(out / (name + ".log")) + "\n" + result.stdout[-5000:])
         return result.stdout
 
-    lock = json.loads((owner / "INPUTS.json").read_text())
-    for name, expected in lock["files"].items():
-        if digest(root / name) != expected:
-            raise ValueError("NLP/file integration input drift: " + name)
-    for directory, expected in lock["java_source_sets"].items():
-        actual = sorted(str(p.relative_to(root)) for p in (root / directory).rglob("*.java"))
-        if actual != expected:
-            raise ValueError("Incomplete or unexpected module source inventory: " + directory)
-    for directory, expected in lock["native_source_sets"].items():
-        actual = sorted(str(p.relative_to(root)) for p in (root / directory).rglob("*")
-                        if p.is_file() and p.suffix in (".c", ".h"))
-        if actual != expected:
-            raise ValueError("Incomplete or unexpected native source inventory: " + directory)
+    verify_input_lock(root, owner, out)
     run("input-jdk", [home / "bin/java", "-version"])
     jdk = (compiler_source_proof.build(root, home, out / "compiler-proof", run)
            if args.compiler_source_proof else home)
