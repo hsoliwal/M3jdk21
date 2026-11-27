@@ -61,3 +61,22 @@ for vm in default interpreter; do
   done
 done
 printf 'M3_PARALLEL_PROVIDER_SPI_PASS configurations=2 scenarios=9 checks=18\n'
+
+# Receipt hashing is a public m3.parallel contract. Run the real reference
+# plan against an independent scalar SHA-256 encoder with a heap smaller than
+# the old full-buffer int[] snapshot. One true JDK-module consumer, no mocks.
+RECEIPT_TEST="$ROOT/test/jdk/jdk/m3/parallel/DigestReceiptLargeTest.java"
+if [[ ! -f "$RECEIPT_TEST" ]]; then
+  echo "Missing required M3 parallel receipt regression: $RECEIPT_TEST" >&2
+  exit 1
+fi
+javac --release 21 -proc:none -Xlint:all,-module -Werror \
+  -cp "$BUILD/classes" -d "$BUILD/classes" "$RECEIPT_TEST"
+actual=$(java -Xmx24m -XX:MaxDirectMemorySize=256m -XX:ActiveProcessorCount=2 \
+  -cp "$BUILD/classes" DigestReceiptLargeTest)
+expected='M3_PARALLEL_RECEIPT_STREAM_PASS scenarios=19 large=8000000'
+if [[ "$actual" != "$expected" ]]; then
+  echo "M3 parallel receipt SHA-256 mismatch: $actual" >&2
+  exit 1
+fi
+printf '%s\n' "$actual"

@@ -36,7 +36,7 @@ final class Digests {
         frame(digest, Integer.toString(bindings.size()));
         bindings.forEach(binding -> {
             frame(digest, binding.transfer().name());
-            ints(digest, binding.buffer().toArray());
+            ints(digest, binding.buffer());
         });
         return HexFormat.of().formatHex(digest.digest());
     }
@@ -63,18 +63,21 @@ final class Digests {
         digest.update(bytes);
     }
 
-    private static void ints(MessageDigest digest, int[] values) {
-        frame(digest, Integer.toString(values.length));
-        ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES * 4096);
-        for (int value : values) {
-            if (buffer.remaining() < Integer.BYTES) {
-                digest.update(buffer.array(), 0, buffer.position());
-                buffer.clear();
+    private static void ints(MessageDigest digest, IntBuffer values) {
+        int length = values.length();
+        frame(digest, Integer.toString(length));
+        final int chunkElements = 4096;
+        int[] chunk = new int[Math.min(chunkElements, length)];
+        ByteBuffer bytes = ByteBuffer.allocate(chunk.length * Integer.BYTES);
+        for (int start = 0; start < length; ) {
+            int count = Math.min(chunk.length, length - start);
+            values.copyTo(start, chunk, 0, count);
+            bytes.clear();
+            for (int i = 0; i < count; i++) {
+                bytes.putInt(chunk[i]);
             }
-            buffer.putInt(value);
-        }
-        if (buffer.position() > 0) {
-            digest.update(buffer.array(), 0, buffer.position());
+            digest.update(bytes.array(), 0, count * Integer.BYTES);
+            start += count;
         }
     }
 }
