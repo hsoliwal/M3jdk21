@@ -12,6 +12,7 @@ on:
     branches:
       - m3lex-v2-contiguous-geometry-20261123
       - m3lex-jtreg-package-launcher-20261124
+      - m3lex-native-egl-gles-link-20261126
     paths:
       - 'src/java.base/share/classes/java/lang/M3StringPool.java'
       - 'm3/lexicon/receiver/**'
@@ -77,7 +78,22 @@ jobs:
             build-essential autoconf zip unzip file curl python3 \
             libasound2-dev libcups2-dev libfreetype-dev \
             libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libxrandr-dev \
-            libfontconfig1-dev libffi-dev jtreg8
+            libfontconfig1-dev libffi-dev libegl-dev libgles-dev jtreg8
+      - name: Verify actual Ubuntu EGL and GLESv2 linker interfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Native Skia JNI links -lGLESv2 and -lEGL. Require exact
+          # dev-package unversioned symlinks; runtime SONAMEs are insufficient.
+          dpkg-query -W -f='${Package} ${Version}\n' libegl-dev libgles-dev
+          dpkg-query -L libegl-dev | grep -Eq '/libEGL[.]so$'
+          dpkg-query -L libgles-dev | grep -Eq '/libGLESv2[.]so$'
+          printf 'int main(void) { return 0; }\n' \
+            | g++ -x c++ - -o "$RUNNER_TEMP/m3lex-glvnd-link" \
+                -Wl,--no-as-needed -lGLESv2 -lEGL
+          test -x "$RUNNER_TEMP/m3lex-glvnd-link"
+          "$RUNNER_TEMP/m3lex-glvnd-link"
+          echo "M3LEX_GLVND_NATIVE_LINK_INTERFACE_PASS EGL/GLESv2"
       - name: Prove package-owned JTReg8 launcher discovery and refusals
         shell: bash
         run: |
