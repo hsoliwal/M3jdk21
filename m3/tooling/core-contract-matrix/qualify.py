@@ -34,6 +34,7 @@ def pass_markers(text, marker):
 def main():
     ap = argparse.ArgumentParser()
     for key in ("source", "out", "jdk"): ap.add_argument("--"+key, type=Path, required=True)
+    ap.add_argument("--manifest", type=Path)
     a = ap.parse_args()
     source, out, jdk = a.source.resolve(), a.out.resolve(), a.jdk.resolve()
     if source == out or source in out.parents or out in source.parents:
@@ -41,7 +42,15 @@ def main():
     runner = Path(os.environ["RUNNER_TEMP"]).resolve()
     if runner not in out.parents or not out.is_dir():
         raise ValueError("owned runner output required")
-    manifest = json.loads(regular(source/"m3/tooling/core-contract-matrix/CURRENT_INPUTS.json"))
+    manifest_path = (a.manifest if a.manifest is not None
+                     else source/"m3/tooling/core-contract-matrix/CURRENT_INPUTS.json")
+    manifest = json.loads(regular(manifest_path))
+    actual_ref = subprocess.run(
+        ["git", "-C", str(source), "rev-parse", "HEAD"],
+        text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        timeout=10, check=True).stdout.strip()
+    if actual_ref != manifest["sourceCommit"]:
+        raise ValueError("historical checkout ref does not match sealed sourceCommit")
     assert manifest["schema"] == "M3_CURRENT_CORE_CONTRACT_INPUTS_V1"
     assert manifest["repository"] == "hsoliwal/M3jdk21" and len(manifest["files"]) == 81
     rows = manifest["files"]

@@ -1,7 +1,7 @@
 {
   "schema": "M3_CURRENT_CORE_CONTRACT_INPUTS_V1",
   "repository": "hsoliwal/M3jdk21",
-  "sourceCommit": "64092c8c1b4157975e018c1f679f54059389e3fa",
+  "sourceCommit": "0f80ed69a89a8d0a32f04f0824fab2f0c1457525",
   "files": [
     {
       "path": "m3/build.sh",
