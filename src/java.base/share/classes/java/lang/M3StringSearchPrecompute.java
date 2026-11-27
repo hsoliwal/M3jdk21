@@ -41,15 +41,15 @@ final class M3StringSearchPrecompute {
     private M3StringSearchPrecompute() {}
 
     /** A maximal suffix and its period, packed as (critical position, period). */
-    private static long factor(CharSequence needle, boolean backwards, boolean oppositeOrder) {
-        int length = needle.length();
+    private static long factor(CharSequence needle, byte[] needleBytes, byte needleCoder,
+            int length, boolean backwards, boolean oppositeOrder) {
         int suffix = -1;
         int candidate = 0;
         int offset = 1;
         int period = 1;
         while (offset < length - candidate) {
-            char next = needleUnit(needle, candidate + offset, backwards);
-            char previous = needleUnit(needle, suffix + offset, backwards);
+            char next = needleUnit(needle, needleBytes, needleCoder, length, candidate + offset, backwards);
+            char previous = needleUnit(needle, needleBytes, needleCoder, length, suffix + offset, backwards);
             if (next == previous) {
                 if (offset == period) {
                     candidate += period;
@@ -70,8 +70,10 @@ final class M3StringSearchPrecompute {
         return ((long) (suffix + 1) << Integer.SIZE) | (period & 0xffff_ffffL);
     }
 
-    private static char needleUnit(CharSequence needle, int index, boolean backwards) {
-        return needle.charAt(backwards ? needle.length() - 1 - index : index);
+    private static char needleUnit(CharSequence needle, byte[] needleBytes, byte needleCoder,
+            int length, int index, boolean backwards) {
+        int at = backwards ? length - 1 - index : index;
+        return needleBytes == null ? needle.charAt(at) : rawUnit(needleBytes, needleCoder, at);
     }
 
     private static char searchUnit(byte[] flat, byte flatCoder, int length,
@@ -98,16 +100,22 @@ final class M3StringSearchPrecompute {
             M3StringBuilderLane lane, M3String canonical, M3String.CodeUnitCursor cursor,
             CharSequence needle, int first, boolean backwards) {
         int size = needle.length();
-        long normal = factor(needle, backwards, false);
-        long opposite = factor(needle, backwards, true);
+        byte[] needleBytes = null;
+        byte needleCoder = 0;
+        if (needle instanceof String text && text.m3() == null) {
+            needleBytes = text.value();
+            needleCoder = text.coder();
+        }
+        long normal = factor(needle, needleBytes, needleCoder, size, backwards, false);
+        long opposite = factor(needle, needleBytes, needleCoder, size, backwards, true);
         long selected = (normal >>> Integer.SIZE) >= (opposite >>> Integer.SIZE)
                 ? normal : opposite;
         int critical = (int) (selected >>> Integer.SIZE);
         int period = (int) selected;
         boolean periodic = period <= size - critical;
         for (int index = 0; periodic && index < critical; index++) {
-            periodic = needleUnit(needle, index, backwards)
-                    == needleUnit(needle, index + period, backwards);
+            periodic = needleUnit(needle, needleBytes, needleCoder, size, index, backwards)
+                    == needleUnit(needle, needleBytes, needleCoder, size, index + period, backwards);
         }
         if (!periodic) period = Math.max(critical - 1, size - critical) + 1;
 
@@ -116,7 +124,7 @@ final class M3StringSearchPrecompute {
         int limit = length - size;
         while (position <= limit) {
             int index = Math.max(critical, memory);
-            while (index < size && needleUnit(needle, index, backwards)
+            while (index < size && needleUnit(needle, needleBytes, needleCoder, size, index, backwards)
                     == searchUnit(flat, flatCoder, length, lane, canonical, cursor,
                             position + index, backwards)) {
                 index++;
@@ -127,7 +135,7 @@ final class M3StringSearchPrecompute {
                 memory = 0;
             } else {
                 index = critical;
-                while (index > memory && needleUnit(needle, index - 1, backwards)
+                while (index > memory && needleUnit(needle, needleBytes, needleCoder, size, index - 1, backwards)
                         == searchUnit(flat, flatCoder, length, lane, canonical, cursor,
                                 position + index - 1, backwards)) {
                     index--;
