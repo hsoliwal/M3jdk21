@@ -136,7 +136,8 @@ public interface IContainer {
      * @throws IllegalArgumentException if type/qualifier not bound
      */
     default <T> T get(Class<T> type, String qualifier) {
-        return get(type); // Default ignores qualifier
+        throw new IllegalArgumentException(
+            "No binding for type: " + type.getName() + " with qualifier: " + qualifier);
     }
 
     /**
