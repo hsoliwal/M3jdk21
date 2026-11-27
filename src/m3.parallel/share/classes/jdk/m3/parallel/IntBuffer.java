@@ -88,6 +88,14 @@ public final class IntBuffer {
         view.get(0, target);
     }
 
+    /** Bulk-read a bounded range without moving the buffer cursor or copying the whole buffer. */
+    void copyTo(int sourceIndex, int[] target, int targetIndex, int count) {
+        Objects.requireNonNull(target, "target");
+        Objects.checkFromIndexSize(sourceIndex, count, length);
+        Objects.checkFromIndexSize(targetIndex, count, target.length);
+        view.get(sourceIndex, target, targetIndex, count);
+    }
+
     /**
      * Copies every element from {@code source}.
      *

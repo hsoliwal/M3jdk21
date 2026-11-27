@@ -27,3 +27,56 @@ java --patch-module "java.base=$BUILD/patch" \
 java -Xint --patch-module "java.base=$BUILD/patch" \
   --add-exports java.base/jdk.internal.vm.parallel=ALL-UNNAMED \
   -cp "$BUILD/classes" M3ParallelIntAddProof
+
+# Execute the actual M3 parallel provider SPI regression against the modules
+# compiled above, not a mock provider layer. jtreg's @build dependency is
+# explicit, and every @run scenario receives a fresh JVM/class initialization.
+PROVIDER_TEST="$ROOT/test/jdk/jdk/m3/parallel/BackendProviderFailureTest.java"
+SWAP_TEST="$ROOT/test/jdk/jdk/m3/parallel/BackendSwapTest.java"
+for test_source in "$SWAP_TEST" "$PROVIDER_TEST"; do
+  if [[ ! -f "$test_source" ]]; then
+    echo "Missing required M3 parallel provider regression: $test_source" >&2
+    exit 1
+  fi
+done
+javac --release 21 -proc:none -Xlint:all,-module -Werror \
+  -cp "$BUILD/classes" -d "$BUILD/classes" \
+  "$SWAP_TEST" "$PROVIDER_TEST"
+
+for vm in default interpreter; do
+  options=()
+  if [[ "$vm" == interpreter ]]; then
+    options=(-Xint)
+  fi
+  for scenario in id capabilities score probe supports-service supports-runtime \
+      supports-linkage supports-assertion reference-error; do
+    actual=$(java "${options[@]}" -cp "$BUILD/classes" \
+      BackendProviderFailureTest "$scenario")
+    expected="BackendProviderFailureTest passed $scenario"
+    if [[ "$actual" != "$expected" ]]; then
+      echo "M3 parallel provider case failed ($vm, $scenario): $actual" >&2
+      exit 1
+    fi
+    printf '%s [%s]\n' "$actual" "$vm"
+  done
+done
+printf 'M3_PARALLEL_PROVIDER_SPI_PASS configurations=2 scenarios=9 checks=18\n'
+
+# Receipt hashing is a public m3.parallel contract. Run the real reference
+# plan against an independent scalar SHA-256 encoder with a heap smaller than
+# the old full-buffer int[] snapshot. One true JDK-module consumer, no mocks.
+RECEIPT_TEST="$ROOT/test/jdk/jdk/m3/parallel/DigestReceiptLargeTest.java"
+if [[ ! -f "$RECEIPT_TEST" ]]; then
+  echo "Missing required M3 parallel receipt regression: $RECEIPT_TEST" >&2
+  exit 1
+fi
+javac --release 21 -proc:none -Xlint:all,-module -Werror \
+  -cp "$BUILD/classes" -d "$BUILD/classes" "$RECEIPT_TEST"
+actual=$(java -Xmx24m -XX:MaxDirectMemorySize=256m -XX:ActiveProcessorCount=2 \
+  -cp "$BUILD/classes" DigestReceiptLargeTest)
+expected='M3_PARALLEL_RECEIPT_STREAM_PASS scenarios=19 large=8000000'
+if [[ "$actual" != "$expected" ]]; then
+  echo "M3 parallel receipt SHA-256 mismatch: $actual" >&2
+  exit 1
+fi
+printf '%s\n' "$actual"
