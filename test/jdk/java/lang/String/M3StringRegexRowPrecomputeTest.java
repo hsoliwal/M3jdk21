@@ -23,6 +23,7 @@ public class M3StringRegexRowPrecomputeTest {
     private static long checks;
     private static Class<?> m3Class;
     private static Class<?> indexClass;
+    private static Method canonicalEmpty;
     private static Method compile;
     private static Method prepare;
     private static Method candidates;
@@ -40,6 +41,14 @@ public class M3StringRegexRowPrecomputeTest {
             String s = new String(text.toCharArray());
             s.length();
             Object existing = stringM3.get(s);
+            if (s.isEmpty()) {
+                // Ordinary empty String deliberately has no M3 field. The row index
+                // nevertheless requires the canonical zero-length descriptor.
+                check(existing == null);
+                Object empty = canonicalEmpty.invoke(null);
+                check(empty instanceof CharSequence && ((CharSequence) empty).length() == 0);
+                return empty;
+            }
             check(existing != null);
             return existing;
         }
@@ -57,6 +66,8 @@ public class M3StringRegexRowPrecomputeTest {
         try {
             stringM3 = String.class.getDeclaredField("m3");
             stringM3.setAccessible(true);
+            canonicalEmpty = m3Class.getDeclaredMethod("empty");
+            canonicalEmpty.setAccessible(true);
         } catch (NoSuchFieldException isolatedFixture) {
             fallbackCtor = m3Class.getDeclaredConstructor(String.class);
             fallbackCtor.setAccessible(true);
