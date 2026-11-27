@@ -24,6 +24,7 @@
 package java.lang;
 
 import jdk.internal.vm.annotation.IntrinsicCandidate;
+import java.security.SHA256Adapter;
 
 /**
  * Slightly modified version of java.lang.Object that replaces
@@ -33,6 +34,55 @@ public class Object {
 
     @IntrinsicCandidate
     public Object() {}
+
+    /**
+     * Adapt this object to a requested Java type or M3JDK object capability.
+     * Assignable types return this receiver without allocation or conversion.
+     * An exact request for a JDK-internal object capability type returns its lazy
+     * capability; unsupported types return null. Creating that capability does not
+     * read fields, index an object graph, or start observation delivery.
+     *
+     * <p>Capability-bearing subclasses may override this method. No resident
+     * state is added to Object, and a nonmatching type is never cast unsafely.
+     *
+     * @param clazz the requested type
+     * @param <T> requested result type
+     * @return this instance when assignable, its JDK-internal capability for that
+     *         exact type, otherwise null
+     * @throws NullPointerException if clazz is null
+     */
+    public <T> T toAdapter(Class<T> clazz) {
+        if (clazz == null) {
+            throw new NullPointerException("clazz");
+        }
+        if (clazz.isInstance(this)) {
+            return clazz.cast(this);
+        }
+        if (clazz == M3Object.class) {
+            return clazz.cast(M3Object.of(this));
+        }
+        return clazz == SHA256Adapter.class
+                ? clazz.cast(SHA256Adapter.of(this)) : null;
+    }
+
+    /**
+     * Adapts this object by delegating to {@link #toAdapter(Class)}.
+     *
+     * <p>This additional entry delegates virtually to {@code toAdapter}, so
+     * subclasses that override that method keep their established semantics.
+     * The selected implementation determines the result and exceptions; this
+     * method performs no additional argument validation. This method is also
+     * overridable and adds no per-object state.
+     *
+     * @param clazz the requested adapter type
+     * @param <T> the requested result type
+     * @return the selected adapter result, which may be {@code null}
+     * @throws NullPointerException if the selected implementation rejects a null
+     *         {@code clazz}; the implementation in {@code Object} rejects null
+     */
+    public <T> T toAdpater(Class<T> clazz) {
+        return toAdapter(clazz);
+    }
 
     @IntrinsicCandidate
     public final native Class<?> getClass();
