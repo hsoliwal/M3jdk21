@@ -95,17 +95,56 @@ final class M3StringSearchPrecompute {
         return twoWay(flat, flatCoder, length, lane, null, null, needle, first, backwards);
     }
 
-    /** One exact matcher for flat bytes, builder coordinates and canonical text. */
-    private static int twoWay(byte[] flat, byte flatCoder, int length,
-            M3StringBuilderLane lane, M3String canonical, M3String.CodeUnitCursor cursor,
-            CharSequence needle, int first, boolean backwards) {
-        int size = needle.length();
-        byte[] needleBytes = null;
-        byte needleCoder = 0;
-        if (needle instanceof String text && text.m3() == null) {
-            needleBytes = text.value();
-            needleCoder = text.coder();
+    /** Bounded, weak identity metadata for repeated searches of immutable flat needles. */
+    private static final class FlatFactors {
+        private static final int SLOTS = 64;
+        private static final int MIN_UNITS = 16;
+        // Separate forward and reverse slots; no cache entry owns text or an array.
+        static final AtomicReferenceArray<FlatFactor> ENTRIES = allocate();
+
+        private static AtomicReferenceArray<FlatFactor> allocate() {
+            try {
+                return new AtomicReferenceArray<>(2 * SLOTS);
+            } catch (OutOfMemoryError unavailable) {
+                return null;
+            }
         }
+    }
+
+    private static final class FlatFactor extends WeakReference<String> {
+        final long packed;
+
+        FlatFactor(String needle, long packed) {
+            super(needle);
+            this.packed = packed;
+        }
+    }
+
+    private static long flatFactorization(CharSequence needle, byte[] needleBytes,
+            byte needleCoder, int size, boolean backwards) {
+        // Mutable CharSequences and canonical coordinates retain the original calculation.
+        if (needleBytes == null || size < FlatFactors.MIN_UNITS || size > MAX_PATTERN_UNITS) {
+            return factorization(needle, needleBytes, needleCoder, size, backwards);
+        }
+        AtomicReferenceArray<FlatFactor> entries = FlatFactors.ENTRIES;
+        if (entries == null) return factorization(needle, needleBytes, needleCoder, size, backwards);
+        String text = (String) needle;
+        int slot = (System.identityHashCode(text) & (FlatFactors.SLOTS - 1))
+                + (backwards ? FlatFactors.SLOTS : 0);
+        FlatFactor cached = entries.get(slot);
+        if (cached != null && cached.refersTo(text)) return cached.packed;
+        long packed = factorization(needle, needleBytes, needleCoder, size, backwards);
+        try {
+            entries.set(slot, new FlatFactor(text, packed));
+        } catch (OutOfMemoryError unavailable) {
+            // Metadata is optional; the exact calculation has already succeeded.
+        }
+        return packed;
+    }
+
+    /** Pack the exact critical position, period and periodicity, without a temporary object. */
+    private static long factorization(CharSequence needle, byte[] needleBytes,
+            byte needleCoder, int size, boolean backwards) {
         long normal = factor(needle, needleBytes, needleCoder, size, backwards, false);
         long opposite = factor(needle, needleBytes, needleCoder, size, backwards, true);
         long selected = (normal >>> Integer.SIZE) >= (opposite >>> Integer.SIZE)
@@ -118,6 +157,26 @@ final class M3StringSearchPrecompute {
                     == needleUnit(needle, needleBytes, needleCoder, size, index + period, backwards);
         }
         if (!periodic) period = Math.max(critical - 1, size - critical) + 1;
+        return ((long) critical << Integer.SIZE) | (period & 0xffff_ffffL)
+                | (periodic ? Long.MIN_VALUE : 0L);
+
+    }
+
+    /** One exact matcher for flat bytes, builder coordinates and canonical text. */
+    private static int twoWay(byte[] flat, byte flatCoder, int length,
+            M3StringBuilderLane lane, M3String canonical, M3String.CodeUnitCursor cursor,
+            CharSequence needle, int first, boolean backwards) {
+        int size = needle.length();
+        byte[] needleBytes = null;
+        byte needleCoder = 0;
+        if (needle instanceof String text && text.m3() == null) {
+            needleBytes = text.value();
+            needleCoder = text.coder();
+        }
+        long plan = flatFactorization(needle, needleBytes, needleCoder, size, backwards);
+        int critical = (int) ((plan & Long.MAX_VALUE) >>> Integer.SIZE);
+        int period = (int) plan;
+        boolean periodic = plan < 0;
 
         int memory = 0;
         int position = first;
@@ -152,7 +211,7 @@ final class M3StringSearchPrecompute {
     }
 
     /**
-     * Conservative upper bound for primitive metadata retained by both direct-mapped caches.
+     * Conservative upper bound for primitive metadata retained by the bounded direct-mapped caches.
      * Object/reference overhead is intentionally excluded; cache cardinality is separately fixed.
      */
     static long maximumRetainedPrimitiveBytes() {
@@ -162,7 +221,8 @@ final class M3StringSearchPrecompute {
                                 + 256L * Integer.BYTES);
         long sourceBytes =
                 (long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES;
-        return Math.addExact(patternBytes, sourceBytes);
+        long flatFactorBytes = (long) 2 * FlatFactors.SLOTS * Long.BYTES;
+        return Math.addExact(Math.addExact(patternBytes, sourceBytes), flatFactorBytes);
     }
 
     static Plan prepare(M3String pattern) {
