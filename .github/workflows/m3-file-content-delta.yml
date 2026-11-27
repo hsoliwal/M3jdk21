@@ -9,6 +9,12 @@ name: M3File source and class content deltas
 #     pull_request:
 #       paths:
 #         - 'm3/file/**'
+#         - 'm3/arrays/**'
+#         - 'm3/collections/**'
+#         - 'src/jdk.m3.collections/**'
+#         - 'test/jdk/jdk/m3/arrays/**'
+#         - 'test/jdk/jdk/m3/collections/**'
+#         - 'test/jdk/jdk/internal/m3/**'
 #         - 'm3/docs/build-delta-invariant.md'
 #         - 'm3/docs/name-mapping.d/m3file-build-delta-20261020.json'
 #         - '.github/workflows/m3-file-content-delta.yml'
@@ -24,7 +30,7 @@ concurrency:
 jobs:
   file-delta:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,15 +39,26 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Build and test original module dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m3/file/target/delta-check
+          mvn -B -ntp -f m3/arrays/pom.xml install 2>&1 | tee m3/file/target/delta-check/arrays-install.log
+          mvn -B -ntp -f m3/collections/pom.xml install 2>&1 | tee m3/file/target/delta-check/collections-install.log
+      - name: Verify source-bound file workflow wiring
+        run: python3 -m unittest discover -s m3/file -p test_workflow_wiring.py -v
       - name: Verify module and linked-image source/class contract
-        run: mvn -B -ntp -f m3/file/pom.xml verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/file/pom.xml verify 2>&1 | tee m3/file/target/delta-check/file-verify.log
       - name: Require executed JUnit and original host/linked image proof
         shell: bash
         run: |
           set -euo pipefail
-          python3 - <<'PY'
+          python3 - <<'PY_JUNIT'
           from pathlib import Path
-          import json
           import xml.etree.ElementTree as ET
 
           report = Path("m3/file/target/surefire-reports/TEST-jdk.m3.file.M3FileDeltaTest.xml")
@@ -53,24 +70,80 @@ jobs:
                   or not any(test.get("name") == "fullSourceClassAndCliContract"
                              for test in suite.iter("testcase"))):
               raise SystemExit("file-delta JUnit did not execute and pass its actual test")
-          receipt = Path("m3/file/target/delta-check/receipt.json")
-          if not receipt.is_file():
-              raise SystemExit("missing file module host/image receipt")
-          result = json.loads(receipt.read_text(encoding="utf-8"))
-          inventory = result.get("contract_inventory", {})
-          host = result.get("host_module_contracts", {})
-          image = result.get("image_module_contracts", {})
-          if (result.get("state") != "PASSED"
-                  or inventory.get("source_count") != 19
-                  or inventory.get("host_javac_only") != ["M3FileDeltaSelfTest"]
-                  or inventory.get("maven_junit_separate_gate") != ["M3FileDeltaTest"]
-                  or len(host) != 18 or len(image) != 17
-                  or "M3FILE_DELTA_SELFTEST_PASS" not in host.get("M3FileDeltaSelfTest", "")
-                  or "M3FileDeltaSelfTest" in image
-                  or "M3FILE_DELTA_CONTRACT_PASS" not in image.get("M3FileDeltaContractSelfTest", "")):
-              raise SystemExit("incomplete file module host/image/JUnit source qualification")
-          print("M3_FILE_DELTA_JUNIT_AND_IMAGE_PROOF_PASS tests=1 host=18 image=17 sources=19")
+          print("M3_FILE_DELTA_JUNIT_PASS")
+          PY_JUNIT
+          python3 - m3/file/target/delta-check/receipt.json <<'PY'
+          import json
+          from pathlib import Path
+          import sys
+          def unique_object(pairs):
+              value = {}
+              for name, item in pairs:
+                  if name in value:
+                      raise SystemExit("M3_FILE_SHADOW_DUPLICATE_JSON_KEY: " + name)
+                  value[name] = item
+              return value
+          receipt = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"),
+                               object_pairs_hook=unique_object)
+          if receipt.get("state") != "PASSED":
+              raise SystemExit("M3_FILE_SHADOW_MODULE_NOT_QUALIFIED")
+          host = receipt.get("host_module_contracts", {})
+          image = receipt.get("image_module_contracts", {})
+          if not isinstance(host, dict) or not isinstance(image, dict):
+              raise SystemExit("M3_FILE_SHADOW_MISSING_CONTRACT_MAPS")
+          shared = {
+              "M3BuildImpactPlanContract", "M3FileBuildImpactContract",
+              "M3FileDeltaContractSelfTest", "M3FileDeltaLedgerContract",
+              "M3FileChangeMapBinarySearchProof",
+              "M3FileEditBatchContract", "M3FileEditFramesContract",
+              "M3FileMoveCandidatesContract", "M3FileObservationContract",
+              "M3FileRangeContract", "M3FileSourceContract", "M3FileStreamsContract",
+              "M3FileWatcherContract", "M3ProjectDeltaPermutationContract",
+              "M3ReactorImpactPlanContract", "M3ResourceLocksContract",
+              "M3ResourceLocksTimedContract", "M3ShadowStreamsContract",
+          }
+          host_only = {"M3FileDeltaSelfTest"}
+          bounded = {"M3ChunkDeltaWorkspaceProbe:script", "M3ChunkDeltaWorkspaceProbe:distance"}
+          if set(image) != shared | bounded or set(host) != shared | bounded | host_only:
+              raise SystemExit("M3_FILE_SHADOW_EXACT_HOST_IMAGE_CENSUS_MISMATCH")
+          expected_inventory = {
+              "source_count": 45,
+              "host_and_image": sorted(shared),
+              "host_javac_only": sorted(host_only),
+              "bounded_probe_host_and_image": ["M3ChunkDeltaWorkspaceProbe"],
+              "fixtures_no_entrypoint": sorted({
+                  "InMemoryPageableTree", "PageableTreePaths", "PageableTreeSession",
+                  "PageableTreeSource", "PageableTreeWalker", "StaleTreeCursorException",
+                  "TreeCursor", "TreeNode", "TreePage", "TreePageRequest",
+                  "TreeProgressMonitor", "VisibleTreeWindow",
+              }),
+              "maven_junit_separate_gate": sorted({
+                  "M3ChunkDeltaGeneratorContractTest", "M3ContentExtentTest",
+                  "M3DurableExtentStoreOracleTest", "M3DurableExtentStoreTest",
+                  "M3FileCensus3Test", "M3FileDeltaTest", "M3FileEncodedEditsContract",
+                  "M3FileRetainedContractsTest", "M3FileScopeTest", "M3FileTextCoordinatesContract",
+                  "M3GrammarContract", "M3GrammarTest", "M3PageableTreeDonorDifferentialTest",
+              }),
+          }
+          if receipt.get("contract_inventory") != expected_inventory:
+              raise SystemExit("M3_FILE_SHADOW_CONTRACT_ROLE_INVENTORY_MISMATCH")
+          expected = {
+              "M3FileStreamsContract": "M3_FILE_SHADOW_STREAM_PASS",
+              "M3ShadowStreamsContract": "M3_SHADOW_STREAM_PASS",
+              "M3FileChangeMapBinarySearchProof": "M3_FILE_CHANGEMAP_LOWER_BOUND_V1",
+              "M3ChunkDeltaWorkspaceProbe:script": "PASS script 5000x5000",
+              "M3ChunkDeltaWorkspaceProbe:distance": "PASS distance 5000x5000",
+          }
+          for name, marker in expected.items():
+              if marker not in host.get(name, "") or marker not in image.get(name, ""):
+                  raise SystemExit("M3_FILE_SHADOW_CONTRACT_NOT_EXECUTED: " + name)
+          if receipt.get("full_m3jdk21_bootstrap") != "NOT_RUN":
+              raise SystemExit("M3_FILE_SHADOW_SCOPE_MARKER_CHANGED")
+          if receipt.get("maven_fork_execution") != "SEPARATE_GATE":
+              raise SystemExit("M3_FILE_SHADOW_MAVEN_GATE_CHANGED")
+          print("M3_FILE_SHADOW_HOST_LINKED_IMAGE_PASS host_contracts=21 image_contracts=20 sources=45")
           PY
+          echo M3_FILE_DELTA_JUNIT_AND_IMAGE_PROOF_PASS
       - name: Retain actual commands and results
         if: always()
         uses: actions/upload-artifact@v4
@@ -79,4 +152,7 @@ jobs:
           path: |
             m3/file/target/delta-check/*.log
             m3/file/target/delta-check/*.json
+            m3/file/target/surefire-reports/*.xml
+            m3/arrays/target/surefire-reports/*.xml
+            m3/collections/target/surefire-reports/*.xml
           if-no-files-found: error
