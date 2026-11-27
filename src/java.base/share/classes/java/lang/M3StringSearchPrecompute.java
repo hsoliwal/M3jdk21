@@ -81,7 +81,7 @@ final class M3StringSearchPrecompute {
             M3String.CodeUnitCursor cursor, int index, boolean backwards) {
         int at = backwards ? length - 1 - index : index;
         if (canonical != null) return sourceUnit(canonical, cursor, at);
-        return lane == null ? sourceUnit(flat, flatCoder, at) : lane.charAt(flat, flatCoder, at);
+        return lane == null ? rawUnit(flat, flatCoder, at) : lane.charAt(flat, flatCoder, at);
     }
 
     /**
@@ -816,7 +816,20 @@ final class M3StringSearchPrecompute {
         if (sourceCoder == String.LATIN1) {
             while (index >= floor && (source[index] & 0xff) != unit) index--;
         } else {
-            while (index >= floor && StringUTF16.getChar(source, index) != unit) index--;
+            // UTF-16 String bytes use native byte order. Compute the two bytes
+            // once and compare the pair without decoding every rejected unit.
+            boolean bigEndian = Utf16Order.BIG_ENDIAN;
+            byte first = (byte) (bigEndian ? unit >>> 8 : unit);
+            byte second = (byte) (bigEndian ? unit : unit >>> 8);
+            int offset = index << 1;
+            int bottom = floor << 1;
+            while (offset >= bottom) {
+                if (source[offset] == first && source[offset + 1] == second) {
+                    return offset >>> 1;
+                }
+                offset -= 2;
+            }
+            return -1;
         }
         return index >= floor ? index : -1;
     }
@@ -846,9 +859,16 @@ final class M3StringSearchPrecompute {
      * {@link #sourceUnit} are not repeated per unit there.
      */
     private static char rawUnit(byte[] source, byte sourceCoder, int index) {
-        return sourceCoder == String.LATIN1
-                ? (char) (source[index] & 0xff)
-                : StringUTF16.getChar(source, index);
+        if (sourceCoder == String.LATIN1) return (char) (source[index] & 0xff);
+        int offset = index << 1;
+        int first = source[offset] & 0xff;
+        int second = source[offset + 1] & 0xff;
+        return (char) (Utf16Order.BIG_ENDIAN ? (first << 8) | second : first | (second << 8));
+    }
+
+    /** The native order is initialized only on use of the UTF-16 lane. */
+    private static final class Utf16Order {
+        static final boolean BIG_ENDIAN = jdk.internal.misc.Unsafe.getUnsafe().isBigEndian();
     }
 
     /** The per-unit reverse search of master, kept for a needle whose units cannot be copied. */
