@@ -67,6 +67,25 @@ public final class GCArguments {
         return augmented.toArray(new String[augmented.size()]);
     }
 
+    /**
+     * Historical test helper: use the tested JDK without inheriting jtreg VM options.
+     * Keep the limited builder as the sole owner of default GC test options.
+     * @param arguments explicit arguments for the child VM
+     * @return a process builder for the tested JDK
+     */
+    static public ProcessBuilder createJavaProcessBuilder(List<String> arguments) {
+        return createLimitedTestJavaProcessBuilder(arguments);
+    }
+
+    /**
+     * Historical varargs form of the limited test process builder.
+     * @param arguments explicit arguments for the child VM
+     * @return a process builder for the tested JDK
+     */
+    static public ProcessBuilder createJavaProcessBuilder(String... arguments) {
+        return createLimitedTestJavaProcessBuilder(arguments);
+    }
+
     static public ProcessBuilder createLimitedTestJavaProcessBuilder(List<String> arguments) {
         return createLimitedTestJavaProcessBuilder(arguments.toArray(String[]::new));
     }
