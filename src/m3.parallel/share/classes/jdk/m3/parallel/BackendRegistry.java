@@ -89,10 +89,22 @@ final class BackendRegistry {
             case BEST -> PREFERRED.stream();
             case ACCELERATOR -> PREFERRED.stream().filter(backend -> !backend.isReference());
         };
-        return candidates.filter(backend -> backend.supports(kernel))
+        return candidates.filter(backend -> supportsForSelection(backend, kernel))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException(
                         "no " + policy + " backend supports kernel " + kernel));
+    }
+
+    private static boolean supportsForSelection(Backend backend, KernelId kernel) {
+        if (backend.isReference()) {
+            return backend.supports(kernel);
+        }
+        try {
+            return backend.supports(kernel);
+        } catch (ServiceConfigurationError | RuntimeException | LinkageError failure) {
+            // A broken optional provider must not mask healthy providers at selection time.
+            return false;
+        }
     }
 
     private static List<BackendProvider> loadProviders(Map<String, Probe> probes) {
@@ -120,7 +132,14 @@ final class BackendRegistry {
         try {
             return Optional.of(provider.get());
         } catch (ServiceConfigurationError | RuntimeException | LinkageError error) {
-            probes.put("unloadable:" + provider.type().getName(), failure(error));
+            String key;
+            try {
+                key = "unloadable:" + provider.type().getName();
+            } catch (ServiceConfigurationError | RuntimeException | LinkageError badType) {
+                // A broken service type must not turn discovery into class-init failure.
+                key = "unloadable:unresolved#" + probes.size();
+            }
+            probes.put(key, failure(error));
             return Optional.empty();
         }
     }
@@ -139,7 +158,7 @@ final class BackendRegistry {
                 return Optional.empty();
             }
             return Optional.of(id);
-        } catch (RuntimeException | LinkageError error) {
+        } catch (ServiceConfigurationError | RuntimeException | LinkageError error) {
             probes.put(key, failure(error));
             return Optional.empty();
         }
@@ -163,7 +182,7 @@ final class BackendRegistry {
             if (probe.available()) {
                 available.put(id, new Backend(id, provider, capabilities, score));
             }
-        } catch (RuntimeException | LinkageError error) {
+        } catch (ServiceConfigurationError | RuntimeException | LinkageError error) {
             probes.put(id, failure(error));
         }
     }
