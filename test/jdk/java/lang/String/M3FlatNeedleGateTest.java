@@ -34,6 +34,7 @@
  * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3FlatNeedleGateTest
  */
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +47,14 @@ public class M3FlatNeedleGateTest {
     private static final Unsafe UNSAFE = Unsafe.getUnsafe();
     private static final int[] LENGTHS = {0, 1, 2, 3, 8, 255, 256, 257, 1000, 1024, 2047, 2048, 2049, 4096, 20000, 32768, 32769, 40000};
     private static final int[] NEEDLE_LENGTHS = {3, 4, 5, 8, 17, 40};
+    private static final long EXPECTED_SEARCH_CHECKS = 172_125L;
     private static long checks;
-    private static String context = "";
+    private static long fixtureChecks;
+    private static ThreadLocal<Boolean> admitting;
+    private static int contextLength;
+    private static int contextKind;
+    private static int contextShape;
+    private static int contextNeedle;
     private static Method internChars;
     private static Method concat;
     private static Method slice;
@@ -57,31 +64,62 @@ public class M3FlatNeedleGateTest {
 
     public static void main(String[] args) throws Exception {
         bind();
+        flatFixtureStates();
         Random random = new Random(0x4e4545444c45L);
         for (int length : LENGTHS) {
             for (int kind = 0; kind < 5; kind++) {
-                String text = spell(random, length, kind);
+                String text = flat(spell(random, length, kind).toCharArray());
                 List<String> needles = needles(text, random, kind);
+                // Fixture representation must not depend on optional VM admission.
+                for (int n = 0; n < needles.size(); n++) {
+                    needles.set(n, flat(needles.get(n).toCharArray()));
+                }
+                Object oracleValue = UNSAFE.getReference(text, valueOffset);
                 Object[] shapes = shapes(text, random);
                 for (int s = 0; s < shapes.length; s++) {
                     String m3 = shaped(text, shapes[s]);
+                    Object sourceValue = UNSAFE.getReference(m3, valueOffset);
                     for (int n = 0; n < needles.size(); n++) {
-                        context = "length " + length + " kind " + kind + " shape " + s + " needle " + n + " ";
+                        contextLength = length;
+                        contextKind = kind;
+                        contextShape = s;
+                        contextNeedle = n;
                         String needle = needles.get(n);
+                        Object needleValue = UNSAFE.getReference(needle, valueOffset);
                         int from = length == 0 ? 0 : random.nextInt(length + 1);
                         for (int repeat = 0; repeat < 3; repeat++) {
                             search(text, m3, needle, from, repeat);
                         }
+                        fixture(UNSAFE.getReference(text, m3Offset) == null,
+                                "oracle must remain flat");
+                        fixture(UNSAFE.getReference(needle, m3Offset) == null,
+                                "needle must remain flat");
+                        fixture(UNSAFE.getReference(m3, m3Offset) == shapes[s],
+                                "canonical source storage must remain unchanged");
+                        fixture(UNSAFE.getReference(m3, valueOffset) == sourceValue,
+                                "canonical source shadow must remain unchanged");
+                        fixture(UNSAFE.getReference(text, valueOffset) == oracleValue,
+                                "flat oracle payload must remain unchanged");
+                        fixture(UNSAFE.getReference(needle, valueOffset) == needleValue,
+                                "flat needle payload must remain unchanged");
                     }
                 }
             }
         }
+        fixture(checks == EXPECTED_SEARCH_CHECKS, "search corpus count changed");
         System.out.println("M3FlatNeedleGateTest checks=" + checks);
+        System.out.println("M3FlatNeedleGateTest fixtureChecks=" + fixtureChecks);
     }
 
     private static void bind() throws Exception {
         Class<?> pool = Class.forName("java.lang.M3StringPool");
         Class<?> m3 = Class.forName("java.lang.M3String");
+        Field admission = m3.getDeclaredField("ADMITTING");
+        admission.setAccessible(true);
+        @SuppressWarnings("unchecked")
+        ThreadLocal<Boolean> threadAdmission =
+                (ThreadLocal<Boolean>) admission.get(null);
+        admitting = threadAdmission;
         internChars = accessible(pool.getDeclaredMethod("internChars", char[].class, int.class, int.class));
         concat = accessible(m3.getDeclaredMethod("concat", m3));
         slice = accessible(m3.getDeclaredMethod("slice", int.class, int.class));
@@ -91,20 +129,23 @@ public class M3FlatNeedleGateTest {
     }
 
     private static void search(String flat, String m3, String needle, int from, int repeat) {
-        String label = context + "repeat " + repeat + " needle " + needle.length() + " units ";
+        int needleLength = needle.length();
         int expected = flat.indexOf(needle);
         int actual = m3.indexOf(needle);
-        check(actual == expected, label + "indexOf " + actual + " vs " + expected);
+        check(actual, expected, "indexOf", from, repeat, needleLength);
         expected = flat.indexOf(needle, from);
         actual = m3.indexOf(needle, from);
-        check(actual == expected, label + "indexOf from " + from + " " + actual + " vs " + expected);
+        check(actual, expected, "indexOf from", from, repeat, needleLength);
         expected = flat.lastIndexOf(needle);
         actual = m3.lastIndexOf(needle);
-        check(actual == expected, label + "lastIndexOf " + actual + " vs " + expected);
+        check(actual, expected, "lastIndexOf", from, repeat, needleLength);
         expected = flat.lastIndexOf(needle, from);
         actual = m3.lastIndexOf(needle, from);
-        check(actual == expected, label + "lastIndexOf from " + from + " " + actual + " vs " + expected);
-        check(m3.contains(needle) == flat.contains(needle), label + "contains");
+        check(actual, expected, "lastIndexOf from", from, repeat, needleLength);
+        // Preserve the original contains call order: canonical source before flat oracle.
+        actual = m3.contains(needle) ? 1 : 0;
+        expected = flat.contains(needle) ? 1 : 0;
+        check(actual, expected, "contains", from, repeat, needleLength);
     }
 
     private static List<String> needles(String text, Random random, int kind) {
@@ -189,7 +230,73 @@ public class M3FlatNeedleGateTest {
         return concat.invoke(tupleOf(text.substring(0, cut), random, depth - 1), tupleOf(text.substring(cut), random, depth - 1));
     }
 
+    /**
+     * Construct a physical flat fixture using the existing test-thread admission guard.
+     * The flat String lane may still share lower-level matchers with canonical search.
+     */
+    private static String flat(char[] units) {
+        Boolean previous = admitting.get();
+        admitting.set(Boolean.TRUE);
+        String value;
+        try {
+            value = new String(units);
+        } finally {
+            if (previous == null) admitting.remove();
+            else admitting.set(previous);
+        }
+        fixture(UNSAFE.getReference(value, m3Offset) == null,
+                "flat fixture unexpectedly admitted");
+        return value;
+    }
+
+    /** Exercise restoration without consuming any of the deterministic corpus's random draws. */
+    private static void flatFixtureStates() {
+        Boolean previous = admitting.get();
+        char[] units = {'A', 0, '\u00ff', '\u0100', '\ud800', '\udc00', '\uffff'};
+        try {
+            admitting.remove();
+            String unset = flat(units);
+            fixture(admitting.get() == null, "unset admission state must be restored");
+            exceptionalFlatState();
+            admitting.set(Boolean.FALSE);
+            String falseState = flat(units);
+            fixture(admitting.get() == Boolean.FALSE, "false admission state must be restored");
+            exceptionalFlatState();
+            admitting.set(Boolean.TRUE);
+            String trueState = flat(units);
+            fixture(admitting.get() == Boolean.TRUE, "true admission state must be restored");
+            exceptionalFlatState();
+            for (int index = 0; index < units.length; index++) {
+                fixture(unset.charAt(index) == units[index], "unset fixture UTF-16 unit");
+                fixture(falseState.charAt(index) == units[index], "false fixture UTF-16 unit");
+                fixture(trueState.charAt(index) == units[index], "true fixture UTF-16 unit");
+            }
+        } finally {
+            if (previous == null) admitting.remove();
+            else admitting.set(previous);
+        }
+    }
+
+    /** The constructor's failure must restore the same thread-local state as success. */
+    private static void exceptionalFlatState() {
+        Boolean previous = admitting.get();
+        try {
+            flat(null);
+            throw new AssertionError("null flat fixture must fail");
+        } catch (NullPointerException expected) {
+            // The String(char[]) constructor owns the validation.
+        }
+        fixture(admitting.get() == previous, "exceptional admission state must be restored");
+    }
+
+    /** Fixture guards are separate from the historical search-comparison count. */
+    private static void fixture(boolean ok, String message) {
+        fixtureChecks++;
+        if (!ok) throw new AssertionError(message);
+    }
+
     private static String shaped(String flat, Object storage) throws Exception {
+        fixture(storage != null, "canonical pool declined source fixture");
         String out = (String) UNSAFE.allocateInstance(String.class);
         UNSAFE.putReference(out, valueOffset, UNSAFE.getReference(flat, valueOffset));
         UNSAFE.putByte(out, coderOffset, UNSAFE.getByte(flat, coderOffset));
@@ -202,8 +309,15 @@ public class M3FlatNeedleGateTest {
         return method;
     }
 
-    private static void check(boolean ok, String message) {
+    /** Format diagnostics only on failure, outside successful search/admission work. */
+    private static void check(int actual, int expected, String operation,
+            int from, int repeat, int needleLength) {
         checks++;
-        if (!ok) throw new AssertionError(message);
+        if (actual != expected) {
+            throw new AssertionError("length " + contextLength + " kind " + contextKind
+                    + " shape " + contextShape + " needle " + contextNeedle
+                    + " repeat " + repeat + " needle " + needleLength + " units "
+                    + operation + " from " + from + " " + actual + " vs " + expected);
+        }
     }
 }
