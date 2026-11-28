@@ -53,8 +53,23 @@ jobs:
           done
           echo 'PASS: exact merged Synexia source images, test metadata and owner identities'
 
-  source-built-linux:
+  prepare-jtreg:
     needs: exact-source-custody
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout original JDK CI and JTReg version configuration
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github
+            make/conf/github-actions.conf
+          persist-credentials: false
+      - name: Create the version-pinned JTReg/JUnit 5 artifact for this same workflow run
+        uses: ./.github/actions/build-jtreg
+
+  source-built-linux:
+    needs: prepare-jtreg
     uses: ./.github/workflows/build-linux.yml
     with:
       platform: linux-x64
@@ -63,7 +78,7 @@ jobs:
       make-target: 'product-bundles test-bundles'
 
   real-jtreg:
-    needs: [exact-source-custody, source-built-linux]
+    needs: [exact-source-custody, prepare-jtreg, source-built-linux]
     runs-on: ubuntu-22.04
     timeout-minutes: 45
     steps:
