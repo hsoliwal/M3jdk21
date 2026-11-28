@@ -4,7 +4,7 @@
  * @summary Verify TQ range facts, canonical backing reuse and required JNI parity
  * @modules java.base/jdk.internal.mindex
  * @build M3MappedStringBackingTest
- * @run main/native M3TQTest
+ * @run main/othervm/native M3TQTest
  */
 
 import java.nio.ByteBuffer;
