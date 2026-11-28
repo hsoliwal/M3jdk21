@@ -59,7 +59,7 @@ jobs:
     with:
       platform: linux-x64
       gcc-major-version: '10'
-      debug-levels: '["release"]'
+      debug-levels: '["debug"]'
       make-target: 'product-bundles test-bundles'
 
   real-jtreg:
@@ -79,12 +79,12 @@ jobs:
       - name: Native JTReg and real JUnit 5 provider
         uses: ./.github/actions/get-jtreg
         id: jtreg
-      - name: Exact source-built release JDK and test bundles from this workflow run
+      - name: Exact source-built debug JDK and test bundles from this workflow run
         uses: ./.github/actions/get-bundles
         id: bundles
         with:
           platform: linux-x64
-          debug-suffix: ''
+          debug-suffix: '-debug'
       - name: Execute both authored JUnit owners in normal and interpreted installed JDK
         shell: bash
         run: |
