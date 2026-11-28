@@ -4,8 +4,16 @@
  */
 package jdk.internal.m3.collections;
 
+import java.util.AbstractCollection;
+import java.util.AbstractSet;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.LongSupplier;
 
 /**
@@ -22,7 +30,7 @@ import java.util.function.LongSupplier;
  *
  * <p>Not thread-safe. Keys must not change their hash or equality while stored.
  */
-public final class ExpiringMapView<K, V> {
+public final class ExpiringMapView<K, V> implements Map<K, V> {
     static final long STATE_OCCUPIED = 1L << 0;
     static final long STATE_DELETED = 1L << 1;
     static final long STATE_EXPIRED = 1L << 2;
@@ -82,6 +90,222 @@ public final class ExpiringMapView<K, V> {
     /** Keep the original descriptor for consumers of the M3 collection census. */
     public static String scaffoldDescriptor() {
         return "M3ExpiringMapView|EXPIRING_MAP|OBJECT|OCCUPIED,DELETED,EXPIRED|Object[] keyLane;Object[] valueLane;long[] deadlineLane;int[] hashIndexLane";
+    }
+
+
+    /**
+     * Map.containsValue: a full-view query expires stale rows before comparing
+     * values. No retained values facade or per-entry map is required.
+     */
+    @Override
+    public boolean containsValue(Object value) {
+        size();
+        int observed = epoch;
+        for (int row = 0; row < size; row++) {
+            if (Objects.equals(value, valueLane[row])) {
+                if (observed != epoch) throw new ConcurrentModificationException();
+                return true;
+            }
+            if (observed != epoch) throw new ConcurrentModificationException();
+        }
+        return false;
+    }
+
+    /** Applies the same policy and TTL stamping as repeated Map.put calls. */
+    @Override
+    public void putAll(Map<? extends K, ? extends V> source) {
+        Objects.requireNonNull(source, "source");
+        // The same array owner already contains all of its own mappings.
+        // Re-stamping through an iterator would invalidate its epoch.
+        if (source == this) return;
+        for (Map.Entry<? extends K, ? extends V> entry : source.entrySet()) {
+            put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    /**
+     * The caller owns each iterator. It captures the structural epoch after
+     * a single passive-expiry sweep and never retains a node per mapping.
+     */
+    private abstract class LaneCursor<T> implements Iterator<T> {
+        int next;
+        int last = -1;
+        int expected;
+
+        LaneCursor() {
+            ExpiringMapView.this.size();
+            expected = epoch;
+        }
+
+        private void check() {
+            if (expected != epoch) throw new ConcurrentModificationException();
+        }
+
+        @Override public boolean hasNext() {
+            check();
+            return next < ExpiringMapView.this.size;
+        }
+
+        @Override public T next() {
+            check();
+            if (next >= ExpiringMapView.this.size) throw new NoSuchElementException();
+            last = next++;
+            return at(last);
+        }
+
+        @Override public void remove() {
+            check();
+            if (last < 0) throw new IllegalStateException();
+            removeAt(last);
+            next = last; // last physical row may have swapped into this ordinal
+            last = -1;
+            expected = epoch;
+        }
+
+        abstract T at(int row);
+    }
+
+    @SuppressWarnings("unchecked")
+    private K keyAt(int row) { return (K) keyLane[row]; }
+
+    @SuppressWarnings("unchecked")
+    private V valueAt(int row) { return (V) valueLane[row]; }
+
+    /**
+     * Live key projection; the keys themselves remain in keyLane. The cursor
+     * is fail-fast on structural removal or an expiry sweep by another call.
+     */
+    @Override public Set<K> keySet() {
+        return new AbstractSet<>() {
+            @Override public int size() { return ExpiringMapView.this.size(); }
+            @Override public boolean contains(Object key) {
+                return ExpiringMapView.this.containsKey(key);
+            }
+            @Override public Iterator<K> iterator() {
+                return new LaneCursor<>() {
+                    @Override K at(int row) { return keyAt(row); }
+                };
+            }
+            @Override public boolean remove(Object key) {
+                if (!containsKey(key)) return false;
+                ExpiringMapView.this.remove(key);
+                return true;
+            }
+            @Override public void clear() { ExpiringMapView.this.clear(); }
+        };
+    }
+
+    /** Live values projection; iterator.remove mutates the existing lanes. */
+    @Override public Collection<V> values() {
+        return new AbstractCollection<>() {
+            @Override public int size() { return ExpiringMapView.this.size(); }
+            @Override public boolean contains(Object value) {
+                return ExpiringMapView.this.containsValue(value);
+            }
+            @Override public Iterator<V> iterator() {
+                return new LaneCursor<>() {
+                    @Override V at(int row) { return valueAt(row); }
+                };
+            }
+            @Override public void clear() { ExpiringMapView.this.clear(); }
+        };
+    }
+
+    /**
+     * A per-iteration entry is only a projected API facade. It owns one key
+     * reference but never becomes the map's retained physical storage.
+     */
+    private final class LiveEntry implements Map.Entry<K, V> {
+        private final K key;
+        LiveEntry(K key) { this.key = key; }
+        @Override public K getKey() { return key; }
+        @Override public V getValue() { return ExpiringMapView.this.get(key); }
+        @Override public V setValue(V value) {
+            int row = liveRow(key, checkedHash(key), now());
+            if (row < 0) throw new IllegalStateException("mapping no longer present");
+            V prior = valueAt(row);
+            valueLane[row] = value; // entry mutation does not renew expiration
+            return prior;
+        }
+        @Override public boolean equals(Object other) {
+            if (!(other instanceof Map.Entry<?, ?> entry)) return false;
+            return Objects.equals(key, entry.getKey())
+                    && Objects.equals(getValue(), entry.getValue());
+        }
+        @Override public int hashCode() {
+            return Objects.hashCode(key) ^ Objects.hashCode(getValue());
+        }
+        @Override public String toString() { return key + "=" + getValue(); }
+    }
+
+    /** Live entry projection, including write-through setValue and removal. */
+    @Override public Set<Map.Entry<K, V>> entrySet() {
+        return new AbstractSet<>() {
+            @Override public int size() { return ExpiringMapView.this.size(); }
+            @Override public Iterator<Map.Entry<K, V>> iterator() {
+                return new LaneCursor<>() {
+                    @Override Map.Entry<K, V> at(int row) {
+                        return new LiveEntry(keyAt(row));
+                    }
+                };
+            }
+            @Override public boolean contains(Object candidate) {
+                if (!(candidate instanceof Map.Entry<?, ?> entry)) return false;
+                Object key = entry.getKey();
+                V value = ExpiringMapView.this.get(key);
+                return Objects.equals(value, entry.getValue())
+                        && (value != null || ExpiringMapView.this.containsKey(key));
+            }
+            @Override public boolean remove(Object candidate) {
+                if (!(candidate instanceof Map.Entry<?, ?> entry)) return false;
+                if (!contains(candidate)) return false;
+                ExpiringMapView.this.remove(entry.getKey());
+                return true;
+            }
+            @Override public void clear() { ExpiringMapView.this.clear(); }
+        };
+    }
+
+    /** Standard Map equality, including explicit null mappings. */
+    @Override public boolean equals(Object other) {
+        if (other == this) return true;
+        if (!(other instanceof Map<?, ?> map) || map.size() != size()) return false;
+        int expected = epoch;
+        for (int i = 0; i < size; i++) {
+            Object key = keyLane[i];
+            Object value = valueLane[i];
+            Object found = map.get(key);
+            if (!Objects.equals(value, found)
+                    || (value == null && !map.containsKey(key))) return false;
+            if (expected != epoch) throw new ConcurrentModificationException();
+        }
+        return true;
+    }
+
+    @Override public int hashCode() {
+        size();
+        int expected = epoch;
+        int hash = 0;
+        for (int i = 0; i < size; i++) {
+            hash += Objects.hashCode(keyLane[i]) ^ Objects.hashCode(valueLane[i]);
+            if (expected != epoch) throw new ConcurrentModificationException();
+        }
+        return hash;
+    }
+
+    @Override public String toString() {
+        size();
+        StringBuilder text = new StringBuilder("{");
+        int expected = epoch;
+        for (int i = 0; i < size; i++) {
+            if (i != 0) text.append(", ");
+            Object key = keyLane[i];
+            Object value = valueLane[i];
+            text.append(key == this ? "(this Map)" : key);
+            text.append('=').append(value == this ? "(this Map)" : value);
+            if (expected != epoch) throw new ConcurrentModificationException();
+        }
+        return text.append('}').toString();
     }
 
     private long now() {
