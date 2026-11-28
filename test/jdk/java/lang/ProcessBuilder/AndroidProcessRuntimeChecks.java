@@ -12,6 +12,7 @@
  */
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -61,7 +62,57 @@ public class AndroidProcessRuntimeChecks {
         }
     }
 
+    // Android's native encoding is always UTF-8, and the checks below pass non-ASCII paths,
+    // arguments and environment values. jtreg runs tests with LC_ALL=C, where
+    // sun.jnu.encoding is ASCII and such values cannot be represented, so the checks run
+    // in a child JVM under the C.UTF-8 locale instead of being skipped.
+    private static final String UTF8_CHILD = "ANDROID_PROCESS_RUNTIME_CHECKS_UTF8_CHILD";
+
+    private static boolean nativeEncodingIsUtf8() {
+        String encoding = System.getProperty("sun.jnu.encoding");
+        try {
+            return encoding != null && Charset.forName(encoding).equals(StandardCharsets.UTF_8);
+        } catch (IllegalArgumentException unknownOrIllegalName) {
+            return false;
+        }
+    }
+
+    private static void runInUtf8Locale() throws Exception {
+        if (System.getenv(UTF8_CHILD) != null) {
+            throw new AssertionError("LC_ALL=C.UTF-8 did not select a UTF-8 sun.jnu.encoding: "
+                    + System.getProperty("sun.jnu.encoding"));
+        }
+        List<String> command = new ArrayList<>();
+        command.add(Path.of(System.getProperty("java.home"), "bin", "java").toString());
+        String mechanism = System.getProperty("jdk.lang.Process.launchMechanism");
+        if (mechanism != null) {
+            command.add("-Djdk.lang.Process.launchMechanism=" + mechanism);
+        }
+        for (String key : List.of("test.vm.opts", "test.java.opts")) {
+            String options = System.getProperty(key, "").trim();
+            if (!options.isEmpty()) {
+                command.addAll(List.of(options.split("\\s+")));
+            }
+        }
+        command.add("-cp");
+        command.add(System.getProperty("java.class.path"));
+        command.add(AndroidProcessRuntimeChecks.class.getName());
+        ProcessBuilder builder = new ProcessBuilder(command).inheritIO();
+        builder.environment().put("LC_ALL", "C.UTF-8");
+        builder.environment().put(UTF8_CHILD, "1");
+        Process child = builder.start();
+        if (!child.waitFor(300, TimeUnit.SECONDS)) {
+            child.destroyForcibly();
+            throw new AssertionError("UTF-8 child JVM did not finish");
+        }
+        equal(child.exitValue(), 0);
+    }
+
     public static void main(String[] args) throws Exception {
+        if (!nativeEncodingIsUtf8()) {
+            runInUtf8Locale();
+            return;
+        }
         Path directory = Files.createTempDirectory("android-process-\u03bb-");
         try {
             ProcessBuilder builder = new ProcessBuilder(SHELL, "-c",
