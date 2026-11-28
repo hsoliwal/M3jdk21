@@ -293,6 +293,36 @@ public final class ExpiringMapProviderViewsTest {
         }
     }
 
+    private static void defaultMethodContracts() {
+        AtomicLong time = new AtomicLong(100L);
+        ExpiringMapView<String,Integer> map = new ExpiringMapView<>(10L, time::get);
+        Map<String,Integer> standard = map;
+        equal(standard.put("a", 1), null, "default map insert a");
+        equal(standard.put("b", 2), null, "default map insert b");
+        time.set(107L);
+        standard.replaceAll((key, value) -> value + 10);
+        equal(map.get("a"), 11, "replaceAll uses write-through entry");
+        equal(map.get("b"), 12, "replaceAll updates second entry");
+        equal(standard.putIfAbsent("b", 99), 12, "putIfAbsent preserves value");
+        equal(standard.computeIfAbsent("c", key -> 3), 3,
+                "computeIfAbsent uses normal put semantics");
+        equal(standard.merge("c", 7, Integer::sum), 10,
+                "merge uses entry and insertion semantics");
+        equal(standard.computeIfPresent("c", (key, value) -> value + 1), 11,
+                "computeIfPresent");
+        final int[] total = {0};
+        standard.forEach((key, value) -> total[0] += value);
+        equal(total[0], 34, "forEach visits all live projections");
+        time.set(110L);
+        require(!standard.containsKey("a"), "replaceAll did not restart expiration");
+        require(!standard.containsKey("b"), "nonstructural entry write preserved TTL");
+        equal(standard.size(), 1, "only c has refreshed TTL");
+        require(standard.containsKey("c"), "recent c survives expiry");
+        equal(standard.computeIfPresent("c", (key, value) -> null), null,
+                "computeIfPresent may delete");
+        require(standard.isEmpty(), "computeIfPresent null removed mapping");
+    }
+
     private static void ownership() {
         for (Field field : ExpiringMapView.class.getDeclaredFields()) {
             if (Modifier.isStatic(field.getModifiers())) continue;
@@ -308,6 +338,7 @@ public final class ExpiringMapProviderViewsTest {
     public static void main(String[] args) {
         deterministic();
         randomized();
+        defaultMethodContracts();
         ownership();
         System.out.println("ExpiringMapProviderViewsTest PASS assertions=" + checks);
     }
