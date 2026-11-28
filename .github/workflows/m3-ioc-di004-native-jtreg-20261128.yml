@@ -1,0 +1,172 @@
+# SPDX-License-Identifier: Apache-2.0
+# Qualified DI-004 JDK source and test receiving; no new runtime owner.
+name: M3 IoC DI-004 source-built jtreg admission
+
+on:
+  pull_request:
+    paths:
+      - 'src/jdk.m3.paradigm/share/classes/jdk/internal/m3/paradigm/context/IContainer.java'
+      - 'test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedDefaultTest.java'
+      - 'test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedChildTest.java'
+      - '.github/workflows/m3-ioc-di004-native-jtreg-20261128.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m3-ioc-di004-native-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-source-custody:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Fail closed on any product or test source drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          source='src/jdk.m3.paradigm/share/classes/jdk/internal/m3/paradigm/context/IContainer.java'
+          first='test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedDefaultTest.java'
+          second='test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedChildTest.java'
+          [[ "$(git hash-object "$source")" == 'd57c9a881d4619f69c37bd9d262f520648414937' ]] || {
+            echo 'DI004 ERROR: qualified-child product source differs from merged Synexia recipe' >&2
+            exit 1
+          }
+          [[ "$(git hash-object "$first")" == 'f862371c5a10dc5b6cc8246945c784fc5800071c' ]] || {
+            echo 'DI004 ERROR: qualified-default jtreg test differs from canonical source seal' >&2
+            exit 1
+          }
+          [[ "$(git hash-object "$second")" == '99a5e012a58958a2ad4b458222b2812dc4b4c601' ]] || {
+            echo 'DI004 ERROR: qualified-child jtreg test differs from canonical source seal' >&2
+            exit 1
+          }
+          for name in IContainerQualifiedDefaultTest IContainerQualifiedChildTest; do
+            file="test/jdk/jdk/internal/m3/paradigm/context/$name.java"
+            grep -Fq '* @test' "$file"
+            grep -Fq '* @modules jdk.m3.paradigm/jdk.internal.m3.paradigm.context' "$file"
+            grep -Fq "* @run junit/othervm jdk.internal.m3.paradigm.context.$name" "$file"
+          done
+          echo 'PASS: exact merged Synexia source images, test metadata and owner identities'
+
+  source-built-linux:
+    needs: exact-source-custody
+    uses: ./.github/workflows/build-linux.yml
+    with:
+      platform: linux-x64
+      gcc-major-version: '10'
+      debug-levels: '["release"]'
+      make-target: 'product-bundles test-bundles'
+
+  real-jtreg:
+    needs: [exact-source-custody, source-built-linux]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout the exact JDK under test
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Boot JDK
+        uses: ./.github/actions/get-bootjdk
+        id: bootjdk
+        with:
+          platform: linux-x64
+      - name: Native JTReg and real JUnit 5 provider
+        uses: ./.github/actions/get-jtreg
+        id: jtreg
+      - name: Exact source-built release JDK and test bundles from this workflow run
+        uses: ./.github/actions/get-bundles
+        id: bundles
+        with:
+          platform: linux-x64
+          debug-suffix: ''
+      - name: Execute both authored JUnit owners in normal and interpreted installed JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${{ steps.bundles.outputs.jdk-path }}"
+          : "${{ steps.bundles.outputs.tests-path }}"
+          test -x "${{ steps.bundles.outputs.jdk-path }}/bin/java"
+          test -d "${{ steps.jtreg.outputs.path }}"
+          evidence="$RUNNER_TEMP/m3-di004-native-jtreg"
+          test ! -e "$evidence" || { echo 'DI004 ERROR: evidence directory occupied'; exit 1; }
+          mkdir "$evidence"
+          for mode in normal interpreted; do
+            if [[ "$mode" == 'interpreted' ]]; then
+              jtreg_options='JAVA_OPTIONS=-Xint -XX:-CreateCoredumpOnCrash;VERBOSE=fail,error,time;KEYWORDS=!headful'
+            else
+              jtreg_options='JAVA_OPTIONS=-XX:-CreateCoredumpOnCrash;VERBOSE=fail,error,time;KEYWORDS=!headful'
+            fi
+            for owner in IContainerQualifiedDefaultTest IContainerQualifiedChildTest; do
+              test_path="test/jdk/jdk/internal/m3/paradigm/context/$owner.java"
+              # Deliberately run one owner at a time, so a matching overall
+              # test count cannot falsely certify either individual source.
+              set +e
+              make test-prebuilt \
+                TEST="$test_path" \
+                BOOT_JDK="${{ steps.bootjdk.outputs.path }}" \
+                JT_HOME="${{ steps.jtreg.outputs.path }}" \
+                JDK_IMAGE_DIR="${{ steps.bundles.outputs.jdk-path }}" \
+                SYMBOLS_IMAGE_DIR="${{ steps.bundles.outputs.symbols-path }}" \
+                TEST_IMAGE_DIR="${{ steps.bundles.outputs.tests-path }}" \
+                JTREG="$jtreg_options" > "$evidence/$mode-$owner-build.log" 2>&1
+              result=$?
+              set -e
+              if (( result != 0 )); then
+                cat "$evidence/$mode-$owner-build.log"
+                echo "DI004 ERROR: native $mode $owner returned $result" >&2
+                exit 1
+              fi
+              mapfile -d '' reports < <(find build/run-test-prebuilt/test-support \
+                -type f -name "$owner.jtr" -print0)
+              if (( ${#reports[@]} != 1 )); then
+                echo "DI004 ERROR: required $mode $owner JTR missing or duplicated: ${#reports[@]}" >&2
+                exit 1
+              fi
+              cp -- "${reports[0]}" "$evidence/$mode-$owner.jtr"
+            done
+          done
+          python3 - "$evidence" <<'PY'
+          import json, pathlib, re, sys
+          path = pathlib.Path(sys.argv[1])
+          pattern = re.compile(
+              r'\[\s*JUnit Tests:\s*found\s+(\d+),\s*started\s+(\d+),'
+              r'\s*succeeded\s+(\d+),\s*failed\s+(\d+),\s*aborted\s+(\d+),'
+              r'\s*skipped\s+(\d+)\s*\]')
+          report = {}
+          for mode in ("normal", "interpreted"):
+              for owner, count in (
+                  ("IContainerQualifiedDefaultTest", 3),
+                  ("IContainerQualifiedChildTest", 4),
+              ):
+                  file = path / f"{mode}-{owner}.jtr"
+                  content = file.read_text(encoding="utf-8", errors="replace")
+                  summaries = pattern.findall(content)
+                  expected = (count, count, count, 0, 0, 0)
+                  observed = [tuple(map(int, values)) for values in summaries]
+                  if len(observed) != 1 or observed[0] != expected:
+                      raise SystemExit(
+                          f"DI004 ERROR: {file.name} exact JUnit receipt mismatch: {observed}"
+                      )
+                  if not content.rstrip().endswith("test result: Passed. Execution successful"):
+                      raise SystemExit(f"DI004 ERROR: jtreg did not pass {file.name}")
+                  report[f"{mode}:{owner}"] = {"methods": count, "status": "PASSED"}
+          if len(report) != 4 or sum(x["methods"] for x in report.values()) != 14:
+              raise SystemExit("DI004 ERROR: incomplete dual-mode test inventory")
+          (path / "DI004_JTREG_RECEIPT.json").write_text(
+              json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("PASS DI004 exact seven methods in both normal and -Xint source-built JDK")
+          PY
+      - name: Upload native execution evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: m3-di004-native-jtreg-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-di004-native-jtreg/
+          if-no-files-found: warn
+          retention-days: 14
