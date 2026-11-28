@@ -38,6 +38,8 @@ public final class ExpiringMapView<K, V> {
     private long[] stateMaskWords = new long[0];
     private int size;
     private int epoch;
+    // Conservative minimum live deadline; stale-low hints only cause extra sweeps.
+    private long nextDeadline = Long.MAX_VALUE;
     private final long ttlMillis;
     private final LongSupplier clock;
     private final ExpirationPolicy<? super K, ? super V> policy;
@@ -206,6 +208,7 @@ public final class ExpiringMapView<K, V> {
             V prior = (V) valueLane[row];
             valueLane[row] = value;
             deadlineLane[row] = due;
+            if (due >= 0 && due < nextDeadline) nextDeadline = due;
             epoch++;
             return prior;
         }
@@ -214,6 +217,7 @@ public final class ExpiringMapView<K, V> {
         keyLane[next] = key;
         valueLane[next] = value;
         deadlineLane[next] = due;
+        if (due >= 0 && due < nextDeadline) nextDeadline = due;
         hashLane[next] = hash;
         markState(next, (int) STATE_OCCUPIED);
         SlotIndex.place(hashIndexLane, hashLane, next);
@@ -240,12 +244,20 @@ public final class ExpiringMapView<K, V> {
         return liveRow(key, checkedHash(key), timestamp) >= 0;
     }
 
-    /** Sweep expired entries once, with a single clock sample. */
+    /** One clock sample; skip the full sweep until the earliest possible expiry. */
     public int size() {
         if (ttlMillis >= 0 || policy != null) {
             long timestamp = now();
-            for (int row = size - 1; row >= 0; row--) {
-                if (expired(row, timestamp)) removeAt(row);
+            if (timestamp >= nextDeadline) {
+                long future = Long.MAX_VALUE;
+                for (int row = size - 1; row >= 0; row--) {
+                    long due = deadlineLane[row];
+                    if (due >= 0) {
+                        if (timestamp >= due) removeAt(row);
+                        else if (due < future) future = due;
+                    }
+                }
+                nextDeadline = future;
             }
         }
         return size;
@@ -264,6 +276,7 @@ public final class ExpiringMapView<K, V> {
         Arrays.fill(hashIndexLane, 0);
         Arrays.fill(stateMaskWords, 0L);
         size = 0;
+        nextDeadline = Long.MAX_VALUE;
         epoch++;
     }
 }
