@@ -37,19 +37,22 @@ jobs:
             echo 'DI004 ERROR: qualified-child product source differs from merged Synexia recipe' >&2
             exit 1
           }
-          [[ "$(git hash-object "$first")" == 'f862371c5a10dc5b6cc8246945c784fc5800071c' ]] || {
+          [[ "$(git hash-object "$first")" == '6d90daeb8dbc7a9402824afa2bdbeb955c95da48' ]] || {
             echo 'DI004 ERROR: qualified-default jtreg test differs from canonical source seal' >&2
             exit 1
           }
-          [[ "$(git hash-object "$second")" == '99a5e012a58958a2ad4b458222b2812dc4b4c601' ]] || {
+          [[ "$(git hash-object "$second")" == 'd8dc05aae6d37500ecf5dee1363e0d6fec82b86c' ]] || {
             echo 'DI004 ERROR: qualified-child jtreg test differs from canonical source seal' >&2
             exit 1
           }
+          compile_patch='* @compile --patch-module jdk.m3.paradigm=${test.src} --add-reads jdk.m3.paradigm=ALL-UNNAMED'
+          runtime_patch='* @run junit/othervm --patch-module jdk.m3.paradigm=${test.classes} --add-reads jdk.m3.paradigm=ALL-UNNAMED'
           for name in IContainerQualifiedDefaultTest IContainerQualifiedChildTest; do
             file="test/jdk/jdk/internal/m3/paradigm/context/$name.java"
             grep -Fq '* @test' "$file"
-            grep -Fq '* @modules jdk.m3.paradigm/jdk.internal.m3.paradigm.context' "$file"
-            grep -Fq "* @run junit/othervm jdk.internal.m3.paradigm.context.$name" "$file"
+            grep -Fq '* @modules jdk.m3.paradigm/jdk.internal.m3.paradigm.context:open' "$file"
+            grep -Fq "$compile_patch $name.java" "$file"
+            grep -Fq "$runtime_patch jdk.internal.m3.paradigm.context.$name" "$file"
           done
           echo 'PASS: exact merged Synexia source images, test metadata and owner identities'
 
