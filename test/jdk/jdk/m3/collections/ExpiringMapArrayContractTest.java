@@ -104,6 +104,7 @@ public class ExpiringMapArrayContractTest {
     private static final Field HASHES;
     private static final Field INDEX;
     private static final Field MASKS;
+    private static final Field NEXT_DEADLINE;
     static {
         try {
             Class<?> owner = ExpiringMapView.class;
@@ -114,7 +115,8 @@ public class ExpiringMapArrayContractTest {
             HASHES = owner.getDeclaredField("hashLane");
             INDEX = owner.getDeclaredField("hashIndexLane");
             MASKS = owner.getDeclaredField("stateMaskWords");
-            for (Field field : new Field[]{SIZE, KEYS, VALUES, DEADLINES, HASHES, INDEX, MASKS})
+            NEXT_DEADLINE = owner.getDeclaredField("nextDeadline");
+            for (Field field : new Field[]{SIZE, KEYS, VALUES, DEADLINES, HASHES, INDEX, MASKS, NEXT_DEADLINE})
                 field.setAccessible(true);
         } catch (ReflectiveOperationException failure) {
             throw new ExceptionInInitializerError(failure);
@@ -136,6 +138,7 @@ public class ExpiringMapArrayContractTest {
         equal(hashes.length, keys.length, "parallel cached hash capacity");
         boolean[] seen = new boolean[size];
         int indexed = 0;
+        long earliest = Long.MAX_VALUE;
         for (int encoded : index) {
             if (encoded == 0) continue;
             ok(encoded > 0 && encoded <= size, "index ordinal in bounds");
@@ -149,7 +152,10 @@ public class ExpiringMapArrayContractTest {
             int bits = (int) ((masks[i / 21] >>> (3 * (i % 21))) & 7);
             equal(bits, 1, "row occupancy mask");
             equal(hashes[i], keys[i] == null ? 0 : keys[i].hashCode(), "cached hash");
+            if (deadlines[i] >= 0 && deadlines[i] < earliest) earliest = deadlines[i];
         }
+        ok(NEXT_DEADLINE.getLong(map) <= earliest,
+                "earliest expiration hint must be conservative after swap/remove");
         for (int i = size; i < keys.length; i++) {
             ok(keys[i] == null, "no retained key past logical size");
             ok(values[i] == null, "no retained value past logical size");
@@ -333,6 +339,7 @@ public class ExpiringMapArrayContractTest {
         equal(HASHES.getType(), int[].class, "cached hash lane type");
         equal(INDEX.getType(), int[].class, "slot index type");
         equal(MASKS.getType(), long[].class, "state mask type");
+        equal(NEXT_DEADLINE.getType(), long.class, "O(1) pre-expiry size hint");
         for (Field field : owner.getDeclaredFields()) {
             if (!Modifier.isStatic(field.getModifiers())) {
                 ok(!Map.class.isAssignableFrom(field.getType()), "no retained map or entry owner: " + field);
