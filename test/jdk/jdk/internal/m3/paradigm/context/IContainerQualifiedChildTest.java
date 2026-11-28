@@ -1,5 +1,15 @@
 // SPDX-License-Identifier: Apache-2.0
-package jdk.internal.m3.paradigm.context;
+/*
+ * @test
+ * @summary M3 ContextOS DI-004: delegate qualified lookup through default children
+ * @modules jdk.m3.paradigm/jdk.internal.m3.paradigm.context
+ * @run junit/othervm jdk.m3.test.context.IContainerQualifiedChildTest
+ */
+
+package jdk.m3.test.context;
+
+import jdk.internal.m3.paradigm.context.IContainer;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
