@@ -3,6 +3,7 @@
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 # Modifications Copyright (c) 2026 Hitesh Soliwal and contributors.
 # Modified 2026: repair desktop runner, toolchain, and action runtime selection.
+# Modified 2026: provision pinned GN and Ninja for the bundled Skia build.
 #
 # This code is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 2 only, as
@@ -129,6 +130,41 @@ jobs:
             --add Microsoft.VisualStudio.Component.VC.${{ inputs.msvc-toolset-version }}.${{ inputs.msvc-toolset-architecture }}
         if: steps.toolchain-check.outputs.toolchain-installed != 'true'
 
+      # GN and Ninja are build-host tools; both Windows lanes build on an x64
+      # host. Use the same pins as Skia's bin/fetch-gn and bin/fetch-ninja (the
+      # Linux and macOS provisioning), fetched from the same CIPD packages and
+      # verified against their content-addressed SHA-256 instance digests.
+      - name: 'Get pinned GN and Ninja for bundled Skia'
+        id: skia-tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          gn_rev=b2afae122eeb6ce09c52d63f67dc53fc517dbdc8
+          gn_sha256=7249f55d6f22b55affa68aaf19d2f597c39946299216e12d78eac6cc1469f8a1
+          ninja_version='version:2@1.12.1.chromium.4'
+          ninja_sha256=887dc0900b956d218a669bfadc1f8e1285dab34c61320fd27696a41ffd540c68
+          skia="$(cygpath -m "$GITHUB_WORKSPACE")/src/jdk.m3.graphics/share/native/libm3graphics/skia"
+          test -f "$skia/BUILD.gn"
+          grep -qF "rev = '$gn_rev'" "$skia/bin/fetch-gn"
+          grep -qF "'ninja_version': '$ninja_version'" "$skia/DEPS"
+          cipd=https://chrome-infra-packages.appspot.com/dl
+          tmp="$(cygpath -m "$RUNNER_TEMP")/skia-tools"
+          mkdir -p "$tmp"
+          curl -fsSL --retry 3 -o "$tmp/gn.zip" "$cipd/gn/gn/windows-amd64/+/git_revision:$gn_rev"
+          curl -fsSL --retry 3 -o "$tmp/ninja.zip" "$cipd/infra/3pp/tools/ninja/windows-amd64/+/$ninja_version"
+          printf '%s  %s\n' "$gn_sha256" "$tmp/gn.zip" "$ninja_sha256" "$tmp/ninja.zip" | sha256sum -c -
+          mkdir -p "$skia/bin" "$skia/third_party/ninja"
+          unzip -o -q "$tmp/gn.zip" gn.exe -d "$skia/bin"
+          unzip -o -q "$tmp/ninja.zip" ninja.exe -d "$skia/third_party/ninja"
+          gn="$skia/bin/gn.exe"
+          ninja="$skia/third_party/ninja/ninja.exe"
+          test -x "$gn"
+          test -x "$ninja"
+          [[ "$("$gn" --version)" == "2175 (b2afae"* ]]
+          "$ninja" --version
+          printf 'gn=%s\n' "$gn" >> "$GITHUB_OUTPUT"
+          printf 'ninja=%s\n' "$ninja" >> "$GITHUB_OUTPUT"
+
       - name: 'Configure'
         run: >
           bash configure
@@ -139,6 +175,9 @@ jobs:
           --with-jtreg=${{ steps.jtreg.outputs.path }}
           --with-gtest=${{ steps.gtest.outputs.path }}
           --with-msvc-toolset-version=${{ inputs.msvc-toolset-version }}
+          --with-skia=bundled
+          --with-gn=${{ steps.skia-tools.outputs.gn }}
+          --with-ninja=${{ steps.skia-tools.outputs.ninja }}
           --with-jmod-compress=zip-1
           ${{ inputs.extra-conf-options }} ${{ inputs.configure-arguments }} || (
           echo "Dumping config.log:" &&

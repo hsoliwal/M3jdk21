@@ -3,6 +3,7 @@
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 # Modifications Copyright (c) 2026 Hitesh Soliwal and contributors.
 # Modified 2026: update CI action runtimes and MSYS2 installation selection.
+# Modified 2026: install the POSIX python3 used by the bundled Skia build.
 #
 # This code is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 2 only, as
@@ -35,7 +36,9 @@ runs:
       id: msys2
       uses: msys2/setup-msys2@v2.31.0
       with:
-        install: 'autoconf tar unzip zip make'
+        # python provides the POSIX python3 that configure requires to drive
+        # the bundled Skia build in jdk.m3.graphics (os.name must be posix).
+        install: 'autoconf tar unzip zip make python'
         path-type: minimal
         release: false
 

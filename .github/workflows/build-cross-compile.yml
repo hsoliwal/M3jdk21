@@ -3,6 +3,7 @@
 # DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
 # Modifications Copyright (c) 2026 Hitesh Soliwal and contributors.
 # Modified 2026: update CI action runtimes and MSYS2 installation selection.
+# Modified 2026: provision pinned GN and Ninja for the bundled Skia build.
 #
 # This code is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 2 only, as
@@ -64,6 +65,7 @@ jobs:
             debian-repository: https://httpredir.debian.org/debian/
             debian-version: trixie
             tolerate-sysroot-errors: false
+            skia: bundled
           - target-cpu: arm
             gnu-arch: arm
             debian-arch: armhf
@@ -71,6 +73,7 @@ jobs:
             debian-version: trixie
             tolerate-sysroot-errors: false
             gnu-abi: eabihf
+            skia: bundled
           - target-cpu: s390x
             gnu-arch: s390x
             debian-arch: s390x
@@ -117,6 +120,34 @@ jobs:
               g++-${{ inputs.gcc-major-version }}-${{ matrix.gnu-arch }}-linux-gnu${{ matrix.gnu-abi}} \
               libxrandr-dev libxtst-dev libcups2-dev libasound2-dev
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-${{ inputs.gcc-major-version }} 100 --slave /usr/bin/g++ g++ /usr/bin/g++-${{ inputs.gcc-major-version }}
+
+        # GN and Ninja are build-host (linux-x64) tools, so this is the Linux
+        # lane's provisioning step, plus SHA-256 checks of the fetched binaries.
+        # Only targets that build the bundled Skia engine need them.
+      - name: 'Get pinned GN and Ninja for bundled Skia'
+        id: skia-tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          skia="$GITHUB_WORKSPACE/src/jdk.m3.graphics/share/native/libm3graphics/skia"
+          test -f "$skia/BUILD.gn"
+          test -f "$skia/bin/fetch-gn"
+          test -f "$skia/bin/fetch-ninja"
+          python3 "$skia/bin/fetch-gn"
+          python3 "$skia/bin/fetch-ninja"
+          gn="$skia/bin/gn"
+          ninja="$skia/third_party/ninja/ninja"
+          test -x "$gn"
+          test -x "$ninja"
+          printf '%s  %s\n' \
+              8fa12442a4d0fc4d754e89ec732aa015cdaf8d4bcbbedf68468c652531ea482c "$gn" \
+              09f0e5a8a2cf762b24b4d3ed464ffb2529e650d2efc36bab31da36aa93791efc "$ninja" \
+              | sha256sum -c -
+          [[ "$("$gn" --version)" == "2175 (b2afae"* ]]
+          "$ninja" --version
+          printf 'gn=%s\n' "$gn" >> "$GITHUB_OUTPUT"
+          printf 'ninja=%s\n' "$ninja" >> "$GITHUB_OUTPUT"
+        if: matrix.skia == 'bundled'
 
       - name: 'Check cache for sysroot'
         id: get-cached-sysroot
@@ -176,6 +207,7 @@ jobs:
           --disable-precompiled-headers
           --openjdk-target=${{ matrix.gnu-arch }}-linux-gnu${{ matrix.gnu-abi}}
           --with-sysroot=sysroot
+          ${{ matrix.skia == 'bundled' && format('--with-skia=bundled --with-gn={0} --with-ninja={1}', steps.skia-tools.outputs.gn, steps.skia-tools.outputs.ninja) || '' }}
           --with-jmod-compress=zip-1
           CC=${{ matrix.gnu-arch }}-linux-gnu${{ matrix.gnu-abi}}-gcc-${{ inputs.gcc-major-version }}
           CXX=${{ matrix.gnu-arch }}-linux-gnu${{ matrix.gnu-abi}}-g++-${{ inputs.gcc-major-version }}
