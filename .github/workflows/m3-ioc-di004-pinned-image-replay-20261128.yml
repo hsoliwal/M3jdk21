@@ -1,0 +1,184 @@
+# SPDX-License-Identifier: Apache-2.0
+# Fast independent recheck: exact prior source-built JDK, new test-only metadata.
+# This supplements (does not replace) the source-built current-head jtreg gate.
+name: M3 IoC DI-004 previous-source-identical JDK jtreg replay
+
+on:
+  pull_request:
+    paths:
+      - 'test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedDefaultTest.java'
+      - 'test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedChildTest.java'
+      - '.github/workflows/m3-ioc-di004-pinned-image-replay-20261128.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: m3-ioc-di004-pinned-jdk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-identical-image-jtreg:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout candidate JDK test sources
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Refuse product/build source divergence from the exact previously built image
+        shell: bash
+        run: |
+          set -euo pipefail
+          built_head='49a193c1b62be13357e3d4cec48e3ecae2acdbfb'
+          git -c protocol.version=2 fetch --no-tags --depth=1 origin "$built_head"
+          git cat-file -e "$built_head^{commit}"
+          # Every difference relative to the original successful source-build
+          # MUST be either these two test headers or CI qualification metadata.
+          mapfile -t differences < <(git diff --name-only "$built_head" HEAD)
+          (( ${#differences[@]} == 4 )) || {
+            printf 'Unexpected source-image delta count: %s\n' "${#differences[@]}"
+            printf '%s\n' "${differences[@]}"
+            exit 1
+          }
+          for entry in "${differences[@]}"; do
+            case "$entry" in
+              test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedDefaultTest.java|\
+              test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedChildTest.java|\
+              .github/workflows/m3-ioc-di004-native-jtreg-20261128.yml|\
+              .github/workflows/m3-ioc-di004-pinned-image-replay-20261128.yml) ;;
+              *) echo "DI004 ERROR: stale JDK image cannot be reused with changed $entry" >&2; exit 1 ;;
+            esac
+          done
+          expected_product='d57c9a881d4619f69c37bd9d262f520648414937'
+          source='src/jdk.m3.paradigm/share/classes/jdk/internal/m3/paradigm/context/IContainer.java'
+          [[ "$(git hash-object "$source")" == "$expected_product" ]]
+          [[ "$(git hash-object test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedDefaultTest.java)" == '6d90daeb8dbc7a9402824afa2bdbeb955c95da48' ]]
+          [[ "$(git hash-object test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedChildTest.java)" == 'd8dc05aae6d37500ecf5dee1363e0d6fec82b86c' ]]
+          echo 'PASS source-built image reusability: only exact test comments and workflow changed'
+
+      - name: BootJDK for prebuilt test harness
+        id: bootjdk
+        uses: ./.github/actions/get-bootjdk
+        with:
+          platform: linux-x64
+
+      - name: Reuse source-built JDK/test bundles from successful debug build
+        uses: actions/download-artifact@v8
+        with:
+          name: bundles-linux-x64-debug
+          run-id: 46101625158
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+          path: bundles
+      - name: Reuse exact OpenJDK jtreg 8.2.1+1/JUnit 5 provider
+        uses: actions/download-artifact@v8
+        with:
+          name: bundles-jtreg-8.2.1+1
+          run-id: 46101625158
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+          path: jtreg/installed
+
+      - name: Unpack and verify immutable JDK/JUnit provider bundles
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f 'bundles/jdk-linux-x64-debug.tar.gz'
+          test -f 'bundles/tests-linux-x64-debug.tar.gz'
+          test -f 'bundles/symbols-linux-x64-debug.tar.gz'
+          test -f 'jtreg/installed/lib/jtreg.jar'
+          test -f 'jtreg/installed/lib/junit-platform-console-standalone-1.14.2.jar'
+          mkdir -p bundles/jdk bundles/tests bundles/symbols
+          tar -xzf bundles/jdk-linux-x64-debug.tar.gz -C bundles/jdk
+          tar -xzf bundles/tests-linux-x64-debug.tar.gz -C bundles/tests
+          tar -xzf bundles/symbols-linux-x64-debug.tar.gz -C bundles/symbols
+          find bundles/jdk -path '*/bin/java' -type f -print
+          test "$(find bundles/jdk -path '*/bin/java' -type f | wc -l)" -eq 1
+
+      - name: Run exact seven JUnit methods against original source-built named JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/m3-di004-pinned-image-native"
+          test ! -e "$evidence"
+          mkdir "$evidence"
+          jdk_bin="$(find "$PWD/bundles/jdk" -path '*/bin/java' -type f -print -quit)"
+          test -x "$jdk_bin"
+          jdk_root="$(dirname "$(dirname "$jdk_bin")")"
+          symbols_bin="$(find "$PWD/bundles/symbols" -type d -name bin -print -quit)"
+          test -n "$symbols_bin"
+          symbols_root="$(dirname "$symbols_bin")"
+          for mode in normal interpreted; do
+            if [[ "$mode" == interpreted ]]; then
+              jtreg_options='JAVA_OPTIONS=-Xint -XX:-CreateCoredumpOnCrash;VERBOSE=fail,error,time;KEYWORDS=!headful'
+            else
+              jtreg_options='JAVA_OPTIONS=-XX:-CreateCoredumpOnCrash;VERBOSE=fail,error,time;KEYWORDS=!headful'
+            fi
+            for owner in IContainerQualifiedDefaultTest IContainerQualifiedChildTest; do
+              set +e
+              make test-prebuilt \
+                TEST="test/jdk/jdk/internal/m3/paradigm/context/$owner.java" \
+                BOOT_JDK="${{ steps.bootjdk.outputs.path }}" \
+                JT_HOME="$PWD/jtreg/installed" \
+                JDK_IMAGE_DIR="$jdk_root" \
+                SYMBOLS_IMAGE_DIR="$symbols_root" \
+                TEST_IMAGE_DIR="$PWD/bundles/tests" \
+                JTREG="$jtreg_options" > "$evidence/$mode-$owner-build.log" 2>&1
+              code=$?
+              set -e
+              if (( code != 0 )); then
+                cat "$evidence/$mode-$owner-build.log"
+                echo "DI004 ERROR: $owner $mode native prebuilt test failed ($code)" >&2
+                exit 1
+              fi
+              mapfile -d '' jtr < <(find build/run-test-prebuilt/test-support -type f -name "$owner.jtr" -print0)
+              if (( ${#jtr[@]} != 1 )); then
+                echo "DI004 ERROR: missing or ambiguous JTR for $owner $mode" >&2
+                exit 1
+              fi
+              cp -- "${jtr[0]}" "$evidence/$mode-$owner.jtr"
+            done
+          done
+          python3 - "$evidence" <<'PY'
+          import json, pathlib, re, sys
+          root=pathlib.Path(sys.argv[1])
+          pattern=re.compile(
+            r'\[\s*JUnit Tests:\s*found\s+(\d+),\s*started\s+(\d+),'
+            r'\s*succeeded\s+(\d+),\s*failed\s+(\d+),\s*aborted\s+(\d+),'
+            r'\s*skipped\s+(\d+)\s*\]')
+          out={}
+          for mode in ('normal', 'interpreted'):
+            for owner,expected_count in (
+              ('IContainerQualifiedDefaultTest',3),
+              ('IContainerQualifiedChildTest',4),
+            ):
+              name=f'{mode}-{owner}.jtr'
+              s=(root/name).read_text('utf-8',errors='replace')
+              observed=[tuple(int(y) for y in x) for x in pattern.findall(s)]
+              expected=(expected_count,expected_count,expected_count,0,0,0)
+              if observed != [expected]:
+                raise SystemExit(f'DI004 ERROR: {name} actual JUnit summary is {observed}')
+              if not s.rstrip().endswith('test result: Passed. Execution successful'):
+                raise SystemExit(f'DI004 ERROR: jtreg result is not passed for {name}')
+              out[f'{mode}:{owner}']={'found':expected_count,'succeeded':expected_count}
+          if len(out)!=4 or sum(x['succeeded'] for x in out.values())!=14:
+            raise SystemExit('DI004 ERROR: incomplete seven-tests/two-modes JUnit receipt')
+          (root/'DI004_SOURCE_IDENTICAL_IMAGE_JTREG.json').write_text(
+            json.dumps({'provenance_build_run':46101625158,'results':out},sort_keys=True,indent=2)+'\n')
+          print('PASS seven DI004 methods in normal and -Xint using pinned source-identical built JDK')
+          PY
+
+      - name: Preserve source-built-image and native JUnit evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: m3-di004-pinned-image-jtreg-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-di004-pinned-image-native/
+          if-no-files-found: warn
+          retention-days: 14
