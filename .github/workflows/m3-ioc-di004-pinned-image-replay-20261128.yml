@@ -58,8 +58,8 @@ jobs:
           expected_product='d57c9a881d4619f69c37bd9d262f520648414937'
           source='src/jdk.m3.paradigm/share/classes/jdk/internal/m3/paradigm/context/IContainer.java'
           [[ "$(git hash-object "$source")" == "$expected_product" ]]
-          [[ "$(git hash-object test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedDefaultTest.java)" == '6d90daeb8dbc7a9402824afa2bdbeb955c95da48' ]]
-          [[ "$(git hash-object test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedChildTest.java)" == 'd8dc05aae6d37500ecf5dee1363e0d6fec82b86c' ]]
+          [[ "$(git hash-object test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedDefaultTest.java)" == '2519e2d5c3a80b290d37ea9228109b3dd26c6ca5' ]]
+          [[ "$(git hash-object test/jdk/jdk/internal/m3/paradigm/context/IContainerQualifiedChildTest.java)" == '593685b4bf29ec7bafcc2b7064a011f29a203be9' ]]
           echo 'PASS source-built image reusability: only exact test comments and workflow changed'
 
       - name: BootJDK for prebuilt test harness
