@@ -3,12 +3,15 @@
 /*
  * @test
  * @summary M3 ContextOS DI-004: reject unsupported qualifiers
- * @modules jdk.m3.paradigm/jdk.internal.m3.paradigm.context:open
- * @compile --patch-module jdk.m3.paradigm=${test.src} --add-reads jdk.m3.paradigm=ALL-UNNAMED IContainerQualifiedDefaultTest.java
- * @run junit/othervm --patch-module jdk.m3.paradigm=${test.classes} --add-reads jdk.m3.paradigm=ALL-UNNAMED jdk.internal.m3.paradigm.context.IContainerQualifiedDefaultTest
+ * @modules jdk.m3.paradigm/jdk.internal.m3.paradigm.context
+ * @run junit/othervm jdk.m3.test.context.IContainerQualifiedDefaultTest
  */
 
-package jdk.internal.m3.paradigm.context;
+package jdk.m3.test.context;
+
+import jdk.internal.m3.paradigm.context.IContainer;
+import jdk.internal.m3.paradigm.context.AbstractContainer;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
