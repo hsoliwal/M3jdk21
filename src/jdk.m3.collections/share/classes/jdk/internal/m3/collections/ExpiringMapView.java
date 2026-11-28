@@ -115,6 +115,9 @@ public final class ExpiringMapView<K, V> implements Map<K, V> {
     @Override
     public void putAll(Map<? extends K, ? extends V> source) {
         Objects.requireNonNull(source, "source");
+        // The same array owner already contains all of its own mappings.
+        // Re-stamping through an iterator would invalidate its epoch.
+        if (source == this) return;
         for (Map.Entry<? extends K, ? extends V> entry : source.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }
