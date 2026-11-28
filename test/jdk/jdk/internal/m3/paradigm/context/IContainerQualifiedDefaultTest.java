@@ -1,5 +1,12 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+/*
+ * @test
+ * @summary M3 ContextOS DI-004: reject unsupported qualifiers
+ * @modules jdk.m3.paradigm/jdk.internal.m3.paradigm.context
+ * @run junit/othervm jdk.internal.m3.paradigm.context.IContainerQualifiedDefaultTest
+ */
+
 package jdk.internal.m3.paradigm.context;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
