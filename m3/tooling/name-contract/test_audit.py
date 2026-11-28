@@ -202,7 +202,7 @@ class CanonicalRelatedOwnerTest(unittest.TestCase):
                       if row["id"] == history["anchors"]["related_source_range"])
         target = record["targets"][0]
         self.assertEqual(target["symbol"], "jdk.m3.text.SharedRelatedLexemeCatalog")
-        self.assertEqual(target["path"], "m3/core/src/jdk/m3/text/SharedRelatedLexemeCatalog.java")
+        self.assertEqual(target["path"], "src/java.base/share/classes/jdk/m3/text/SharedRelatedLexemeCatalog.java")
         signature = "java.util.List<Relation> findBySource(java.lang.String)"
         self.assertIn(signature, target["signatures"])
         historical_symbol = history["restored_records"][0]["source_symbol"]
