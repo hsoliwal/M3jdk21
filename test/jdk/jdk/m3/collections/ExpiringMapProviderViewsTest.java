@@ -236,6 +236,11 @@ public final class ExpiringMapProviderViewsTest {
         require(infinite.entrySet().isEmpty(), "entrySet empty");
 
         ExpiringMapView<Object,Object> self = new ExpiringMapView<>();
+        self.put("one", new Object());
+        self.put("two", new Object());
+        Map<Object,Object> snapshot = new HashMap<>(self);
+        self.putAll(self);
+        equal(self, snapshot, "putAll(self) preserves entries and cursor validity");
         self.put("self", self);
         require(self.toString().contains("(this Map)"), "self reference toString");
         self.clear();
