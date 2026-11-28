@@ -16,7 +16,6 @@ jobs:
     env:
       M3_CONTROL_ROOT: ${{ github.workspace }}/m3-core-cohort-control
       M3_SOURCE_ROOT: ${{ github.workspace }}/m3-core-cohort-original
-      M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}
       M3_ORIGINAL_COMMIT: 0f80ed69a89a8d0a32f04f0824fab2f0c1457525
     steps:
       - name: Checkout current qualification control plane only
@@ -55,6 +54,8 @@ jobs:
           java-version: '21'
       - name: Reserve independent proof output and fail closed on low storage
         shell: bash
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -75,6 +76,8 @@ jobs:
           PY
       - name: Admit all 81 exact original source blobs and 75 Java owners
         shell: bash
+        env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
           set -euo pipefail
           python3 -I -S -B "$M3_CONTROL_ROOT/m3/tooling/core-contract-matrix/verify_historical_cohort.py" \
@@ -87,6 +90,7 @@ jobs:
         shell: bash
         timeout-minutes: 14
         env:
+          M3_PROOF_ROOT: ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}
           TMPDIR: ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}/tmp
           TEMP: ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}/tmp
           TMP: ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}/tmp
@@ -107,6 +111,6 @@ jobs:
           retention-days: 7
           if-no-files-found: warn
           path: |
-            ${{ env.M3_PROOF_ROOT }}/HISTORICAL_SOURCESET.json
-            ${{ env.M3_PROOF_ROOT }}/contract/RESULT.json
-            ${{ env.M3_PROOF_ROOT }}/contract/original-build.log
+            ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}/HISTORICAL_SOURCESET.json
+            ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}/contract/RESULT.json
+            ${{ runner.temp }}/m3-core-historical-${{ github.run_id }}-${{ github.run_attempt }}/contract/original-build.log
