@@ -204,6 +204,13 @@ public interface IContainer {
             }
 
             @Override
+            public <T> T get(Class<T> type, String qualifier) {
+                // The child's local map stores only unqualified class keys.
+                // Delegate exact qualified selection to the original parent.
+                return parent.get(type, qualifier);
+            }
+
+            @Override
             public <T> void bind(Class<T> type, Supplier<T> supplier) {
                 bindings.put(type, supplier.get());
             }
