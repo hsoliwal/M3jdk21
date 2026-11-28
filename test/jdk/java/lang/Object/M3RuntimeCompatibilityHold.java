@@ -110,6 +110,9 @@ public class M3RuntimeCompatibilityHold {
     public static void main(String[] args) throws Exception {
         String stockProperty = System.getProperty("m3.stock.jdk");
         if (stockProperty == null || stockProperty.isBlank()) {
+            stockProperty = System.getProperty("test.boot.jdk");
+        }
+        if (stockProperty == null || stockProperty.isBlank()) {
             throw new IllegalArgumentException("m3.stock.jdk must identify an unmodified Java 21 JDK");
         }
         Path stock = Path.of(stockProperty).toRealPath();
